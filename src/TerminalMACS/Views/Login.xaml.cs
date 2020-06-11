@@ -27,7 +27,7 @@ namespace TerminalMACS.Views
         {
         }
 
-        private void LoginWithTerminal_Click(object sender, RoutedEventArgs e)
+        private async void LoginWithTerminal_Click(object sender, RoutedEventArgs e)
         {
             var options = new OidcClientOptions()
             {

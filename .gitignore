@@ -13,3 +13,5 @@ src/TerminalMACS.Infrastructure/obj/
 src/TerminalMACS.Server/obj/
 *.user
 src/TerminalMACS/.vs/
+src/.vs/
+src/Build/
