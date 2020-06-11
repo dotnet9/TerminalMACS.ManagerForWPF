@@ -1,0 +1,140 @@
+﻿<Metro:MetroWindow x:Class="TerminalMACS.Views.About"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Metro="clr-namespace:AduSkin.Controls.Metro;assembly=AduSkin"
+        xmlns:AduOpenLink="clr-namespace:AduSkin.Interactivity;assembly=AduSkin"
+        xmlns:markup="clr-namespace:WpfExtensions.Xaml.Markup;assembly=WpfExtensions.Xaml"
+        xmlns:i18NResources="clr-namespace:TerminalMACS.I18nResources"
+        mc:Ignorable="d" ShowInTaskbar="False" Icon="{x:Null}"
+        BorderThickness="0"
+        Background="#FFF"
+        BorderBrush="{StaticResource DefaultBrush}"
+        Title="{markup:I18n {x:Static i18NResources:Language.MainMenu_About}}" Height="600" Width="800">
+    <StackPanel>
+        <Image Source="/Images/logo2.png" Width="64" HorizontalAlignment="Center"/>
+        <TextBlock Margin="0 15" Foreground="{StaticResource DefaultBrush}"
+                   HorizontalAlignment="Center" 
+                   TextWrapping="WrapWithOverflow">
+            <Run FontSize="30" Text="{markup:I18n {x:Static i18NResources:Language.AppTitle}}" />
+            <Run x:Name="txtVersion"/>
+        </TextBlock>
+
+        <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="DarkOrange" 
+                    FontSize="20" Text="{markup:I18n {x:Static i18NResources:Language.About_TechExchange}}" Margin="0"/>
+        <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <Metro:HCShield Subject="{markup:I18n {x:Static i18NResources:Language.MainMenu_QQGroup}}" Status="172269357"
+                            Color="{StaticResource DefaultBrush}" Margin="10,0"
+                            Command="AduOpenLink:ControlCommands.OpenLink"
+                            CommandParameter="https://jq.qq.com/?_wv=1027&amp;k=50b36fD">
+                <Metro:HCShield.ToolTip>
+                    <Metro:AduToolTip Content="{markup:I18n {x:Static i18NResources:Language.About_JonQQGroup}}" IsShowShadow="True"
+                                      FontSize="12" Padding="10,6" PlacementEx="BottomCenter" />
+                </Metro:HCShield.ToolTip>
+            </Metro:HCShield>
+            <Metro:HCShield Subject="QQ" Status="632871194" Color="#4A8AF4" Margin="10,0" 
+                            Command="AduOpenLink:ControlCommands.OpenLink"
+                            CommandParameter="http://wpa.qq.com/msgrd?v=3&amp;uin=632871194&amp;site=qq&amp;menu=yes">
+                <Metro:HCShield.ToolTip>
+                    <Metro:AduToolTip Content="{markup:I18n {x:Static i18NResources:Language.About_ContactAuthor}}" IsShowShadow="True" FontSize="12" 
+                                      Padding="10,6" PlacementEx="BottomCenter" />
+                </Metro:HCShield.ToolTip>
+            </Metro:HCShield>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Grid Width="200">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Border Margin="30 5" Height="150" Width="150" CornerRadius="10">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/Images/WeChat-public-address.jpg"/>
+                    </Border.Background>
+                </Border>
+                <TextBlock Grid.Row="1" Text="{markup:I18n {x:Static i18NResources:Language.About_AddWeChatOfficialAccount}}"
+                           Width="170" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center"/>
+            </Grid>
+            <Grid Width="200">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Border Margin="30 5" Height="150" Width="150" CornerRadius="10" HorizontalAlignment="Center">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/Images/mynewwechat.jpg"/>
+                    </Border.Background>
+                </Border>
+                <TextBlock Grid.Row="1" Text="{markup:I18n {x:Static i18NResources:Language.About_AddAuthorWeChat}}" 
+                           Width="170" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center"/>
+            </Grid>
+            <Grid Width="200">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Border Margin="30 5" Height="150" Width="150" CornerRadius="10" HorizontalAlignment="Center">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/Images/WeChat_UIDesigner.jpg"/>
+                    </Border.Background>
+                </Border>
+                <TextBlock Grid.Row="1" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center">
+                    <Run Text="{markup:I18n {x:Static i18NResources:Language.About_AddUIDesignerWeChat}}" />
+                    <Run Text="：smsg8047" />
+                </TextBlock>
+            </Grid>
+        </StackPanel>
+
+        <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="DarkOrange" 
+                    FontSize="20" Text="{markup:I18n {x:Static i18NResources:Language.About_Thanks}}" Margin="0 20 0 0"/>
+        <StackPanel Orientation="Horizontal" Margin="0 10" HorizontalAlignment="Center">
+            <Metro:HCShield Subject="WPF" Status="Prism" Color="#F06632" Margin="10,0"
+                            Command="AduOpenLink:ControlCommands.OpenLink" 
+                            CommandParameter="https://github.com/PrismLibrary/Prism">
+                <Metro:HCShield.ToolTip>
+                    <Metro:AduToolTip Content="{markup:I18n {x:Static i18NResources:Language.About_BrowseOpenSourceFramework}}"
+                                      IsShowShadow="True" FontSize="12" Padding="10,6" PlacementEx="BottomCenter" />
+                </Metro:HCShield.ToolTip>
+            </Metro:HCShield>
+            <Metro:HCShield Subject="WPF" Status="Accelerider.Windows" Color="#F06632" Margin="10,0"
+                            Command="AduOpenLink:ControlCommands.OpenLink" 
+                            CommandParameter="https://github.com/Accelerider/Accelerider.Windows">
+                <Metro:HCShield.ToolTip>
+                    <Metro:AduToolTip Content="{markup:I18n {x:Static i18NResources:Language.About_BrowseOpenSourceFramework}}"
+                                      IsShowShadow="True" FontSize="12" Padding="10,6" PlacementEx="BottomCenter" />
+                </Metro:HCShield.ToolTip>
+            </Metro:HCShield>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0 10" HorizontalAlignment="Center">
+            <Metro:HCShield Subject="WPF" Status="AduSkin" Color="#F06632" Margin="10,0"
+                            Command="AduOpenLink:ControlCommands.OpenLink" 
+                            CommandParameter="https://github.com/aduskin/AduSkin">
+                <Metro:HCShield.ToolTip>
+                    <Metro:AduToolTip Content="{markup:I18n {x:Static i18NResources:Language.About_BrowseOpenSourceFramework}}"
+                                      IsShowShadow="True" FontSize="12" Padding="10,6" PlacementEx="BottomCenter" />
+                </Metro:HCShield.ToolTip>
+            </Metro:HCShield>
+            <Metro:HCShield Subject="WPF" Status="HandyControl" Color="#F06632" Margin="10,0"
+                            Command="AduOpenLink:ControlCommands.OpenLink" 
+                            CommandParameter="https://github.com/HandyOrg/HandyControl">
+                <Metro:HCShield.ToolTip>
+                    <Metro:AduToolTip Content="{markup:I18n {x:Static i18NResources:Language.About_BrowseOpenSourceFramework}}"
+                                      IsShowShadow="True" FontSize="12" Padding="10,6" PlacementEx="BottomCenter" />
+                </Metro:HCShield.ToolTip>
+            </Metro:HCShield>
+            <Metro:HCShield Subject="WPF" Status="MaterialDesignInXamlToolkit" Color="#F06632" Margin="10,0"
+                            Command="AduOpenLink:ControlCommands.OpenLink" 
+                            CommandParameter="https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit">
+                <Metro:HCShield.ToolTip>
+                    <Metro:AduToolTip Content="{markup:I18n {x:Static i18NResources:Language.About_BrowseOpenSourceFramework}}"
+                                      IsShowShadow="True" FontSize="12" Padding="10,6" PlacementEx="BottomCenter" />
+                </Metro:HCShield.ToolTip>
+            </Metro:HCShield>
+        </StackPanel>
+
+        <TextBlock Text="Copyright © 2020-2020 TerminalMACS.COM" 
+                   Foreground="#ccc" Margin="0 10 0 14"
+                   HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+    </StackPanel>
+</Metro:MetroWindow>

@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:WpfExtensions.Xaml.Converters">
+
+    <converters:AnyOperator x:Key="AnyOperator" />
+    <converters:NotOperator x:Key="NotOperator" />
+    <converters:IsNullOperator x:Key="IsNullOperator" />
+    <converters:IsNullOrEmptyOperator x:Key="IsNullOrEmptyOperator" />
+    <converters:ReverseOperator x:Key="ReverseOperator" />
+    <converters:GetTypeOperator x:Key="GetTypeOperator" />
+
+    <converters:DoubleEqualsOperator x:Key="DoubleEqualsOperator" />
+    <converters:EqualsOperator x:Key="EqualsOperator" />
+    <converters:GreaterThanOperator x:Key="GreaterThanOperator" />
+    <converters:LessThanOperator x:Key="LessThanOperator" />
+
+    <!--<converters:BitmapToBitmapSourceConverter x:Key="BitmapToBitmapSourceConverter" />-->
+
+</ResourceDictionary>

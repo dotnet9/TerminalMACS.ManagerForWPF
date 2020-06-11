@@ -1,0 +1,15 @@
+src/TerminalMACS.Client/obj/
+src/TerminalMACS.Controls/bin/
+src/TerminalMACS.Controls/obj/
+src/TerminalMACS.Home/obj/
+src/TerminalMACS.Infrastructure.UI/bin/
+src/TerminalMACS.Infrastructure.UI/obj/
+src/TerminalMACS/bin/
+src/TerminalMACS/obj/
+src/WpfExtensions.Xaml/obj/
+src/WpfExtensions.Xaml/bin/
+src/TerminalMACS.Infrastructure/bin/
+src/TerminalMACS.Infrastructure/obj/
+src/TerminalMACS.Server/obj/
+*.user
+src/TerminalMACS/.vs/

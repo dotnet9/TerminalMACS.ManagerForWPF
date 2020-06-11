@@ -1,0 +1,106 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>Flase</AppendTargetFrameworkToOutputPath>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Images\logo2.ico</ApplicationIcon>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <FileVersion>0.1.1.0</FileVersion>
+    <Version>0.0.1</Version>
+    <PackageProjectUrl>https://terminalmacs.com/</PackageProjectUrl>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageReleaseNotes>TerminalMACS桌面管理端WPF版本</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\Build\Debug\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\Build\Release\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\about.png" />
+    <None Remove="Images\code.png" />
+    <None Remove="Images\Contact.png" />
+    <None Remove="Images\logo.ico" />
+    <None Remove="Images\logo.png" />
+    <None Remove="Images\logo2.ico" />
+    <None Remove="Images\logo2.png" />
+    <None Remove="Images\mynewwechat.jpg" />
+    <None Remove="Images\setting.png" />
+    <None Remove="Images\WeChat-public-address.jpg" />
+    <None Remove="Images\WeChat_UIDesigner.jpg" />
+    <None Include="I18nResources\Language.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Language.tt</DependentUpon>
+    </None>
+    <None Include="Images\logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AduSkin" Version="1.1.1.7" />
+    <PackageReference Include="HandyControl" Version="2.5.0.2" />
+    <PackageReference Include="IdentityModel.OidcClient" Version="4.0.0-preview.3" />
+    <PackageReference Include="Prism.Unity" Version="8.0.0.1740-pre" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TerminalMACS.Controls\TerminalMACS.Controls.csproj" />
+    <ProjectReference Include="..\TerminalMACS.Infrastructure.UI\TerminalMACS.Infrastructure.UI.csproj" />
+    <ProjectReference Include="..\WpfExtensions.Xaml\WpfExtensions.Xaml.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\about.png" />
+    <Resource Include="Images\code.png" />
+    <Resource Include="Images\Contact.png" />
+    <Resource Include="Images\logo.ico" />
+    <Resource Include="Images\logo2.ico" />
+    <Resource Include="Images\logo.png" />
+    <Resource Include="Images\logo2.png" />
+    <Resource Include="Images\mynewwechat.jpg" />
+    <Resource Include="Images\setting.png" />
+    <Resource Include="Images\WeChat-public-address.jpg" />
+    <Resource Include="Images\WeChat_UIDesigner.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="I18nResources\Language.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Language.tt</DependentUpon>
+    </Compile>
+    <Compile Update="I18nResources\UiResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UiResource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="I18nResources\UiResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UiResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="I18nResources\Language.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Language.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>
