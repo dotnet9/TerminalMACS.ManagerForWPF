@@ -22,5 +22,6 @@ namespace TerminalMACS.Infrastructure.UI
         public const string HOME = "Home";
         public const string Server = "Server";
         public const string Client = "Client";
+        public const string TestDemo = "TestDemo";
     }
 }

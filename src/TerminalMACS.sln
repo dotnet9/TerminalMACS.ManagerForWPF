@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TerminalMACS.Infrastructure
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfExtensions.Xaml", "WpfExtensions.Xaml\WpfExtensions.Xaml.csproj", "{4D2CE44F-27EC-41E1-BA1A-718750B37704}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TerminalMACS.TestDemo", "TerminalMACS.TestDemo\TerminalMACS.TestDemo.csproj", "{63EAA843-A85F-4B96-9B49-35452ED85D1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{4D2CE44F-27EC-41E1-BA1A-718750B37704}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D2CE44F-27EC-41E1-BA1A-718750B37704}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D2CE44F-27EC-41E1-BA1A-718750B37704}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63EAA843-A85F-4B96-9B49-35452ED85D1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63EAA843-A85F-4B96-9B49-35452ED85D1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63EAA843-A85F-4B96-9B49-35452ED85D1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63EAA843-A85F-4B96-9B49-35452ED85D1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{C0900AB2-042F-4D15-9AB6-15BE5AF64AEF} = {A9962531-F9F1-4B56-B0CE-345D2E2D6C61}
 		{13A16DF3-AACC-41EB-A2B8-636DDBC73C17} = {A9962531-F9F1-4B56-B0CE-345D2E2D6C61}
 		{7B7FF627-5DFE-4725-9E73-DB7B0A071B54} = {A9962531-F9F1-4B56-B0CE-345D2E2D6C61}
+		{63EAA843-A85F-4B96-9B49-35452ED85D1D} = {A9962531-F9F1-4B56-B0CE-345D2E2D6C61}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73FC7CE0-9D4E-442B-AE18-58FB8F7BC4F0}

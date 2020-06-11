@@ -1,0 +1,208 @@
+﻿<Window x:Class="TerminalMACS.TestDemo.Views.FoodAppLoginUI.FoodAppLoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:markup="clr-namespace:WpfExtensions.Xaml.Markup;assembly=WpfExtensions.Xaml"
+        xmlns:i18NResources="clr-namespace:TerminalMACS.TestDemo.I18nResources"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="{markup:I18n {x:Static i18NResources:Language.MainTabItem_FoodBtnContent}}" Height="550" Width="800" 
+        AllowsTransparency="True" WindowStyle="None"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        MouseLeftButtonDown="DragWindow_MouseLeftButtonDown">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Amber.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <materialDesign:DialogHost DialogOpened="OpenCB_DialogOpened"
+                               DialogClosing="ClosingCB_DialogClosing">
+        
+        <!--#region login wait dialog content-->
+        <materialDesign:DialogHost.DialogContent>
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="{markup:I18n {x:Static i18NResources:Language.FoodAppLoginView_IsLogining}}" Grid.Row="0" Margin="10"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ProgressBar IsIndeterminate="True" Grid.Row="1" Margin="10"
+                                 Style="{StaticResource MaterialDesignCircularProgressBar}"/>
+                <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                            Command="materialDesign:DialogHost.CloseDialogCommand"
+                            Grid.Row="2" Margin="0,10,0,0"
+                            Content="{markup:I18n {x:Static i18NResources:Language.FoodAppLoginView_Cancel}}"/>
+            </Grid>
+        </materialDesign:DialogHost.DialogContent>
+        <!--#endregion-->
+        
+        <Grid>
+            <Grid.Resources>
+                <Style x:Key="setVisibilityBasedLogin" TargetType="StackPanel">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=IsLoggedIn,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}
+                            ,UpdateSourceTrigger=PropertyChanged}" Value="True">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Resources>
+            <Grid.Background>
+                <ImageBrush ImageSource="/TerminalMACS.TestDemo;component/Images/bg.png"/>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <!--#region right background image-->
+            <materialDesign:TransitioningContent
+                Grid.Column="1"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+                <materialDesign:TransitioningContent.OpeningEffects>
+                    <materialDesign:TransitionEffect Kind="SlideInFromRight" Duration="0:0:2"/>
+                </materialDesign:TransitioningContent.OpeningEffects>
+                <materialDesign:Card>
+                    <Image Source="./images/food.jpg" Stretch="UniformToFill" StretchDirection="Both">
+
+                    </Image>
+                </materialDesign:Card>
+            </materialDesign:TransitioningContent>
+            <!--#endregion-->
+            
+            <Grid Grid.Column="0" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <!--#region window title-->
+                <materialDesign:TransitioningContent
+                    Grid.Row="0" Margin="0,-80,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top">
+                    <materialDesign:TransitioningContent.OpeningEffects>
+                        <materialDesign:TransitionEffect Kind="ExpandIn" Duration="0:0:2"/>
+                    </materialDesign:TransitioningContent.OpeningEffects>
+                    <materialDesign:Card>
+                        <TextBlock Padding="8" Style="{StaticResource MaterialDesignTextBlock}" Text="{markup:I18n {x:Static i18NResources:Language.FoodAppLoginView_MyFoodApp}}"/>
+                    </materialDesign:Card>
+                </materialDesign:TransitioningContent>
+                <!--#endregion-->
+                
+                <!--#region login status textblock-->
+                <TextBlock x:Name="loginStatus" Grid.Row="1" 
+                           Text="{Binding Path=LoginStatusmsg,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}
+                            ,UpdateSourceTrigger=PropertyChanged}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Visibility="Visible"
+                           >
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Style.Triggers>
+                                
+                                <!--#region login success-->
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=IsJustStarted,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window},
+                                                UpdateSourceTrigger=PropertyChanged}" Value="False"/>
+                                        <Condition Binding="{Binding Path=IsLoggedIn,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window}
+                            ,UpdateSourceTrigger=PropertyChanged}" Value="True"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="Foreground" Value="Green"/>
+                                </MultiDataTrigger>
+                                <!--#endregion-->
+                                
+                                <!--#region login fail-->
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=IsJustStarted, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window},
+                                                UpdateSourceTrigger=PropertyChanged}" Value="False"/>
+                                        <Condition Binding="{Binding Path=IsLoggedIn, RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Window},
+                                                UpdateSourceTrigger=PropertyChanged}" Value="False"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="Foreground" Value="Red"/>
+                                </MultiDataTrigger>
+                                <!--#endregion-->
+                                
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <!--#endregion-->
+                
+                <!--#region User name textblox-->
+                <materialDesign:TransitioningContent Grid.Row="2" Margin="90,20,00,0" HorizontalAlignment="Left">
+                    <materialDesign:TransitioningContent.OpeningEffects>
+                        <materialDesign:TransitionEffect Kind="SlideInFromLeft" Duration="0:0:2"/>
+                    </materialDesign:TransitioningContent.OpeningEffects>
+                    <StackPanel Style="{StaticResource setVisibilityBasedLogin}" Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Account" Width="16" Height="16" VerticalAlignment="Center"
+                                         Margin="0,5,10,0" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}"/>
+                        <TextBox x:Name="NameTextBox" Width="140" materialDesign:HintAssist.Hint="{markup:I18n {x:Static i18NResources:Language.FoodAppLoginView_UserName}}"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                    </StackPanel>
+                </materialDesign:TransitioningContent>
+                <!--#endregion-->
+                
+                <!--#region password box-->
+                <materialDesign:TransitioningContent Grid.Row="3" Margin="90,20,0,0" HorizontalAlignment="Left">
+                    <materialDesign:TransitioningContent.OpeningEffects>
+                        <materialDesign:TransitionEffect Kind="SlideInFromLeft" Duration="0:0:2"/>
+                    </materialDesign:TransitioningContent.OpeningEffects>
+                    <StackPanel Style="{StaticResource setVisibilityBasedLogin}" Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Key" Width="16" Height="16" Margin="0,5,10,0"
+                                         Foreground="{Binding ElementName=passwordBox,Path=BorderBrush}"/>
+                        <PasswordBox x:Name="passwordBox" 
+                             materialDesign:HintAssist.Hint="{markup:I18n {x:Static i18NResources:Language.FoodAppLoginView_Password}}"
+                             materialDesign:HintAssist.Foreground="Green"
+                             materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                             Width="140"
+                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+                    </StackPanel>
+                </materialDesign:TransitioningContent>
+                <!--#endregion-->
+                
+                <!--#region control panel-->
+                <materialDesign:TransitioningContent Grid.Row="4" Margin="40,20,0,0">
+                    <materialDesign:TransitioningContent.OpeningEffects>
+                        <materialDesign:TransitionEffect Kind="SlideInFromBottom" Duration="0:0:2"/>
+                    </materialDesign:TransitioningContent.OpeningEffects>
+                    <StackPanel Style="{StaticResource setVisibilityBasedLogin}" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <CheckBox Content="{markup:I18n {x:Static i18NResources:Language.FoodAppLoginView_RememberMe}}"/>
+                        <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            Width="80" Height="40" Margin="120,0,0,0"
+                                Content="{markup:I18n {x:Static i18NResources:Language.FoodAppLoginView_Login}}"/>
+                    </StackPanel>
+                </materialDesign:TransitioningContent>
+                <!--#endregion-->
+                
+            </Grid>
+        </Grid>
+    </materialDesign:DialogHost>
+</Window>

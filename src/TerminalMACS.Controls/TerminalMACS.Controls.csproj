@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="1.2.6" />
-    <PackageReference Include="MaterialDesignThemes.Wpf" Version="1.0.1" />
+    <PackageReference Include="MaterialDesignThemes" Version="3.2.0-ci1494" />
   </ItemGroup>
 
   <ItemGroup>
