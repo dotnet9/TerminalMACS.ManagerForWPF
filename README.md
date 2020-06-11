@@ -1,0 +1,1 @@
+# TerminalMACS.ManagerForWPF
