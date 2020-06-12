@@ -25,17 +25,15 @@
             <Metro:MetroTitleMenuItem Header="{markup:I18n {x:Static i18NResources:Language.MainMenu_Contact}}" Icon="/Images/Contact.png">
                 <Metro:MetroMenuItem Header="QQ"  Command="AduOpenLink:ControlCommands.OpenLink" 
                                      CommandParameter="http://wpa.qq.com/msgrd?v=3&amp;uin=632871194&amp;site=qq&amp;menu=yes"/>
-                <Metro:MetroMenuItem Header="{markup:I18n {x:Static i18NResources:Language.MainMenu_QQGroup}}" Command="AduOpenLink:ControlCommands.OpenLink"
-                                     CommandParameter="https://jq.qq.com/?_wv=1027&amp;k=50b36fD"/>
                 <Metro:MetroMenuItem Header="{markup:I18n {x:Static i18NResources:Language.MainMenu_Email}}" Command="AduOpenLink:ControlCommands.OpenLink"
                                      CommandParameter="mailto:632871194@qq.com" />
             </Metro:MetroTitleMenuItem>
 
             <Metro:MetroTitleMenuItem Header="{markup:I18n {x:Static i18NResources:Language.MainMenu_SourceCode}}"  Icon="/Images/code.png">
                 <Metro:MetroMenuItem Header="GitHub" Command="AduOpenLink:ControlCommands.OpenLink" 
-                                     CommandParameter="https://github.com/dotnet9/TerminalMACS"/>
+                                     CommandParameter="https://github.com/dotnet9/TerminalMACS.ManagerForWPF"/>
                 <Metro:MetroMenuItem Header="Gitee" Command="AduOpenLink:ControlCommands.OpenLink"
-                                     CommandParameter="https://gitee.com/dotnet9/TerminalMACS"/>
+                                     CommandParameter="https://gitee.com/dotnet9/TerminalMACS.ManagerForWPF"/>
             </Metro:MetroTitleMenuItem>
 
             <Metro:MetroTitleMenuItem Header="{markup:I18n {x:Static i18NResources:Language.MainMenu_Setting}}" Icon="/Images/setting.png">

@@ -24,15 +24,6 @@
         <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="DarkOrange" 
                     FontSize="20" Text="{markup:I18n {x:Static i18NResources:Language.About_TechExchange}}" Margin="0"/>
         <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
-            <Metro:HCShield Subject="{markup:I18n {x:Static i18NResources:Language.MainMenu_QQGroup}}" Status="172269357"
-                            Color="{StaticResource DefaultBrush}" Margin="10,0"
-                            Command="AduOpenLink:ControlCommands.OpenLink"
-                            CommandParameter="https://jq.qq.com/?_wv=1027&amp;k=50b36fD">
-                <Metro:HCShield.ToolTip>
-                    <Metro:AduToolTip Content="{markup:I18n {x:Static i18NResources:Language.About_JonQQGroup}}" IsShowShadow="True"
-                                      FontSize="12" Padding="10,6" PlacementEx="BottomCenter" />
-                </Metro:HCShield.ToolTip>
-            </Metro:HCShield>
             <Metro:HCShield Subject="QQ" Status="632871194" Color="#4A8AF4" Margin="10,0" 
                             Command="AduOpenLink:ControlCommands.OpenLink"
                             CommandParameter="http://wpa.qq.com/msgrd?v=3&amp;uin=632871194&amp;site=qq&amp;menu=yes">
