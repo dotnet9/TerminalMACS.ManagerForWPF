@@ -159,4 +159,7 @@
   <data name="MainTabItem_LoginView2BtnContent" xml:space="preserve">
     <value>フォーム2を簡単に登録する</value>
   </data>
+  <data name="MainTabItem_MusicPlayer1BtnContent" xml:space="preserve">
+    <value>簡易音楽プレーヤー1</value>
+  </data>
 </root>

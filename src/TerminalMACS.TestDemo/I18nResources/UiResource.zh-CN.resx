@@ -159,4 +159,7 @@
   <data name="MainTabItem_LoginView2BtnContent" xml:space="preserve">
     <value>简单登录窗体2</value>
   </data>
+  <data name="MainTabItem_MusicPlayer1BtnContent" xml:space="preserve">
+    <value>简易音乐播放器1</value>
+  </data>
 </root>

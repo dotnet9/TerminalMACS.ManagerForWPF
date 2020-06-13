@@ -185,5 +185,14 @@ namespace TerminalMACS.TestDemo.I18nResources {
                 return ResourceManager.GetString("MainTabItem_LoginView2BtnContent", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 Simple music player 1 的本地化字符串。
+        /// </summary>
+        internal static string MainTabItem_MusicPlayer1BtnContent {
+            get {
+                return ResourceManager.GetString("MainTabItem_MusicPlayer1BtnContent", resourceCulture);
+            }
+        }
     }
 }

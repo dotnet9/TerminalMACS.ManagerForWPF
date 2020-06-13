@@ -2,6 +2,7 @@
 using TerminalMACS.TestDemo.Views.FoodAppLoginUI;
 using TerminalMACS.TestDemo.Views.LoginUI;
 using TerminalMACS.TestDemo.Views.MobileAppUsageDashboardCore;
+using TerminalMACS.TestDemo.Views.MusicPlayer;
 
 namespace TerminalMACS.TestDemo.Views
 {
@@ -36,6 +37,13 @@ namespace TerminalMACS.TestDemo.Views
         private void ShowLoginView2_Click(object sender, RoutedEventArgs e)
         {
             var view = new LoginView2();
+            view.Owner = Application.Current.MainWindow;
+            view.Show();
+        }
+
+        private void ShowMusicPalyer1_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new MusicPlayer1();
             view.Owner = Application.Current.MainWindow;
             view.Show();
         }

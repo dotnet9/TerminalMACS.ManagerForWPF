@@ -63,29 +63,9 @@
 
 收集全球优秀的开源WPF界面设计
 
-#### 5.5.1. 美食应用登录
+**登录注册分类1**
 
-参考视频：[WPF Food App Login UI Material Design [Speed Design]](https://www.youtube.com/watch?v=1i5oWNvIYmo)
-
-<p align="center">
-  <img width="800px" src="./assets/FoodAppLoginUI-zh_CN.gif">
-</p>
-
-<p align="center">美食应用登录</p>
-
-### 5.5.2. 移动应用仪表盘
-
-参考视频：[WPF Dashboard UI – Material Design [Speed Design]](https://www.youtube.com/watch?v=h962rCLfGuA&t=282s)
-
-参考源码：[WPF-Dashboard-UI-Material-Design-Concept](https://github.com/vasanthmes/WPF-Dashboard-UI-Material-Design-Concept)
-
-<p align="center">
-  <img width="800px" src="./assets/AppUsageDashboard.gif">
-</p>
-
-<p align="center">移动应用仪表盘</p>
-
-### 5.5.3. 简单登录窗体设计1
+1. 简单登录窗体设计1
 
 参考视频：[C# WPF Material Design UI: Login Window](https://www.youtube.com/watch?v=gBR1mbMEPnk)
 
@@ -97,7 +77,7 @@
 
 <p align="center">简单登录窗体设计1</p>
 
-### 5.5.4. 简单登录窗体设计2
+2. 简单登录窗体设计2
 
 参考视频：[C# WPF Material Design UI: Login Window](https://www.youtube.com/watch?v=9Y2EvautQnM)
 
@@ -108,3 +88,39 @@
 </p>
 
 <p align="center">简单登录窗体设计2</p>
+
+3. 美食应用登录
+
+参考视频：[WPF Food App Login UI Material Design [Speed Design]](https://www.youtube.com/watch?v=1i5oWNvIYmo)
+
+<p align="center">
+  <img src="./assets/FoodAppLoginUI-zh_CN.gif">
+</p>
+
+<p align="center">美食应用登录</p>
+
+**其他界面设计**
+
+1. 移动应用仪表盘
+
+参考视频：[WPF Dashboard UI – Material Design [Speed Design]](https://www.youtube.com/watch?v=h962rCLfGuA&t=282s)
+
+参考源码：[WPF-Dashboard-UI-Material-Design-Concept](https://github.com/vasanthmes/WPF-Dashboard-UI-Material-Design-Concept)
+
+<p align="center">
+  <img src="./assets/AppUsageDashboard.gif">
+</p>
+
+<p align="center">移动应用仪表盘</p>
+
+2. 简易音乐播放器1
+
+参考视频：[C# WPF Design UI: Music Player](https://www.youtube.com/watch?v=_Kc6YxIAk7s&t=41s)
+
+参考源码：[Player1](https://github.com/Abel13/Player1)
+
+<p align="center">
+  <img src="./assets/MusicPlayer1.png">
+</p>
+
+<p align="center">简易音乐播放器1</p>
