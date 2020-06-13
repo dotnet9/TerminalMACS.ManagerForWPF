@@ -16,3 +16,7 @@ src/TerminalMACS/.vs/
 src/.vs/
 src/Build/
 src/TerminalMACS.TestDemo/obj/
+src/TerminalMACS.Client/bin/
+src/TerminalMACS.Home/bin/
+src/TerminalMACS.Server/bin/
+src/TerminalMACS.TestDemo/bin/

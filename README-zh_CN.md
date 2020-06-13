@@ -24,6 +24,10 @@
 
 多种开源 WPF UI 库选择，开发 WPF 项目更方便：[MaterialDesignInXamlToolkit](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit)、 [HandyControl](https://github.com/HandyOrg/HandyControl)、 [PanuonUI.Silver](https://github.com/Panuon/PanuonUI.Silver)、 [AduSkin](https://github.com/aduskin/AduSkin)。
 
+- ECharts
+
+ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pie-doughnut)
+
 - 本地化支持
 
 - 动态国际化支持
@@ -63,7 +67,7 @@
 
 收集全球优秀的开源WPF界面设计
 
-**登录注册分类1**
+**登录注册分类 1**
 
 1. 简单登录窗体设计1
 
@@ -99,7 +103,7 @@
 
 <p align="center">美食应用登录</p>
 
-**其他界面设计**
+**其他界面设计 2**
 
 1. 移动应用仪表盘
 
@@ -113,11 +117,25 @@
 
 <p align="center">移动应用仪表盘</p>
 
-2. 简易音乐播放器1
+2. 简易仪表盘2
 
-参考视频：[C# WPF Design UI: Music Player](https://www.youtube.com/watch?v=_Kc6YxIAk7s&t=41s)
+参考视频：[WPF Dashboard UI – Material Design [Speed Design]](https://www.youtube.com/watch?v=h962rCLfGuA&t=282s)
 
-参考源码：[Player1](https://github.com/Abel13/Player1)
+参考源码：[WPF-Dashboard-UI-Material-Design-Concept](https://github.com/vasanthmes/WPF-Dashboard-UI-Material-Design-Concept)
+
+ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pie-doughnut)
+
+<p align="center">
+  <img src="./assets/Dashboard2.gif">
+</p>
+
+<p align="center">简易仪表盘2</p>
+
+3. 简易音乐播放器1
+
+参考视频：[C# WPF Material Design UI: Dashboard](https://www.youtube.com/watch?v=sgEhK3mbDYo&t=26s)
+
+参考源码：[Dashboard](https://github.com/Abel13/Dashboard1)
 
 <p align="center">
   <img src="./assets/MusicPlayer1.png">

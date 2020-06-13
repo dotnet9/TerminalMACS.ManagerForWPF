@@ -147,6 +147,9 @@
   <data name="MainTabItem_AppUsageDashboardBtnContent" xml:space="preserve">
     <value>Modile useage dashboard</value>
   </data>
+  <data name="MainTabItem_Dashboard2BtnContent" xml:space="preserve">
+    <value>Dashboard 2</value>
+  </data>
   <data name="MainTabItem_FoodBtnContent" xml:space="preserve">
     <value>Food app login</value>
   </data>

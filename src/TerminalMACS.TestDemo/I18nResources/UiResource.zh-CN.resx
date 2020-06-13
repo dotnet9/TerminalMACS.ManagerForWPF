@@ -147,6 +147,9 @@
   <data name="MainTabItem_AppUsageDashboardBtnContent" xml:space="preserve">
     <value>移动应用仪表盘</value>
   </data>
+  <data name="MainTabItem_Dashboard2BtnContent" xml:space="preserve">
+    <value>仪表盘2</value>
+  </data>
   <data name="MainTabItem_FoodBtnContent" xml:space="preserve">
     <value>美食应用登录</value>
   </data>

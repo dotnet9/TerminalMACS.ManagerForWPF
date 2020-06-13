@@ -4,6 +4,7 @@
     <AppendTargetFrameworkToOutputPath>Flase</AppendTargetFrameworkToOutputPath>
     <UseWPF>true</UseWPF>
     <AssemblyName>TerminalMACS.TestDemo</AssemblyName>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\Build\Debug\Modules</OutputPath>
@@ -15,6 +16,7 @@
     <None Remove="Images\bg.jpg" />
     <None Remove="Images\bg.png" />
     <None Remove="Views\FoodAppLoginUI\Images\food.jpg" />
+    <None Remove="Views\MobileAppUsageDashboardCore\pie-doughnut.html" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="1.2.6" />
@@ -37,6 +39,9 @@
   <ItemGroup>
     <Resource Include="Images\bg.png" />
     <Resource Include="Views\FoodAppLoginUI\Images\food.jpg" />
+    <Resource Include="Views\MobileAppUsageDashboardCore\pie-doughnut.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="I18nResources\Language.cs">

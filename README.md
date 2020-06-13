@@ -24,6 +24,10 @@ English | [简体中文](./README-zh_CN.md)
 
 >A variety of open source WPF UI library options make it easier to develop WPF projects: [MaterialDesignInXamlToolkit](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit)、 [HandyControl](https://github.com/HandyOrg/HandyControl)、 [PanuonUI.Silver](https://github.com/Panuon/PanuonUI.Silver)、 [AduSkin](https://github.com/aduskin/AduSkin)。
 
+- ECharts
+
+ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pie-doughnut)
+
 - Localization support
 
 - Dynamic internationalization support
@@ -63,12 +67,78 @@ English | [简体中文](./README-zh_CN.md)
 
 Collect the world's best open source WPF interface design
 
-#### 5.5.1. Food app login ui
+**Login registration category 1**
+
+1. Simple login form design 1
+
+Reference video:[C# WPF Material Design UI: Login Window](https://www.youtube.com/watch?v=gBR1mbMEPnk)
+
+Reference source code:[Login2](https://github.com/Abel13/Login2)
 
 <p align="center">
-  <a href="https://dotnet9.com">
-    <img width="800px" src="./assets/FoodAppLoginUI.gif">
-  </a>
+  <img src="./assets/SimpleLoginView1.png">
 </p>
 
-<p align="center">Food app login ui</p>
+<p align="center">Simple login form design 1</p>
+
+2. Simple login form design 2
+
+Reference video:[C# WPF Material Design UI: Login Window](https://www.youtube.com/watch?v=9Y2EvautQnM)
+
+Reference source code:[Login1](https://github.com/Abel13/Login1)
+
+<p align="center">
+  <img src="./assets/SimpleLoginView2.png">
+</p>
+
+<p align="center">Simple login form design 2</p>
+
+3. Food app login
+
+Reference video:[WPF Food App Login UI Material Design [Speed Design]](https://www.youtube.com/watch?v=1i5oWNvIYmo)
+
+<p align="center">
+  <img src="./assets/FoodAppLoginUI-zh_CN.gif">
+</p>
+
+<p align="center">Food app login</p>
+
+**Other ui design 2**
+
+1. Mobile app dashboard
+
+Reference video:[WPF Dashboard UI – Material Design [Speed Design]](https://www.youtube.com/watch?v=h962rCLfGuA&t=282s)
+
+Reference source code:[WPF-Dashboard-UI-Material-Design-Concept](https://github.com/vasanthmes/WPF-Dashboard-UI-Material-Design-Concept)
+
+<p align="center">
+  <img src="./assets/AppUsageDashboard.gif">
+</p>
+
+<p align="center">Mobile app dashboard</p>
+
+2. Easy dashboard 2
+
+Reference video:[WPF Dashboard UI – Material Design [Speed Design]](https://www.youtube.com/watch?v=h962rCLfGuA&t=282s)
+
+Reference source code:[WPF-Dashboard-UI-Material-Design-Concept](https://github.com/vasanthmes/WPF-Dashboard-UI-Material-Design-Concept)
+
+ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pie-doughnut)
+
+<p align="center">
+  <img src="./assets/Dashboard2.gif">
+</p>
+
+<p align="center">Easy dashboard 2</p>
+
+3. Easy music player 1
+
+Reference video:[C# WPF Material Design UI: Dashboard](https://www.youtube.com/watch?v=sgEhK3mbDYo&t=26s)
+
+Reference source code:[Dashboard](https://github.com/Abel13/Dashboard1)
+
+<p align="center">
+  <img src="./assets/MusicPlayer1.png">
+</p>
+
+<p align="center">Easy music player 1</p>

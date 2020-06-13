@@ -147,6 +147,9 @@
   <data name="MainTabItem_AppUsageDashboardBtnContent" xml:space="preserve">
     <value>移動用計器パネル</value>
   </data>
+  <data name="MainTabItem_Dashboard2BtnContent" xml:space="preserve">
+    <value>ダッシュボード2</value>
+  </data>
   <data name="MainTabItem_FoodBtnContent" xml:space="preserve">
     <value>グルメアプリ登録</value>
   </data>

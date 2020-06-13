@@ -12,6 +12,7 @@
     <PackageProjectUrl>https://terminalmacs.com/</PackageProjectUrl>
     <PackageIcon>logo.png</PackageIcon>
     <PackageReleaseNotes>TerminalMACS桌面管理端WPF版本</PackageReleaseNotes>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

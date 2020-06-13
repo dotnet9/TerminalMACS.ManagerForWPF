@@ -15,6 +15,7 @@
     <Product>WpfExtensions.Xaml</Product>
     <PackageId>WpfExtensions.Xaml</PackageId>
     <UseWPF>true</UseWPF>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
