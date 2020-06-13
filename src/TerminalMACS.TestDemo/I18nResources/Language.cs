@@ -26,5 +26,7 @@ namespace TerminalMACS.TestDemo.I18nResources
 		public static readonly ComponentResourceKey MainTabItem_AppUsageDashboardBtnContent = new ComponentResourceKey(typeof(UiResource), nameof(MainTabItem_AppUsageDashboardBtnContent));
 		public static readonly ComponentResourceKey MainTabItem_FoodBtnContent = new ComponentResourceKey(typeof(UiResource), nameof(MainTabItem_FoodBtnContent));
 		public static readonly ComponentResourceKey MainTabItem_Header = new ComponentResourceKey(typeof(UiResource), nameof(MainTabItem_Header));
+		public static readonly ComponentResourceKey MainTabItem_LoginView1BtnContent = new ComponentResourceKey(typeof(UiResource), nameof(MainTabItem_LoginView1BtnContent));
+		public static readonly ComponentResourceKey MainTabItem_LoginView2BtnContent = new ComponentResourceKey(typeof(UiResource), nameof(MainTabItem_LoginView2BtnContent));
 	}
 }

@@ -153,4 +153,10 @@
   <data name="MainTabItem_Header" xml:space="preserve">
     <value>Test demos</value>
   </data>
+  <data name="MainTabItem_LoginView1BtnContent" xml:space="preserve">
+    <value>Simple login form 1</value>
+  </data>
+  <data name="MainTabItem_LoginView2BtnContent" xml:space="preserve">
+    <value>Simple login form 2</value>
+  </data>
 </root>

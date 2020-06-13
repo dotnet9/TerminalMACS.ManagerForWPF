@@ -65,10 +65,46 @@
 
 #### 5.5.1. 美食应用登录
 
+参考视频：[WPF Food App Login UI Material Design [Speed Design]](https://www.youtube.com/watch?v=1i5oWNvIYmo)
+
 <p align="center">
-  <a href="https://dotnet9.com">
-    <img width="800px" src="./assets/FoodAppLoginUI-zh_CN.gif">
-  </a>
+  <img width="800px" src="./assets/FoodAppLoginUI-zh_CN.gif">
 </p>
 
 <p align="center">美食应用登录</p>
+
+### 5.5.2. 移动应用仪表盘
+
+参考视频：[WPF Dashboard UI – Material Design [Speed Design]](https://www.youtube.com/watch?v=h962rCLfGuA&t=282s)
+
+参考源码：[WPF-Dashboard-UI-Material-Design-Concept](https://github.com/vasanthmes/WPF-Dashboard-UI-Material-Design-Concept)
+
+<p align="center">
+  <img width="800px" src="./assets/AppUsageDashboard.gif">
+</p>
+
+<p align="center">移动应用仪表盘</p>
+
+### 5.5.3. 简单登录窗体设计1
+
+参考视频：[C# WPF Material Design UI: Login Window](https://www.youtube.com/watch?v=gBR1mbMEPnk)
+
+参考源码：[Login2](https://github.com/Abel13/Login2)
+
+<p align="center">
+  <img src="./assets/SimpleLoginView1.png">
+</p>
+
+<p align="center">简单登录窗体设计1</p>
+
+### 5.5.4. 简单登录窗体设计2
+
+参考视频：[C# WPF Material Design UI: Login Window](https://www.youtube.com/watch?v=9Y2EvautQnM)
+
+参考源码：[Login1](https://github.com/Abel13/Login1)
+
+<p align="center">
+  <img src="./assets/SimpleLoginView2.png">
+</p>
+
+<p align="center">简单登录窗体设计2</p>

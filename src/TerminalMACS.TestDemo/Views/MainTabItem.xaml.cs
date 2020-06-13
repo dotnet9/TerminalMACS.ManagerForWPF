@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using TerminalMACS.TestDemo.Views.FoodAppLoginUI;
+using TerminalMACS.TestDemo.Views.LoginUI;
 using TerminalMACS.TestDemo.Views.MobileAppUsageDashboardCore;
 
 namespace TerminalMACS.TestDemo.Views
@@ -21,6 +22,20 @@ namespace TerminalMACS.TestDemo.Views
         private void ShowAppUseageDashboard_Click(object sender, RoutedEventArgs e)
         {
             var view = new AppUsageDashboard();
+            view.Owner = Application.Current.MainWindow;
+            view.Show();
+        }
+
+        private void ShowLoginView1_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new LoginView1();
+            view.Owner = Application.Current.MainWindow;
+            view.Show();
+        }
+
+        private void ShowLoginView2_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new LoginView2();
             view.Owner = Application.Current.MainWindow;
             view.Show();
         }

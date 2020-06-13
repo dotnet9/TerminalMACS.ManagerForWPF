@@ -153,4 +153,10 @@
   <data name="MainTabItem_Header" xml:space="preserve">
     <value>テストケース</value>
   </data>
+  <data name="MainTabItem_LoginView1BtnContent" xml:space="preserve">
+    <value>フォーム1を簡単に登録する</value>
+  </data>
+  <data name="MainTabItem_LoginView2BtnContent" xml:space="preserve">
+    <value>フォーム2を簡単に登録する</value>
+  </data>
 </root>

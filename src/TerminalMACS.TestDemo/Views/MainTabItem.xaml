@@ -32,30 +32,22 @@
             <materialDesign:Card 
                 Background="{DynamicResource PrimaryHueDarkBrush}"
                 Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
-                Width="200"
+                Width="250"
                 Padding="8">
                 <StackPanel Orientation="Vertical"
-                    Width="150">
+                    Width="220">
                     <StackPanel.Resources>
-                        <Style TargetType="Button">
+                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                             <Setter Property="Margin" Value="2 5"/>
+                            <Setter Property="materialDesign:ButtonProgressAssist.Value" Value="-1"/>
+                            <Setter Property="materialDesign:ButtonProgressAssist.IsIndicatorVisible" Value="True"/>
+                            <Setter Property="materialDesign:ButtonProgressAssist.IsIndeterminate" Value="True"/>
                         </Style>
                     </StackPanel.Resources>
-                    <Button
-                        Style="{StaticResource MaterialDesignRaisedButton}"
-                        materialDesign:ButtonProgressAssist.Value="-1"
-                        materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-                        materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-                        Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_FoodBtnContent}}"
-                        Click="ShowFoodLoginUI_Click"/>
-                    
-                    <Button
-                        Style="{StaticResource MaterialDesignRaisedButton}"
-                        materialDesign:ButtonProgressAssist.Value="-1"
-                        materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-                        materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-                        Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_AppUsageDashboardBtnContent}}"
-                        Click="ShowAppUseageDashboard_Click"/>
+                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_FoodBtnContent}}" Click="ShowFoodLoginUI_Click"/>
+                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_AppUsageDashboardBtnContent}}" Click="ShowAppUseageDashboard_Click"/>
+                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_LoginView1BtnContent}}" Click="ShowLoginView1_Click"/>
+                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_LoginView2BtnContent}}" Click="ShowLoginView2_Click"/>
                 </StackPanel>
             </materialDesign:Card>
             <materialDesign:Card Width="400">

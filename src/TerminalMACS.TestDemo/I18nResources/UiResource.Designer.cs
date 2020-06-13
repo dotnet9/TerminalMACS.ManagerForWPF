@@ -167,5 +167,23 @@ namespace TerminalMACS.TestDemo.I18nResources {
                 return ResourceManager.GetString("MainTabItem_Header", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 Simple login form 1 的本地化字符串。
+        /// </summary>
+        internal static string MainTabItem_LoginView1BtnContent {
+            get {
+                return ResourceManager.GetString("MainTabItem_LoginView1BtnContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Simple login form 2 的本地化字符串。
+        /// </summary>
+        internal static string MainTabItem_LoginView2BtnContent {
+            get {
+                return ResourceManager.GetString("MainTabItem_LoginView2BtnContent", resourceCulture);
+            }
+        }
     }
 }
