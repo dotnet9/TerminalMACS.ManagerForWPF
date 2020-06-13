@@ -142,6 +142,15 @@ namespace TerminalMACS.TestDemo.I18nResources {
         }
         
         /// <summary>
+        ///   查找类似 Modile useage dashboard 的本地化字符串。
+        /// </summary>
+        internal static string MainTabItem_AppUsageDashboardBtnContent {
+            get {
+                return ResourceManager.GetString("MainTabItem_AppUsageDashboardBtnContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Food app login 的本地化字符串。
         /// </summary>
         internal static string MainTabItem_FoodBtnContent {

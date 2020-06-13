@@ -34,17 +34,29 @@
                 Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
                 Width="200"
                 Padding="8">
-                <Grid
+                <StackPanel Orientation="Vertical"
                     Width="150">
+                    <StackPanel.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Margin" Value="2 5"/>
+                        </Style>
+                    </StackPanel.Resources>
                     <Button
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         materialDesign:ButtonProgressAssist.Value="-1"
                         materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                         materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                         Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_FoodBtnContent}}"
-                        Margin="2,0" 
                         Click="ShowFoodLoginUI_Click"/>
-                 </Grid>
+                    
+                    <Button
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        materialDesign:ButtonProgressAssist.Value="-1"
+                        materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                        materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                        Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_AppUsageDashboardBtnContent}}"
+                        Click="ShowAppUseageDashboard_Click"/>
+                </StackPanel>
             </materialDesign:Card>
             <materialDesign:Card Width="400">
 

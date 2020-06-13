@@ -144,6 +144,9 @@
   <data name="FoodAppLoginView_UserName" xml:space="preserve">
     <value>User Name</value>
   </data>
+  <data name="MainTabItem_AppUsageDashboardBtnContent" xml:space="preserve">
+    <value>Modile useage dashboard</value>
+  </data>
   <data name="MainTabItem_FoodBtnContent" xml:space="preserve">
     <value>Food app login</value>
   </data>
