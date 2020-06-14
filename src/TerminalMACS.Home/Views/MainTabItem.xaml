@@ -31,6 +31,9 @@
                     <Setter Property="HorizontalAlignment" Value="Center"/>
                 </Style>
             </Metro:AduTabControl.Resources>
+            <Metro:AduTabItem Header="{markup:I18n {x:Static i18NResources:Language.MainTabItem_TestDemoDisplay}}">
+                <child:TestDemoDisplay/>
+            </Metro:AduTabItem>
             <Metro:AduTabItem Header="{markup:I18n {x:Static i18NResources:Language.MainTabItem_Timeline}}">
                 <child:TerminalMACSTimeLine/>
             </Metro:AduTabItem>

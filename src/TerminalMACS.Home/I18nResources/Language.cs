@@ -14,6 +14,7 @@ namespace TerminalMACS.Home.I18nResources
 {
 	public static class Language
 	{
+		public static readonly ComponentResourceKey MainTabItem_TestDemoDisplay = new ComponentResourceKey(typeof(UiResource), nameof(MainTabItem_TestDemoDisplay));
 		public static readonly ComponentResourceKey MainTabItem_Timeline = new ComponentResourceKey(typeof(UiResource), nameof(MainTabItem_Timeline));
 		public static readonly ComponentResourceKey MainTabItm_Header = new ComponentResourceKey(typeof(UiResource), nameof(MainTabItm_Header));
 		public static readonly ComponentResourceKey Timeline_AddAbpVNextSeverProject = new ComponentResourceKey(typeof(UiResource), nameof(Timeline_AddAbpVNextSeverProject));

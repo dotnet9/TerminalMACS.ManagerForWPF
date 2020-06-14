@@ -114,6 +114,14 @@
                                       IsShowShadow="True" FontSize="12" Padding="10,6" PlacementEx="BottomCenter" />
                 </Metro:HCShield.ToolTip>
             </Metro:HCShield>
+            <Metro:HCShield Subject="WPF" Status="PanuonUI.Silver" Color="#F06632" Margin="10,0"
+                            Command="AduOpenLink:ControlCommands.OpenLink" 
+                            CommandParameter="https://github.com/Panuon/PanuonUI.Silver">
+                <Metro:HCShield.ToolTip>
+                    <Metro:AduToolTip Content="{markup:I18n {x:Static i18NResources:Language.About_BrowseOpenSourceFramework}}"
+                                      IsShowShadow="True" FontSize="12" Padding="10,6" PlacementEx="BottomCenter" />
+                </Metro:HCShield.ToolTip>
+            </Metro:HCShield>
             <Metro:HCShield Subject="WPF" Status="MaterialDesignInXamlToolkit" Color="#F06632" Margin="10,0"
                             Command="AduOpenLink:ControlCommands.OpenLink" 
                             CommandParameter="https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit">

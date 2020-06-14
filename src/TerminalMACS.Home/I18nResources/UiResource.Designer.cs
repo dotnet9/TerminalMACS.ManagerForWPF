@@ -61,6 +61,15 @@ namespace TerminalMACS.Home.I18nResources {
         }
         
         /// <summary>
+        ///   查找类似 Excellent interface display 的本地化字符串。
+        /// </summary>
+        internal static string MainTabItem_TestDemoDisplay {
+            get {
+                return ResourceManager.GetString("MainTabItem_TestDemoDisplay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Timeline 的本地化字符串。
         /// </summary>
         internal static string MainTabItem_Timeline {

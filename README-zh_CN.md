@@ -76,7 +76,7 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 参考源码：[Login2](https://github.com/Abel13/Login2)
 
 <p align="center">
-  <img src="./assets/SimpleLoginView1.png">
+  <img src="./assets/TestDemos/SimpleLoginView1.png">
 </p>
 
 <p align="center">简单登录窗体设计1</p>
@@ -88,7 +88,7 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 参考源码：[Login1](https://github.com/Abel13/Login1)
 
 <p align="center">
-  <img src="./assets/SimpleLoginView2.png">
+  <img src="./assets/TestDemos/SimpleLoginView2.png">
 </p>
 
 <p align="center">简单登录窗体设计2</p>
@@ -98,7 +98,7 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 参考视频：[WPF Food App Login UI Material Design [Speed Design]](https://www.youtube.com/watch?v=1i5oWNvIYmo)
 
 <p align="center">
-  <img src="./assets/FoodAppLoginUI-zh_CN.gif">
+  <img src="./assets/TestDemos/FoodAppLoginUI-zh_CN.gif">
 </p>
 
 <p align="center">美食应用登录</p>
@@ -112,7 +112,7 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 参考源码：[WPF-Dashboard-UI-Material-Design-Concept](https://github.com/vasanthmes/WPF-Dashboard-UI-Material-Design-Concept)
 
 <p align="center">
-  <img src="./assets/AppUsageDashboard.gif">
+  <img src="./assets/TestDemos/AppUsageDashboard.gif">
 </p>
 
 <p align="center">移动应用仪表盘</p>
@@ -126,7 +126,7 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pie-doughnut)
 
 <p align="center">
-  <img src="./assets/Dashboard2.gif">
+  <img src="./assets/TestDemos/Dashboard2.gif">
 </p>
 
 <p align="center">简易仪表盘2</p>
@@ -138,7 +138,7 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 参考源码：[Dashboard](https://github.com/Abel13/Dashboard1)
 
 <p align="center">
-  <img src="./assets/MusicPlayer1.png">
+  <img src="./assets/TestDemos/MusicPlayer1.png">
 </p>
 
 <p align="center">简易音乐播放器1</p>
