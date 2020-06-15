@@ -131,7 +131,19 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 
 <p align="center">简易仪表盘2</p>
 
-3. 简易音乐播放器1
+3. 菜单切换用户控件
+
+参考视频：[C# WPF Material Design UI: Fast Food Sales](https://www.youtube.com/watch?v=VNYOKc1PLqA&t=24s)
+
+参考源码：[Pizzaria1](https://github.com/Abel13/Pizzaria1)
+
+<p align="center">
+  <img src="./assets/TestDemos/MenuChange.gif">
+</p>
+
+<p align="center">菜单切换用户控件</p>
+
+4. 简易音乐播放器1
 
 参考视频：[C# WPF Material Design UI: Dashboard](https://www.youtube.com/watch?v=sgEhK3mbDYo&t=26s)
 

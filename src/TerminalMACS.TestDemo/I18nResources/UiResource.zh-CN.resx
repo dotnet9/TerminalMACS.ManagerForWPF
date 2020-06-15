@@ -162,6 +162,9 @@
   <data name="MainTabItem_LoginView2BtnContent" xml:space="preserve">
     <value>简单登录窗体2</value>
   </data>
+  <data name="MainTabItem_MenuChangeBtnContent" xml:space="preserve">
+    <value>菜单切换</value>
+  </data>
   <data name="MainTabItem_MusicPlayer1BtnContent" xml:space="preserve">
     <value>简易音乐播放器1</value>
   </data>

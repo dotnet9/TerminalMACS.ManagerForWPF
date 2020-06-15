@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using TerminalMACS.TestDemo.Views.FoodAppLoginUI;
 using TerminalMACS.TestDemo.Views.LoginUI;
+using TerminalMACS.TestDemo.Views.MenuChange;
 using TerminalMACS.TestDemo.Views.MobileAppUsageDashboardCore;
 using TerminalMACS.TestDemo.Views.MusicPlayer;
 
@@ -51,6 +52,13 @@ namespace TerminalMACS.TestDemo.Views
         private void ShowDashboard2_Click(object sender, RoutedEventArgs e)
         {
             var view = new Dashboard2();
+            view.Owner = Application.Current.MainWindow;
+            view.Show();
+        }
+
+        private void ShowMenuChange_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new MenuChange.MenuChange();
             view.Owner = Application.Current.MainWindow;
             view.Show();
         }
