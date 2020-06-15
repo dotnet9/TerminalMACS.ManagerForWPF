@@ -143,7 +143,19 @@ Reference source code:[Pizzaria1](https://github.com/Abel13/Pizzaria1)
 
 <p align="center">Menu change user control</p>
 
-4. Easy music player 1
+4. Animated menu
+
+Reference video:[C# WPF Material Design UI: Animated Menu](https://www.youtube.com/watch?v=yrnE2Aah4B4&t=23s)
+
+Reference source code:[AnimatedMenu1](https://github.com/Abel13/AnimatedMenu1)
+
+<p align="center">
+  <img src="./assets/TestDemos/AnimatedMenu.gif">
+</p>
+
+<p align="center">Animated menu</p>
+
+5. Easy music player 1
 
 Reference video:[C# WPF Material Design UI: Dashboard](https://www.youtube.com/watch?v=sgEhK3mbDYo&t=26s)
 

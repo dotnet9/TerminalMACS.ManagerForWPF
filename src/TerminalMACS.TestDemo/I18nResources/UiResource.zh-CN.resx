@@ -144,6 +144,9 @@
   <data name="FoodAppLoginView_UserName" xml:space="preserve">
     <value>用户名</value>
   </data>
+  <data name="MainTabItem_AnimatedMenuBtnContent" xml:space="preserve">
+    <value>菜单动画</value>
+  </data>
   <data name="MainTabItem_AppUsageDashboardBtnContent" xml:space="preserve">
     <value>移动应用仪表盘</value>
   </data>

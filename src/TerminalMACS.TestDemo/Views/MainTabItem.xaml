@@ -63,6 +63,7 @@
                     </StackPanel.Resources>
                     <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_MusicPlayer1BtnContent}}" Click="ShowMusicPalyer1_Click"/>
                     <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_MenuChangeBtnContent}}" Click="ShowMenuChange_Click"/>
+                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_AnimatedMenuBtnContent}}" Click="ShowAnimatedMenu_Click"/>
                     <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_AppUsageDashboardBtnContent}}" Click="ShowAppUseageDashboard_Click"/>
                     <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_Dashboard2BtnContent}}" Click="ShowDashboard2_Click"/>
                 </StackPanel>

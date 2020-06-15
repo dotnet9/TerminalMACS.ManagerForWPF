@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using TerminalMACS.TestDemo.Views.AnimatedMenu;
 using TerminalMACS.TestDemo.Views.FoodAppLoginUI;
 using TerminalMACS.TestDemo.Views.LoginUI;
 using TerminalMACS.TestDemo.Views.MenuChange;
@@ -59,6 +60,13 @@ namespace TerminalMACS.TestDemo.Views
         private void ShowMenuChange_Click(object sender, RoutedEventArgs e)
         {
             var view = new MenuChange.MenuChange();
+            view.Owner = Application.Current.MainWindow;
+            view.Show();
+        }
+
+        private void ShowAnimatedMenu_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new AnimatedMenuView();
             view.Owner = Application.Current.MainWindow;
             view.Show();
         }

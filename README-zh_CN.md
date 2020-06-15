@@ -143,7 +143,19 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 
 <p align="center">菜单切换用户控件</p>
 
-4. 简易音乐播放器1
+4. 菜单切换动画
+
+参考视频：[C# WPF Material Design UI: Animated Menu](https://www.youtube.com/watch?v=yrnE2Aah4B4&t=23s)
+
+参考源码：[AnimatedMenu1](https://github.com/Abel13/AnimatedMenu1)
+
+<p align="center">
+  <img src="./assets/TestDemos/AnimatedMenu.gif">
+</p>
+
+<p align="center">菜单切换用户控件</p>
+
+5. 简易音乐播放器1
 
 参考视频：[C# WPF Material Design UI: Dashboard](https://www.youtube.com/watch?v=sgEhK3mbDYo&t=26s)
 

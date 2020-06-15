@@ -144,6 +144,9 @@
   <data name="FoodAppLoginView_UserName" xml:space="preserve">
     <value>ユーザ名</value>
   </data>
+  <data name="MainTabItem_AnimatedMenuBtnContent" xml:space="preserve">
+    <value>メニューアニメーション</value>
+  </data>
   <data name="MainTabItem_AppUsageDashboardBtnContent" xml:space="preserve">
     <value>移動用計器パネル</value>
   </data>

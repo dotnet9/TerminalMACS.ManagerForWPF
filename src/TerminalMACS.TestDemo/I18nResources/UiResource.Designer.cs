@@ -142,6 +142,15 @@ namespace TerminalMACS.TestDemo.I18nResources {
         }
         
         /// <summary>
+        ///   查找类似 Animated menu 的本地化字符串。
+        /// </summary>
+        internal static string MainTabItem_AnimatedMenuBtnContent {
+            get {
+                return ResourceManager.GetString("MainTabItem_AnimatedMenuBtnContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Modile useage dashboard 的本地化字符串。
         /// </summary>
         internal static string MainTabItem_AppUsageDashboardBtnContent {
