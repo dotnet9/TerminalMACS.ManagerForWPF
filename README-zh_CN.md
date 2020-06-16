@@ -167,7 +167,19 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 
 <p align="center">Instagram重新设计</p>
 
-6. 简易音乐播放器1
+6. LoLGoal
+
+参考视频：[dotnet9](https://dotnet9.com/7026.html)
+
+参考源码：[dotnet9](https://dotnet9.com/7026.html)
+
+<p align="center">
+  <img src="./assets/TestDemos/LoLGoal.gif">
+</p>
+
+<p align="center">LoLGoal</p>
+
+7. 简易音乐播放器1
 
 参考视频：[C# WPF Material Design UI: Dashboard](https://www.youtube.com/watch?v=sgEhK3mbDYo&t=26s)
 

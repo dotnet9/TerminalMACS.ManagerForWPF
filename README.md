@@ -167,7 +167,19 @@ Reference source code:[Instagram](https://github.com/Abel13/Instagram)
 
 <p align="center">Instagram redesign</p>
 
-6. Easy music player 1
+6. LoLGoal
+
+Reference video:[dotnet9](https://dotnet9.com/7026.html)
+
+Reference source code:[dotnet9](https://dotnet9.com/7026.html)
+
+<p align="center">
+  <img src="./assets/TestDemos/LoLGoal.gif">
+</p>
+
+<p align="center">LoLGoal</p>
+
+7. Easy music player 1
 
 Reference video:[C# WPF Material Design UI: Dashboard](https://www.youtube.com/watch?v=sgEhK3mbDYo&t=26s)
 

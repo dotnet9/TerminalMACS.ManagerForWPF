@@ -28,11 +28,22 @@
     <None Remove="Views\InstagramRedesign\Assets\pexels-photo-792778.jpeg" />
     <None Remove="Views\InstagramRedesign\Assets\pexels-photo-797640.jpeg" />
     <None Remove="Views\InstagramRedesign\Assets\profile.jpeg" />
+    <None Remove="Views\LoLGoal\Assets\emblems\Emblem_Bronze.png" />
+    <None Remove="Views\LoLGoal\Assets\emblems\Emblem_Challenger.png" />
+    <None Remove="Views\LoLGoal\Assets\emblems\Emblem_Diamond.png" />
+    <None Remove="Views\LoLGoal\Assets\emblems\Emblem_Gold.png" />
+    <None Remove="Views\LoLGoal\Assets\emblems\Emblem_Grandmaster.png" />
+    <None Remove="Views\LoLGoal\Assets\emblems\Emblem_Iron.png" />
+    <None Remove="Views\LoLGoal\Assets\emblems\Emblem_Master.png" />
+    <None Remove="Views\LoLGoal\Assets\emblems\Emblem_Platinum.png" />
+    <None Remove="Views\LoLGoal\Assets\emblems\Emblem_Silver.png" />
+    <None Remove="Views\LoLGoal\Assets\logo2.png" />
     <None Remove="Views\MobileAppUsageDashboardCore\pie-doughnut.html" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="1.2.6" />
     <PackageReference Include="MaterialDesignThemes" Version="3.2.0-ci1494" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Prism.Wpf" Version="8.0.0.1740-pre" />
   </ItemGroup>
   <ItemGroup>
@@ -63,6 +74,16 @@
     <Resource Include="Views\InstagramRedesign\Assets\pexels-photo-792778.jpeg" />
     <Resource Include="Views\InstagramRedesign\Assets\pexels-photo-797640.jpeg" />
     <Resource Include="Views\InstagramRedesign\Assets\profile.jpeg" />
+    <Resource Include="Views\LoLGoal\Assets\emblems\Emblem_Bronze.png" />
+    <Resource Include="Views\LoLGoal\Assets\emblems\Emblem_Challenger.png" />
+    <Resource Include="Views\LoLGoal\Assets\emblems\Emblem_Diamond.png" />
+    <Resource Include="Views\LoLGoal\Assets\emblems\Emblem_Gold.png" />
+    <Resource Include="Views\LoLGoal\Assets\emblems\Emblem_Grandmaster.png" />
+    <Resource Include="Views\LoLGoal\Assets\emblems\Emblem_Iron.png" />
+    <Resource Include="Views\LoLGoal\Assets\emblems\Emblem_Master.png" />
+    <Resource Include="Views\LoLGoal\Assets\emblems\Emblem_Platinum.png" />
+    <Resource Include="Views\LoLGoal\Assets\emblems\Emblem_Silver.png" />
+    <Resource Include="Views\LoLGoal\Assets\logo2.png" />
     <Resource Include="Views\MobileAppUsageDashboardCore\pie-doughnut.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

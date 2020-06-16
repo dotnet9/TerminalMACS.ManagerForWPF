@@ -1,0 +1,64 @@
+﻿<Window x:Class="TerminalMACS.TestDemo.Views.LoLGoal.Views.WindowProfile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TerminalMACS.TestDemo.Views.LoLGoal.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d" Height="600" Width="400" 
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" 
+        WindowStyle="None" Background="#FF410A66">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Purple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Blue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Border Background="White" Margin="20 100 20 20" CornerRadius="15">
+            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                <Border Width="100" Height="100" Margin="20 20 0 10" BorderBrush="Gray" HorizontalAlignment="Left" BorderThickness="1" CornerRadius="15">
+                    <Border.Background>
+                        <ImageBrush ImageSource="{Binding Path=Icon}"/>
+                    </Border.Background>
+                </Border>
+                <TextBlock Margin="20 15" FontSize="30" Text="{Binding Path=SummonerName}" Foreground="DarkGray"/>
+                <StackPanel Orientation="Horizontal" Margin="20 0">
+                    <StackPanel Margin="5">
+                        <TextBlock Text="胜场" FontSize="15" FontWeight="Bold" Foreground="Green"/>
+                        <TextBlock Text="{Binding Path=Wins}" FontSize="18" Foreground="Gray" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Margin="5">
+                        <TextBlock Text="输场" FontSize="15" FontWeight="Bold" Foreground="DarkRed"/>
+                        <TextBlock Text="{Binding Path=Losses}" FontSize="18" Foreground="Gray" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Margin="30 20">
+                    <TextBlock Text="等级" FontSize="15" Foreground="LightGray"/>
+                    <TextBlock Text="{Binding Path=Level}" HorizontalAlignment="Center" FontSize="80" Foreground="Gray"/>
+                </StackPanel>
+                <Grid Margin="20 10">
+                    <Button x:Name="ButtonSearch" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFlatButton}" Width="100" Click="ButtonSearch_Click">
+                        <materialDesign:PackIcon Kind="Search" Width="24" Height="24"/>
+                    </Button>
+                    <Button HorizontalAlignment="Right" Width="100" Content="登录"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+        <StackPanel HorizontalAlignment="Right" Margin="30 10">
+            <Image Source="{Binding Path=Emblem}" Width="200" Height="200">
+                <Image.Effect>
+                    <DropShadowEffect BlurRadius="40" ShadowDepth="1"/>
+                </Image.Effect>
+            </Image>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                <TextBlock FontSize="18" Foreground="Gray" Text="{Binding Path=Tier}" Margin="5" VerticalAlignment="Center"/>
+                <TextBlock FontSize="20" Foreground="Gray" Text="{Binding Path=Rank}" Margin="5"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

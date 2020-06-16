@@ -214,6 +214,15 @@ namespace TerminalMACS.TestDemo.I18nResources {
         }
         
         /// <summary>
+        ///   查找类似 LoL goal 的本地化字符串。
+        /// </summary>
+        internal static string MainTabItem_LoLGoalBtnContent {
+            get {
+                return ResourceManager.GetString("MainTabItem_LoLGoalBtnContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Menu change 的本地化字符串。
         /// </summary>
         internal static string MainTabItem_MenuChangeBtnContent {

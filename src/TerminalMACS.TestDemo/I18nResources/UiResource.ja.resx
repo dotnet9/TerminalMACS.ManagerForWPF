@@ -168,6 +168,9 @@
   <data name="MainTabItem_LoginView2BtnContent" xml:space="preserve">
     <value>フォーム2を簡単に登録する</value>
   </data>
+  <data name="MainTabItem_LoLGoalBtnContent" xml:space="preserve">
+    <value>LoL goal</value>
+  </data>
   <data name="MainTabItem_MenuChangeBtnContent" xml:space="preserve">
     <value>メニュー切り替え</value>
   </data>

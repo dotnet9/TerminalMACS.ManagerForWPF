@@ -67,6 +67,7 @@
                     <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_AppUsageDashboardBtnContent}}" Click="ShowAppUseageDashboard_Click"/>
                     <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_Dashboard2BtnContent}}" Click="ShowDashboard2_Click"/>
                     <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_InstagramRedesignBtnContent}}" Click="ShowInstagramRedesign_Click"/>
+                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_LoLGoalBtnContent}}" Click="ShowLoLGoal_Click"/>
                 </StackPanel>
             </materialDesign:Card>
             <materialDesign:Card Width="400">

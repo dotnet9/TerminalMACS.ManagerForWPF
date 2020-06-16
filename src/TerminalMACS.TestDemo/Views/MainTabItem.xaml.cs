@@ -3,6 +3,7 @@ using TerminalMACS.TestDemo.Views.AnimatedMenu;
 using TerminalMACS.TestDemo.Views.FoodAppLoginUI;
 using TerminalMACS.TestDemo.Views.InstagramRedesign;
 using TerminalMACS.TestDemo.Views.LoginUI;
+using TerminalMACS.TestDemo.Views.LoLGoal.Views;
 using TerminalMACS.TestDemo.Views.MenuChange;
 using TerminalMACS.TestDemo.Views.MobileAppUsageDashboardCore;
 using TerminalMACS.TestDemo.Views.MusicPlayer;
@@ -75,6 +76,13 @@ namespace TerminalMACS.TestDemo.Views
         private void ShowInstagramRedesign_Click(object sender, RoutedEventArgs e)
         {
             var view = new InstagramRedesignView();
+            view.Owner = Application.Current.MainWindow;
+            view.Show();
+        }
+
+        private void ShowLoLGoal_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new MainWindow();
             view.Owner = Application.Current.MainWindow;
             view.Show();
         }
