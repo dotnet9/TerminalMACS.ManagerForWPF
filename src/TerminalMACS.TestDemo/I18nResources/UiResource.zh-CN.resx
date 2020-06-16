@@ -159,6 +159,9 @@
   <data name="MainTabItem_Header" xml:space="preserve">
     <value>测试案例</value>
   </data>
+  <data name="MainTabItem_InstagramRedesignBtnContent" xml:space="preserve">
+    <value>Instagram重新设计</value>
+  </data>
   <data name="MainTabItem_LoginView1BtnContent" xml:space="preserve">
     <value>简单登录窗体1</value>
   </data>

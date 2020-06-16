@@ -159,6 +159,9 @@
   <data name="MainTabItem_Header" xml:space="preserve">
     <value>テストケース</value>
   </data>
+  <data name="MainTabItem_InstagramRedesignBtnContent" xml:space="preserve">
+    <value>Instagramの再設計</value>
+  </data>
   <data name="MainTabItem_LoginView1BtnContent" xml:space="preserve">
     <value>フォーム1を簡単に登録する</value>
   </data>

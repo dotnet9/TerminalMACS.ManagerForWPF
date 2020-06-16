@@ -155,7 +155,19 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 
 <p align="center">菜单切换用户控件</p>
 
-5. 简易音乐播放器1
+5. Instagram重新设计
+
+参考视频：[C# WPF Material Design UI: Redesign Instagram](https://www.youtube.com/watch?v=X-FcXgDnglA&t=39s)
+
+参考源码：[Instagram](https://github.com/Abel13/Instagram)
+
+<p align="center">
+  <img src="./assets/TestDemos/InstagramRedesign.gif">
+</p>
+
+<p align="center">Instagram重新设计</p>
+
+6. 简易音乐播放器1
 
 参考视频：[C# WPF Material Design UI: Dashboard](https://www.youtube.com/watch?v=sgEhK3mbDYo&t=26s)
 

@@ -159,6 +159,9 @@
   <data name="MainTabItem_Header" xml:space="preserve">
     <value>Test demos</value>
   </data>
+  <data name="MainTabItem_InstagramRedesignBtnContent" xml:space="preserve">
+    <value>Instagram redesign</value>
+  </data>
   <data name="MainTabItem_LoginView1BtnContent" xml:space="preserve">
     <value>Simple login form 1</value>
   </data>

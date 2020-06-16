@@ -187,6 +187,15 @@ namespace TerminalMACS.TestDemo.I18nResources {
         }
         
         /// <summary>
+        ///   查找类似 Instagram redesign 的本地化字符串。
+        /// </summary>
+        internal static string MainTabItem_InstagramRedesignBtnContent {
+            get {
+                return ResourceManager.GetString("MainTabItem_InstagramRedesignBtnContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Simple login form 1 的本地化字符串。
         /// </summary>
         internal static string MainTabItem_LoginView1BtnContent {

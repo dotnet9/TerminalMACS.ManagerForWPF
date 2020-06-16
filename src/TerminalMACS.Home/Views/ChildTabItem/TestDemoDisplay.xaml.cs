@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Controls;
 using System.Linq;
+using System.Threading;
 
 namespace TerminalMACS.Home.Views.ChildTabItem
 {
@@ -12,6 +13,7 @@ namespace TerminalMACS.Home.Views.ChildTabItem
         public TestDemoDisplay()
         {
             InitializeComponent();
+
             var imgs = System.IO.Directory.GetFiles("./../../../assets/TestDemos");
             if (imgs.Length > 0)
             {
@@ -21,7 +23,7 @@ namespace TerminalMACS.Home.Views.ChildTabItem
                     CoverFlowMain.Add(new Uri(fullPath, UriKind.RelativeOrAbsolute));
                 }
             }
-            //CoverFlowMain.JumpTo(2);
+            CoverFlowMain.JumpTo(2);
         }
     }
 }

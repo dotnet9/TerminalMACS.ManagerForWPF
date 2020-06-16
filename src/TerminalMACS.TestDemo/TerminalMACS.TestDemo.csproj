@@ -16,6 +16,18 @@
     <None Remove="Images\bg.jpg" />
     <None Remove="Images\bg.png" />
     <None Remove="Views\FoodAppLoginUI\Images\food.jpg" />
+    <None Remove="Views\InstagramRedesign\Assets\food-salad-restaurant-person.jpg" />
+    <None Remove="Views\InstagramRedesign\Assets\insta.jpg" />
+    <None Remove="Views\InstagramRedesign\Assets\pexels-photo-192439.jpeg" />
+    <None Remove="Views\InstagramRedesign\Assets\pexels-photo-257360.jpeg" />
+    <None Remove="Views\InstagramRedesign\Assets\pexels-photo-288583.jpeg" />
+    <None Remove="Views\InstagramRedesign\Assets\pexels-photo-301290.jpeg" />
+    <None Remove="Views\InstagramRedesign\Assets\pexels-photo-614810.jpeg" />
+    <None Remove="Views\InstagramRedesign\Assets\pexels-photo-638791.jpeg" />
+    <None Remove="Views\InstagramRedesign\Assets\pexels-photo-790164.jpeg" />
+    <None Remove="Views\InstagramRedesign\Assets\pexels-photo-792778.jpeg" />
+    <None Remove="Views\InstagramRedesign\Assets\pexels-photo-797640.jpeg" />
+    <None Remove="Views\InstagramRedesign\Assets\profile.jpeg" />
     <None Remove="Views\MobileAppUsageDashboardCore\pie-doughnut.html" />
   </ItemGroup>
   <ItemGroup>
@@ -39,6 +51,18 @@
   <ItemGroup>
     <Resource Include="Images\bg.png" />
     <Resource Include="Views\FoodAppLoginUI\Images\food.jpg" />
+    <Resource Include="Views\InstagramRedesign\Assets\food-salad-restaurant-person.jpg" />
+    <Resource Include="Views\InstagramRedesign\Assets\insta.jpg" />
+    <Resource Include="Views\InstagramRedesign\Assets\pexels-photo-192439.jpeg" />
+    <Resource Include="Views\InstagramRedesign\Assets\pexels-photo-257360.jpeg" />
+    <Resource Include="Views\InstagramRedesign\Assets\pexels-photo-288583.jpeg" />
+    <Resource Include="Views\InstagramRedesign\Assets\pexels-photo-301290.jpeg" />
+    <Resource Include="Views\InstagramRedesign\Assets\pexels-photo-614810.jpeg" />
+    <Resource Include="Views\InstagramRedesign\Assets\pexels-photo-638791.jpeg" />
+    <Resource Include="Views\InstagramRedesign\Assets\pexels-photo-790164.jpeg" />
+    <Resource Include="Views\InstagramRedesign\Assets\pexels-photo-792778.jpeg" />
+    <Resource Include="Views\InstagramRedesign\Assets\pexels-photo-797640.jpeg" />
+    <Resource Include="Views\InstagramRedesign\Assets\profile.jpeg" />
     <Resource Include="Views\MobileAppUsageDashboardCore\pie-doughnut.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

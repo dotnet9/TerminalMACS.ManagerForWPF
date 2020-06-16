@@ -155,7 +155,19 @@ Reference source code:[AnimatedMenu1](https://github.com/Abel13/AnimatedMenu1)
 
 <p align="center">Animated menu</p>
 
-5. Easy music player 1
+5. Instagram redesign
+
+Reference video:[C# WPF Material Design UI: Redesign Instagram](https://www.youtube.com/watch?v=X-FcXgDnglA&t=39s)
+
+Reference source code:[Instagram](https://github.com/Abel13/Instagram)
+
+<p align="center">
+  <img src="./assets/TestDemos/InstagramRedesign.gif">
+</p>
+
+<p align="center">Instagram redesign</p>
+
+6. Easy music player 1
 
 Reference video:[C# WPF Material Design UI: Dashboard](https://www.youtube.com/watch?v=sgEhK3mbDYo&t=26s)
 

@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using TerminalMACS.TestDemo.Views.AnimatedMenu;
 using TerminalMACS.TestDemo.Views.FoodAppLoginUI;
+using TerminalMACS.TestDemo.Views.InstagramRedesign;
 using TerminalMACS.TestDemo.Views.LoginUI;
 using TerminalMACS.TestDemo.Views.MenuChange;
 using TerminalMACS.TestDemo.Views.MobileAppUsageDashboardCore;
@@ -67,6 +68,13 @@ namespace TerminalMACS.TestDemo.Views
         private void ShowAnimatedMenu_Click(object sender, RoutedEventArgs e)
         {
             var view = new AnimatedMenuView();
+            view.Owner = Application.Current.MainWindow;
+            view.Show();
+        }
+
+        private void ShowInstagramRedesign_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new InstagramRedesignView();
             view.Owner = Application.Current.MainWindow;
             view.Show();
         }
