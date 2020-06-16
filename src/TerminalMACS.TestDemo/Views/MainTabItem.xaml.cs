@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using TerminalMACS.TestDemo.Views.AnimatedColorfulMenu;
 using TerminalMACS.TestDemo.Views.AnimatedMenu;
 using TerminalMACS.TestDemo.Views.FoodAppLoginUI;
 using TerminalMACS.TestDemo.Views.InstagramRedesign;
@@ -83,6 +84,13 @@ namespace TerminalMACS.TestDemo.Views
         private void ShowLoLGoal_Click(object sender, RoutedEventArgs e)
         {
             var view = new MainWindow();
+            view.Owner = Application.Current.MainWindow;
+            view.Show();
+        }
+
+        private void ShowDrawerMenu_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new DrawerMenu();
             view.Owner = Application.Current.MainWindow;
             view.Show();
         }

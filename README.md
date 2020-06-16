@@ -103,7 +103,45 @@ Reference video:[WPF Food App Login UI Material Design [Speed Design]](https://w
 
 <p align="center">Food app login</p>
 
-**Other ui design 2**
+**Menu design 3**
+
+1. Drawer menu
+
+Reference video：[C# WPF Material Design UI: Animated Colorful Navigation Drawer](https://www.youtube.com/watch?v=PQFyoKKfstM)
+
+Reference source code:[AnimatedColorfulMenu](https://github.com/Abel13/AnimatedColorfulMenu)
+
+<p align="center">
+  <img src="./assets/TestDemos/DrawerMenu.gif">
+</p>
+
+<p align="center">Drawer menu</p>
+
+2. Menu change user control
+
+Reference video：[C# WPF Material Design UI: Fast Food Sales](https://www.youtube.com/watch?v=VNYOKc1PLqA&t=24s)
+
+Reference source code:[Pizzaria1](https://github.com/Abel13/Pizzaria1)
+
+<p align="center">
+  <img src="./assets/TestDemos/MenuChange.gif">
+</p>
+
+<p align="center">Menu change user control</p>
+
+3. Animated menu
+
+Reference video:[C# WPF Material Design UI: Animated Menu](https://www.youtube.com/watch?v=yrnE2Aah4B4&t=23s)
+
+Reference source code:[AnimatedMenu1](https://github.com/Abel13/AnimatedMenu1)
+
+<p align="center">
+  <img src="./assets/TestDemos/AnimatedMenu.gif">
+</p>
+
+<p align="center">Animated menu</p>
+
+**Other ui design 3**
 
 1. Mobile app dashboard
 
@@ -131,31 +169,7 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 
 <p align="center">Easy dashboard 2</p>
 
-3. Menu change user control
-
-Reference video：[C# WPF Material Design UI: Fast Food Sales](https://www.youtube.com/watch?v=VNYOKc1PLqA&t=24s)
-
-Reference source code:[Pizzaria1](https://github.com/Abel13/Pizzaria1)
-
-<p align="center">
-  <img src="./assets/TestDemos/MenuChange.gif">
-</p>
-
-<p align="center">Menu change user control</p>
-
-4. Animated menu
-
-Reference video:[C# WPF Material Design UI: Animated Menu](https://www.youtube.com/watch?v=yrnE2Aah4B4&t=23s)
-
-Reference source code:[AnimatedMenu1](https://github.com/Abel13/AnimatedMenu1)
-
-<p align="center">
-  <img src="./assets/TestDemos/AnimatedMenu.gif">
-</p>
-
-<p align="center">Animated menu</p>
-
-5. Instagram redesign
+3. Instagram redesign
 
 Reference video:[C# WPF Material Design UI: Redesign Instagram](https://www.youtube.com/watch?v=X-FcXgDnglA&t=39s)
 
@@ -167,7 +181,7 @@ Reference source code:[Instagram](https://github.com/Abel13/Instagram)
 
 <p align="center">Instagram redesign</p>
 
-6. LoLGoal
+4. LoLGoal
 
 Reference video:[dotnet9](https://dotnet9.com/7026.html)
 
@@ -179,7 +193,7 @@ Reference source code:[dotnet9](https://dotnet9.com/7026.html)
 
 <p align="center">LoLGoal</p>
 
-7. Easy music player 1
+5. Easy music player 1
 
 Reference video:[C# WPF Material Design UI: Dashboard](https://www.youtube.com/watch?v=sgEhK3mbDYo&t=26s)
 

@@ -103,7 +103,45 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 
 <p align="center">美食应用登录</p>
 
-**其他界面设计 2**
+**菜单类 2**
+
+1. 抽屉式菜单
+
+参考视频：[C# WPF Material Design UI: Animated Colorful Navigation Drawer](https://www.youtube.com/watch?v=PQFyoKKfstM)
+
+参考源码：[AnimatedColorfulMenu](https://github.com/Abel13/AnimatedColorfulMenu)
+
+<p align="center">
+  <img src="./assets/TestDemos/DrawerMenu.gif">
+</p>
+
+<p align="center">抽屉式菜单</p>
+
+2. 菜单切换用户控件
+
+参考视频：[C# WPF Material Design UI: Fast Food Sales](https://www.youtube.com/watch?v=VNYOKc1PLqA&t=24s)
+
+参考源码：[Pizzaria1](https://github.com/Abel13/Pizzaria1)
+
+<p align="center">
+  <img src="./assets/TestDemos/MenuChange.gif">
+</p>
+
+<p align="center">菜单切换用户控件</p>
+
+3. 菜单切换动画
+
+参考视频：[C# WPF Material Design UI: Animated Menu](https://www.youtube.com/watch?v=yrnE2Aah4B4&t=23s)
+
+参考源码：[AnimatedMenu1](https://github.com/Abel13/AnimatedMenu1)
+
+<p align="center">
+  <img src="./assets/TestDemos/AnimatedMenu.gif">
+</p>
+
+<p align="center">菜单切换用户控件</p>
+
+**其他界面设计 3**
 
 1. 移动应用仪表盘
 
@@ -131,31 +169,7 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 
 <p align="center">简易仪表盘2</p>
 
-3. 菜单切换用户控件
-
-参考视频：[C# WPF Material Design UI: Fast Food Sales](https://www.youtube.com/watch?v=VNYOKc1PLqA&t=24s)
-
-参考源码：[Pizzaria1](https://github.com/Abel13/Pizzaria1)
-
-<p align="center">
-  <img src="./assets/TestDemos/MenuChange.gif">
-</p>
-
-<p align="center">菜单切换用户控件</p>
-
-4. 菜单切换动画
-
-参考视频：[C# WPF Material Design UI: Animated Menu](https://www.youtube.com/watch?v=yrnE2Aah4B4&t=23s)
-
-参考源码：[AnimatedMenu1](https://github.com/Abel13/AnimatedMenu1)
-
-<p align="center">
-  <img src="./assets/TestDemos/AnimatedMenu.gif">
-</p>
-
-<p align="center">菜单切换用户控件</p>
-
-5. Instagram重新设计
+3. Instagram重新设计
 
 参考视频：[C# WPF Material Design UI: Redesign Instagram](https://www.youtube.com/watch?v=X-FcXgDnglA&t=39s)
 
@@ -167,7 +181,7 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 
 <p align="center">Instagram重新设计</p>
 
-6. LoLGoal
+4. LoLGoal
 
 参考视频：[dotnet9](https://dotnet9.com/7026.html)
 
@@ -179,7 +193,7 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 
 <p align="center">LoLGoal</p>
 
-7. 简易音乐播放器1
+5. 简易音乐播放器1
 
 参考视频：[C# WPF Material Design UI: Dashboard](https://www.youtube.com/watch?v=sgEhK3mbDYo&t=26s)
 

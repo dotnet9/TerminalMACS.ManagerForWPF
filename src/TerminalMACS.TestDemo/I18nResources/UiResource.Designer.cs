@@ -169,6 +169,15 @@ namespace TerminalMACS.TestDemo.I18nResources {
         }
         
         /// <summary>
+        ///   查找类似 Drawer menu 的本地化字符串。
+        /// </summary>
+        internal static string MainTabItem_DrawerMenuBtnContent {
+            get {
+                return ResourceManager.GetString("MainTabItem_DrawerMenuBtnContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Food app login 的本地化字符串。
         /// </summary>
         internal static string MainTabItem_FoodBtnContent {

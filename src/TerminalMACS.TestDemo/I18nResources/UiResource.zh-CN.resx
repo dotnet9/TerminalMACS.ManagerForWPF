@@ -153,6 +153,9 @@
   <data name="MainTabItem_Dashboard2BtnContent" xml:space="preserve">
     <value>仪表盘2</value>
   </data>
+  <data name="MainTabItem_DrawerMenuBtnContent" xml:space="preserve">
+    <value>抽屉式菜单</value>
+  </data>
   <data name="MainTabItem_FoodBtnContent" xml:space="preserve">
     <value>美食应用登录</value>
   </data>

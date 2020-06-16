@@ -62,16 +62,42 @@
                         </Style>
                     </StackPanel.Resources>
                     <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_MusicPlayer1BtnContent}}" Click="ShowMusicPalyer1_Click"/>
-                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_MenuChangeBtnContent}}" Click="ShowMenuChange_Click"/>
-                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_AnimatedMenuBtnContent}}" Click="ShowAnimatedMenu_Click"/>
                     <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_AppUsageDashboardBtnContent}}" Click="ShowAppUseageDashboard_Click"/>
                     <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_Dashboard2BtnContent}}" Click="ShowDashboard2_Click"/>
                     <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_InstagramRedesignBtnContent}}" Click="ShowInstagramRedesign_Click"/>
                     <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_LoLGoalBtnContent}}" Click="ShowLoLGoal_Click"/>
                 </StackPanel>
             </materialDesign:Card>
-            <materialDesign:Card Width="400">
-
+            <materialDesign:Card
+                Background="{DynamicResource PrimaryHueLightBrush}"
+                Foreground="DarkOrange"
+                Width="250"
+                Padding="8">
+                <StackPanel Orientation="Vertical"
+                    Width="220">
+                    <StackPanel.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}"/>
+                        <Style TargetType="materialDesign:Badged">
+                            <Setter Property="Margin" Value="2 5"/>
+                            <Setter Property="BadgeColorZoneMode" Value="PrimaryDark"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <materialDesign:Badged Badge="1">
+                        <Grid>
+                            <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_DrawerMenuBtnContent}}" Click="ShowDrawerMenu_Click"/>
+                        </Grid>
+                    </materialDesign:Badged>
+                    <materialDesign:Badged Badge="2">
+                        <Grid>
+                            <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_MenuChangeBtnContent}}" Click="ShowMenuChange_Click"/>
+                        </Grid>
+                    </materialDesign:Badged>
+                    <materialDesign:Badged Badge="3">
+                        <Grid>
+                            <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_AnimatedMenuBtnContent}}" Click="ShowAnimatedMenu_Click"/>
+                        </Grid>
+                    </materialDesign:Badged>
+                </StackPanel>
             </materialDesign:Card>
         </WrapPanel>
     </Border>
