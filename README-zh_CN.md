@@ -227,3 +227,14 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 </p>
 
 <p align="center">聊天界面设计</p>
+
+7. 计算器
+
+参考视频：
+- [Calcalator](https://www.youtube.com/watch?v=G76O79eLcKM)
+
+<p align="center">
+  <img src="./assets/TestDemos/Calculator.gif">
+</p>
+
+<p align="center">计算器</p>

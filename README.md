@@ -227,3 +227,14 @@ Reference source code:[Chat](https://github.com/Abel13/Chat/tree/chat/Chat)
 </p>
 
 <p align="center">Chat view design</p>
+
+6. Calcalator
+
+Reference video:
+- [Calcalator](https://www.youtube.com/watch?v=G76O79eLcKM)
+
+<p align="center">
+  <img src="./assets/TestDemos/Calculator.gif">
+</p>
+
+<p align="center">Calcalator</p>

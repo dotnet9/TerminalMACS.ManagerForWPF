@@ -2,6 +2,7 @@
 using TerminalMACS.TestDemo.Views.AnimatedColorfulMenu;
 using TerminalMACS.TestDemo.Views.AnimatedMenu;
 using TerminalMACS.TestDemo.Views.BaiduMap;
+using TerminalMACS.TestDemo.Views.Calculator;
 using TerminalMACS.TestDemo.Views.ChatView;
 using TerminalMACS.TestDemo.Views.FoodAppLoginUI;
 using TerminalMACS.TestDemo.Views.InstagramRedesign;
@@ -107,6 +108,13 @@ namespace TerminalMACS.TestDemo.Views
         private void ShowChatView_Click(object sender, RoutedEventArgs e)
         {
             var view = new MainChatView();
+            view.Owner = Application.Current.MainWindow;
+            view.Show();
+        }
+
+        private void ShowCalculator_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new CalculatorView();
             view.Owner = Application.Current.MainWindow;
             view.Show();
         }

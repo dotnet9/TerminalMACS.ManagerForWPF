@@ -107,6 +107,11 @@
                             <Button Content="Chat view" Click="ShowChatView_Click"/>
                         </Grid>
                     </materialDesign:Badged>
+                    <materialDesign:Badged Badge="6">
+                        <Grid>
+                            <Button Content="Calculator" Click="ShowCalculator_Click"/>
+                        </Grid>
+                    </materialDesign:Badged>
                 </StackPanel>
             </materialDesign:Card>
         </WrapPanel>
