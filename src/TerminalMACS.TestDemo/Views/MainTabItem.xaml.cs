@@ -2,6 +2,7 @@
 using TerminalMACS.TestDemo.Views.AnimatedColorfulMenu;
 using TerminalMACS.TestDemo.Views.AnimatedMenu;
 using TerminalMACS.TestDemo.Views.BaiduMap;
+using TerminalMACS.TestDemo.Views.ChatView;
 using TerminalMACS.TestDemo.Views.FoodAppLoginUI;
 using TerminalMACS.TestDemo.Views.InstagramRedesign;
 using TerminalMACS.TestDemo.Views.LoginUI;
@@ -99,6 +100,13 @@ namespace TerminalMACS.TestDemo.Views
         private void ShowBaiduMap_Click(object sender, RoutedEventArgs e)
         {
             var view = new BaiduMapView();
+            view.Owner = Application.Current.MainWindow;
+            view.Show();
+        }
+
+        private void ShowChatView_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new MainChatView();
             view.Owner = Application.Current.MainWindow;
             view.Show();
         }

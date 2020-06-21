@@ -212,3 +212,18 @@ Reference source code:[Dashboard](https://github.com/Abel13/Dashboard1)
 </p>
 
 <p align="center">Baidu Map</p>
+
+6. Chat view design
+
+Reference video:
+- [C# WPF Design UI – 1/3 – Contact List](https://www.youtube.com/watch?v=SzPj59ioTNc)
+- [C# WPF Design UI – 2/3 – Profile](https://www.youtube.com/watch?v=wkoXTj2UgzM)
+- [C# WPF Design UI – 3/3 – Chat](https://www.youtube.com/watch?v=834UHMisrxw&t=25s)
+
+Reference source code:[Chat](https://github.com/Abel13/Chat/tree/chat/Chat)
+
+<p align="center">
+  <img src="./assets/TestDemos/ChatView.gif">
+</p>
+
+<p align="center">Chat view design</p>
