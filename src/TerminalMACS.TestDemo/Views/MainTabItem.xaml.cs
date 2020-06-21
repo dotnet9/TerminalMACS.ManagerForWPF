@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using TerminalMACS.TestDemo.Views.AnimatedColorfulMenu;
 using TerminalMACS.TestDemo.Views.AnimatedMenu;
+using TerminalMACS.TestDemo.Views.BaiduMap;
 using TerminalMACS.TestDemo.Views.FoodAppLoginUI;
 using TerminalMACS.TestDemo.Views.InstagramRedesign;
 using TerminalMACS.TestDemo.Views.LoginUI;
@@ -91,6 +92,13 @@ namespace TerminalMACS.TestDemo.Views
         private void ShowDrawerMenu_Click(object sender, RoutedEventArgs e)
         {
             var view = new DrawerMenu();
+            view.Owner = Application.Current.MainWindow;
+            view.Show();
+        }
+
+        private void ShowBaiduMap_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new BaiduMapView();
             view.Owner = Application.Current.MainWindow;
             view.Show();
         }

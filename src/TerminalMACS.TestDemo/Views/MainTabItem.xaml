@@ -97,6 +97,11 @@
                             <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_AnimatedMenuBtnContent}}" Click="ShowAnimatedMenu_Click"/>
                         </Grid>
                     </materialDesign:Badged>
+                    <materialDesign:Badged Badge="4">
+                        <Grid>
+                            <Button Content="Baidu map" Click="ShowBaiduMap_Click"/>
+                        </Grid>
+                    </materialDesign:Badged>
                 </StackPanel>
             </materialDesign:Card>
         </WrapPanel>

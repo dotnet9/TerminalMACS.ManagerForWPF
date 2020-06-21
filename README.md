@@ -204,3 +204,11 @@ Reference source code:[Dashboard](https://github.com/Abel13/Dashboard1)
 </p>
 
 <p align="center">Easy music player 1</p>
+
+6. Baidu Map
+
+<p align="center">
+  <img src="./assets/TestDemos/BaiduMap.gif">
+</p>
+
+<p align="center">Baidu Map</p>

@@ -204,3 +204,11 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 </p>
 
 <p align="center">简易音乐播放器1</p>
+
+6. 百度地图
+
+<p align="center">
+  <img src="./assets/TestDemos/BaiduMap.gif">
+</p>
+
+<p align="center">百度地图</p>

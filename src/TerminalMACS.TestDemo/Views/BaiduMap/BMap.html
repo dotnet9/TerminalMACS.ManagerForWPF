@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>百度地图API显示多个标注点带提示的代码</title>
+    <!--css-->
+    <style type="text/css">
+        body, html, #map {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+
+        #l-map {
+            height: 100%;
+            width: 78%;
+            float: left;
+            border-right: 2px solid #bcbcbc;
+        }
+
+        #r-result {
+            height: 100%;
+            width: 20%;
+            float: left;
+        }
+    </style>
+    <!--javascript-->
+    <script src="http://www.w3school.com.cn/jquery/jquery.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="map">
+    </div>
+    <script type="text/javascript">
+
+        var map; //Map实例
+        var myGeo;//地址解析
+        function map_init() {
+            map = new BMap.Map("map");
+
+            //第1步：设置地图中心点，广州市
+            var point = new BMap.Point(113.312213, 23.147267);
+
+            //第2步：初始化地图,设置中心点坐标和地图级别。
+            map.centerAndZoom(point, 13);
+
+            //第3步：启用滚轮放大缩小
+            map.enableScrollWheelZoom(true);
+
+            //启用键盘上下左右移动地图
+            map.enableKeyboard();
+
+            //第4步：向地图中添加缩放控件
+            var ctrlNav = new window.BMap.NavigationControl({
+                anchor: BMAP_ANCHOR_TOP_LEFT,
+                type: BMAP_NAVIGATION_CONTROL_LARGE
+            });
+            map.addControl(ctrlNav);
+
+            //第5步：向地图中添加缩略图控件
+            var ctrlOve = new window.BMap.OverviewMapControl({
+                anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
+                isOpen: 1
+            });
+            map.addControl(ctrlOve);
+
+            //第6步：向地图中添加比例尺控件
+            var ctrlSca = new window.BMap.ScaleControl({
+                anchor: BMAP_ANCHOR_BOTTOM_LEFT
+            });
+            map.addControl(ctrlSca);
+        }
+
+        //清除覆盖物
+        function removeOverlay() {
+            map.clearOverlays();
+        }
+
+        //移动到某一点
+        function MoveToPoint(lng, lat) {
+            map.panTo(new BMap.Point(lng, lat));
+        }
+
+        // 添加标注
+        function addMarker(lng, lat, index, title, des) {
+
+            //标注图标
+            var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png",
+                new BMap.Size(23, 25), {
+                    offset: new BMap.Size(10, 25),
+                    imageOffset: new BMap.Size(0, 0 - index * 25)
+                });
+            var point = new BMap.Point(lng, lat);
+            var marker = new BMap.Marker(point, { icon: myIcon });
+            map.addOverlay(marker);
+
+            //跳动的动画
+            marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+
+            //根据坐标点，获取详细地址信息
+            if (myGeo == null)
+                myGeo = new BMap.Geocoder();
+            myGeo.getLocation(point, function (res) {
+                if (res == null)
+                    //设置点击详细信息
+                    addInfoWindow(marker, title, des);
+                else
+                    addInfoWindow(marker, res.address, res.business);
+            });
+            return marker;
+        }
+
+        // 添加信息窗口
+        function addInfoWindow(marker, title, des) {
+
+            //标签
+            var label = new BMap.Label(title, { offset: new BMap.Size(20, -10) });
+            marker.setLabel(label);
+
+            //pop弹窗标题
+            var title = '<div style="font-weight:bold;color:#CE5521;font-size:14px">' + title + '</div>';
+            //pop弹窗信息
+            var html = [];
+            html.push('<table cellspacing="0" style="table-layout:fixed;width:100%;font:12px arial,simsun,sans-serif"><tbody>');
+            html.push('<tr>');
+            html.push('<td style="vertical-align:top;line-height:16px;width:48px;white-space:nowrap;word-break:keep-all">详细信息:</td>');
+            html.push('<td style="vertical-align:top;line-height:16px">' + des + ' </td>');
+            html.push('</tr>');
+            html.push('</tbody></table>');
+            var infoWindow = new BMap.InfoWindow(html.join(""), { title: title, width: 200 });
+
+            var openInfoWinFun = function () {
+                marker.openInfoWindow(infoWindow);
+            };
+            marker.addEventListener("click", openInfoWinFun);
+            return openInfoWinFun;
+        }
+
+        //异步调用百度js
+        function map_load() {
+            var load = document.createElement("script");
+            load.src = "http://api.map.baidu.com/api?v=1.4&callback=map_init";
+            document.body.appendChild(load);
+        }
+        window.onload = map_load;
+    </script>
+</body>
+</html>
