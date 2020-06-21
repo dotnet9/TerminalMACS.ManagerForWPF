@@ -188,7 +188,7 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 参考源码：[dotnet9](https://dotnet9.com/7026.html)
 
 <p align="center">
-  <img src="./assets/TestDemos/LoLGoal.gif">
+  <img src="./assets/TestDemos/LolGoal.gif">
 </p>
 
 <p align="center">LoLGoal</p>

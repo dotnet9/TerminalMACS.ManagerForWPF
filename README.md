@@ -188,7 +188,7 @@ Reference video:[dotnet9](https://dotnet9.com/7026.html)
 Reference source code:[dotnet9](https://dotnet9.com/7026.html)
 
 <p align="center">
-  <img src="./assets/TestDemos/LoLGoal.gif">
+  <img src="./assets/TestDemos/LolGoal.gif">
 </p>
 
 <p align="center">LoLGoal</p>
