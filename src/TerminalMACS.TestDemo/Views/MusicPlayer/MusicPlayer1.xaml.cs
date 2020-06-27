@@ -25,7 +25,7 @@ namespace TerminalMACS.TestDemo.Views.MusicPlayer
         }
         private void ButtonFechar_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            this.Close();
         }
         private void Proxima_Click(object sender, RoutedEventArgs e)
         {

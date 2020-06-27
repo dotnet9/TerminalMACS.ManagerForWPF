@@ -16,7 +16,7 @@ namespace TerminalMACS.TestDemo.Views.MenuChange
         }
         private void ButtonFechar_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            this.Close();
         }
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {

@@ -39,6 +39,17 @@
     <None Remove="Views\LoLGoal\Assets\emblems\Emblem_Silver.png" />
     <None Remove="Views\LoLGoal\Assets\logo2.png" />
     <None Remove="Views\MobileAppUsageDashboardCore\pie-doughnut.html" />
+    <None Remove="Views\NavigationDrawMenu\Assets\closeBtn_default.png" />
+    <None Remove="Views\NavigationDrawMenu\Assets\closeBtn_MouseOver.png" />
+    <None Remove="Views\NavigationDrawMenu\Assets\img_background.png" />
+    <None Remove="Views\NavigationDrawMenu\Assets\img_contact.png" />
+    <None Remove="Views\NavigationDrawMenu\Assets\img_home.png" />
+    <None Remove="Views\NavigationDrawMenu\Assets\img_map.png" />
+    <None Remove="Views\NavigationDrawMenu\Assets\img_message.png" />
+    <None Remove="Views\NavigationDrawMenu\Assets\img_setting.png" />
+    <None Remove="Views\NavigationDrawMenu\Assets\img_signout.png" />
+    <None Remove="Views\NavigationDrawMenu\Assets\tgBtn_default.png" />
+    <None Remove="Views\NavigationDrawMenu\Assets\tgBtn_MouseOver.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="1.2.6" />
@@ -87,6 +98,17 @@
     <Resource Include="Views\MobileAppUsageDashboardCore\pie-doughnut.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Views\NavigationDrawMenu\Assets\closeBtn_default.png" />
+    <Resource Include="Views\NavigationDrawMenu\Assets\closeBtn_MouseOver.png" />
+    <Resource Include="Views\NavigationDrawMenu\Assets\img_background.png" />
+    <Resource Include="Views\NavigationDrawMenu\Assets\img_contact.png" />
+    <Resource Include="Views\NavigationDrawMenu\Assets\img_home.png" />
+    <Resource Include="Views\NavigationDrawMenu\Assets\img_map.png" />
+    <Resource Include="Views\NavigationDrawMenu\Assets\img_message.png" />
+    <Resource Include="Views\NavigationDrawMenu\Assets\img_setting.png" />
+    <Resource Include="Views\NavigationDrawMenu\Assets\img_signout.png" />
+    <Resource Include="Views\NavigationDrawMenu\Assets\tgBtn_default.png" />
+    <Resource Include="Views\NavigationDrawMenu\Assets\tgBtn_MouseOver.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="I18nResources\Language.cs">

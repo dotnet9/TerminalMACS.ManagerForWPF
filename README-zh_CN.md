@@ -105,7 +105,7 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 
 **菜单类 2**
 
-1. 抽屉式菜单
+1. 抽屉式菜单1
 
 参考视频：[C# WPF Material Design UI: Animated Colorful Navigation Drawer](https://www.youtube.com/watch?v=PQFyoKKfstM)
 
@@ -115,9 +115,21 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
   <img src="./assets/TestDemos/DrawerMenu.gif">
 </p>
 
-<p align="center">抽屉式菜单</p>
+<p align="center">抽屉式菜单1</p>
 
-2. 菜单切换用户控件
+2. 抽屉式菜单2
+
+参考视频：[WPF - Navigation Drawer / Sidebar Menu | UI Design | C# |](https://www.youtube.com/watch?v=fzBcXicj2G8)
+
+参考源码：[Navigation-Drawer-Sidebar-Menu-in-WPF](https://github.com/CSharpDesignPro/Navigation-Drawer-Sidebar-Menu-in-WPF)
+
+<p align="center">
+  <img src="./assets/TestDemos/NavigationDrawMenu.gif">
+</p>
+
+<p align="center">抽屉式菜单2</p>
+
+3. 菜单切换用户控件
 
 参考视频：[C# WPF Material Design UI: Fast Food Sales](https://www.youtube.com/watch?v=VNYOKc1PLqA&t=24s)
 
@@ -129,7 +141,7 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 
 <p align="center">菜单切换用户控件</p>
 
-3. 菜单切换动画
+4. 菜单切换动画
 
 参考视频：[C# WPF Material Design UI: Animated Menu](https://www.youtube.com/watch?v=yrnE2Aah4B4&t=23s)
 

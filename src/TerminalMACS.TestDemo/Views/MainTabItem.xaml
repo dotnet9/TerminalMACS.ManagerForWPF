@@ -87,6 +87,11 @@
                             <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_DrawerMenuBtnContent}}" Click="ShowDrawerMenu_Click"/>
                         </Grid>
                     </materialDesign:Badged>
+                    <materialDesign:Badged Badge="1">
+                        <Grid>
+                            <Button Content="Drawer Menu 2" Click="ShowDrawerMenu2_Click"/>
+                        </Grid>
+                    </materialDesign:Badged>
                     <materialDesign:Badged Badge="2">
                         <Grid>
                             <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_MenuChangeBtnContent}}" Click="ShowMenuChange_Click"/>

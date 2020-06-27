@@ -11,6 +11,7 @@ using TerminalMACS.TestDemo.Views.LoLGoal.Views;
 using TerminalMACS.TestDemo.Views.MenuChange;
 using TerminalMACS.TestDemo.Views.MobileAppUsageDashboardCore;
 using TerminalMACS.TestDemo.Views.MusicPlayer;
+using TerminalMACS.TestDemo.Views.NavigationDrawMenu;
 
 namespace TerminalMACS.TestDemo.Views
 {
@@ -94,6 +95,13 @@ namespace TerminalMACS.TestDemo.Views
         private void ShowDrawerMenu_Click(object sender, RoutedEventArgs e)
         {
             var view = new DrawerMenu();
+            view.Owner = Application.Current.MainWindow;
+            view.Show();
+        }
+
+        private void ShowDrawerMenu2_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new MenuView();
             view.Owner = Application.Current.MainWindow;
             view.Show();
         }

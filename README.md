@@ -105,7 +105,7 @@ Reference video:[WPF Food App Login UI Material Design [Speed Design]](https://w
 
 **Menu design 3**
 
-1. Drawer menu
+1. Drawer menu 1
 
 Reference video：[C# WPF Material Design UI: Animated Colorful Navigation Drawer](https://www.youtube.com/watch?v=PQFyoKKfstM)
 
@@ -115,9 +115,21 @@ Reference source code:[AnimatedColorfulMenu](https://github.com/Abel13/AnimatedC
   <img src="./assets/TestDemos/DrawerMenu.gif">
 </p>
 
-<p align="center">Drawer menu</p>
+<p align="center">Drawer menu 1</p>
 
-2. Menu change user control
+2. Drawer menu 2
+
+Reference video：[WPF - Navigation Drawer / Sidebar Menu | UI Design | C# |](https://www.youtube.com/watch?v=fzBcXicj2G8)
+
+Reference source code:[Navigation-Drawer-Sidebar-Menu-in-WPF](https://github.com/CSharpDesignPro/Navigation-Drawer-Sidebar-Menu-in-WPF)
+
+<p align="center">
+  <img src="./assets/TestDemos/NavigationDrawMenu.gif">
+</p>
+
+<p align="center">Drawer menu 2</p>
+
+3. Menu change user control
 
 Reference video：[C# WPF Material Design UI: Fast Food Sales](https://www.youtube.com/watch?v=VNYOKc1PLqA&t=24s)
 
@@ -129,7 +141,7 @@ Reference source code:[Pizzaria1](https://github.com/Abel13/Pizzaria1)
 
 <p align="center">Menu change user control</p>
 
-3. Animated menu
+4. Animated menu
 
 Reference video:[C# WPF Material Design UI: Animated Menu](https://www.youtube.com/watch?v=yrnE2Aah4B4&t=23s)
 
