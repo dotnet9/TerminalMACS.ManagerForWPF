@@ -55,6 +55,7 @@
     <PackageReference Include="MaterialDesignColors" Version="1.2.6" />
     <PackageReference Include="MaterialDesignThemes" Version="3.2.0-ci1494" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="NPOI" Version="2.5.1" />
     <PackageReference Include="Prism.Wpf" Version="8.0.0.1740-pre" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TerminalMACS.Infrastructure.UI\TerminalMACS.Infrastructure.UI.csproj" />
+    <ProjectReference Include="..\TerminalMACS.Infrastructure\TerminalMACS.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\bg.png" />
@@ -137,4 +139,10 @@
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="System.Windows.Forms">
+			<HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.Windows.Forms.dll</HintPath>
+		</Reference>
+	</ItemGroup>
 </Project>

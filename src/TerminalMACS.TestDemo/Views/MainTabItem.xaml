@@ -119,6 +119,28 @@
                     </materialDesign:Badged>
                 </StackPanel>
             </materialDesign:Card>
+
+            <materialDesign:Card
+                Background="{DynamicResource PrimaryHueLightBrush}"
+                Foreground="DarkOrange"
+                Width="250"
+                Padding="8">
+                <StackPanel Orientation="Vertical"
+                    Width="220">
+                    <StackPanel.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}"/>
+                        <Style TargetType="materialDesign:Badged">
+                            <Setter Property="Margin" Value="2 5"/>
+                            <Setter Property="BadgeColorZoneMode" Value="PrimaryDark"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <materialDesign:Badged Badge="1">
+                        <Grid>
+                            <Button Content="Write excel" Click="ShowWriteExcel_Click"/>
+                        </Grid>
+                    </materialDesign:Badged>
+                </StackPanel>
+            </materialDesign:Card>
         </WrapPanel>
     </Border>
 </TabItem>
