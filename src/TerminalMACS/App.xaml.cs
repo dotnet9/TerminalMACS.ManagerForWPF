@@ -3,6 +3,7 @@ using Prism.Modularity;
 using Prism.Unity;
 using System.IO;
 using System.Windows;
+using TerminalMACS.Infrastructure.Services;
 using TerminalMACS.Infrastructure.UI;
 using TerminalMACS.Views;
 using WpfExtensions.Xaml;
@@ -23,6 +24,7 @@ namespace TerminalMACS
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<ITestService, TestService>();
         }
 
         protected override IModuleCatalog CreateModuleCatalog()

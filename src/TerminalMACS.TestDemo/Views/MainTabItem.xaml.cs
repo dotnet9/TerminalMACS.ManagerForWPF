@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using TerminalMACS.Infrastructure.Services;
 using TerminalMACS.TestDemo.Views.AnimatedColorfulMenu;
 using TerminalMACS.TestDemo.Views.AnimatedMenu;
 using TerminalMACS.TestDemo.Views.BaiduMap;
@@ -8,7 +9,6 @@ using TerminalMACS.TestDemo.Views.FoodAppLoginUI;
 using TerminalMACS.TestDemo.Views.InstagramRedesign;
 using TerminalMACS.TestDemo.Views.LoginUI;
 using TerminalMACS.TestDemo.Views.LoLGoal.Views;
-using TerminalMACS.TestDemo.Views.MenuChange;
 using TerminalMACS.TestDemo.Views.MobileAppUsageDashboardCore;
 using TerminalMACS.TestDemo.Views.MusicPlayer;
 using TerminalMACS.TestDemo.Views.NavigationDrawMenu;
@@ -18,9 +18,11 @@ namespace TerminalMACS.TestDemo.Views
 {
     public partial class MainTabItem
     {
-        public MainTabItem()
+        public MainTabItem(ITestService service)
         {
             InitializeComponent();
+            var currentTime = service.GetCurrentTime();
+            System.Console.WriteLine(currentTime);
         }
 
         private void ShowFoodLoginUI_Click(object sender, System.Windows.RoutedEventArgs e)
