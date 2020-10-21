@@ -13,6 +13,7 @@ using TerminalMACS.TestDemo.Views.MobileAppUsageDashboardCore;
 using TerminalMACS.TestDemo.Views.MusicPlayer;
 using TerminalMACS.TestDemo.Views.NavigationDrawMenu;
 using TerminalMACS.TestDemo.Views.ReadWriteExcel;
+using TerminalMACS.TestDemo.Views.TestBehaviors;
 
 namespace TerminalMACS.TestDemo.Views
 {
@@ -133,6 +134,13 @@ namespace TerminalMACS.TestDemo.Views
         private void ShowWriteExcel_Click(object sender, RoutedEventArgs e)
         {
             var view = new TestReadWriteExcelView();
+            view.Owner = Application.Current.MainWindow;
+            view.Show();
+        }
+
+        private void ShowCoreBehaviors_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new TestBehaviorsView();
             view.Owner = Application.Current.MainWindow;
             view.Show();
         }

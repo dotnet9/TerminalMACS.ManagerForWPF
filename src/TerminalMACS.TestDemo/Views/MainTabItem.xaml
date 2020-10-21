@@ -139,6 +139,11 @@
                             <Button Content="Write excel" Click="ShowWriteExcel_Click"/>
                         </Grid>
                     </materialDesign:Badged>
+                    <materialDesign:Badged Badge="2">
+                        <Grid>
+                            <Button Content="Test core behaviors" Click="ShowCoreBehaviors_Click"/>
+                        </Grid>
+                    </materialDesign:Badged>
                 </StackPanel>
             </materialDesign:Card>
         </WrapPanel>

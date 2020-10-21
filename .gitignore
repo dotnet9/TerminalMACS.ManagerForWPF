@@ -20,3 +20,7 @@ src/TerminalMACS.Client/bin/
 src/TerminalMACS.Home/bin/
 src/TerminalMACS.Server/bin/
 src/TerminalMACS.TestDemo/bin/
+src/TerminalMACS.Utils.UnitTest/bin/
+src/TerminalMACS.Utils.UnitTest/obj/
+src/TerminalMACS.Utils/bin/
+src/TerminalMACS.Utils/obj/
