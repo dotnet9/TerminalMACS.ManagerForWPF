@@ -34,7 +34,6 @@
     <None Remove="Images\mynewwechat.jpg" />
     <None Remove="Images\setting.png" />
     <None Remove="Images\WeChat-public-address.jpg" />
-    <None Remove="Images\WeChat_UIDesigner.jpg" />
     <None Include="I18nResources\Language.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -70,7 +69,6 @@
     <Resource Include="Images\mynewwechat.jpg" />
     <Resource Include="Images\setting.png" />
     <Resource Include="Images\WeChat-public-address.jpg" />
-    <Resource Include="Images\WeChat_UIDesigner.jpg" />
   </ItemGroup>
 
   <ItemGroup>

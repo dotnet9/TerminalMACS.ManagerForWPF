@@ -60,21 +60,6 @@
                 <TextBlock Grid.Row="1" Text="{markup:I18n {x:Static i18NResources:Language.About_AddAuthorWeChat}}" 
                            Width="170" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center"/>
             </Grid>
-            <Grid Width="200">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Border Margin="30 5" Height="150" Width="150" CornerRadius="10" HorizontalAlignment="Center">
-                    <Border.Background>
-                        <ImageBrush ImageSource="/Images/WeChat_UIDesigner.jpg"/>
-                    </Border.Background>
-                </Border>
-                <TextBlock Grid.Row="1" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center">
-                    <Run Text="{markup:I18n {x:Static i18NResources:Language.About_AddUIDesignerWeChat}}" />
-                    <Run Text="：smsg8047" />
-                </TextBlock>
-            </Grid>
         </StackPanel>
 
         <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="DarkOrange" 

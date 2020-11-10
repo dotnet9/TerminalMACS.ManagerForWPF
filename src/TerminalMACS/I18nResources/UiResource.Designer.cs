@@ -47,8 +47,8 @@ namespace TerminalMACS.I18nResources {
         }
         
         /// <summary>
-        ///   重写当前线程的 CurrentUICulture 属性
-        ///   重写当前线程的 CurrentUICulture 属性。
+        ///   重写当前线程的 CurrentUICulture 属性，对
+        ///   使用此强类型资源类的所有资源查找执行重写。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         public static global::System.Globalization.CultureInfo Culture {
@@ -66,15 +66,6 @@ namespace TerminalMACS.I18nResources {
         public static string About_AddAuthorWeChat {
             get {
                 return ResourceManager.GetString("About_AddAuthorWeChat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Scan code to add UI Designer 的本地化字符串。
-        /// </summary>
-        public static string About_AddUIDesignerWeChat {
-            get {
-                return ResourceManager.GetString("About_AddUIDesignerWeChat", resourceCulture);
             }
         }
         

@@ -15,7 +15,6 @@ namespace TerminalMACS.I18nResources
 	public static class Language
 	{
 		public static readonly ComponentResourceKey About_AddAuthorWeChat = new ComponentResourceKey(typeof(UiResource), nameof(About_AddAuthorWeChat));
-		public static readonly ComponentResourceKey About_AddUIDesignerWeChat = new ComponentResourceKey(typeof(UiResource), nameof(About_AddUIDesignerWeChat));
 		public static readonly ComponentResourceKey About_AddWeChatOfficialAccount = new ComponentResourceKey(typeof(UiResource), nameof(About_AddWeChatOfficialAccount));
 		public static readonly ComponentResourceKey About_BrowseOpenSourceFramework = new ComponentResourceKey(typeof(UiResource), nameof(About_BrowseOpenSourceFramework));
 		public static readonly ComponentResourceKey About_ContactAuthor = new ComponentResourceKey(typeof(UiResource), nameof(About_ContactAuthor));
