@@ -24,3 +24,5 @@ src/TerminalMACS.Utils.UnitTest/bin/
 src/TerminalMACS.Utils.UnitTest/obj/
 src/TerminalMACS.Utils/bin/
 src/TerminalMACS.Utils/obj/
+src/Tools/QuickApp/bin/
+src/Tools/QuickApp/obj/

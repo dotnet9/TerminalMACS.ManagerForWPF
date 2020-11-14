@@ -1,0 +1,451 @@
+﻿<Window x:Class="QuickApp.Views.MainWindow2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:vm="clr-namespace:QuickApp.ViewModels"
+        xmlns:CustomControls="clr-namespace:QuickApp.CustomControls"
+        xmlns:helpers="clr-namespace:QuickApp.Helpers"
+        xmlns:local="clr-namespace:QuickApp.Views"
+        mc:Ignorable="d" ResizeMode="NoResize"
+        TextOptions.TextFormattingMode="Display" UseLayoutRounding="True"
+        SnapsToDevicePixels="True" WindowStyle="None" Background="Transparent"
+        Title="MainView" Height="600" Width="120" Topmost="True"
+        ShowInTaskbar="False" x:Name="myWindow">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="-10" CaptionHeight="0"/>
+    </WindowChrome.WindowChrome>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding ViewLoaded}"></i:InvokeCommandAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <FrameworkElement.DataContext>
+        <vm:MainVM/>
+    </FrameworkElement.DataContext>
+    <FrameworkElement.Resources>
+        <Geometry x:Key="DragPath">M256 384h128v-128h-128v128zM448 384h128v-128h-128v128zM640 256v128h128v-128h-128zM256 576h128v-128h-128v128zM448 576h128v-128h-128v128zM640 576h128v-128h-128v128zM256 768h128v-128h-128v128zM448 768h128v-128h-128v128zM640 768h128v-128h-128v128z</Geometry>
+        <DataTemplate x:Key="ApplicationTemplate">
+            <DataTemplate.Resources>
+                <Storyboard x:Key="OnMouseEnter">
+                    <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                        <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                        <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.3"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                        <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                        <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1.3"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.Opacity)">
+                        <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0.4"/>
+                        <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+                <Storyboard x:Key="OnMouseLeave">
+                    <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                        <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.3"/>
+                        <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                        <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.3"/>
+                        <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+            </DataTemplate.Resources>
+            <Border RenderTransformOrigin="0.5,0.5" x:Name="border" 
+                    Margin="4" Cursor="Hand">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDown">
+                        <i:InvokeCommandAction Command="{Binding DataContext.SelectionChangedCommand,RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        <SkewTransform AngleX="0" AngleY="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform X="0" Y="0"/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+                <StackPanel Orientation="Vertical">
+                    <Image Source="{Binding IconPath}"/>
+                    <TextBlock Text="{Binding Name}" 
+                               MaxWidth="70" TextWrapping="Wrap"
+                               VerticalAlignment="Center"
+                               Block.TextAlignment="Center" 
+                               HorizontalAlignment="Center"
+                               Foreground="White"/>
+                </StackPanel>
+            </Border>
+            <DataTemplate.Triggers>
+                <EventTrigger RoutedEvent="Mouse.MouseEnter" SourceName="border">
+                    <BeginStoryboard Storyboard="{StaticResource OnMouseEnter}"/>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Mouse.MouseLeave" SourceName="border">
+                    <BeginStoryboard Storyboard="{StaticResource OnMouseLeave}"/>
+                </EventTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <!--<LinearGradientBrush x:Key="NormalColors"
+				EndPoint="0.5,1"
+				StartPoint="0.5,0">
+            <GradientStop
+					Color="#FF33B9AD"
+					Offset="0" />
+            <GradientStop
+					Color="#FF007ACC"
+					Offset="1" />
+        </LinearGradientBrush>-->
+
+        <SolidColorBrush x:Key="NormalColors" Color="Black"/>
+
+
+        <Storyboard x:Key="WindowPutItAway">
+            <DoubleAnimation Storyboard.TargetName="myWindow" 
+                             Storyboard.TargetProperty="(Window.Height)" 
+                             To="60" BeginTime="0:0:0" Duration="0:0:00.10"/>
+            <DoubleAnimation Storyboard.TargetName="myWindow" 
+                             Storyboard.TargetProperty="(Window.Width)" 
+                             To="30" BeginTime="0:0:00.10" Duration="0:0:00.101"/>
+            <!--<DoubleAnimation Storyboard.TargetName="PutItAwayBorder" 
+                             Storyboard.TargetProperty="(Button.Opacity)" 
+                             To="0"/>
+            
+            <DoubleAnimation Storyboard.TargetName="StretchOutBorder" 
+                             Storyboard.TargetProperty="(Button.Opacity)" 
+                             To="1"/>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="StretchOutBorder"
+                        Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:5" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>-->
+        </Storyboard>
+
+        <Storyboard x:Key="WindowStretchOut">
+            <DoubleAnimation Storyboard.TargetName="myWindow" 
+                             Storyboard.TargetProperty="(Window.Width)" 
+                             To="110" BeginTime="0:0:0" Duration="0:0:00.02"/>
+            <DoubleAnimation Storyboard.TargetName="myWindow" 
+                             Storyboard.TargetProperty="(Window.Height)" 
+                             To="600" BeginTime="0:0:00.02" Duration="0:0:00.32"/>
+
+            <!--<DoubleAnimation Storyboard.TargetName="StretchOutBorder" 
+                             Storyboard.TargetProperty="(Button.Opacity)" 
+                             To="1"/>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="StretchOutBorder"
+                        Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:5" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimation Storyboard.TargetName="StretchOutBorder" 
+                             Storyboard.TargetProperty="(Button.Opacity)" 
+                             To="0"/>-->
+
+        </Storyboard>
+
+        <LinearGradientBrush x:Key="DefaultBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#E2EAF3" Offset="0" />
+            <GradientStop Color="#C3CEDC" Offset="0.45" />
+            <GradientStop Color="#A2B1C4" Offset="0.45" />
+            <GradientStop Color="#B4C3DB" Offset="1" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="MouseOverBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#ADCEE8" Offset="0" />
+            <GradientStop Color="#70A3C7" Offset="0.45" />
+            <GradientStop Color="#1E6FA5" Offset="0.45" />
+            <GradientStop Color="#2782B4" Offset="0.80" />
+            <GradientStop Color="#17FBFA" Offset="1" />
+        </LinearGradientBrush>
+
+        <Style x:Key="tbSwitchMiniAndNormal" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="ToolTip" Value="Mini"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid x:Name="PART_Grid">
+                            <Rectangle x:Name="PART_Rectangle" Fill="{DynamicResource DefaultBackgroundBrush}"/>
+                            <Path x:Name="_Path" Data="{DynamicResource PutItAwayPath}" Fill="Black"
+                                  Stretch="Fill" Width="10" Height="10"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <!--<Setter Property="Opacity" TargetName="PART_Rectangle" Value="1"/>-->
+                                <Setter Property="Fill" TargetName="PART_Rectangle" Value="{DynamicResource MouseOverBackgroundBrush}" />
+                                <Setter Property="Fill" Value="#FFF" TargetName="_Path"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Data" Value="{DynamicResource StretchOutPath}" TargetName="_Path"/>
+                                <Setter Property="ToolTip" Value="Normal"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Margin" Value="0,2,0,0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="ToolTip" Value="Exit"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid x:Name="PART_Grid">
+                            <Rectangle x:Name="PART_Rectangle" Fill="{DynamicResource DefaultBackgroundBrush}"/>
+                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <!--<Setter Property="Opacity" TargetName="PART_Rectangle" Value="1"/>-->
+                                <Setter Property="Fill" TargetName="PART_Rectangle" Value="{DynamicResource MouseOverBackgroundBrush}" />
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Margin" Value="0,2,0,0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+    </FrameworkElement.Resources>
+    <!--<FrameworkElement.Resources>
+        <ResourceDictionary>
+            <Storyboard
+				RepeatBehavior="Forever"
+				x:Key="Color">
+                <ColorAnimationUsingKeyFrames
+					Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)"
+					Storyboard.TargetName="PageGround">
+                    <EasingColorKeyFrame
+						KeyTime="0:0:2"
+						Value="#FFDD94FF" />
+                    <EasingColorKeyFrame
+						KeyTime="0:0:4"
+						Value="#FFC282FF" />
+                    <EasingColorKeyFrame
+						KeyTime="0:0:6"
+						Value="#FFFF9090" />
+                    <EasingColorKeyFrame
+						KeyTime="0:0:8"
+						Value="#FFE6FF90" />
+                    <EasingColorKeyFrame
+						KeyTime="0:0:10"
+						Value="#FF33B9AD" />
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames
+					Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)"
+					Storyboard.TargetName="PageGround">
+                    <EasingColorKeyFrame
+						KeyTime="0:0:2"
+						Value="#FF00CCA7" />
+                    <EasingColorKeyFrame
+						KeyTime="0:0:4"
+						Value="#FF4578B2" />
+                    <EasingColorKeyFrame
+						KeyTime="0:0:6"
+						Value="#FF5C89BD" />
+                    <EasingColorKeyFrame
+						KeyTime="0:0:8"
+						Value="#FF1CDCA8" />
+                    <EasingColorKeyFrame
+						KeyTime="0:0:10"
+						Value="#FF007ACC" />
+                </ColorAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames
+					Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Offset)"
+					Storyboard.TargetName="PageGround">
+                    <EasingDoubleKeyFrame
+						KeyTime="0:0:2"
+						Value="0" />
+                    <EasingDoubleKeyFrame
+						KeyTime="0:0:4"
+						Value="0" />
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames
+					Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Offset)"
+					Storyboard.TargetName="PageGround">
+                    <EasingDoubleKeyFrame
+						KeyTime="0:0:2"
+						Value="1" />
+                    <EasingDoubleKeyFrame
+						KeyTime="0:0:4"
+						Value="1" />
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames
+					Storyboard.TargetProperty="(Panel.Background).(Brush.RelativeTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)"
+					Storyboard.TargetName="PageGround">
+                    <EasingDoubleKeyFrame
+						KeyTime="0"
+						Value="0" />
+                    <EasingDoubleKeyFrame
+						KeyTime="0:0:10"
+						Value="720" />
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+        </ResourceDictionary>
+    </FrameworkElement.Resources>-->
+    <!--<FrameworkElement.Triggers>
+        <EventTrigger
+			RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard
+				Storyboard="{StaticResource Color}" />
+        </EventTrigger>
+    </FrameworkElement.Triggers>-->
+    <Grid  Name="MyGrid">
+        <!--<Rectangle Opacity=".6" Margin="10" Fill="Black" RadiusX="2" RadiusY="2"/>-->
+        <Rectangle Opacity=".6" Margin="30,10,0,10"
+                   Name="PageGround" Fill="{DynamicResource NormalColors}">
+            <Rectangle.Effect>
+                <DropShadowEffect ShadowDepth="1" BlurRadius="6" Direction="270" Opacity="0.75" Color="#FF211613"/>
+                <!--<BlurEffect KernelType="Gaussian" Radius="60" />-->
+            </Rectangle.Effect>
+        </Rectangle>
+
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top"
+                Margin="10,10,0,0">
+            <Rectangle Fill="{DynamicResource DefaultBackgroundBrush}"/>
+            <StackPanel>
+                <Button x:Name="borderExit" Width="20" Height="20"
+                    Margin="0,2,0,0" ToolTip="Exit">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding DataContext.ExitCommand,RelativeSource={RelativeSource AncestorType=Window}}"></i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <Path Data="{DynamicResource ClosePath}" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button},Path=Foreground}" 
+                      Stretch="Fill" Width="10" Height="10" IsHitTestVisible="False"/>
+                </Button>
+                <!--<Line X1="0" Y1="1" X2="20" Y2="1" Stroke="White"/>-->
+                <ToggleButton Style="{DynamicResource tbSwitchMiniAndNormal}"
+                          Height="20" Width="20" IsChecked="False" Margin="0,2"
+                              Checked="ToggleButtonMini_Checked"
+                              Unchecked="UnToggleButtonMini_Checked">
+                    <!--<ToggleButton.Triggers>
+                        <EventTrigger RoutedEvent="ToggleButton.Checked">
+                            <BeginStoryboard Storyboard="{DynamicResource WindowPutItAway}">
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                            <BeginStoryboard Storyboard="{DynamicResource WindowStretchOut}">
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ToggleButton.Triggers>-->
+                </ToggleButton>
+
+            </StackPanel>
+        </Grid>
+
+
+        <Grid Margin="30,10,0,14">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <CustomControls:SwitchMenu Grid.Row="1" ItemsSource="{Binding ApplicationList}" Orientation="Vertical"
+                                       ItemTemplate="{StaticResource ApplicationTemplate}">
+
+            </CustomControls:SwitchMenu>
+            <Grid Height="20" Margin="0,10"
+                  Background="Transparent" 
+                  Cursor="SizeAll">
+                <Path Data="{DynamicResource DragPath}" Fill="White" 
+                      Stretch="Fill" Width="20" IsHitTestVisible="False"/>
+            </Grid>
+            <!--<Border x:Name="borderExit" Width="15" Height="15"
+                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Margin="0,4,4,0" Cursor="Hand"
+                    ToolTip="Exit" Background="Transparent">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDown">
+                        <i:InvokeCommandAction Command="{Binding DataContext.ExitCommand,RelativeSource={RelativeSource AncestorType=Window}}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="Visibility" Value="Hidden"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=MyGrid, Path=IsMouseOver}" Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Path Data="{DynamicResource ExitPath}" Fill="White" 
+                      Stretch="Fill" Width="10" Height="10"/>
+            </Border>-->
+            <!--<Border x:Name="PutItAwayBorder" Width="15" Height="15"
+                    HorizontalAlignment="Left" VerticalAlignment="Top"
+                    Margin="4,4,0,0" Cursor="Hand" Background="Transparent"
+                    ToolTip="Mini">
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="Visibility" Value="Hidden"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=MyGrid, Path=IsMouseOver}" Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Border.Triggers>
+                    <EventTrigger RoutedEvent="Border.MouseDown">
+                        <BeginStoryboard Storyboard="{DynamicResource WindowPutItAway}">
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Border.Triggers>
+                <Path Data="{DynamicResource PutItAwayPath}" Fill="White" 
+                      Stretch="Fill" Width="10" Height="10"/>
+            </Border>
+
+            <Border x:Name="StretchOutBorder" Width="15" Height="15"
+                    HorizontalAlignment="Left" VerticalAlignment="Top"
+                    Margin="4,4,0,0" Cursor="Hand" Background="Transparent"
+                    ToolTip="还原" Opacity="0" Visibility="Collapsed">
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=MyGrid, Path=IsMouseOver}" Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Border.Triggers>
+                    <EventTrigger RoutedEvent="Border.MouseDown">
+                        <BeginStoryboard Storyboard="{DynamicResource WindowStretchOut}">
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Border.Triggers>
+                <Path Data="{DynamicResource StretchOutPath}" Fill="White" 
+                      Stretch="Fill" Width="10" Height="10"/>
+            </Border>-->
+            <!--<ToggleButton Style="{DynamicResource tbSwitchMiniAndNormal}"
+                          HorizontalAlignment="Left" VerticalAlignment="Center"
+                          Height="20" Width="20" IsChecked="False">
+                <ToggleButton.Triggers>
+                    <EventTrigger RoutedEvent="ToggleButton.Checked">
+                        <BeginStoryboard Storyboard="{DynamicResource WindowPutItAway}">
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                        <BeginStoryboard Storyboard="{DynamicResource WindowStretchOut}">
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </ToggleButton.Triggers>
+            </ToggleButton>-->
+
+            <Line X1="0" Margin="10,0" Y1="1" X2="80" Y2="1" Stroke="White" VerticalAlignment="Bottom"/>
+
+        </Grid>
+    </Grid>
+</Window>
+
