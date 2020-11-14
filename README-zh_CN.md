@@ -250,3 +250,7 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 </p>
 
 <p align="center">计算器</p>
+
+## 6. 更新记录
+
+参考开源项目 https://github.com/yanjinhuagood/SoftWareHelper 及文章 https://www.cnblogs.com/yanjinhua/p/13896894.html，添加快捷应用小程序

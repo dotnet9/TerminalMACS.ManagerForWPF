@@ -250,3 +250,7 @@ Reference video:
 </p>
 
 <p align="center">Calcalator</p>
+
+## 6. Update records
+
+Reference from the open source project https://github.com/yanjinhuagood/SoftWareHelper and blog https://www.cnblogs.com/yanjinhua/p/13896894.html ，add quick application applet
