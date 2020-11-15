@@ -1,0 +1,57 @@
+﻿<Window x:Class="QuickApp.Views.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:QuickApp.ViewModels"
+        mc:Ignorable="d"
+        WindowStyle="None" Background="Transparent" AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen" FontSize="14" Foreground="White"
+        ShowInTaskbar="False" ResizeMode="NoResize" FontFamily="Microsoft Yahei"
+        Title="快捷应用" Height="100" Width="600" x:Name="_this">
+    <Grid  MouseMove="Grid_MouseMove" AllowDrop="True" Drop="Grid_Drop" DragEnter="Grid_DragEnter">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="15"/>
+            </Grid.RowDefinitions>
+            <Grid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="添加命令行" Style="{StaticResource MenuItemCommon}" Command="{Binding RaiseAddCmdCommand}"/>
+                    <MenuItem Style="{StaticResource MenuItemSwitch}">
+                        <MenuItem.Header>
+                            <ToggleButton x:Name="tbSwitch" Content="开机启动" Style="{StaticResource tbSwitch}" IsChecked="{Binding IsPowerOn}"
+                                          Command="{Binding RaisePowerOnCommand}"></ToggleButton>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem Header="退出工具" Style="{StaticResource MenuItemExit}" Command="{Binding RaiseExitCommand}">
+                    </MenuItem>
+                </ContextMenu>
+            </Grid.ContextMenu>
+            <Grid>
+                <Border CornerRadius="2" Background="Black" Opacity=".6"  Margin="10">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="1" BlurRadius="6" Direction="270" Opacity="0.75" Color="#FF211613"/>
+                    </Border.Effect>
+                </Border>
+                <Border CornerRadius="1" Background="Transparent"  >
+                    <StackPanel x:Name="fishButtons" Orientation="Horizontal">
+                        <StackPanel.Resources>
+                            <Style TargetType="Button" BasedOn="{StaticResource PulseButton}">
+                                <Style.Setters>
+                                    <Setter Property="Width" Value="95"/>
+                                    <Setter Property="Height" Value="75"/>
+                                    <Setter Property="FontSize" Value="28"/>
+                                    <Setter Property="Foreground" Value="#FFFFFFFF"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style.Setters>
+                            </Style>
+                        </StackPanel.Resources>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <ToggleButton x:Name="btnOpenOrClose" Grid.Row="1" Style="{StaticResource tobtnStop}" Click="btnOpenOrClose_Click"/>
+        </Grid>
+    </Grid>
+</Window>
