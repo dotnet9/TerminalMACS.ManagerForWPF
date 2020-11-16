@@ -26,3 +26,9 @@ src/TerminalMACS.Utils/bin/
 src/TerminalMACS.Utils/obj/
 src/Tools/QuickApp/bin/
 src/Tools/QuickApp/obj/
+src/Tools/NettyTest/EchoClient/bin/
+src/Tools/NettyTest/EchoClient/obj/
+src/Tools/NettyTest/EchoServer/bin/
+src/Tools/NettyTest/EchoServer/obj/
+src/Tools/NettyTest/NettyModel/bin/
+src/Tools/NettyTest/NettyModel/obj/

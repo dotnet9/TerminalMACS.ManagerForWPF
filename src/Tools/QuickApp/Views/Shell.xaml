@@ -8,7 +8,7 @@
         WindowStyle="None" Background="Transparent" AllowsTransparency="True"
         WindowStartupLocation="CenterScreen" FontSize="14" Foreground="White"
         ShowInTaskbar="False" ResizeMode="NoResize" FontFamily="Microsoft Yahei"
-        Title="快捷应用" Height="100" Width="600" x:Name="_this">
+        Title="快捷应用" Height="100" Width="1000" x:Name="_this">
     <Grid  MouseMove="Grid_MouseMove" AllowDrop="True" Drop="Grid_Drop" DragEnter="Grid_DragEnter">
         <Grid>
             <Grid.RowDefinitions>
