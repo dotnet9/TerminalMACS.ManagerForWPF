@@ -1,44 +1,88 @@
 ﻿using DotNetty.Buffers;
 using DotNetty.Transport.Channels;
+using EventBus;
+using MessagePack;
+using NettyModel.Event;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EchoClient
 {
-    public class EchoClientHandler : SimpleChannelInboundHandler<IByteBuffer>
+    public class EchoClientHandler : SimpleChannelInboundHandler<Object>
     {
+        private IChannelHandlerContext _Socket;
         /// <summary>
-        /// Read0是DotNetty特有的对于Read方法的封装
-        /// 封装实现了：
-        /// 1. 返回的message的泛型实现
-        /// 2. 丢弃非该指定泛型的信息
+        /// Socket
         /// </summary>
-        /// <param name="ctx"></param>
-        /// <param name="msg"></param>
-        protected override void ChannelRead0(IChannelHandlerContext ctx, IByteBuffer msg)
+        public IChannelHandlerContext Socket
         {
-            if (msg != null)
+            get { return _Socket; }
+            set
             {
-                Console.WriteLine("收到服务端数据:" + msg.ToString(Encoding.UTF8));
+                try
+                {
+                    _Socket = value;
+                }
+                catch (Exception ex)
+                {
+                }
             }
-            ctx.WriteAsync(Unpooled.CopiedBuffer(msg));
         }
+        public void SendData(TestEvent testEvent)
+        {
+            try
+            {
+                Socket.WriteAndFlushAsync(testEvent);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        protected override void ChannelRead0(IChannelHandlerContext ctx, object msg)
+        {
+            TestEvent testEvent = MessagePackSerializer.Deserialize<TestEvent>(MessagePackSerializer.Serialize(msg));
+            Console.WriteLine("客户端接收到消息:" + JsonConvert.SerializeObject(testEvent));
+            SimpleEventBus.GetDefaultEventBus().Post(testEvent.ToString(), TimeSpan.Zero);
+        }
+
         public override void ChannelReadComplete(IChannelHandlerContext context)
         {
+            base.ChannelReadComplete(context);
             context.Flush();
+            Console.WriteLine("ChannelReadComplete:" + context);
         }
+
+        public override void ChannelRegistered(IChannelHandlerContext context)
+        {
+            base.ChannelRegistered(context);
+            Console.WriteLine("Client ChannelRegistered:" + context);
+        }
+
         public override void ChannelActive(IChannelHandlerContext context)
         {
-            Console.WriteLine("发送当前时间");
-            context.WriteAndFlushAsync(Unpooled.CopiedBuffer(Encoding.UTF8.GetBytes(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"))));
+            Socket = context;
+            Console.WriteLine("Client channelActive:" + context);
+            SimpleEventBus.GetDefaultEventBus().Post("建立连接：" + context, TimeSpan.Zero);
+        }
+
+        public override void ChannelInactive(IChannelHandlerContext context)
+        {
+            base.ChannelInactive(context);
+            Console.WriteLine("Client ChannelInactive:" + context);
+            SimpleEventBus.GetDefaultEventBus().Post("连接断开：" + context, TimeSpan.Zero);
+        }
+
+        public override void ChannelUnregistered(IChannelHandlerContext context)
+        {
+            base.ChannelUnregistered(context);
+            Console.WriteLine("Client ChannelUnregistered:" + context);
         }
 
         public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
         {
-            Console.WriteLine(exception);
+            Console.WriteLine("Exception: " + exception);
             context.CloseAsync();
         }
     }

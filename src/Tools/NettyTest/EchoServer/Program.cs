@@ -2,6 +2,7 @@
 using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
+using NettyModel;
 using NettyModel.Coder;
 using NettyModel.Event;
 using System;
@@ -16,6 +17,7 @@ namespace EchoServer
         {
             RunServerAsync().Wait();
         }
+        static NettyServerHandler nettyServerHandler = null;
 
         static async Task RunServerAsync()
         {
@@ -39,24 +41,28 @@ namespace EchoServer
                     pipeline.AddLast("frameEncoder", new LengthFieldPrepender(4));
                     // MessagePack编码器，消息发出之前先由frameEncoder处理，再给msgPackEncoder处理
                     pipeline.AddLast("msgPackEncoder", new MessagePackEncoder());
+                    nettyServerHandler = new NettyServerHandler();
                     // 消息处理handler
-                    pipeline.AddLast("handler", new NettyClientHandler());
+                    pipeline.AddLast("handler", nettyServerHandler);
                 }));
                 IChannel boundChannel = await bootstrap.BindAsync(10086);
                 ThreadPool.QueueUserWorkItem(sen =>
                 {
                     while (true)
                     {
-                        boundChannel.WriteAndFlushAsync(new TestEvent()
+                        if (nettyServerHandler != null && nettyServerHandler.Socket.Channel.Active)
                         {
-                            code = EventCode.OK,
-                            time = GetCurrentTimeStamp(),
-                            msg = "回应",
-                            fromId = "",
-                            reqId = $"",
-                            data = $"服务器时间：{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}"
-                        });
-                        Thread.Sleep(TimeSpan.FromSeconds(10));
+                            nettyServerHandler.SendData(new TestEvent()
+                            {
+                                code = EventCode.OK,
+                                time = UtilHelper.GetCurrentTimeStamp(),
+                                msg = "服务器推送",
+                                fromId = "",
+                                reqId = $"",
+                                data = $"服务器时间：{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}"
+                            });
+                        }
+                        Thread.Sleep(TimeSpan.FromSeconds(1));
                     }
                 });
                 Console.ReadLine();
@@ -73,15 +79,5 @@ namespace EchoServer
         }
 
 
-
-        /// <summary>
-        /// 获取当前时间戳
-        /// </summary>
-        /// <returns></returns>
-        public static long GetCurrentTimeStamp()
-        {
-            System.DateTime startTime = new System.DateTime(1970, 1, 1);    // 当地时区
-            return (long)(DateTime.UtcNow - startTime).TotalMilliseconds;   // 相差毫秒数
-        }
     }
 }
