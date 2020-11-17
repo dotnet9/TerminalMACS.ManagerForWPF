@@ -3,6 +3,7 @@ using DotNetty.Handlers.Timeout;
 using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
+using NettyModel;
 using NettyModel.Coder;
 using NettyModel.Event;
 using System;
@@ -21,9 +22,6 @@ namespace EchoClient
         static EchoClientHandler echoClientHandler = null;
         // 重连时休眠时间
         private const int RECONNECT_DELAY = 5;
-        // 未收到服务端回应超时时间
-        private const int READ_TIMEOUT = 10;
-        static UptimeClientHandler uptimeClientHandler = new UptimeClientHandler();
 
         static async Task RunClientAsync()
         {
@@ -46,23 +44,31 @@ namespace EchoClient
                         pipeline.AddLast("frameEncoder", new LengthFieldPrepender(4));
                         // MessagePack编码器，消息发出之前先由frameEncoder处理，再给msgPackEncoder处理
                         pipeline.AddLast("msgPackEncoder", new MessagePackEncoder());
+
+                        // IdleStateHandler 心跳
+                        //客户端为写IDLE
+                        pipeline.AddLast(new IdleStateHandler(0, 0, 10));
+
                         // 消息处理handler
                         echoClientHandler = new EchoClientHandler();
+                        echoClientHandler.DisconnectServer += () => RunClientAsync().Wait();
                         pipeline.AddLast("handler", echoClientHandler);
-                        pipeline.AddLast(new IdleStateHandler(READ_TIMEOUT, 0, 0), uptimeClientHandler);
                     }));
+
+                // 192.168.50.87
+                //IChannel clientChannel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("192.168.50.87"), 10086));
                 IChannel clientChannel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 10086));
 
                 ThreadPool.QueueUserWorkItem(sen =>
                 {
                     while (true)
                     {
-                        if (echoClientHandler != null && echoClientHandler.Socket != null && echoClientHandler.Socket.Channel.Active)
+                        if (echoClientHandler != null)
                         {
                             echoClientHandler.SendData(new TestEvent()
                             {
                                 code = EventCode.OK,
-                                time = GetCurrentTimeStamp(),
+                                time = UtilHelper.GetCurrentTimeStamp(),
                                 msg = "客户端请求",
                                 fromId = "",
                                 reqId = $"",
@@ -82,18 +88,8 @@ namespace EchoClient
             }
             finally
             {
-                await group.ShutdownGracefullyAsync();
+                await group.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1));
             }
-        }
-
-        /// <summary>
-        /// 获取当前时间戳
-        /// </summary>
-        /// <returns></returns>
-        public static long GetCurrentTimeStamp()
-        {
-            System.DateTime startTime = new System.DateTime(1970, 1, 1);    // 当地时区
-            return (long)(DateTime.UtcNow - startTime).TotalMilliseconds;   // 相差毫秒数
         }
     }
 }

@@ -11,5 +11,13 @@ namespace NettyModel.Event
     public class TestEvent : BaseEvent
     {
         public TestEvent() { }
+
+    }
+
+    public class TestEventCount
+    {
+        public TestEvent TestEvent;
+        public int TryCount = 0;
+        public const int MAX_TRY_COUNT = 5;
     }
 }
