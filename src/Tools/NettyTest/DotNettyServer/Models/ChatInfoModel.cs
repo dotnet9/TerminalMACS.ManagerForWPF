@@ -1,6 +1,6 @@
 ﻿using HandyControl.Data;
 
-namespace DotNettyClient.Models
+namespace DotNettyServer.Models
 {
     public struct ChatInfoModel
     {
