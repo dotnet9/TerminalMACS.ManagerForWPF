@@ -1,4 +1,5 @@
 ﻿using DotNetty.Codecs;
+using DotNetty.Handlers.Timeout;
 using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
@@ -18,6 +19,12 @@ namespace EchoClient
             RunClientAsync().Wait();
         }
         static EchoClientHandler echoClientHandler = null;
+        // 重连时休眠时间
+        private const int RECONNECT_DELAY = 5;
+        // 未收到服务端回应超时时间
+        private const int READ_TIMEOUT = 10;
+        static UptimeClientHandler uptimeClientHandler = new UptimeClientHandler();
+
         static async Task RunClientAsync()
         {
             var group = new MultithreadEventLoopGroup();
@@ -42,6 +49,7 @@ namespace EchoClient
                         // 消息处理handler
                         echoClientHandler = new EchoClientHandler();
                         pipeline.AddLast("handler", echoClientHandler);
+                        pipeline.AddLast(new IdleStateHandler(READ_TIMEOUT, 0, 0), uptimeClientHandler);
                     }));
                 IChannel clientChannel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 10086));
 
@@ -49,7 +57,7 @@ namespace EchoClient
                 {
                     while (true)
                     {
-                        if (echoClientHandler!=null&& echoClientHandler.Socket.Channel.Active)
+                        if (echoClientHandler != null && echoClientHandler.Socket != null && echoClientHandler.Socket.Channel.Active)
                         {
                             echoClientHandler.SendData(new TestEvent()
                             {

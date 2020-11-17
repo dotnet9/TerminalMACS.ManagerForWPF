@@ -18,39 +18,36 @@ namespace EchoServer
             RunServerAsync().Wait();
         }
         static NettyServerHandler nettyServerHandler = null;
+        private static readonly UptimeServerHandler handler = new UptimeServerHandler();
+
 
         static async Task RunServerAsync()
         {
-            IEventLoopGroup eventLoop;
-            eventLoop = new MultithreadEventLoopGroup();
+            IEventLoopGroup bossGroup=new MultithreadEventLoopGroup(1);
+            IEventLoopGroup workerGroup = new MultithreadEventLoopGroup();
             try
             {
                 // 服务器引导程序
                 var bootstrap = new ServerBootstrap();
-                bootstrap.Group(eventLoop);
+                bootstrap.Group(bossGroup, workerGroup);
                 bootstrap.Channel<TcpServerSocketChannel>();
                 bootstrap.ChildHandler(new ActionChannelInitializer<IChannel>(channel =>
                 {
                     IChannelPipeline pipeline = channel.Pipeline;
-                    // Tcp粘包处理，添加一个LengthFieldBasedFrameDecoder解码器，它会在解码时按照消息头的长度来进行解码。
                     pipeline.AddLast("frameDecoder", new LengthFieldBasedFrameDecoder(ushort.MaxValue, 0, 4, 0, 4));
-                    // MessagePack解码器，消息进来后先由frameDecoder处理，再给msgPackDecoder处理
                     pipeline.AddLast("msgPackDecoder", new MessagePackDecoder());
-                    // Tcp粘包处理，添加一个
-                    // LengthFieldPrepender编码器，它会在ByteBuf之前增加4个字节的字段，用于记录消息长度。
                     pipeline.AddLast("frameEncoder", new LengthFieldPrepender(4));
-                    // MessagePack编码器，消息发出之前先由frameEncoder处理，再给msgPackEncoder处理
                     pipeline.AddLast("msgPackEncoder", new MessagePackEncoder());
                     nettyServerHandler = new NettyServerHandler();
-                    // 消息处理handler
                     pipeline.AddLast("handler", nettyServerHandler);
+                    pipeline.AddLast("Uptime", handler);
                 }));
                 IChannel boundChannel = await bootstrap.BindAsync(10086);
                 ThreadPool.QueueUserWorkItem(sen =>
                 {
                     while (true)
                     {
-                        if (nettyServerHandler != null && nettyServerHandler.Socket.Channel.Active)
+                        if (nettyServerHandler != null && nettyServerHandler.Socket != null && nettyServerHandler.Socket.Channel.Active)
                         {
                             nettyServerHandler.SendData(new TestEvent()
                             {
@@ -74,7 +71,8 @@ namespace EchoServer
             }
             finally
             {
-                await eventLoop.ShutdownGracefullyAsync();
+                await Task.WhenAll(bossGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)),
+                                   workerGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)));
             }
         }
 
