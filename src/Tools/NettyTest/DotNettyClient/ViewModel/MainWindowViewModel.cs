@@ -14,13 +14,15 @@ using Prism.Mvvm;
 using System;
 using System.Collections.ObjectModel;
 using System.Net;
+using System.Threading;
 using System.Windows.Input;
 
 namespace DotNettyClient.ViewModel
 {
     public class MainWindowViewModel : BindableBase
     {
-        public ObservableCollection<ChatInfoModel> ChatInfos { get; set; } = new ObservableCollection<ChatInfoModel>();
+        private ObservableCollection<ChatInfoModel> _ChatInfo = new ObservableCollection<ChatInfoModel>();
+        public ObservableCollection<ChatInfoModel> ChatInfos { get { return _ChatInfo; } }
         private string _ServerIP = "127.0.0.1";
         /// <summary>
         /// 服务端端口
@@ -71,15 +73,17 @@ namespace DotNettyClient.ViewModel
         public ICommand RaiseConnectServerCommand { get; private set; }
         public ICommand RaiseSendStringCommand { get; private set; }
 
-
-        EchoClientHandler echoClientHandler = new EchoClientHandler();
+        /// <summary>
+        /// 客户端处理程序
+        /// </summary>
+        public EchoClientHandler DotNettyClientHandler { get; private set; } = new EchoClientHandler();
         private readonly string _id = Guid.NewGuid().ToString();
 
         public MainWindowViewModel()
         {
             RaiseConnectServerCommand = new DelegateCommand(RaiseConnectServerHandler);
             RaiseSendStringCommand = new DelegateCommand(RaiseSendStringHandler);
-            echoClientHandler.ReceiveEventFromClientEvent += ReceiveMessage;
+            DotNettyClientHandler.ReceiveEventFromClientEvent += ReceiveMessage;
         }
 
         /// <summary>
@@ -87,6 +91,7 @@ namespace DotNettyClient.ViewModel
         /// </summary>
         private async void RaiseConnectServerHandler()
         {
+            IsConnectServerButtonEnabled = false;
             var group = new MultithreadEventLoopGroup();
             try
             {
@@ -112,15 +117,34 @@ namespace DotNettyClient.ViewModel
                         pipeline.AddLast(new IdleStateHandler(0, 0, 10));
 
                         // 消息处理handler
-                        echoClientHandler.DisconnectServer += () => RaiseConnectServerHandler();
-                        pipeline.AddLast("handler", echoClientHandler);
+                        DotNettyClientHandler.DisconnectServer += () => RaiseConnectServerHandler();
+                        pipeline.AddLast("handler", DotNettyClientHandler);
                     }));
 
                 // 192.168.50.87
                 //IChannel clientChannel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("192.168.50.87"), 10086));
-                IChannel clientChannel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 10086));
+                IChannel clientChannel = await bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse(this.ServerIP), this.ServerPort));
 
-                await clientChannel.CloseAsync();
+
+                /*ThreadPool.QueueUserWorkItem(sen =>
+                {
+                    while (true)
+                    {
+                        if (DotNettyClientHandler != null)
+                        {
+                            DotNettyClientHandler.SendData(new TestEvent()
+                            {
+                                code = EventCode.Chat,
+                                time = UtilHelper.GetCurrentTimeStamp(),
+                                msg = "客户端请求",
+                                fromId = "",
+                                reqId = $"",
+                                data = $"客户端时间：{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}"
+                            });
+                        }
+                        Thread.Sleep(TimeSpan.FromSeconds(15));
+                    }
+                });*/
             }
             catch (Exception ex)
             {
@@ -128,7 +152,7 @@ namespace DotNettyClient.ViewModel
             }
             finally
             {
-                await group.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1));
+                //await group.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1));
             }
         }
 
@@ -137,25 +161,29 @@ namespace DotNettyClient.ViewModel
         /// </summary>
         private void RaiseSendStringHandler()
         {
+
             if (string.IsNullOrEmpty(ChatString)) return;
-            var info = new ChatInfoModel
+            App.Current.Dispatcher.Invoke(() =>
             {
-                Message = ChatString,
-                SenderId = _id,
-                Type = ChatMessageType.String,
-                Role = ChatRoleType.Sender
-            };
-            ChatInfos.Add(info); 
-            if (echoClientHandler != null)
-            {
-                echoClientHandler.SendData(new TestEvent()
+                var info = new ChatInfoModel
                 {
-                    code = EventCode.FuBin,
+                    Message = ChatString,
+                    SenderId = _id,
+                    Type = ChatMessageType.String,
+                    Role = ChatRoleType.Sender
+                };
+                ChatInfos.Add(info);
+            });
+            if (DotNettyClientHandler != null)
+            {
+                DotNettyClientHandler.SendData(new TestEvent()
+                {
+                    code = EventCode.Chat,
                     time = UtilHelper.GetCurrentTimeStamp(),
                     msg = "客户端请求",
                     fromId = "",
-                    reqId = $"",
-                    data = $"客户端时间：{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}"
+                    reqId = Guid.NewGuid().ToString(),
+                    data = ChatString
                 });
             }
             ChatString = string.Empty;
@@ -163,15 +191,18 @@ namespace DotNettyClient.ViewModel
 
         private void ReceiveMessage(TestEvent testEvent)
         {
-            ChatInfoModel info = new ChatInfoModel
+            App.Current.Dispatcher.Invoke(() =>
             {
+                ChatInfoModel info = new ChatInfoModel
+                {
 
-                Message = testEvent.data,
-                SenderId = "ddd",
-                Type = ChatMessageType.String,
-                Role = ChatRoleType.Receiver
-            };
-            ChatInfos.Add(info);
+                    Message = testEvent.data,
+                    SenderId = "ddd",
+                    Type = ChatMessageType.String,
+                    Role = ChatRoleType.Receiver
+                };
+                ChatInfos.Add(info);
+            });
         }
     }
 }

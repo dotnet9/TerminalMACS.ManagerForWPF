@@ -16,7 +16,7 @@ namespace EchoClient
     {
         public event Action DisconnectServer;
         private IChannelHandlerContext channelHandlerContext;
-        private List<TestEventCount> lstNeedSendDatas = new List<TestEventCount>();   // 用于存放需要发送的数据
+        private static List<TestEventCount> lstNeedSendDatas = new List<TestEventCount>();   // 用于存放需要发送的数据
         private static object lockOjb = new object();                       // 读取数据锁
         private List<TestEvent> lstSendPings = new List<TestEvent>();       // 用于存放发送的ping包
         private const int MAX_NO_RESPONSE_PING_COUNT = 7;                   // 未收到ping回应的数据包最大个数

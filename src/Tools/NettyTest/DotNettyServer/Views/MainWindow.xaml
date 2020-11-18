@@ -19,6 +19,7 @@
             <RowDefinition Height="35"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="100"/>
+            <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -44,9 +45,11 @@
         <TextBox Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" Margin="5" 
                  AcceptsReturn="True" VerticalScrollBarVisibility="Auto"
                  Text="{Binding ChatString}"/>
-        <Button Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+        <Button Grid.Row="2" Grid.Column="3" ToolTip="发送" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                 Command="{Binding RaiseSendStringCommand}">
             <materialDesign:PackIcon Kind="Send"/>
         </Button>
+
+        <TextBox x:Name="tbLog" Grid.Row="3" Grid.ColumnSpan="2" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
     </Grid>
 </pu:WindowX>

@@ -40,6 +40,8 @@ namespace EchoServer
             }
         }
 
+        public override bool IsSharable => true;//标注一个channel handler可以被多个channel安全地共享。
+
         /// <summary>
         /// 收到客户端回应
         /// </summary>
@@ -129,14 +131,11 @@ namespace EchoServer
             Console.WriteLine("已经15秒未收到客户端的消息了！");
             if (evt is IdleStateEvent eventState)
             {
-                if (eventState.State == IdleState.ReaderIdle)
+                lossConnectCount++;
+                if (lossConnectCount > 2)
                 {
-                    lossConnectCount++;
-                    if (lossConnectCount > 2)
-                    {
-                        Console.WriteLine("关闭这个不活跃通道！");
-                        context.CloseAsync();
-                    }
+                    Console.WriteLine("关闭这个不活跃通道！");
+                    context.CloseAsync();
                 }
             }
             else

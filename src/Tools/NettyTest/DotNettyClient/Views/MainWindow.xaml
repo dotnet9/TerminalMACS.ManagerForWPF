@@ -14,14 +14,12 @@
         Height="800"
         pu:WindowXCaption.Background="#0099FF"
         pu:WindowXCaption.Foreground="White">
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="100"/>
+            <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -53,5 +51,7 @@
                 Command="{Binding RaiseSendStringCommand}">
             <materialDesign:PackIcon Kind="Send"/>
         </Button>
+
+        <TextBox x:Name="tbLog" Grid.Row="3" Grid.ColumnSpan="2" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
     </Grid>
 </pu:WindowX>

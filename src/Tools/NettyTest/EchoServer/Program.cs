@@ -48,7 +48,7 @@ namespace EchoServer
 
                     // IdleStateHandler 心跳
                     //服务端为读IDLE
-                    pipeline.AddLast(new IdleStateHandler(150, 0, 0));      //第一个参数为读，第二个为写，第三个为读写全部
+                    pipeline.AddLast(new IdleStateHandler(0, 0, 10));      //第一个参数为读，第二个为写，第三个为读写全部
                     
                     //业务handler ，这里是实际处理业务的Handler
                     pipeline.AddLast("handler", nettyServerHandler);
@@ -56,7 +56,7 @@ namespace EchoServer
 
                 // bootstrap绑定到指定端口的行为 就是服务端启动服务，同样的Serverbootstrap可以bind到多个端口
                 IChannel boundChannel = await bootstrap.BindAsync(10086);
-                ThreadPool.QueueUserWorkItem(sen =>
+                /*ThreadPool.QueueUserWorkItem(sen =>
                 {
                     while (true)
                     {
@@ -74,9 +74,9 @@ namespace EchoServer
                             });
 
                         }
-                        Thread.Sleep(TimeSpan.FromSeconds(1));
+                        Thread.Sleep(TimeSpan.FromSeconds(15));
                     }
-                });
+                });*/
                 Console.ReadLine();
                 
                 //关闭服务

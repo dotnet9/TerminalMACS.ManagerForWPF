@@ -67,7 +67,7 @@ namespace EchoClient
                         {
                             echoClientHandler.SendData(new TestEvent()
                             {
-                                code = EventCode.OK,
+                                code = EventCode.Chat,
                                 time = UtilHelper.GetCurrentTimeStamp(),
                                 msg = "客户端请求",
                                 fromId = "",
@@ -75,7 +75,7 @@ namespace EchoClient
                                 data = $"客户端时间：{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}"
                             });
                         }
-                        Thread.Sleep(TimeSpan.FromSeconds(1));
+                        Thread.Sleep(TimeSpan.FromSeconds(15));
                     }
                 });
 

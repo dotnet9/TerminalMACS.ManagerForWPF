@@ -14,6 +14,7 @@ namespace DotNettyClient.DotNetty
     {
         public event Action DisconnectServer;
         public event Action<TestEvent> ReceiveEventFromClientEvent;
+        public event Action<string> RecordLogEvent;
         private IChannelHandlerContext channelHandlerContext;
         private List<TestEventCount> lstNeedSendDatas = new List<TestEventCount>();   // 用于存放需要发送的数据
         private static object lockOjb = new object();                       // 读取数据锁
@@ -35,6 +36,7 @@ namespace DotNettyClient.DotNetty
                 }
                 if (channelHandlerContext == null)
                 {
+                    RecordLogEvent?.Invoke($"未连接服务，无法发送数据");
                     return;
                 }
                 SendData();
@@ -70,14 +72,15 @@ namespace DotNettyClient.DotNetty
                         if (sendEvent != null)
                         {
                             channelHandlerContext.WriteAndFlushAsync(sendEvent.TestEvent);
+                            RecordLogEvent?.Invoke($"发送到服务端：{JsonConvert.SerializeObject(sendEvent.TestEvent)}");
                             sendEvent.TryCount++;
                         }
                     }
                     catch (Exception ex2)
                     {
-
+                        RecordLogEvent?.Invoke($"发送到服务端异常：{ex2.Message}");
                     }
-                    Thread.Sleep(TimeSpan.FromSeconds(5));
+                    Thread.Sleep(TimeSpan.FromSeconds(0.5));
                 }
             });
         }
@@ -97,7 +100,7 @@ namespace DotNettyClient.DotNetty
                 if (testEvent.code == EventCode.Ping)
                 {
                     lstSendPings.Clear();
-                    Console.WriteLine("收到Android端心跳回应");
+                    RecordLogEvent?.Invoke("收到Android端心跳回应");
                     return;
                 }
                 else if (testEvent.code == EventCode.OK)
@@ -107,13 +110,16 @@ namespace DotNettyClient.DotNetty
                         lstNeedSendDatas.RemoveAll(cu => cu.TestEvent.reqId == testEvent.reqId);
                     }
                 }
+                else if (testEvent.code == EventCode.Chat)
+                {
+                    ReceiveEventFromClientEvent?.Invoke(testEvent);
+                }
                 var eventMsg = JsonConvert.SerializeObject(testEvent);
-                Console.WriteLine($"收到Android端消息：{eventMsg}");
-                ReceiveEventFromClientEvent?.Invoke(testEvent);
+                RecordLogEvent?.Invoke($"收到Android端消息：{eventMsg}");
             }
             catch (Exception ex)
             {
-
+                RecordLogEvent?.Invoke($"读取数据异常：{ex.Message}");
             }
         }
 
@@ -144,18 +150,19 @@ namespace DotNettyClient.DotNetty
             };
             lstSendPings.Add(testEvent);
             ctx.WriteAndFlushAsync(testEvent);
+            RecordLogEvent?.Invoke("发送心跳");
         }
 
 
         public override void HandlerAdded(IChannelHandlerContext context)
         {
-            Console.WriteLine($"服务端{context}上线.");
+            RecordLogEvent?.Invoke($"服务端{context}上线.");
             base.HandlerAdded(context);
         }
 
         public override void HandlerRemoved(IChannelHandlerContext context)
         {
-            Console.WriteLine($"服务端{context}下线.");
+            RecordLogEvent?.Invoke($"服务端{context}下线.");
             base.HandlerRemoved(context);
         }
 
@@ -163,30 +170,27 @@ namespace DotNettyClient.DotNetty
         {
             base.ChannelReadComplete(context);
             context.Flush();
-            Console.WriteLine("ChannelReadComplete:" + context);
+            RecordLogEvent?.Invoke("ChannelReadComplete:" + context);
         }
 
         public override void ChannelRegistered(IChannelHandlerContext context)
         {
             base.ChannelRegistered(context);
-            Console.WriteLine("Client ChannelRegistered:" + context);
+            RecordLogEvent?.Invoke("Client ChannelRegistered:" + context);
         }
 
         public override void ChannelActive(IChannelHandlerContext context)
         {
             channelHandlerContext = context;
-            Console.WriteLine("Client channelActive:" + context);
-            Console.WriteLine("我是客户端.");
-            Console.WriteLine($"连接至服务端{context}.");
+            RecordLogEvent?.Invoke("Client channelActive:" + context);
             isConnect = true;
         }
 
         public override void ChannelInactive(IChannelHandlerContext context)
         {
             base.ChannelInactive(context);
-            Console.WriteLine("Client ChannelInactive:" + context);
+            RecordLogEvent?.Invoke("Client ChannelInactive:" + context);
             isConnect = false;
-            //SimpleEventBus.GetDefaultEventBus().Post("连接断开：" + context, TimeSpan.Zero);
         }
 
         public override void ChannelUnregistered(IChannelHandlerContext context)
@@ -195,12 +199,12 @@ namespace DotNettyClient.DotNetty
 
             DisconnectServer?.Invoke();
 
-            Console.WriteLine("Client ChannelUnregistered:" + context);
+            RecordLogEvent?.Invoke("Client ChannelUnregistered:" + context);
         }
 
         public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
         {
-            Console.WriteLine("Exception: " + exception);
+            RecordLogEvent?.Invoke("Exception: " + exception);
             context.CloseAsync();
         }
     }

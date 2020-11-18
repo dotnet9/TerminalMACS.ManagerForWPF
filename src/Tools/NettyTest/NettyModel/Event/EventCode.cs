@@ -9,10 +9,7 @@ namespace NettyModel.Event
     public enum EventCode
     {
         OK = 200,                   // 发送成功
-        AnalysisFail = 10010001,    // 数据解析失败
-        SaveFail = 10010002,        // 数据存储失败
-        FuBin = 10010003,           // 覆冰数据
-        Ping = 10010004,            // 心跳
-        ServerBusy = 500            // 服务繁忙
+        Ping = 10010001,            // 心跳
+        Chat = 10010002,            // 聊天
     }
 }

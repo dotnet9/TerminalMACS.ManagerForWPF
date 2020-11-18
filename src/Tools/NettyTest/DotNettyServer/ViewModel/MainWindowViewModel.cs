@@ -65,7 +65,10 @@ namespace DotNettyServer.ViewModel
         public ICommand RaiseStartServerCommand { get; private set; }
         public ICommand RaiseSendStringCommand { get; private set; }
 
-        NettyServerHandler nettyServerHandler = new NettyServerHandler();
+        /// <summary>
+        /// DotNetty处理程序
+        /// </summary>
+        public NettyServerHandler DotNettyServerHandler { get; private set; } = new NettyServerHandler();
 
         private readonly string _id = Guid.NewGuid().ToString();
 
@@ -73,7 +76,7 @@ namespace DotNettyServer.ViewModel
         {
             RaiseStartServerCommand = new DelegateCommand(RaiseStartServerHandler);
             RaiseSendStringCommand = new DelegateCommand(RaiseSendStringHandler);
-            nettyServerHandler.ReceiveEventFromClientEvent += ReceiveMessage;
+            DotNettyServerHandler.ReceiveEventFromClientEvent += ReceiveMessage;
         }
 
         /// <summary>
@@ -111,14 +114,11 @@ namespace DotNettyServer.ViewModel
                     pipeline.AddLast(new IdleStateHandler(150, 0, 0));      //第一个参数为读，第二个为写，第三个为读写全部
 
                     //业务handler ，这里是实际处理业务的Handler
-                    pipeline.AddLast("handler", nettyServerHandler);
+                    pipeline.AddLast("handler", DotNettyServerHandler);
                 }));
 
                 // bootstrap绑定到指定端口的行为 就是服务端启动服务，同样的Serverbootstrap可以bind到多个端口
                 IChannel boundChannel = await bootstrap.BindAsync(ServerPort);
-
-                //关闭服务
-                await boundChannel.CloseAsync();
             }
             catch (Exception ex)
             {
@@ -127,8 +127,8 @@ namespace DotNettyServer.ViewModel
             finally
             {
                 //释放工作组线程
-                await Task.WhenAll(bossGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)),
-                                   workerGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)));
+                //await Task.WhenAll(bossGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)),
+                //                 workerGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)));
             }
         }
 
@@ -138,25 +138,28 @@ namespace DotNettyServer.ViewModel
         private void RaiseSendStringHandler()
         {
             if (string.IsNullOrEmpty(ChatString)) return;
-            var info = new ChatInfoModel
+            App.Current.Dispatcher.Invoke(() =>
             {
-                Message = ChatString,
-                SenderId = _id,
-                Type = ChatMessageType.String,
-                Role = ChatRoleType.Sender
-            };
-            ChatInfos.Add(info);
-            if (nettyServerHandler != null)
+                var info = new ChatInfoModel
+                {
+                    Message = ChatString,
+                    SenderId = _id,
+                    Type = ChatMessageType.String,
+                    Role = ChatRoleType.Sender
+                };
+                ChatInfos.Add(info);
+            });
+            if (DotNettyServerHandler != null)
             {
 
-                nettyServerHandler.SendData(new TestEvent()
+                DotNettyServerHandler.SendData(new TestEvent()
                 {
-                    code = EventCode.FuBin,
+                    code = EventCode.Chat,
                     time = UtilHelper.GetCurrentTimeStamp(),
                     msg = "服务器推送",
                     fromId = "",
-                    reqId = $"",
-                    data = $"服务器时间：{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}"
+                    reqId = Guid.NewGuid().ToString(),
+                    data = ChatString
                 });
 
             }
@@ -169,14 +172,17 @@ namespace DotNettyServer.ViewModel
         /// <param name="testEvent"></param>
         private void ReceiveMessage(TestEvent testEvent)
         {
-            ChatInfoModel info = new ChatInfoModel {
-
-                Message = testEvent.data,
-                SenderId = "ddd",
-                Type = ChatMessageType.String,
-                Role = ChatRoleType.Receiver
-            };
-            ChatInfos.Add(info);
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                ChatInfoModel info = new ChatInfoModel
+                {
+                    Message = testEvent.data,
+                    SenderId = "ddd",
+                    Type = ChatMessageType.String,
+                    Role = ChatRoleType.Receiver
+                };
+                ChatInfos.Add(info);
+            });
         }
     }
 }
