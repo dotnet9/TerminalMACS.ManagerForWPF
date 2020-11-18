@@ -35,12 +35,12 @@
                     </Border.Effect>
                 </Border>
                 <Border CornerRadius="1" Background="Transparent"  >
-                    <StackPanel x:Name="fishButtons" Orientation="Horizontal">
+                    <StackPanel x:Name="fishButtons" Orientation="Horizontal" Margin="10 0">
                         <StackPanel.Resources>
                             <Style TargetType="Button" BasedOn="{StaticResource PulseButton}">
                                 <Style.Setters>
-                                    <Setter Property="Width" Value="95"/>
-                                    <Setter Property="Height" Value="75"/>
+                                    <Setter Property="Width" Value="48"/>
+                                    <Setter Property="Height" Value="48"/>
                                     <Setter Property="FontSize" Value="28"/>
                                     <Setter Property="Foreground" Value="#FFFFFFFF"/>
                                     <Setter Property="HorizontalAlignment" Value="Center"/>
