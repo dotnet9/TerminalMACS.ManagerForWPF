@@ -24,7 +24,7 @@ namespace DotNettyClient.ViewModel
     {
         private ObservableCollection<ChatInfoModel> _ChatInfo = new ObservableCollection<ChatInfoModel>();
         public ObservableCollection<ChatInfoModel> ChatInfos { get { return _ChatInfo; } }
-        private string _ServerIP = "127.0.0.1";
+        private string _ServerIP = "192.168.50.87";//"127.0.0.1";//
         /// <summary>
         /// 服务端端口
         /// </summary>
@@ -44,6 +44,7 @@ namespace DotNettyClient.ViewModel
             get { return _ServerPort; }
             set { SetProperty(ref _ServerPort, value); }
         }
+        private bool isConnectSuccess = false;
         private bool _IsConnectServer = false;
         /// <summary>
         /// 开启服务按钮是否可用
@@ -115,7 +116,7 @@ namespace DotNettyClient.ViewModel
 
                     // IdleStateHandler 心跳
                     //客户端为写IDLE
-                    pipeline.AddLast(new IdleStateHandler(0, 0, 10));
+                    pipeline.AddLast(new IdleStateHandler(0, 0, 0));
 
                     // 消息处理handler
                     if (DotNettyClientHandler != null)
@@ -131,6 +132,29 @@ namespace DotNettyClient.ViewModel
                     pipeline.AddLast("handler", DotNettyClientHandler);
                 }));
             bootstrap.RemoteAddress(new IPEndPoint(IPAddress.Parse(this.ServerIP), this.ServerPort));
+            CheckConnectServer();
+        }
+
+        private bool isCheckConnect = false;
+        private void CheckConnectServer()
+        {
+            if (isCheckConnect)
+            {
+                return;
+            }
+            isCheckConnect = true;
+
+            ThreadPool.QueueUserWorkItem(sen =>
+            {
+                while (true)
+                {
+                    if (!isConnectSuccess)
+                    {
+                        ConnectToServer();
+                    }
+                    Thread.Sleep(TimeSpan.FromSeconds(5));
+                }
+            });
         }
 
         /// <summary>
@@ -161,16 +185,13 @@ namespace DotNettyClient.ViewModel
                 IChannel clientChannel = null;
                 try
                 {
-                    if (group != null && !group.IsShutdown)
-                    {
-                        InitDotNetty();
-                    }
+                    isConnectSuccess = false;
                     clientChannel = await bootstrap.ConnectAsync();
+                    isConnectSuccess = true;
                 }
                 catch (Exception ex)
                 {
-                    System.Threading.Thread.Sleep(TimeSpan.FromSeconds(5));
-                    await ConnectToServer();
+                    isConnectSuccess = false;
                 }
             }
             finally

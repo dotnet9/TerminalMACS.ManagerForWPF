@@ -20,7 +20,7 @@ namespace DotNettyClient.DotNetty
         private List<TestEventCount> lstNeedSendDatas = new List<TestEventCount>();   // 用于存放需要发送的数据
         private static object lockOjb = new object();                       // 读取数据锁
         private List<TestEvent> lstSendPings = new List<TestEvent>();       // 用于存放发送的ping包
-        private const int MAX_NO_RESPONSE_PING_COUNT = 7;                   // 未收到ping回应的数据包最大个数
+        private const int MAX_NO_RESPONSE_PING_COUNT = 2;                   // 未收到ping回应的数据包最大个数
         private bool isConnect;
         private int total = 0;
 
@@ -69,7 +69,8 @@ namespace DotNettyClient.DotNetty
                         TestEventCount sendEvent = null;
                         lock (lockOjb)
                         {
-                            sendEvent = lstNeedSendDatas.FirstOrDefault(cu => cu.TryCount < TestEventCount.MAX_TRY_COUNT);
+                            lstNeedSendDatas.RemoveAll(cu => cu.TryCount >= TestEventCount.MAX_TRY_COUNT);
+                            sendEvent = lstNeedSendDatas.FirstOrDefault();
                         }
                         if (sendEvent != null)
                         {
@@ -77,12 +78,17 @@ namespace DotNettyClient.DotNetty
                             RecordLogEvent?.Invoke($"发送到服务端：{JsonConvert.SerializeObject(sendEvent.TestEvent)}");
                             sendEvent.TryCount++;
                         }
+                        // 没有数据包，发送数据包
+                        else
+                        {
+                            SendPing();
+                        }
                     }
                     catch (Exception ex2)
                     {
                         RecordLogEvent?.Invoke($"发送到服务端异常：{ex2.Message}");
                     }
-                    Thread.Sleep(TimeSpan.FromSeconds(0.5));
+                    Thread.Sleep(TimeSpan.FromSeconds(5));
                 }
             });
         }
@@ -137,10 +143,18 @@ namespace DotNettyClient.DotNetty
                 return;
             }
 
+            SendPing();
+        }
+
+        private void SendPing()
+        {
             // 发送的ping，超过一定范围，认为与服务端断开连接，需要重连
             if (lstSendPings.Count >= MAX_NO_RESPONSE_PING_COUNT)
             {
-                ctx.CloseAsync();
+                channelHandlerContext.CloseAsync();
+                RecordLogEvent?.Invoke($"{lstSendPings.Count} 次未收到心跳回应，重连服务器");
+                lstSendPings.Clear();
+                Reconnect(channelHandlerContext);
                 return;
             }
 
@@ -151,7 +165,7 @@ namespace DotNettyClient.DotNetty
                 reqId = Guid.NewGuid().ToString()
             };
             lstSendPings.Add(testEvent);
-            ctx.WriteAndFlushAsync(testEvent);
+            channelHandlerContext.WriteAndFlushAsync(testEvent);
             RecordLogEvent?.Invoke("发送心跳");
         }
 
@@ -159,14 +173,13 @@ namespace DotNettyClient.DotNetty
         public override void HandlerAdded(IChannelHandlerContext context)
         {
             this.channelHandlerContext = context;
-            RecordLogEvent?.Invoke($"服务端{context}上线.");
+            RecordLogEvent?.Invoke($"HandlerAdded.");
             base.HandlerAdded(context);
         }
 
         public override void HandlerRemoved(IChannelHandlerContext context)
         {
-            Reconnect(context);
-            RecordLogEvent?.Invoke($"服务端{context}下线.");
+            RecordLogEvent?.Invoke($"HandlerRemoved");
             base.HandlerRemoved(context);
         }
 
@@ -192,7 +205,6 @@ namespace DotNettyClient.DotNetty
 
         public override void ChannelInactive(IChannelHandlerContext context)
         {
-            Reconnect(context);
             base.ChannelInactive(context);
             RecordLogEvent?.Invoke("Client ChannelInactive:" + context);
             isConnect = false;
@@ -201,13 +213,12 @@ namespace DotNettyClient.DotNetty
         public override void ChannelUnregistered(IChannelHandlerContext context)
         {
             base.ChannelUnregistered(context);
-
+            Reconnect(context);
             RecordLogEvent?.Invoke("Client ChannelUnregistered:" + context);
         }
 
         public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
         {
-            Reconnect(context);
             RecordLogEvent?.Invoke("Exception: " + exception);
             context.CloseAsync();
         }
