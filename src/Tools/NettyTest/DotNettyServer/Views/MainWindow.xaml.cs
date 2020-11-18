@@ -31,6 +31,7 @@ namespace DotNettyServer.Views
                 string time = System.DateTime.Now.ToString("HH:mm:ss.fff");
                 string formatStr = $"{time}：{msg}\r\n";
                 this.tbLog.AppendText(formatStr);
+                this.tbLog.ScrollToEnd();
             });
         }
     }

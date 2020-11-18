@@ -32,15 +32,15 @@ namespace DotNettyServer.ViewModel
             get { return _ServerPort; }
             set { SetProperty(ref _ServerPort, value); }
         }
-        private bool _IsStartServerButtonEnabled = true;
+        private bool _IsStartServer = false;
         /// <summary>
         /// 开启服务按钮是否可用
         /// </summary>
 
-        public bool IsStartServerButtonEnabled
+        public bool IsStartServer
         {
-            get { return _IsStartServerButtonEnabled; }
-            set { SetProperty(ref _IsStartServerButtonEnabled, value); }
+            get { return _IsStartServer; }
+            set { SetProperty(ref _IsStartServer, value); }
         }
         private string _StartServerButtonContent = "开启服务";
         /// <summary>
@@ -79,12 +79,53 @@ namespace DotNettyServer.ViewModel
             DotNettyServerHandler.ReceiveEventFromClientEvent += ReceiveMessage;
         }
 
+        MultithreadEventLoopGroup bossGroup = null;
+        MultithreadEventLoopGroup workerGroup = null;
+        private IChannel serverChannel = null;
+        /// <summary>
+        /// 关闭服务
+        /// </summary>
+        private async void StopServer()
+        {
+            try
+            {
+                if (serverChannel != null)
+                {
+                    await serverChannel.DisconnectAsync();
+                    await serverChannel.CloseAsync();
+                    await serverChannel.CloseCompletion;
+                    serverChannel = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"关闭通道异常：{ex.Message}");
+            }
+            finally
+            {
+                if (bossGroup != null)
+                {
+                    // 释放工作组线程
+                    await Task.WhenAll(bossGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)),
+                                     workerGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)));
+                    bossGroup = null;
+                    workerGroup = null;
+                }
+            }
+        }
+
         /// <summary>
         /// 开启、关闭DotNetty服务
         /// </summary>
         private async void RaiseStartServerHandler()
         {
-            IsStartServerButtonEnabled = false;
+            IsStartServer = !IsStartServer;
+            StartServerButtonContent = (IsStartServer ? "关闭服务" : "开启服务");
+            if (!IsStartServer)
+            {
+                StopServer();
+                return;
+            }
 
             // 主工作线程组，设置为1个线程
             IEventLoopGroup bossGroup = new MultithreadEventLoopGroup(1);
@@ -118,17 +159,11 @@ namespace DotNettyServer.ViewModel
                 }));
 
                 // bootstrap绑定到指定端口的行为 就是服务端启动服务，同样的Serverbootstrap可以bind到多个端口
-                IChannel boundChannel = await bootstrap.BindAsync(ServerPort);
+                serverChannel = await bootstrap.BindAsync(ServerPort);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-            }
-            finally
-            {
-                //释放工作组线程
-                //await Task.WhenAll(bossGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)),
-                //                 workerGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)));
             }
         }
 
@@ -151,7 +186,6 @@ namespace DotNettyServer.ViewModel
             });
             if (DotNettyServerHandler != null)
             {
-
                 DotNettyServerHandler.SendData(new TestEvent()
                 {
                     code = EventCode.Chat,

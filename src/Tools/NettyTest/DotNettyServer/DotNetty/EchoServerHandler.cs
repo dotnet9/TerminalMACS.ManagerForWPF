@@ -38,6 +38,7 @@ namespace DotNettyServer.DotNetty
                 RecordLogEvent?.Invoke($"发送数据异常：{ex.Message}");
             }
         }
+        public override bool IsSharable => true;//标注一个channel handler可以被多个channel安全地共享。
 
         /// <summary>
         /// 收到客户端回应

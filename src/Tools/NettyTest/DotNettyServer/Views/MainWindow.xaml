@@ -14,7 +14,7 @@
         Height="800"
         pu:WindowXCaption.Background="#0099FF"
         pu:WindowXCaption.Foreground="White">
-    <Grid>
+    <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
             <RowDefinition Height="*"/>
@@ -28,7 +28,7 @@
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.ColumnSpan="2">
             <TextBlock Text="端口：" VerticalAlignment="Center"/>
             <TextBox x:Name="tbPort" Text="{Binding ServerPort}" VerticalAlignment="Center" Width="100"/>
-            <Button Content="{Binding StartServerButtonContent}" IsEnabled="{Binding IsStartServerButtonEnabled}" Command="{Binding RaiseStartServerCommand}" VerticalAlignment="Center"/>
+            <Button Content="{Binding StartServerButtonContent}" Command="{Binding RaiseStartServerCommand}" VerticalAlignment="Center"/>
         </StackPanel>
         <ListBox Name="ListBoxChat" Grid.Row="1" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" 
              BorderThickness="0" Style="{StaticResource StackPanelVerticalListBox}" ItemsSource="{Binding ChatInfos}">

@@ -6,13 +6,14 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading;
 
 namespace DotNettyClient.DotNetty
 {
     public class EchoClientHandler : SimpleChannelInboundHandler<Object>
     {
-        public event Action DisconnectServer;
+        public event Action ReconnectServer;
         public event Action<TestEvent> ReceiveEventFromClientEvent;
         public event Action<string> RecordLogEvent;
         private IChannelHandlerContext channelHandlerContext;
@@ -20,7 +21,8 @@ namespace DotNettyClient.DotNetty
         private static object lockOjb = new object();                       // 读取数据锁
         private List<TestEvent> lstSendPings = new List<TestEvent>();       // 用于存放发送的ping包
         private const int MAX_NO_RESPONSE_PING_COUNT = 7;                   // 未收到ping回应的数据包最大个数
-        private bool isConnect = false;
+        private bool isConnect;
+        private int total = 0;
 
         /// <summary>
         /// 发送数据到服务端
@@ -43,7 +45,7 @@ namespace DotNettyClient.DotNetty
             }
             catch (Exception ex)
             {
-
+                RecordLogEvent?.Invoke($"发送数据异常：{ex.Message}");
             }
         }
 
@@ -156,12 +158,14 @@ namespace DotNettyClient.DotNetty
 
         public override void HandlerAdded(IChannelHandlerContext context)
         {
+            this.channelHandlerContext = context;
             RecordLogEvent?.Invoke($"服务端{context}上线.");
             base.HandlerAdded(context);
         }
 
         public override void HandlerRemoved(IChannelHandlerContext context)
         {
+            Reconnect(context);
             RecordLogEvent?.Invoke($"服务端{context}下线.");
             base.HandlerRemoved(context);
         }
@@ -181,13 +185,14 @@ namespace DotNettyClient.DotNetty
 
         public override void ChannelActive(IChannelHandlerContext context)
         {
-            channelHandlerContext = context;
+            total = 0;
             RecordLogEvent?.Invoke("Client channelActive:" + context);
             isConnect = true;
         }
 
         public override void ChannelInactive(IChannelHandlerContext context)
         {
+            Reconnect(context);
             base.ChannelInactive(context);
             RecordLogEvent?.Invoke("Client ChannelInactive:" + context);
             isConnect = false;
@@ -197,15 +202,36 @@ namespace DotNettyClient.DotNetty
         {
             base.ChannelUnregistered(context);
 
-            DisconnectServer?.Invoke();
-
             RecordLogEvent?.Invoke("Client ChannelUnregistered:" + context);
         }
 
         public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
         {
+            Reconnect(context);
             RecordLogEvent?.Invoke("Exception: " + exception);
             context.CloseAsync();
+        }
+
+        public void Disconnect()
+        {
+            if (channelHandlerContext != null)
+                channelHandlerContext.DisconnectAsync();
+        }
+
+        public void Reconnect()
+        {
+            if (channelHandlerContext != null)
+                channelHandlerContext.ConnectAsync(channelHandlerContext.Channel.RemoteAddress, channelHandlerContext.Channel.LocalAddress);
+        }
+
+        public void Reconnect(IChannelHandlerContext context)
+        {
+            Interlocked.Increment(ref total);
+            if (total == 1)
+            {
+                ReconnectServer?.Invoke();
+
+            }
         }
     }
 }

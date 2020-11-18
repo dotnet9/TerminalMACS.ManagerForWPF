@@ -20,7 +20,7 @@ namespace DotNettyClient.Views
             if (this.DataContext == null)
             {
                 this.DataContext = ViewModel = new MainWindowViewModel();
-                ViewModel.DotNettyClientHandler.RecordLogEvent += ReceiveLog;
+                ViewModel.RecordLogEvent += ReceiveLog;
             }
         }
 
@@ -31,6 +31,7 @@ namespace DotNettyClient.Views
                 string time = System.DateTime.Now.ToString("HH:mm:ss.fff");
                 string formatStr = $"{time}：{msg}\r\n";
                 this.tbLog.AppendText(formatStr);
+                this.tbLog.ScrollToEnd();
             });
         }
     }

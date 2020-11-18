@@ -9,7 +9,7 @@ namespace NettyModel.Event
     public enum EventCode
     {
         OK = 200,                   // 发送成功
-        Ping = 10010001,            // 心跳
-        Chat = 10010002,            // 聊天
+        Ping = 10010004,            // 心跳
+        Chat = 10010003,            // 聊天
     }
 }
