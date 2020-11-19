@@ -14,7 +14,7 @@ namespace DotNettyServer.DotNetty
     public class NettyServerHandler : SimpleChannelInboundHandler<Object>
     {
         private IChannelHandlerContext channelHandlerContext;
-        public event Action<TestEvent> ReceiveEventFromClientEvent;
+        public event Action<NettyBody> ReceiveEventFromClientEvent;
         public event Action<string> RecordLogEvent;
 
 
@@ -22,7 +22,7 @@ namespace DotNettyServer.DotNetty
         /// 发送数据到客户端
         /// </summary>
         /// <param name="testEvent"></param>
-        public void SendData(TestEvent testEvent)
+        public void SendData(NettyBody testEvent)
         {
             try
             {
@@ -49,19 +49,19 @@ namespace DotNettyServer.DotNetty
         {
             try
             {
-                TestEvent testEvent = MessagePackSerializer.Deserialize<TestEvent>(MessagePackSerializer.Serialize(msg));
+                NettyBody testEvent = MessagePackSerializer.Deserialize<NettyBody>(MessagePackSerializer.Serialize(msg));
 
                 // 服务端收到心跳，直接回应
-                if (testEvent.code == EventCode.Ping)
+                if (testEvent.code == (int)NettyCodeEnum.Ping)
                 {
                     ctx.WriteAndFlushAsync(msg);
                     RecordLogEvent?.Invoke($"收到心跳并原文回应");
                     return;
                 }
-                else if (testEvent.code == EventCode.Chat)
+                else if (testEvent.code == (int)NettyCodeEnum.Chat)
                 {
                     // 回应收到消息成功
-                    testEvent.code = EventCode.OK;
+                    testEvent.code = (int)NettyCodeEnum.OK;
                     ctx.WriteAndFlushAsync(testEvent);
                     ReceiveEventFromClientEvent?.Invoke(testEvent);
                 }

@@ -1,4 +1,5 @@
-﻿using DotNettyClient.ViewModel;
+﻿using DotNettyClient.DotNetty;
+using DotNettyClient.ViewModel;
 using Panuon.UI.Silver;
 
 namespace DotNettyClient.Views
@@ -20,7 +21,7 @@ namespace DotNettyClient.Views
             if (this.DataContext == null)
             {
                 this.DataContext = ViewModel = new MainWindowViewModel();
-                ViewModel.RecordLogEvent += ReceiveLog;
+                ClientEventHandler.RecordLogEvent += ReceiveLog;
             }
         }
 

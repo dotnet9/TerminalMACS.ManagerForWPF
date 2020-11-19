@@ -186,9 +186,9 @@ namespace DotNettyServer.ViewModel
             });
             if (DotNettyServerHandler != null)
             {
-                DotNettyServerHandler.SendData(new TestEvent()
+                DotNettyServerHandler.SendData(new NettyBody()
                 {
-                    code = EventCode.Chat,
+                    code = (int)NettyCodeEnum.Chat,
                     time = UtilHelper.GetCurrentTimeStamp(),
                     msg = "服务器推送",
                     fromId = "",
@@ -204,7 +204,7 @@ namespace DotNettyServer.ViewModel
         /// 收到信息
         /// </summary>
         /// <param name="testEvent"></param>
-        private void ReceiveMessage(TestEvent testEvent)
+        private void ReceiveMessage(NettyBody testEvent)
         {
             App.Current.Dispatcher.Invoke(() =>
             {

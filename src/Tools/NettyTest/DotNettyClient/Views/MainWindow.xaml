@@ -31,7 +31,7 @@
             <TextBox x:Name="tbIP" Text="{Binding ServerIP}" VerticalAlignment="Center" Width="120"/>
             <TextBlock Text="端口：" VerticalAlignment="Center"/>
             <TextBox x:Name="tbPort" Text="{Binding ServerPort}" VerticalAlignment="Center" Width="100"/>
-            <Button Content="{Binding ConnectServerButtonContent}" Command="{Binding RaiseConnectServerCommand}" VerticalAlignment="Center"/>
+            <Button Content="{Binding ConnectServerButtonContent}" IsEnabled="{Binding ConnectServerButtonEnabled}" Command="{Binding RaiseConnectServerCommand}" VerticalAlignment="Center"/>
         </StackPanel>
         <ListBox Name="ListBoxChat" Grid.Row="1" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" 
              BorderThickness="0" Style="{StaticResource StackPanelVerticalListBox}" ItemsSource="{Binding ChatInfos}">

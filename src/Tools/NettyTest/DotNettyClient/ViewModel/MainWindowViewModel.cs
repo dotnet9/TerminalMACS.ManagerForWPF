@@ -24,7 +24,7 @@ namespace DotNettyClient.ViewModel
     {
         private ObservableCollection<ChatInfoModel> _ChatInfo = new ObservableCollection<ChatInfoModel>();
         public ObservableCollection<ChatInfoModel> ChatInfos { get { return _ChatInfo; } }
-        private string _ServerIP = "192.168.50.87";//"127.0.0.1";//
+        private string _ServerIP = "192.168.50.154";//"127.0.0.1";//"192.168.50.87";//
         /// <summary>
         /// 服务端端口
         /// </summary>
@@ -45,15 +45,14 @@ namespace DotNettyClient.ViewModel
             set { SetProperty(ref _ServerPort, value); }
         }
         private bool isConnectSuccess = false;
-        private bool _IsConnectServer = false;
+        private bool _ConnectServerButtonEnabled = true;
         /// <summary>
-        /// 开启服务按钮是否可用
+        /// 连接、关闭服务按钮是否可用
         /// </summary>
-
-        public bool IsConnectServer
+        public bool ConnectServerButtonEnabled
         {
-            get { return _IsConnectServer; }
-            set { SetProperty(ref _IsConnectServer, value); }
+            get { return _ConnectServerButtonEnabled; }
+            set { SetProperty(ref _ConnectServerButtonEnabled, value); }
         }
         private string _ConnectServerButtonContent = "连接服务";
         /// <summary>
@@ -74,18 +73,14 @@ namespace DotNettyClient.ViewModel
         public ICommand RaiseConnectServerCommand { get; private set; }
         public ICommand RaiseSendStringCommand { get; private set; }
 
-        public event Action<string> RecordLogEvent;
-
-        /// <summary>
-        /// 客户端处理程序
-        /// </summary>
-        public EchoClientHandler DotNettyClientHandler { get; private set; }
         private readonly string _id = Guid.NewGuid().ToString();
 
         public MainWindowViewModel()
         {
             RaiseConnectServerCommand = new DelegateCommand(RaiseConnectServerHandler);
             RaiseSendStringCommand = new DelegateCommand(RaiseSendStringHandler);
+            ClientEventHandler.ReconnectServer += () => ConnectToServer().Wait();
+            ClientEventHandler.ReceiveEventFromClientEvent += ReceiveMessage;
             InitDotNetty();
         }
 
@@ -116,26 +111,19 @@ namespace DotNettyClient.ViewModel
 
                     // IdleStateHandler 心跳
                     //客户端为写IDLE
-                    pipeline.AddLast(new IdleStateHandler(0, 0, 0));
+                    pipeline.AddLast(new IdleStateHandler(ClientEventHandler.PING_INTERVAL, 0, 0));
 
                     // 消息处理handler
-                    if (DotNettyClientHandler != null)
-                    {
-                        DotNettyClientHandler.ReceiveEventFromClientEvent -= ReceiveMessage;
-                        DotNettyClientHandler.ReconnectServer -= () => ConnectToServer().Wait();
-                        DotNettyClientHandler.RecordLogEvent -= this.RecordLogEvent;
-                    }
-                    DotNettyClientHandler = new EchoClientHandler();
-                    DotNettyClientHandler.ReceiveEventFromClientEvent += ReceiveMessage;
-                    DotNettyClientHandler.ReconnectServer += () => ConnectToServer().Wait();
-                    DotNettyClientHandler.RecordLogEvent += this.RecordLogEvent;
-                    pipeline.AddLast("handler", DotNettyClientHandler);
+                    pipeline.AddLast("handler", new NettyClientChannelHandler());
                 }));
             bootstrap.RemoteAddress(new IPEndPoint(IPAddress.Parse(this.ServerIP), this.ServerPort));
-            CheckConnectServer();
         }
 
         private bool isCheckConnect = false;
+        private int connectTImes = 0;
+        /// <summary>
+        /// 检查服务是否连接
+        /// </summary>
         private void CheckConnectServer()
         {
             if (isCheckConnect)
@@ -150,9 +138,11 @@ namespace DotNettyClient.ViewModel
                 {
                     if (!isConnectSuccess)
                     {
+                        connectTImes++;
+                        ClientEventHandler.RecordLogEvent?.Invoke($"尝试连接服务 {connectTImes}次");
                         ConnectToServer();
                     }
-                    Thread.Sleep(TimeSpan.FromSeconds(5));
+                    Thread.Sleep(TimeSpan.FromSeconds(10));
                 }
             });
         }
@@ -162,48 +152,36 @@ namespace DotNettyClient.ViewModel
         /// </summary>
         private async void RaiseConnectServerHandler()
         {
-            IsConnectServer = true;
             ConnectServerButtonContent = "重连服务";
-            if (!IsConnectServer)
-            {
-                if (this.group != null)
-                {
-                    this.DotNettyClientHandler.Disconnect();
-                }
-                return;
-            }
-            else
-            {
-                await ConnectToServer();
-            }
+            ConnectServerButtonEnabled = false;
+            CheckConnectServer();
         }
 
+        IChannel clientChannel = null;
+        /// <summary>
+        /// 连接服务
+        /// </summary>
+        /// <returns></returns>
         public async Task ConnectToServer()
         {
             try
             {
-                IChannel clientChannel = null;
-                try
+                isConnectSuccess = false;
+                if (clientChannel != null)
                 {
-                    isConnectSuccess = false;
-                    clientChannel = await bootstrap.ConnectAsync();
-                    isConnectSuccess = true;
+                    ClientEventHandler.RecordLogEvent?.Invoke($"尝试关闭服务");
+                    await clientChannel.CloseAsync();
                 }
-                catch (Exception ex)
-                {
-                    isConnectSuccess = false;
-                }
+                clientChannel = await bootstrap.ConnectAsync();
+                ClientEventHandler.RecordLogEvent?.Invoke($"连接服务成功");
+                isConnectSuccess = true;
             }
-            finally
+            catch (Exception ex)
             {
-                Console.ReadLine();
-                //await group.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1));
+                isConnectSuccess = false;
+                clientChannel = null;
+                ClientEventHandler.RecordLogEvent?.Invoke($"连接服务异常：{ex.Message}");
             }
-        }
-
-        private async Task RunClientAsync()
-        {
-            await ConnectToServer();
         }
 
         /// <summary>
@@ -224,28 +202,24 @@ namespace DotNettyClient.ViewModel
                 };
                 ChatInfos.Add(info);
             });
-            if (DotNettyClientHandler != null)
+            ClientEventHandler.SendData(new NettyBody()
             {
-                DotNettyClientHandler.SendData(new TestEvent()
-                {
-                    code = EventCode.Chat,
-                    time = UtilHelper.GetCurrentTimeStamp(),
-                    msg = "客户端请求",
-                    fromId = "",
-                    reqId = Guid.NewGuid().ToString(),
-                    data = ChatString
-                });
-            }
+                code = (int)NettyCodeEnum.Chat,
+                time = UtilHelper.GetCurrentTimeStamp(),
+                msg = "客户端请求",
+                fromId = "",
+                reqId = Guid.NewGuid().ToString(),
+                data = ChatString
+            });
             ChatString = string.Empty;
         }
 
-        private void ReceiveMessage(TestEvent testEvent)
+        private void ReceiveMessage(NettyBody testEvent)
         {
             App.Current.Dispatcher.Invoke(() =>
             {
                 ChatInfoModel info = new ChatInfoModel
                 {
-
                     Message = testEvent.data,
                     SenderId = "ddd",
                     Type = ChatMessageType.String,
