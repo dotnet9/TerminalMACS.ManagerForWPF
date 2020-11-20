@@ -42,10 +42,6 @@ namespace DotNettyClient.DotNetty
         /// </summary>
         public static Action<string> RecordLogEvent;
         /// <summary>
-        /// 重新连接服务器事件
-        /// </summary>
-        public static Action ReconnectServer;
-        /// <summary>
         /// 从服务端收到数据
         /// </summary>
         public static Action<NettyBody> ReceiveEventFromClientEvent;
@@ -67,6 +63,7 @@ namespace DotNettyClient.DotNetty
             string guid = System.Guid.NewGuid().ToString();
             LstSendPings.Enqueue(guid);
             ctx.WriteAndFlushAsync(NettyBody.ping(guid));
+            RecordLogEvent?.Invoke($"发送心跳包，已发送{LstSendPings.Count} 次");
         }
 
 
@@ -109,13 +106,13 @@ namespace DotNettyClient.DotNetty
                         NettyBodyCounter sendEvent = null;
                         lock (LockOjb)
                         {
-                            for(int i = LstNeedSendDatas.Count-1;i>=0;i--)
+                            for (int i = LstNeedSendDatas.Count - 1; i >= 0; i--)
                             {
                                 var tmpNettyBody = LstNeedSendDatas[i];
-                                if(tmpNettyBody.TryCount>=RETRY_SEND_TIME)
+                                if (tmpNettyBody.TryCount >= RETRY_SEND_TIME)
                                 {
                                     LstNeedSendDatas.Remove(tmpNettyBody);
-                                    RecordLogEvent?.Invoke($"删除超时数据包(已发{sendEvent.TryCount}次)：{JsonConvert.SerializeObject(sendEvent.NettyBody)}");
+                                    RecordLogEvent?.Invoke($"删除超时数据包(已发{tmpNettyBody.TryCount}次)：{JsonConvert.SerializeObject(tmpNettyBody.NettyBody)}");
                                 }
                             }
                             sendEvent = LstNeedSendDatas.FirstOrDefault();

@@ -14,6 +14,13 @@ namespace DotNettyClient.DotNetty
 {
     public class NettyClientChannelHandler : SimpleChannelInboundHandler<Object>
     {
+        private string serverIP;
+        private int serverPort;
+        public NettyClientChannelHandler(string serverIP, int serverPort)
+        {
+            this.serverIP = serverIP;
+            this.serverPort = serverPort;
+        }
 
         public override bool IsSharable => true;//标注一个channel handler可以被多个channel安全地共享。
 
@@ -76,7 +83,7 @@ namespace DotNettyClient.DotNetty
         public override void ChannelRegistered(IChannelHandlerContext context)
         {
             base.ChannelRegistered(context);
-            ClientEventHandler.RecordLogEvent?.Invoke("注册通道：" + context);
+            ClientEventHandler.RecordLogEvent?.Invoke($"注册通道：{context.Channel.RemoteAddress}");
         }
 
         /// <summary>
@@ -86,7 +93,7 @@ namespace DotNettyClient.DotNetty
         public override void ChannelActive(IChannelHandlerContext context)
         {
             base.ChannelActive(context);
-            ClientEventHandler.RecordLogEvent?.Invoke("通道激活：" + context);
+            ClientEventHandler.RecordLogEvent?.Invoke($"通道激活：{context.Channel.RemoteAddress}");
             ClientEventHandler.RunSendData(context);
         }
 
@@ -97,7 +104,7 @@ namespace DotNettyClient.DotNetty
         public override void ChannelInactive(IChannelHandlerContext context)
         {
             base.ChannelInactive(context);
-            ClientEventHandler.RecordLogEvent?.Invoke("断开连接：" + context);
+            ClientEventHandler.RecordLogEvent?.Invoke($"断开连接：{context.Channel.RemoteAddress}");
         }
 
         /// <summary>
@@ -107,9 +114,11 @@ namespace DotNettyClient.DotNetty
         public override void ChannelUnregistered(IChannelHandlerContext context)
         {
             base.ChannelUnregistered(context);
-            ClientEventHandler.RecordLogEvent?.Invoke("注销通道：" + context);
+            ClientEventHandler.RecordLogEvent?.Invoke($"注销通道：{context.Channel.RemoteAddress}");
             Thread.Sleep(TimeSpan.FromSeconds(5));
-            ClientEventHandler.ReconnectServer?.Invoke();
+
+            NettyClient nettyClient = new NettyClient(serverIP, serverPort);
+            nettyClient.ConnectServer().Wait() ;
         }
 
         /// <summary>
@@ -119,7 +128,7 @@ namespace DotNettyClient.DotNetty
         /// <param name="exception"></param>
         public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
         {
-            ClientEventHandler.RecordLogEvent?.Invoke("Exception: " + exception);
+            ClientEventHandler.RecordLogEvent?.Invoke($"Exception: {exception.Message}");
             context.CloseAsync();
         }
 

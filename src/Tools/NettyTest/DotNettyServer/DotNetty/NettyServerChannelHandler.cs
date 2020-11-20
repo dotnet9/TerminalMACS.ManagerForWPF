@@ -11,7 +11,7 @@ namespace DotNettyServer.DotNetty
     /// <summary>
     /// 因为服务器只需要响应传入的消息，所以只需要实现ChannelHandlerAdapter就可以了
     /// </summary>
-    public class NettyServerHandler : SimpleChannelInboundHandler<Object>
+    public class NettyServerChannelHandler : SimpleChannelInboundHandler<Object>
     {
         private IChannelHandlerContext channelHandlerContext;
         public event Action<NettyBody> ReceiveEventFromClientEvent;
@@ -58,12 +58,13 @@ namespace DotNettyServer.DotNetty
                     RecordLogEvent?.Invoke($"收到心跳并原文回应");
                     return;
                 }
-                else if (testEvent.code == (int)NettyCodeEnum.Chat)
+                if (testEvent.code == (int)NettyCodeEnum.Chat)
                 {
                     // 回应收到消息成功
                     testEvent.code = (int)NettyCodeEnum.OK;
                     ctx.WriteAndFlushAsync(testEvent);
                     ReceiveEventFromClientEvent?.Invoke(testEvent);
+                    return;
                 }
                 RecordLogEvent?.Invoke($"服务端接收到消息:" + JsonConvert.SerializeObject(testEvent));
 
@@ -74,80 +75,10 @@ namespace DotNettyServer.DotNetty
             }
         }
 
-        static volatile IChannelGroup groups;
-        //客户端连接进来时
-        public override void HandlerAdded(IChannelHandlerContext context)
-        {
-            RecordLogEvent?.Invoke($"客户端{context}上线.");
-            //SimpleEventBus.GetDefaultEventBus().Post("客户端连接进来：" + context, TimeSpan.Zero);
-            base.HandlerAdded(context);
-
-            IChannelGroup g = groups;
-            if (g == null)
-            {
-                lock (this)
-                {
-                    if (groups == null)
-                    {
-                        g = groups = new DefaultChannelGroup(context.Executor);
-                    }
-                }
-            }
-
-            g.Add(context.Channel);
-            //groups.WriteAndFlushAsync($"欢迎{context.Channel.RemoteAddress}加入.");
-        }
-
-        //客户端下线断线时
-        public override void HandlerRemoved(IChannelHandlerContext context)
-        {
-            RecordLogEvent?.Invoke($"客户端{context}下线.");
-            base.HandlerRemoved(context);
-
-            groups.Remove(context.Channel);
-            //groups.WriteAndFlushAsync($"恭送{context.Channel.RemoteAddress}离开.");
-            //SimpleEventBus.GetDefaultEventBus().Post("下线：" + context, TimeSpan.Zero);
-        }
-
-        //服务器监听到客户端活动时
-        public override void ChannelActive(IChannelHandlerContext context)
-        {
-            channelHandlerContext = context;
-            RecordLogEvent?.Invoke($"客户端{context.Channel.RemoteAddress}在线.");
-            //SimpleEventBus.GetDefaultEventBus().Post("在线：" + context, TimeSpan.Zero);
-            base.ChannelActive(context);
-        }
-
-        //服务器监听到客户端不活动时
-        public override void ChannelInactive(IChannelHandlerContext context)
-        {
-            RecordLogEvent?.Invoke($"客户端{context.Channel.RemoteAddress}离线了.");
-            //SimpleEventBus.GetDefaultEventBus().Post("离线：" + context, TimeSpan.Zero);
-            base.ChannelInactive(context);
-        }
-        private int lossConnectCount = 0;
-
-        public override void UserEventTriggered(IChannelHandlerContext context, object evt)
-        {
-            RecordLogEvent?.Invoke($"已经15秒未收到客户端的消息了！");
-            if (evt is IdleStateEvent eventState)
-            {
-                if (eventState.State == IdleState.ReaderIdle)
-                {
-                    lossConnectCount++;
-                    if (lossConnectCount > 2)
-                    {
-                        RecordLogEvent?.Invoke($"关闭这个不活跃通道！");
-                        context.CloseAsync();
-                    }
-                }
-            }
-            else
-            {
-                base.UserEventTriggered(context, evt);
-            }
-        }
-
+        /// <summary>
+        /// 消息读取完成
+        /// </summary>
+        /// <param name="context"></param>
         public override void ChannelReadComplete(IChannelHandlerContext context)
         {
             base.ChannelReadComplete(context);
@@ -155,21 +86,50 @@ namespace DotNettyServer.DotNetty
             RecordLogEvent?.Invoke($"ChannelReadComplete:" + context);
         }
 
+        /// <summary>
+        /// 注册通道
+        /// </summary>
+        /// <param name="context"></param>
         public override void ChannelRegistered(IChannelHandlerContext context)
         {
             base.ChannelRegistered(context);
-            RecordLogEvent?.Invoke($"Server ChannelRegistered:" + context);
+            RecordLogEvent?.Invoke($"注册通道：{context.Channel.RemoteAddress}");
         }
 
+        /// <summary>
+        /// 通道激活
+        /// </summary>
+        /// <param name="context"></param>
+        public override void ChannelActive(IChannelHandlerContext context)
+        {
+            channelHandlerContext = context;
+            RecordLogEvent?.Invoke($"通道激活：{context.Channel.RemoteAddress}");
+            base.ChannelActive(context);
+        }
+
+        /// <summary>
+        /// 断开连接
+        /// </summary>
+        /// <param name="context"></param>
+        public override void ChannelInactive(IChannelHandlerContext context)
+        {
+            RecordLogEvent?.Invoke($"断开连接：{context.Channel.RemoteAddress}");
+            base.ChannelInactive(context);
+        }
+
+        /// <summary>
+        /// 注销通道
+        /// </summary>
+        /// <param name="context"></param>
         public override void ChannelUnregistered(IChannelHandlerContext context)
         {
             base.ChannelUnregistered(context);
-            RecordLogEvent?.Invoke($"Server ChannelUnregistered:" + context);
+            RecordLogEvent?.Invoke($"注销通道：{context.Channel.RemoteAddress}");
         }
 
         public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
         {
-            RecordLogEvent?.Invoke($"Exception: " + exception);
+            RecordLogEvent?.Invoke($"异常：{exception.Message}");
             context.CloseAsync();
         }
     }

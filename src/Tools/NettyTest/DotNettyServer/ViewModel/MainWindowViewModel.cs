@@ -22,6 +22,7 @@ namespace DotNettyServer.ViewModel
     public class MainWindowViewModel : BindableBase
     {
         public ObservableCollection<ChatInfoModel> ChatInfos { get; set; } = new ObservableCollection<ChatInfoModel>();
+
         private int _ServerPort = 10086;
         /// <summary>
         /// 服务端端口
@@ -32,26 +33,18 @@ namespace DotNettyServer.ViewModel
             get { return _ServerPort; }
             set { SetProperty(ref _ServerPort, value); }
         }
-        private bool _IsStartServer = false;
+
+        private bool _StartServerButtonEnabled = true;
         /// <summary>
-        /// 开启服务按钮是否可用
+        /// 开启、关闭服务按钮可用状态
         /// </summary>
 
-        public bool IsStartServer
+        public bool StartServerButtonEnabled
         {
-            get { return _IsStartServer; }
-            set { SetProperty(ref _IsStartServer, value); }
+            get { return _StartServerButtonEnabled; }
+            set { SetProperty(ref _StartServerButtonEnabled, value); }
         }
-        private string _StartServerButtonContent = "开启服务";
-        /// <summary>
-        /// 开启、关闭服务按钮显示内容
-        /// </summary>
 
-        public string StartServerButtonContent
-        {
-            get { return _StartServerButtonContent; }
-            set { SetProperty(ref _StartServerButtonContent, value); }
-        }
         /// <summary>
         /// 待发送的聊天内容
         /// </summary>
@@ -62,13 +55,15 @@ namespace DotNettyServer.ViewModel
             get { return _ChatString; }
             set { SetProperty(ref _ChatString, value); }
         }
+
         public ICommand RaiseStartServerCommand { get; private set; }
+
         public ICommand RaiseSendStringCommand { get; private set; }
 
         /// <summary>
         /// DotNetty处理程序
         /// </summary>
-        public NettyServerHandler DotNettyServerHandler { get; private set; } = new NettyServerHandler();
+        public NettyServerChannelHandler DotNettyServerHandler { get; private set; } = new NettyServerChannelHandler();
 
         private readonly string _id = Guid.NewGuid().ToString();
 
@@ -79,91 +74,35 @@ namespace DotNettyServer.ViewModel
             DotNettyServerHandler.ReceiveEventFromClientEvent += ReceiveMessage;
         }
 
-        MultithreadEventLoopGroup bossGroup = null;
-        MultithreadEventLoopGroup workerGroup = null;
-        private IChannel serverChannel = null;
-        /// <summary>
-        /// 关闭服务
-        /// </summary>
-        private async void StopServer()
-        {
-            try
-            {
-                if (serverChannel != null)
-                {
-                    await serverChannel.DisconnectAsync();
-                    await serverChannel.CloseAsync();
-                    await serverChannel.CloseCompletion;
-                    serverChannel = null;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"关闭通道异常：{ex.Message}");
-            }
-            finally
-            {
-                if (bossGroup != null)
-                {
-                    // 释放工作组线程
-                    await Task.WhenAll(bossGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)),
-                                     workerGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)));
-                    bossGroup = null;
-                    workerGroup = null;
-                }
-            }
-        }
-
         /// <summary>
         /// 开启、关闭DotNetty服务
         /// </summary>
         private async void RaiseStartServerHandler()
         {
-            IsStartServer = !IsStartServer;
-            StartServerButtonContent = (IsStartServer ? "关闭服务" : "开启服务");
-            if (!IsStartServer)
-            {
-                StopServer();
-                return;
-            }
+            StartServerButtonEnabled = false;
 
-            // 主工作线程组，设置为1个线程
             IEventLoopGroup bossGroup = new MultithreadEventLoopGroup(1);
-            // 工作线程组，默认为内核数*2的线程数
             IEventLoopGroup workerGroup = new MultithreadEventLoopGroup();
             try
             {
-                //声明一个服务端Bootstrap，每个Netty服务端程序，都由ServerBootstrap控制，
-                //通过链式的方式组装需要的参数
                 var bootstrap = new ServerBootstrap();
-                bootstrap.Group(bossGroup, workerGroup);                                    // 设置主和工作线程组
-                bootstrap.Channel<TcpServerSocketChannel>();                                // 设置通道模式为TcpSocket
+                bootstrap.Group(bossGroup, workerGroup);
+                bootstrap.Channel<TcpServerSocketChannel>();
                 bootstrap.ChildHandler(new ActionChannelInitializer<IChannel>(channel =>
                 {
-                    //工作线程连接器 是设置了一个管道，服务端主线程所有接收到的信息都会通过这个管道一层层往下传输
-                    //同时所有出栈的消息 也要这个管道的所有处理器进行一步步处理
                     IChannelPipeline pipeline = channel.Pipeline;
-
-                    //配置编码解码器
-                    pipeline.AddLast("frameDecoder", new LengthFieldBasedFrameDecoder(ushort.MaxValue, 0, 4, 0, 4));
-                    pipeline.AddLast("msgPackDecoder", new MessagePackDecoder());
-                    pipeline.AddLast("frameEncoder", new LengthFieldPrepender(4));
-                    pipeline.AddLast("msgPackEncoder", new MessagePackEncoder());
-
-                    // IdleStateHandler 心跳
-                    //服务端为读IDLE
-                    pipeline.AddLast(new IdleStateHandler(150, 0, 0));      //第一个参数为读，第二个为写，第三个为读写全部
-
-                    //业务handler ，这里是实际处理业务的Handler
-                    pipeline.AddLast("handler", DotNettyServerHandler);
+                    pipeline.AddLast(new LengthFieldBasedFrameDecoder(ushort.MaxValue, 0, 4, 0, 4));
+                    pipeline.AddLast(new MessagePackDecoder());
+                    pipeline.AddLast(new LengthFieldPrepender(4));
+                    pipeline.AddLast(new MessagePackEncoder());
+                    pipeline.AddLast(DotNettyServerHandler);
                 }));
 
-                // bootstrap绑定到指定端口的行为 就是服务端启动服务，同样的Serverbootstrap可以bind到多个端口
-                serverChannel = await bootstrap.BindAsync(ServerPort);
+                await bootstrap.BindAsync(ServerPort);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine($"连接服务异常：{ex.Message}");
             }
         }
 
@@ -206,6 +145,10 @@ namespace DotNettyServer.ViewModel
         /// <param name="testEvent"></param>
         private void ReceiveMessage(NettyBody testEvent)
         {
+            if(App.Current==null)
+            {
+                return;
+            }
             App.Current.Dispatcher.Invoke(() =>
             {
                 ChatInfoModel info = new ChatInfoModel
