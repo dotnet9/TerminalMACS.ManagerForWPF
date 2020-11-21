@@ -10,8 +10,9 @@
         mc:Ignorable="d"
         BorderBrush="#0099FF"
         Title="DotNetty服务端"
-        Width="400"
+        Width="600"
         Height="800"
+        WindowState="Maximized"
         pu:WindowXCaption.Background="#0099FF"
         pu:WindowXCaption.Foreground="White">
     <Grid Margin="5">
@@ -19,11 +20,11 @@
             <RowDefinition Height="35"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.ColumnSpan="2">
             <TextBlock Text="端口：" VerticalAlignment="Center"/>
@@ -46,11 +47,11 @@
         <TextBox Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" Margin="5" 
                  AcceptsReturn="True" VerticalScrollBarVisibility="Auto"
                  Text="{Binding ChatString}"/>
-        <Button Grid.Row="2" Grid.Column="3" ToolTip="发送" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+        <Button Grid.Row="2" Grid.Column="1" ToolTip="发送" VerticalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                 Command="{Binding RaiseSendStringCommand}">
             <materialDesign:PackIcon Kind="Send"/>
         </Button>
 
-        <TextBox x:Name="tbLog" Grid.Row="3" Grid.ColumnSpan="2" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+        <TextBox x:Name="tbLog" Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" Grid.ColumnSpan="2" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
     </Grid>
 </pu:WindowX>

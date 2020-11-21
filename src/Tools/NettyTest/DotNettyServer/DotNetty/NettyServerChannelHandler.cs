@@ -47,6 +47,7 @@ namespace DotNettyServer.DotNetty
         /// <param name="msg"></param>
         protected override void ChannelRead0(IChannelHandlerContext ctx, object msg)
         {
+            channelHandlerContext = ctx;
             try
             {
                 NettyBody testEvent = MessagePackSerializer.Deserialize<NettyBody>(MessagePackSerializer.Serialize(msg));
@@ -83,7 +84,7 @@ namespace DotNettyServer.DotNetty
         {
             base.ChannelReadComplete(context);
             context.Flush();
-            RecordLogEvent?.Invoke($"ChannelReadComplete:" + context);
+            RecordLogEvent?.Invoke($"ChannelReadComplete" );
         }
 
         /// <summary>
