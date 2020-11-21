@@ -73,7 +73,7 @@ namespace DotNettyClient.DotNetty
         {
             base.ChannelReadComplete(context);
             context.Flush();
-            ClientEventHandler.RecordLogEvent?.Invoke("ChannelReadComplete:" + context);
+            ClientEventHandler.RecordLogEvent?.Invoke("ChannelReadComplete");
         }
 
         /// <summary>
@@ -94,6 +94,7 @@ namespace DotNettyClient.DotNetty
         {
             base.ChannelActive(context);
             ClientEventHandler.RecordLogEvent?.Invoke($"通道激活：{context.Channel.RemoteAddress}");
+            ClientEventHandler.IsConnect = true;
             ClientEventHandler.RunSendData(context);
         }
 
@@ -104,7 +105,8 @@ namespace DotNettyClient.DotNetty
         public override void ChannelInactive(IChannelHandlerContext context)
         {
             base.ChannelInactive(context);
-            ClientEventHandler.RecordLogEvent?.Invoke($"断开连接：{context.Channel.RemoteAddress}");
+            ClientEventHandler.RecordLogEvent?.Invoke($"断开连接：{context.Channel.RemoteAddress}"); 
+            ClientEventHandler.IsConnect = false;
         }
 
         /// <summary>
@@ -115,10 +117,11 @@ namespace DotNettyClient.DotNetty
         {
             base.ChannelUnregistered(context);
             ClientEventHandler.RecordLogEvent?.Invoke($"注销通道：{context.Channel.RemoteAddress}");
+            ClientEventHandler.IsConnect = false;
             Thread.Sleep(TimeSpan.FromSeconds(5));
 
             NettyClient nettyClient = new NettyClient(serverIP, serverPort);
-            nettyClient.ConnectServer().Wait() ;
+            nettyClient.ConnectServer().Wait();
         }
 
         /// <summary>
@@ -129,6 +132,7 @@ namespace DotNettyClient.DotNetty
         public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
         {
             ClientEventHandler.RecordLogEvent?.Invoke($"Exception: {exception.Message}");
+            ClientEventHandler.IsConnect = false;
             context.CloseAsync();
         }
 

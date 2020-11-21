@@ -42,7 +42,7 @@ namespace DotNettyClient.DotNetty
                         pipeline.AddLast(new NettyClientChannelHandler(serverIP, serverPort));
                     }));
                 ClientEventHandler.RecordLogEvent?.Invoke("尝试连接服务");
-                var waitResult = bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse(serverIP), serverPort)).Wait(TimeSpan.FromSeconds(5));
+                var waitResult = bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse(serverIP), serverPort)).Wait(TimeSpan.FromSeconds(15));
                 if (waitResult)
                 {
                     ClientEventHandler.RecordLogEvent?.Invoke("连接服务成功");

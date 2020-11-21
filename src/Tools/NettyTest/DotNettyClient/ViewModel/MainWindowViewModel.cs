@@ -24,7 +24,7 @@ namespace DotNettyClient.ViewModel
     {
         private ObservableCollection<ChatInfoModel> _ChatInfo = new ObservableCollection<ChatInfoModel>();
         public ObservableCollection<ChatInfoModel> ChatInfos { get { return _ChatInfo; } }
-        private string _ServerIP = "127.0.0.1";//"192.168.50.87";//"192.168.50.154";//
+        private string _ServerIP = "192.168.101.3";//"127.0.0.1";//"192.168.50.87";//"192.168.50.154";//
 
         /// <summary>
         /// 服务端端口
@@ -82,14 +82,11 @@ namespace DotNettyClient.ViewModel
         /// <summary>
         /// 连接DotNetty服务端
         /// </summary>
-        private async void RaiseConnectServerHandler()
+        private void RaiseConnectServerHandler()
         {
             ConnectServerButtonEnabled = false;
 
-            ThreadPool.QueueUserWorkItem(sen =>
-            {
-                new NettyClient(ServerIP, ServerPort).ConnectServer().Wait();
-            });
+            Task.Run(()=>new NettyClient(ServerIP, ServerPort).ConnectServer().Wait());
         }
 
         /// <summary>

@@ -18,9 +18,13 @@ namespace DotNettyClient.DotNetty
         /// </summary>
         public const int PING_INTERVAL = 5;
         /// <summary>
-        /// 消息发送重试次数
+        /// PING消息发送未回复最大次数，达到则断开重连
         /// </summary>
-        private const int RETRY_SEND_TIME = 3;
+        private const int RETRY_SEND_PINT_TIME = 3;
+        /// <summary>
+        /// 真实数据包发送尝试次数，超过该数据
+        /// </summary>
+        private const int RETRY_SEND_DATA_TIME = 100;
         /// <summary>
         /// 消息发送时间间隔
         /// </summary>
@@ -45,6 +49,10 @@ namespace DotNettyClient.DotNetty
         /// 从服务端收到数据
         /// </summary>
         public static Action<NettyBody> ReceiveEventFromClientEvent;
+        /// <summary>
+        /// 是否已经连接服务
+        /// </summary>
+        public static bool IsConnect = false;
 
         /// <summary>
         /// 发送心跳包
@@ -53,7 +61,7 @@ namespace DotNettyClient.DotNetty
         public static void SendPingMsg(IChannelHandlerContext ctx)
         {
             // 发送的ping，超过一定范围，认为与服务端断开连接，需要重连
-            if (LstSendPings.Count >= RETRY_SEND_TIME)
+            if (LstSendPings.Count >= RETRY_SEND_PINT_TIME)
             {
                 ctx.CloseAsync();
                 RecordLogEvent?.Invoke($"{LstSendPings.Count} 次未收到心跳回应，重连服务器");
@@ -87,11 +95,13 @@ namespace DotNettyClient.DotNetty
         }
 
         private static bool isRunning = false;
+        private static IChannelHandlerContext ctx = null;
         /// <summary>
         /// 发送数据
         /// </summary>
-        public static void RunSendData(IChannelHandlerContext ctx)
+        public static void RunSendData(IChannelHandlerContext ctxTmp)
         {
+            ctx = ctxTmp;
             if (isRunning)
             {
                 return;
@@ -101,6 +111,12 @@ namespace DotNettyClient.DotNetty
             {
                 while (true)
                 {
+                    Thread.Sleep(TimeSpan.FromSeconds(DATA_SEND_INTERVAL));
+                    if(!IsConnect)
+                    {
+                        RecordLogEvent?.Invoke($"未连接服务，无法正常发送数据包！");
+                        continue;
+                    }
                     try
                     {
                         NettyBodyCounter sendEvent = null;
@@ -109,7 +125,7 @@ namespace DotNettyClient.DotNetty
                             for (int i = LstNeedSendDatas.Count - 1; i >= 0; i--)
                             {
                                 var tmpNettyBody = LstNeedSendDatas[i];
-                                if (tmpNettyBody.TryCount >= RETRY_SEND_TIME)
+                                if (tmpNettyBody.TryCount >= RETRY_SEND_DATA_TIME)
                                 {
                                     LstNeedSendDatas.Remove(tmpNettyBody);
                                     RecordLogEvent?.Invoke($"删除超时数据包(已发{tmpNettyBody.TryCount}次)：{JsonConvert.SerializeObject(tmpNettyBody.NettyBody)}");
@@ -128,7 +144,6 @@ namespace DotNettyClient.DotNetty
                     {
                         RecordLogEvent?.Invoke($"发送到服务端异常：{ex2.Message}");
                     }
-                    Thread.Sleep(TimeSpan.FromSeconds(DATA_SEND_INTERVAL));
                 }
             });
         }
