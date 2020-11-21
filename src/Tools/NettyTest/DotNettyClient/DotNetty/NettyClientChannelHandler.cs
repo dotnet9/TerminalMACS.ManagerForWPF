@@ -120,8 +120,11 @@ namespace DotNettyClient.DotNetty
             ClientEventHandler.IsConnect = false;
             Thread.Sleep(TimeSpan.FromSeconds(5));
 
-            NettyClient nettyClient = new NettyClient(serverIP, serverPort);
-            nettyClient.ConnectServer().Wait();
+            if (!ClientEventHandler.IsConnect)
+            {
+                NettyClient nettyClient = new NettyClient(serverIP, serverPort);
+                nettyClient.ConnectServer().Wait();
+            }
         }
 
         /// <summary>

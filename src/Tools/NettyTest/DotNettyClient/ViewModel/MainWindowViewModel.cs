@@ -86,6 +86,7 @@ namespace DotNettyClient.ViewModel
         {
             ConnectServerButtonEnabled = false;
 
+            ClientEventHandler.SetServerAddress(ServerIP, ServerPort);
             Task.Run(()=>new NettyClient(ServerIP, ServerPort).ConnectServer().Wait());
         }
 

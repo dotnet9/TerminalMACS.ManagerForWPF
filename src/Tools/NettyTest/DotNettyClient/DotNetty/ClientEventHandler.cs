@@ -13,6 +13,13 @@ namespace DotNettyClient.DotNetty
 {
     public class ClientEventHandler
     {
+        private static string _serverIP;
+        private static int _serverPort;
+        public static void SetServerAddress(string serverIP, int serverPort)
+        {
+            _serverIP = serverIP;
+            _serverPort = serverPort;
+        }
         /// <summary>
         /// 心跳间隔时间
         /// </summary>
@@ -112,9 +119,12 @@ namespace DotNettyClient.DotNetty
                 while (true)
                 {
                     Thread.Sleep(TimeSpan.FromSeconds(DATA_SEND_INTERVAL));
-                    if(!IsConnect)
+                    if (!IsConnect)
                     {
                         RecordLogEvent?.Invoke($"未连接服务，无法正常发送数据包！");
+                        NettyClient nettyClient = new NettyClient(_serverIP, _serverPort);
+                        nettyClient.ConnectServer().Wait();
+                        Thread.Sleep(TimeSpan.FromSeconds(20));
                         continue;
                     }
                     try

@@ -11,8 +11,10 @@ using System.Threading.Tasks;
 
 namespace DotNettyClient.DotNetty
 {
-    public class NettyClient
+    public class NettyClient : IDisposable
     {
+        private static DateTime dtLastConnectTime = default(DateTime);
+        private bool isDisposed = false;
         private string serverIP;
         private int serverPort;
         public NettyClient(string serverIP, int serverPort)
@@ -22,6 +24,12 @@ namespace DotNettyClient.DotNetty
         }
         public async Task ConnectServer()
         {
+            if ((DateTime.Now - dtLastConnectTime).TotalSeconds <= 5)
+            {
+                return;
+            }
+            dtLastConnectTime = DateTime.Now;
+
             var group = new MultithreadEventLoopGroup();
             try
             {
@@ -49,16 +57,40 @@ namespace DotNettyClient.DotNetty
                 }
                 else
                 {
-                    ClientEventHandler.RecordLogEvent?.Invoke("连接服务失败，重新连接");
-                    Thread.Sleep(TimeSpan.FromSeconds(5));
-                    await ConnectServer();
+                    ClientEventHandler.RecordLogEvent?.Invoke("尝试连接服务失败，请检查服务端状态");
+                    //Thread.Sleep(TimeSpan.FromSeconds(5));
+                    //if (!ClientEventHandler.IsConnect)
+                    //{
+                    //    await ConnectServer();
+                    //}
                 }
             }
             catch (Exception ex)
             {
                 ClientEventHandler.RecordLogEvent?.Invoke($"尝试连接服务失败，请检查服务端状态： {ex.Message}");
-                Thread.Sleep(TimeSpan.FromSeconds(5));
-                await ConnectServer();
+                //Thread.Sleep(TimeSpan.FromSeconds(5));
+                //if (!ClientEventHandler.IsConnect)
+                //{
+                //    await ConnectServer();
+                //}
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!isDisposed)
+            {
+                if (disposing)
+                {
+                    // 执行资源释放操作
+                }
+                isDisposed = true;
             }
         }
     }
