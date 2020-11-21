@@ -41,6 +41,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNettyServer", "Tools\Net
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNettyClient", "Tools\NettyTest\DotNettyClient\DotNettyClient.csproj", "{7EE36BBD-BCB5-4666-9C96-D8A631880929}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSample", "Tools\TestSample\TestSample.csproj", "{3D8E55AA-BFE7-4C54-8B6F-15768D00DE60}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -169,6 +171,14 @@ Global
 		{7EE36BBD-BCB5-4666-9C96-D8A631880929}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7EE36BBD-BCB5-4666-9C96-D8A631880929}.Release|x64.ActiveCfg = Release|Any CPU
 		{7EE36BBD-BCB5-4666-9C96-D8A631880929}.Release|x64.Build.0 = Release|Any CPU
+		{3D8E55AA-BFE7-4C54-8B6F-15768D00DE60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D8E55AA-BFE7-4C54-8B6F-15768D00DE60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D8E55AA-BFE7-4C54-8B6F-15768D00DE60}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3D8E55AA-BFE7-4C54-8B6F-15768D00DE60}.Debug|x64.Build.0 = Debug|Any CPU
+		{3D8E55AA-BFE7-4C54-8B6F-15768D00DE60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D8E55AA-BFE7-4C54-8B6F-15768D00DE60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D8E55AA-BFE7-4C54-8B6F-15768D00DE60}.Release|x64.ActiveCfg = Release|Any CPU
+		{3D8E55AA-BFE7-4C54-8B6F-15768D00DE60}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -184,6 +194,7 @@ Global
 		{4AD45D9C-F131-49C1-86A0-309CD41D279B} = {AE6E06DF-298C-47C4-A913-0BD96D708EEE}
 		{2C4AED0A-AD6E-43AF-AEFC-257B1F530790} = {AE6E06DF-298C-47C4-A913-0BD96D708EEE}
 		{7EE36BBD-BCB5-4666-9C96-D8A631880929} = {AE6E06DF-298C-47C4-A913-0BD96D708EEE}
+		{3D8E55AA-BFE7-4C54-8B6F-15768D00DE60} = {AE6E06DF-298C-47C4-A913-0BD96D708EEE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73FC7CE0-9D4E-442B-AE18-58FB8F7BC4F0}

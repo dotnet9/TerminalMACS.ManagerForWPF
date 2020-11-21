@@ -36,3 +36,5 @@ src/Tools/NettyTest/DotNettyClient/bin/
 src/Tools/NettyTest/DotNettyClient/obj/
 src/Tools/NettyTest/DotNettyServer/bin/
 src/Tools/NettyTest/DotNettyServer/obj/
+src/Tools/TestSample/bin/
+src/Tools/TestSample/obj/
