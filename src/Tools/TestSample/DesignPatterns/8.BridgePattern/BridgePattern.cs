@@ -9,7 +9,7 @@ namespace TestSample.DesignPatterns._8.BridgePattern
     /// </summary>
     class Client
     {
-        static void Main(string[] args)
+        /*static void Main(string[] args)
         {
             // 创建一个遥控器
             RemoteControl remoteControl = new ConcreteRemote();
@@ -28,7 +28,7 @@ namespace TestSample.DesignPatterns._8.BridgePattern
             remoteControl.Off();
 
             Console.Read();
-        }
+        }*/
     }
 
     /// <summary>
