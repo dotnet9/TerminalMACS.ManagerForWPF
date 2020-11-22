@@ -6,7 +6,6 @@ using DotNetty.Transport.Channels.Sockets;
 using NettyModel.Coder;
 using System;
 using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace DotNettyClient.DotNetty
@@ -58,21 +57,13 @@ namespace DotNettyClient.DotNetty
                 else
                 {
                     ClientEventHandler.RecordLogEvent?.Invoke("尝试连接服务失败，请检查服务端状态");
-                    //Thread.Sleep(TimeSpan.FromSeconds(5));
-                    //if (!ClientEventHandler.IsConnect)
-                    //{
-                    //    await ConnectServer();
-                    //}
+                    ClientEventHandler.IsConnect = false;
                 }
             }
             catch (Exception ex)
             {
                 ClientEventHandler.RecordLogEvent?.Invoke($"尝试连接服务失败，请检查服务端状态： {ex.Message}");
-                //Thread.Sleep(TimeSpan.FromSeconds(5));
-                //if (!ClientEventHandler.IsConnect)
-                //{
-                //    await ConnectServer();
-                //}
+                ClientEventHandler.IsConnect = false;
             }
         }
 

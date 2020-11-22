@@ -56,23 +56,25 @@ namespace DotNettyServer.DotNetty
                 if (testEvent.code == (int)NettyCodeEnum.Ping)
                 {
                     ctx.WriteAndFlushAsync(msg);
-                    RecordLogEvent?.Invoke($"收到心跳并原文回应");
+                    RecordLogEvent?.Invoke($"收到心跳并原文回应：{ctx.Channel.RemoteAddress}");
                     return;
                 }
                 if (testEvent.code == (int)NettyCodeEnum.Chat)
                 {
+                    RecordLogEvent?.Invoke($"服务端接收到聊天消息({ctx.Channel.RemoteAddress}):" + JsonConvert.SerializeObject(testEvent));
+
                     // 回应收到消息成功
                     testEvent.code = (int)NettyCodeEnum.OK;
                     ctx.WriteAndFlushAsync(testEvent);
                     ReceiveEventFromClientEvent?.Invoke(testEvent);
                     return;
                 }
-                RecordLogEvent?.Invoke($"服务端接收到消息:" + JsonConvert.SerializeObject(testEvent));
+                RecordLogEvent?.Invoke($"服务端接收到消息({ctx.Channel.RemoteAddress}):" + JsonConvert.SerializeObject(testEvent));
 
             }
             catch (Exception ex)
             {
-                RecordLogEvent?.Invoke($"收到客户端消息，处理失败：{ex.Message}");
+                RecordLogEvent?.Invoke($"收到客户端消息，处理失败({ctx.Channel.RemoteAddress})：{ex.Message}");
             }
         }
 

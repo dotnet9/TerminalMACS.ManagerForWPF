@@ -24,7 +24,7 @@ namespace DotNettyClient.ViewModel
     {
         private ObservableCollection<ChatInfoModel> _ChatInfo = new ObservableCollection<ChatInfoModel>();
         public ObservableCollection<ChatInfoModel> ChatInfos { get { return _ChatInfo; } }
-        private string _ServerIP = "192.168.101.3";//"127.0.0.1";//"192.168.50.87";//"192.168.50.154";//
+        private string _ServerIP = "127.0.0.1";//"192.168.50.87";//"192.168.50.154";//"192.168.101.3";//
 
         /// <summary>
         /// 服务端端口

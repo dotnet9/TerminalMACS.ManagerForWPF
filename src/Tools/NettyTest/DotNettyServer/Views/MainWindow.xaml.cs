@@ -1,5 +1,6 @@
 ﻿using DotNettyServer.ViewModel;
 using Panuon.UI.Silver;
+using System.Threading;
 
 namespace DotNettyServer.Views
 {
@@ -26,6 +27,10 @@ namespace DotNettyServer.Views
 
         private void ReceiveLog(string msg)
         {
+            if (this.tbLog == null || this.tbLog.Dispatcher == null)
+            {
+                return;
+            }
             this.tbLog.Dispatcher.Invoke(() =>
             {
                 string time = System.DateTime.Now.ToString("HH:mm:ss.fff");
