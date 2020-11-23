@@ -25,7 +25,7 @@ namespace DotNettyServer.Views
             }
         }
 
-        private void ReceiveLog(string msg)
+        private void ReceiveLog(bool isRight, string msg)
         {
             if (this.tbLog == null || this.tbLog.Dispatcher == null)
             {

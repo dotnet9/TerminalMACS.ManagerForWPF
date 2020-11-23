@@ -1,4 +1,5 @@
-﻿using DotNettyClient.DotNetty;
+﻿using DotNetty.Common.Concurrency;
+using DotNettyClient.DotNetty;
 using DotNettyClient.ViewModel;
 using Panuon.UI.Silver;
 
@@ -25,8 +26,12 @@ namespace DotNettyClient.Views
             }
         }
 
-        private void ReceiveLog(string msg)
+        private void ReceiveLog(bool isRight, string msg)
         {
+            if (this.tbLog == null || this.tbLog.Dispatcher == null)
+            {
+                return;
+            }
             this.tbLog.Dispatcher.Invoke(() =>
             {
                 string time = System.DateTime.Now.ToString("HH:mm:ss.fff");

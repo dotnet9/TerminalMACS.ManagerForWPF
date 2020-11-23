@@ -33,9 +33,9 @@ namespace DotNettyClient.DotNetty
         /// </summary>
         private const int RETRY_SEND_DATA_TIME = 100;
         /// <summary>
-        /// 消息发送时间间隔
+        /// 消息发送时间间隔,单位毫秒
         /// </summary>
-        private const int DATA_SEND_INTERVAL = 5;
+        private const int DATA_SEND_INTERVAL = 2;
         /// <summary>
         /// 用于存放发送的ping包
         /// </summary>
@@ -51,7 +51,7 @@ namespace DotNettyClient.DotNetty
         /// <summary>
         /// 记录日志事件
         /// </summary>
-        public static Action<string> RecordLogEvent;
+        public static Action<bool, string> RecordLogEvent;
         /// <summary>
         /// 从服务端收到数据
         /// </summary>
@@ -71,14 +71,14 @@ namespace DotNettyClient.DotNetty
             if (LstSendPings.Count >= RETRY_SEND_PINT_TIME)
             {
                 ctx.CloseAsync();
-                RecordLogEvent?.Invoke($"{LstSendPings.Count} 次未收到心跳回应，重连服务器");
+                RecordLogEvent?.Invoke(false, $"{LstSendPings.Count} 次未收到心跳回应，重连服务器");
                 LstSendPings.Clear();
                 return;
             }
             string guid = System.Guid.NewGuid().ToString();
             LstSendPings.Enqueue(guid);
             ctx.WriteAndFlushAsync(NettyBody.ping(guid));
-            RecordLogEvent?.Invoke($"发送心跳包，已发送{LstSendPings.Count} 次");
+            RecordLogEvent?.Invoke(true, $"发送心跳包，已发送{LstSendPings.Count} 次");
         }
 
 
@@ -97,7 +97,7 @@ namespace DotNettyClient.DotNetty
             }
             catch (Exception ex)
             {
-                RecordLogEvent?.Invoke($"发送数据异常：{ex.Message}");
+                RecordLogEvent?.Invoke(false, $"发送数据异常：{ex.Message}");
             }
         }
 
@@ -121,7 +121,7 @@ namespace DotNettyClient.DotNetty
                     Thread.Sleep(TimeSpan.FromSeconds(DATA_SEND_INTERVAL));
                     if (!IsConnect)
                     {
-                        RecordLogEvent?.Invoke($"未连接服务，无法正常发送数据包！");
+                        RecordLogEvent?.Invoke(false, $"未连接服务，无法正常发送数据包！");
                         NettyClient nettyClient = new NettyClient(_serverIP, _serverPort);
                         nettyClient.ConnectServer().Wait();
                         Thread.Sleep(TimeSpan.FromSeconds(20));
@@ -138,7 +138,7 @@ namespace DotNettyClient.DotNetty
                                 if (tmpNettyBody.TryCount >= RETRY_SEND_DATA_TIME)
                                 {
                                     LstNeedSendDatas.Remove(tmpNettyBody);
-                                    RecordLogEvent?.Invoke($"删除超时数据包(已发{tmpNettyBody.TryCount}次)：{JsonConvert.SerializeObject(tmpNettyBody.NettyBody)}");
+                                    RecordLogEvent?.Invoke(false, $"删除超时数据包(已发{tmpNettyBody.TryCount}次)：{JsonConvert.SerializeObject(tmpNettyBody.NettyBody)}");
                                 }
                             }
                             sendEvent = LstNeedSendDatas.FirstOrDefault();
@@ -146,13 +146,13 @@ namespace DotNettyClient.DotNetty
                         if (sendEvent != null)
                         {
                             ctx.WriteAndFlushAsync(sendEvent.NettyBody);
-                            RecordLogEvent?.Invoke($"发送到服务端(已发{sendEvent.TryCount}次)：{JsonConvert.SerializeObject(sendEvent.NettyBody)}");
+                            RecordLogEvent?.Invoke(true, $"发送到服务端(已发{sendEvent.TryCount}次)：{JsonConvert.SerializeObject(sendEvent.NettyBody)}");
                             sendEvent.TryCount++;
                         }
                     }
                     catch (Exception ex2)
                     {
-                        RecordLogEvent?.Invoke($"发送到服务端异常：{ex2.Message}");
+                        RecordLogEvent?.Invoke(false, $"发送到服务端异常：{ex2.Message}");
                     }
                 }
             });

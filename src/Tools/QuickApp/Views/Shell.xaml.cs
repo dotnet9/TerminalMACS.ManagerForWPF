@@ -164,13 +164,33 @@ namespace QuickApp.Views
         {
             try
             {
-                if (menuItem.Type == MenuItemType.Exe || menuItem.Type==MenuItemType.Cmd)
+                if (menuItem.Type == MenuItemType.Exe )
                 {
                     Process.Start(menuItem.FilePath);
                 }
                 else if (menuItem.Type == MenuItemType.Web)
                 {
-                    Process.Start("explorer.exe", menuItem.FilePath);
+                    Process.Start(new ProcessStartInfo("cmd", $"/c start {menuItem.FilePath}")
+                    {
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    });
+                }
+                else if( menuItem.Type == MenuItemType.Cmd)
+                {
+                    Process p = new Process();
+                    p.StartInfo.FileName = "cmd";
+                    p.StartInfo.UseShellExecute = false;
+                    p.StartInfo.RedirectStandardInput = true;
+                    p.StartInfo.RedirectStandardOutput = true;
+                    p.StartInfo.RedirectStandardError = true;
+                    p.StartInfo.CreateNoWindow = true;
+                    p.Start();
+
+                    p.StandardInput.WriteLine($"{menuItem.FilePath} &exit");
+                    p.StandardInput.AutoFlush = true;
+                    p.WaitForExit();
+                    p.Close();
                 }
             }
             catch (Exception ex)

@@ -87,7 +87,24 @@ namespace DotNettyClient.ViewModel
             ConnectServerButtonEnabled = false;
 
             ClientEventHandler.SetServerAddress(ServerIP, ServerPort);
-            Task.Run(()=>new NettyClient(ServerIP, ServerPort).ConnectServer().Wait());
+            Task.Run(() => new NettyClient(ServerIP, ServerPort).ConnectServer().Wait());
+            // 测试并发，发送太多，服务端和客户端解析没问题，就是更新界面会卡顿
+            /*Task.Run(() =>
+            {
+                while (true)
+                {
+                    Thread.Sleep(TimeSpan.FromMilliseconds(50));
+                    ClientEventHandler.SendData(new NettyBody()
+                    {
+                        code = (int)NettyCodeEnum.Chat,
+                        time = UtilHelper.GetCurrentTimeStamp(),
+                        msg = "客户端请求",
+                        fromId = "",
+                        reqId = Guid.NewGuid().ToString(),
+                        data = ChatString
+                    });
+                }
+            });*/
         }
 
         /// <summary>

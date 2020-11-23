@@ -48,21 +48,21 @@ namespace DotNettyClient.DotNetty
                         pipeline.AddLast(new IdleStateHandler(ClientEventHandler.PING_INTERVAL, 0, 0));
                         pipeline.AddLast(new NettyClientChannelHandler(serverIP, serverPort));
                     }));
-                ClientEventHandler.RecordLogEvent?.Invoke("尝试连接服务");
+                ClientEventHandler.RecordLogEvent?.Invoke(false, "尝试连接服务");
                 var waitResult = bootstrap.ConnectAsync(new IPEndPoint(IPAddress.Parse(serverIP), serverPort)).Wait(TimeSpan.FromSeconds(15));
                 if (waitResult)
                 {
-                    ClientEventHandler.RecordLogEvent?.Invoke("连接服务成功");
+                    ClientEventHandler.RecordLogEvent?.Invoke(true, "连接服务成功");
                 }
                 else
                 {
-                    ClientEventHandler.RecordLogEvent?.Invoke("尝试连接服务失败，请检查服务端状态");
+                    ClientEventHandler.RecordLogEvent?.Invoke(false, "尝试连接服务失败，请检查服务端状态");
                     ClientEventHandler.IsConnect = false;
                 }
             }
             catch (Exception ex)
             {
-                ClientEventHandler.RecordLogEvent?.Invoke($"尝试连接服务失败，请检查服务端状态： {ex.Message}");
+                ClientEventHandler.RecordLogEvent?.Invoke(false, $"尝试连接服务失败，请检查服务端状态： {ex.Message}");
                 ClientEventHandler.IsConnect = false;
             }
         }

@@ -39,7 +39,7 @@ namespace DotNettyClient.DotNetty
                 if (testEvent.code == (int)NettyCodeEnum.Ping)
                 {
                     ClientEventHandler.LstSendPings.Clear();
-                    ClientEventHandler.RecordLogEvent?.Invoke("收到Android端心跳回应");
+                    ClientEventHandler.RecordLogEvent?.Invoke(true, "收到Android端心跳回应");
                     return;
                 }
                 // 发送数据给服务端，服务端处理成功回应
@@ -57,11 +57,11 @@ namespace DotNettyClient.DotNetty
                     ClientEventHandler.ReceiveEventFromClientEvent?.Invoke(testEvent);
                 }
                 var eventMsg = JsonConvert.SerializeObject(testEvent);
-                ClientEventHandler.RecordLogEvent?.Invoke($"收到Android端消息：{eventMsg}");
+                ClientEventHandler.RecordLogEvent?.Invoke(true, $"收到Android端消息：{eventMsg}");
             }
             catch (Exception ex)
             {
-                ClientEventHandler.RecordLogEvent?.Invoke($"读取数据异常：{ex.Message}");
+                ClientEventHandler.RecordLogEvent?.Invoke(false, $"读取数据异常：{ex.Message}");
             }
         }
 
@@ -73,7 +73,7 @@ namespace DotNettyClient.DotNetty
         {
             base.ChannelReadComplete(context);
             context.Flush();
-            ClientEventHandler.RecordLogEvent?.Invoke("ChannelReadComplete");
+            ClientEventHandler.RecordLogEvent?.Invoke(true, "ChannelReadComplete");
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace DotNettyClient.DotNetty
         public override void ChannelRegistered(IChannelHandlerContext context)
         {
             base.ChannelRegistered(context);
-            ClientEventHandler.RecordLogEvent?.Invoke($"注册通道：{context.Channel.RemoteAddress}");
+            ClientEventHandler.RecordLogEvent?.Invoke(false, $"注册通道：{context.Channel.RemoteAddress}");
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace DotNettyClient.DotNetty
         public override void ChannelActive(IChannelHandlerContext context)
         {
             base.ChannelActive(context);
-            ClientEventHandler.RecordLogEvent?.Invoke($"通道激活：{context.Channel.RemoteAddress}");
+            ClientEventHandler.RecordLogEvent?.Invoke(false, $"通道激活：{context.Channel.RemoteAddress}");
             ClientEventHandler.IsConnect = true;
             ClientEventHandler.RunSendData(context);
         }
@@ -105,7 +105,7 @@ namespace DotNettyClient.DotNetty
         public override void ChannelInactive(IChannelHandlerContext context)
         {
             base.ChannelInactive(context);
-            ClientEventHandler.RecordLogEvent?.Invoke($"断开连接：{context.Channel.RemoteAddress}"); 
+            ClientEventHandler.RecordLogEvent?.Invoke(false, $"断开连接：{context.Channel.RemoteAddress}");
             ClientEventHandler.IsConnect = false;
         }
 
@@ -116,7 +116,7 @@ namespace DotNettyClient.DotNetty
         public override void ChannelUnregistered(IChannelHandlerContext context)
         {
             base.ChannelUnregistered(context);
-            ClientEventHandler.RecordLogEvent?.Invoke($"注销通道：{context.Channel.RemoteAddress}");
+            ClientEventHandler.RecordLogEvent?.Invoke(false, $"注销通道：{context.Channel.RemoteAddress}");
             ClientEventHandler.IsConnect = false;
             Thread.Sleep(TimeSpan.FromSeconds(5));
 
@@ -134,7 +134,7 @@ namespace DotNettyClient.DotNetty
         /// <param name="exception"></param>
         public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
         {
-            ClientEventHandler.RecordLogEvent?.Invoke($"Exception: {exception.Message}");
+            ClientEventHandler.RecordLogEvent?.Invoke(false, $"Exception: {exception.Message}");
             ClientEventHandler.IsConnect = false;
             context.CloseAsync();
         }
