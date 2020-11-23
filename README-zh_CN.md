@@ -263,6 +263,8 @@ https://github.com/yanjinhuagood/SoftWareHelper
 
 https://www.cnblogs.com/yanjinhua/p/13896894.html
 
+Dotnet9站点介绍文章：https://dotnet9.com/16722.html
+
 ![快捷应用](https://git.imweb.io/dotnet9/imgs/raw/c8b4d01d9020e44184055b1863d6434a7e0b4c1d/dotnet9_com/wp-content/uploads/2020/11/11_run_horizontal_choice_app.gif)
 
 功能：
