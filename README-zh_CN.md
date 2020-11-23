@@ -251,6 +251,172 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 
 <p align="center">计算器</p>
 
-## 6. 更新记录
+## 更新记录
 
-参考开源项目 https://github.com/yanjinhuagood/SoftWareHelper 及文章 https://www.cnblogs.com/yanjinhua/p/13896894.html，添加快捷应用小程序
+### 2020-11-15 添加快捷应用：src\Tools\QuickApp
+
+参考开源项目：
+
+https://github.com/yanjinhuagood/SoftWareHelper 
+
+文章
+
+https://www.cnblogs.com/yanjinhua/p/13896894.html
+
+![快捷应用](https://git.imweb.io/dotnet9/imgs/raw/c8b4d01d9020e44184055b1863d6434a7e0b4c1d/dotnet9_com/wp-content/uploads/2020/11/11_run_horizontal_choice_app.gif)
+
+功能：
+
+1. ☑菜单通过配置文件配置，因为操作系统可能装了太多应用，不需要全部加载。
+
+后面计划改成sqlite数据库存储：
+```json
+{
+  "IsPowerOn": true,
+  "MenuItemInfos": [
+    {
+      "FilePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "IconPath": null,
+      "Name": "Google Chrome",
+      "Type": 0
+    },
+    {
+      "FilePath": "https://dotnet9.com/",
+      "IconPath": "logo.png",
+      "Name": "Dotnet9",
+      "Type": 1
+    },
+    {
+      "FilePath": "mstsc /v:192.168.1.133",
+      "IconPath": "shell.png",
+      "Name": "192.168.1.133",
+      "Type": 2
+    }
+  ]
+}
+```
+2. ☑支持exe拖拽（或者系统生成的快捷方式拖拽）添加。
+
+```C#
+private void Grid_Drop(object sender, DragEventArgs e)
+{
+    try
+    {
+        var fileName = ((System.Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+        MenuItemInfo menuItem = new MenuItemInfo() { FilePath = fileName };
+
+        // 快捷方式需要获取目标文件路径
+        if (fileName.ToLower().EndsWith("lnk"))
+        {
+            WshShell shell = new WshShell();
+            IWshShortcut wshShortcut = (IWshShortcut)shell.CreateShortcut(fileName);
+            menuItem.FilePath = wshShortcut.TargetPath;
+        }
+        ImageSource imageSource = SystemIcon.GetImageSource(true, menuItem.FilePath);
+        System.IO.FileInfo file = new System.IO.FileInfo(fileName);
+        if (string.IsNullOrWhiteSpace(file.Extension))
+        {
+            menuItem.Name = file.Name;
+        }
+        else
+        {
+            menuItem.Name = file.Name.Substring(0, file.Name.Length - file.Extension.Length);
+        }
+        menuItem.Type = MenuItemType.Exe;
+
+        if (ConfigHelper.AddNewMenuItem(menuItem))
+        {
+            var btn = AddMenuItem(menuItem);
+            fishButtons.Children.Add(btn);
+        }
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show(ex.Message);
+    }
+}
+
+private void Grid_DragEnter(object sender, DragEventArgs e)
+{
+    if (e.Data.GetDataPresent(DataFormats.FileDrop))
+    {
+        e.Effects = DragDropEffects.Link;
+    }
+    else
+    {
+        e.Effects = DragDropEffects.None;
+    }
+}
+```
+
+```json
+{
+  "FilePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "IconPath": null,
+  "Name": "Google Chrome",
+  "Type": 0
+}
+```
+
+3. ☑支持网址配置（点击打开指定网址，类似网页收藏快捷方式）。
+```json
+{
+  "FilePath": "https://dotnet9.com/",
+  "IconPath": "logo.png",
+  "Name": "Dotnet9",
+  "Type": 1
+}
+```
+
+```C#
+ else if (menuItem.Type == MenuItemType.Web)
+{
+    Process.Start(new ProcessStartInfo("cmd", $"/c start {menuItem.FilePath}")
+    {
+        UseShellExecute = false,
+        CreateNoWindow = true
+    });
+}
+```
+
+4. ☑支持cmd命令配置（比如系统应用mstsc,远程桌面配置目标IP及端口，一键打开连接等）
+
+```json
+{
+  "FilePath": "mstsc /v:192.168.1.133",
+  "IconPath": "shell.png",
+  "Name": "192.168.1.133",
+  "Type": 2
+}
+```
+
+```C#
+else if( menuItem.Type == MenuItemType.Cmd)
+{
+    Process p = new Process();
+    p.StartInfo.FileName = "cmd";
+    p.StartInfo.UseShellExecute = false;
+    p.StartInfo.RedirectStandardInput = true;
+    p.StartInfo.RedirectStandardOutput = true;
+    p.StartInfo.RedirectStandardError = true;
+    p.StartInfo.CreateNoWindow = true;
+    p.Start();
+
+    p.StandardInput.WriteLine($"{menuItem.FilePath} &exit");
+    p.StandardInput.AutoFlush = true;
+    p.WaitForExit();
+    p.Close();
+}
+```
+
+5. ☒提供界面配置菜单
+6. ☒显示图标与文字
+...更多想法还在想
+
+### 2020-11-16 添加DotNetty服务端与客户端：src\Tools\NettyTest
+
+公司项目有使用到DotNetty与java端Netty项目通信，所以花时间整了这个demo，打算一直维护下去。
+
+功能：
+
+- 服务端和客户端都采用 C# + WPF开发
