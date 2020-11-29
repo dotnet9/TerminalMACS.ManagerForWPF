@@ -32,7 +32,9 @@
     <None Remove="Images\logo2.ico" />
     <None Remove="Images\logo2.png" />
     <None Remove="Images\mynewwechat.jpg" />
+    <None Remove="Images\plane.png" />
     <None Remove="Images\setting.png" />
+    <None Remove="Images\Start.jpg" />
     <None Remove="Images\WeChat-public-address.jpg" />
     <None Include="I18nResources\Language.cs">
       <DesignTime>True</DesignTime>
@@ -67,12 +69,19 @@
     <Resource Include="Images\logo.png" />
     <Resource Include="Images\logo2.png" />
     <Resource Include="Images\mynewwechat.jpg" />
+    <Resource Include="Images\plane.png" />
     <Resource Include="Images\setting.png" />
     <Resource Include="Images\WeChat-public-address.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Start.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

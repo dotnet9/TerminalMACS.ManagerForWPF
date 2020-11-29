@@ -1,5 +1,8 @@
 ﻿using AduSkin.Controls.Metro;
+using System;
 using System.ComponentModel;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using TerminalMACS.Infrastructure.UI;
 using WpfExtensions.Xaml;
@@ -20,7 +23,6 @@ namespace TerminalMACS.Views
                 BorderBrush = Theme.CurrentColor.OpaqueSolidColorBrush;
             };
         }
-
 
         private void ChangeLanguage_Click(object sender, RoutedEventArgs e)
         {

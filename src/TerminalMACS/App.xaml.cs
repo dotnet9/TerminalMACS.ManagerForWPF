@@ -19,7 +19,7 @@ namespace TerminalMACS
         {
             I18nManager.Instance.Add(TerminalMACS.I18nResources.UiResource.ResourceManager);
             LanguageHelper.SetLanguage();
-            return Container.Resolve<MainWindow>();
+            return Container.Resolve<CusSplashScreen>();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
