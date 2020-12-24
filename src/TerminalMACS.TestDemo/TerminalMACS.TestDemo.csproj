@@ -50,6 +50,16 @@
     <None Remove="Views\NavigationDrawMenu\Assets\img_signout.png" />
     <None Remove="Views\NavigationDrawMenu\Assets\tgBtn_default.png" />
     <None Remove="Views\NavigationDrawMenu\Assets\tgBtn_MouseOver.png" />
+    <None Remove="Views\Tree\Images\Avatar.png" />
+    <None Remove="Views\Tree\Images\Basket.png" />
+    <None Remove="Views\Tree\Images\Bell.png" />
+    <None Remove="Views\Tree\Images\Box.png" />
+    <None Remove="Views\Tree\Images\Camera.png" />
+    <None Remove="Views\Tree\Images\Delivery.png" />
+    <None Remove="Views\Tree\Images\Down.png" />
+    <None Remove="Views\Tree\Images\Phone.png" />
+    <None Remove="Views\Tree\Images\Right.png" />
+    <None Remove="Views\Tree\Images\sidebar-3.jpg" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="1.2.6" />
@@ -109,6 +119,20 @@
     <Resource Include="Views\NavigationDrawMenu\Assets\img_signout.png" />
     <Resource Include="Views\NavigationDrawMenu\Assets\tgBtn_default.png" />
     <Resource Include="Views\NavigationDrawMenu\Assets\tgBtn_MouseOver.png" />
+    <Resource Include="Views\Tree\Images\Avatar.png" />
+    <Resource Include="Views\Tree\Images\Basket.png" />
+    <Resource Include="Views\Tree\Images\Bell.png" />
+    <Resource Include="Views\Tree\Images\Box.png" />
+    <Resource Include="Views\Tree\Images\Camera.png" />
+    <Resource Include="Views\Tree\Images\Delivery.png" />
+    <Resource Include="Views\Tree\Images\Down.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Tree\Images\Phone.png" />
+    <Resource Include="Views\Tree\Images\Right.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\Tree\Images\sidebar-3.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="I18nResources\Language.cs">

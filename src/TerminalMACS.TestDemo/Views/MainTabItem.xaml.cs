@@ -14,6 +14,7 @@ using TerminalMACS.TestDemo.Views.MusicPlayer;
 using TerminalMACS.TestDemo.Views.NavigationDrawMenu;
 using TerminalMACS.TestDemo.Views.ReadWriteExcel;
 using TerminalMACS.TestDemo.Views.TestBehaviors;
+using TerminalMACS.TestDemo.Views.Tree;
 
 namespace TerminalMACS.TestDemo.Views
 {
@@ -144,5 +145,12 @@ namespace TerminalMACS.TestDemo.Views
             view.Owner = Application.Current.MainWindow;
             view.Show();
         }
-    }
+
+		private void ShowTreeView_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new TreeViewDemo();
+            view.Owner = Application.Current.MainWindow;
+            view.Show();
+        }
+	}
 }
