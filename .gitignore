@@ -38,3 +38,5 @@ src/Tools/NettyTest/DotNettyServer/bin/
 src/Tools/NettyTest/DotNettyServer/obj/
 src/Tools/TestSample/bin/
 src/Tools/TestSample/obj/
+src/Demo/QuartzNETTest/bin/
+src/Demo/QuartzNETTest/obj/
