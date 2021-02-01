@@ -1,0 +1,486 @@
+﻿<Window
+    x:Class="TerminalMACS.TestDemo.Views.DriveStorage.DriveStorageView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:customcontrols="clr-namespace:TerminalMACS.TestDemo.Views.DriveStorage.CustomControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TerminalMACS.TestDemo.Views.DriveStorage"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="1438"
+    Height="900"
+    AllowsTransparency="True"
+    Background="Transparent"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/TerminalMACS.TestDemo;component/Views/DriveStorage/Resources/Styles.xaml" />
+                <ResourceDictionary Source="/TerminalMACS.TestDemo;component/Views/DriveStorage/Resources/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <!--  Layouting  -->
+    <Border Background="White" CornerRadius="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="228" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="323" />
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <StackPanel Margin="0,83,0,0" Orientation="Vertical">
+                    <TextBlock
+                        Margin="65,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontFamily="Arial Rounded MT Bold"
+                        FontSize="21"
+                        Foreground="#515EC1"
+                        Text="drive." />
+
+
+                    <!--  we need to set padding for inside controls in radio button  -->
+                    <customcontrols:MenuButton
+                        Margin="0,53,0,0"
+                        Padding="65,0,0,0"
+                        GroupName="MenuButton"
+                        Icon="{StaticResource MyDrive}"
+                        IsSelected="True"
+                        Text="My drive" />
+
+                    <!--#region Menu Buttons Files Section-->
+                    <StackPanel Margin="0,27,0,0" Orientation="Vertical">
+                        <TextBlock
+                            Margin="65,0"
+                            Style="{StaticResource TitleText}"
+                            Text="FILES" />
+                        <!--  We only want to select one button at a time...for that we will use radio buttons i will show you why..  -->
+                        <customcontrols:MenuButton
+                            Margin="0,5,0,0"
+                            Padding="65,0,0,0"
+                            GroupName="MenuButton"
+                            Icon="{StaticResource MyFilesFolder}"
+                            Text="My files" />
+                        <customcontrols:MenuButton
+                            Padding="65,0,0,0"
+                            GroupName="MenuButton"
+                            Icon="{StaticResource Shared}"
+                            Text="Sharing" />
+                        <customcontrols:MenuButton
+                            Padding="65,0,0,0"
+                            GroupName="MenuButton"
+                            Icon="{StaticResource Filerequest}"
+                            Text="File requests" />
+                        <customcontrols:MenuButton
+                            Padding="65,0,0,0"
+                            GroupName="MenuButton"
+                            Icon="{StaticResource Trash}"
+                            Text="Deleted files" />
+                    </StackPanel>
+
+                    <StackPanel Margin="0,43,0,0" Orientation="Vertical">
+                        <TextBlock
+                            Margin="65,0"
+                            Style="{StaticResource TitleText}"
+                            Text="MY PLACES" />
+                        <!--  We only want to select one button at a time...for that we will use radio buttons i will show you why..  -->
+                        <customcontrols:MenuButton
+                            Margin="0,5,0,0"
+                            Padding="65,0,0,0"
+                            GroupName="MenuButton"
+                            Icon="{StaticResource Folders}"
+                            Text="Designs" />
+                        <customcontrols:MenuButton
+                            Padding="65,0,0,0"
+                            GroupName="MenuButton"
+                            Icon="{StaticResource Folders}"
+                            Text="Music" />
+                        <customcontrols:MenuButton
+                            Padding="65,0,0,0"
+                            GroupName="MenuButton"
+                            Icon="{StaticResource Folders}"
+                            Text="Design Sprint" />
+                    </StackPanel>
+                    <!--#endregion-->
+                </StackPanel>
+                <!--  Profile Image and Username Code  -->
+                <Grid
+                    Margin="0,0,0,49"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Ellipse
+                        Width="36"
+                        Height="36"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/TerminalMACS.TestDemo;component/Views/DriveStorage/Assets/profile1.jpg" Stretch="UniformToFill" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <Grid
+                        Grid.Column="1"
+                        Width="76"
+                        Margin="14,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Style="{StaticResource MainText}" Text="Staromlynski" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Style="{StaticResource TitleText}"
+                            Text="PREMIUM USER" />
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <!--  Center page  -->
+            <Grid Grid.Column="1" Background="#EFF2F8">
+
+                <!--  Left icon  -->
+                <Path
+                    Width="22"
+                    Height="17"
+                    Margin="60,45"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Data="{StaticResource Left}"
+                    Fill="#C2C3C3"
+                    Stretch="UniformToFill" />
+
+                <!--  Right Icon  -->
+                <Path
+                    Width="22"
+                    Height="17"
+                    Margin="101,45"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Data="{StaticResource Right}"
+                    Fill="#C2C3C3"
+                    Stretch="UniformToFill" />
+
+                <Button
+                    Margin="0,34,67,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Content="UPLOAD NEW FILE"
+                    Style="{StaticResource PrimaryButton}" />
+
+                <TextBlock
+                    Margin="60,85,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontSize="18"
+                    FontWeight="SemiBold"
+                    Text="Recently Used" />
+
+                <StackPanel
+                    Margin="0,139,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Orientation="Horizontal">
+                    <customcontrols:Folders
+                        FolderIcon="{StaticResource SoBigFolder}"
+                        FolderName="Designs"
+                        GroupName="FolderButtons"
+                        IsSelected="True" />
+                    <customcontrols:Folders
+                        Margin="25,0"
+                        FolderIcon="{StaticResource SoBigFolder}"
+                        FolderName="Designs Sprint 2.0"
+                        GroupName="FolderButtons" />
+                    <customcontrols:Folders
+                        FolderIcon="{StaticResource SoBigFolder}"
+                        FolderName="Discovery Call"
+                        GroupName="FolderButtons" />
+                </StackPanel>
+
+                <TextBlock
+                    Margin="60,380,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontSize="18"
+                    FontWeight="SemiBold"
+                    Text="New files" />
+
+                <Button
+                    Margin="0,380,67,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Content="VIEW ALL"
+                    Style="{StaticResource SecondaryButton}" />
+
+                <!--  We will create custom list  -->
+                <customcontrols:CustomList
+                    Margin="0,425,0,0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top" />
+
+                <TextBlock
+                    Margin="60,660,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontSize="18"
+                    FontWeight="SemiBold"
+                    Text="Shared with me" />
+                <Button
+                    Margin="0,660,67,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Content="VIEW ALL"
+                    Style="{StaticResource SecondaryButton}" />
+
+                <!--  Medium Cards  -->
+                <StackPanel
+                    Margin="58,0,0,64"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Bottom"
+                    CanHorizontallyScroll="True"
+                    Orientation="Horizontal">
+                    <customcontrols:MediumCard
+                        FileIcon="{StaticResource Pdf}"
+                        Fill="Red"
+                        Text1="Manual"
+                        Text2="Guidelines" />
+                    <customcontrols:MediumCard
+                        Margin="28,0,0,0"
+                        FileIcon="{StaticResource Png}"
+                        Fill="CadetBlue"
+                        Text1="Manual"
+                        Text2="Guidelines" />
+                    <customcontrols:MediumCard
+                        Margin="28,0,0,0"
+                        FileIcon="{StaticResource txt}"
+                        Fill="Green"
+                        Text1="Manual"
+                        Text2="Guidelines" />
+                    <customcontrols:MediumCard
+                        Margin="28,0,0,0"
+                        FileIcon="{StaticResource Pdf}"
+                        Fill="red"
+                        Text1="Manual"
+                        Text2="Guidelines" />
+                    <customcontrols:MediumCard
+                        Margin="28,0,0,0"
+                        FileIcon="{StaticResource Png}"
+                        Fill="CadetBlue"
+                        Text1="Manual"
+                        Text2="Guidelines" />
+                    <customcontrols:MediumCard
+                        Margin="28,0,0,0"
+                        FileIcon="{StaticResource Pdf}"
+                        Fill="red"
+                        Text1="Manual"
+                        Text2="Guidelines" />
+                </StackPanel>
+            </Grid>
+
+            <!--  Search Box  -->
+            <Grid
+                Grid.Column="2"
+                Margin="35"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top">
+
+                <TextBox
+                    Padding="25,0,0,0"
+                    VerticalContentAlignment="Center"
+                    Background="#EFF2F8"
+                    BorderThickness="0"
+                    FontSize="10"
+                    FontWeight="SemiBold"
+                    Foreground="#C2C3C3"
+                    Text="SEARCH YOUR CONTENT">
+                    <TextBox.Resources>
+                        <!--  to make the border corner round  -->
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="20" />
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+
+                <!--  Search Button  -->
+                <Button
+                    Grid.Column="2"
+                    Width="35"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Style="{StaticResource SearchButton}" />
+            </Grid>
+            <TextBlock
+                Grid.Column="2"
+                Margin="35,103,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontSize="18"
+                FontWeight="SemiBold"
+                Text="Statistics" />
+
+
+            <StackPanel
+                Grid.Column="2"
+                Margin="0,158,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Orientation="Vertical">
+                <Grid Height="82">
+                    <Rectangle
+                        Width="273"
+                        Fill="#EFF2F8"
+                        RadiusX="20"
+                        RadiusY="20" />
+
+                    <TextBlock
+                        Margin="24,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        FontWeight="SemiBold"
+                        Foreground="Black">
+                        <Run Text="Downloads" />
+                        <LineBreak /><Run Text="this week" />
+                    </TextBlock>
+
+
+                    <!--  If you remember we had designed a circular progressbar in our videos, i will provide link for that video so u guys can design it and later then import it here  -->
+                    <customcontrols:CircularProgressBar
+                        Height="50"
+                        HorizontalAlignment="Center"
+                        ArcThickness="2"
+                        BackgroundBrush="White"
+                        IndicatorBrush="#6D78CB"
+                        PFontColor="#6D78CB"
+                        Value="69" />
+
+                    <TextBlock
+                        Margin="0,0,24,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        Foreground="Black"
+                        Text="perday" />
+                </Grid>
+
+                <Grid
+                    Grid.Column="2"
+                    Height="82"
+                    Margin="0,15,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+                    <Rectangle
+                        Width="273"
+                        Fill="#EFF2F8"
+                        RadiusX="20"
+                        RadiusY="20" />
+
+                    <TextBlock
+                        Margin="24,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        FontWeight="SemiBold"
+                        Foreground="Black"><Run Text="Available" /><LineBreak /><Run Text="Space" /></TextBlock>
+
+
+                    <!--  If you remember we had designed a circular progressbar in our videos, i will provide link for that video so u guys can design it and later then import it here  -->
+                    <customcontrols:CircularProgressBar
+                        Height="50"
+                        HorizontalAlignment="Center"
+                        ArcThickness="2"
+                        BackgroundBrush="White"
+                        IndicatorBrush="#6D78CB"
+                        PFontColor="#6D78CB"
+                        Value="12" />
+
+                    <TextBlock
+                        Margin="0,0,24,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        Foreground="Black"
+                        Text="gb left" />
+                </Grid>
+
+                <Grid
+                    Grid.Column="2"
+                    Height="82"
+                    Margin="0,15,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+                    <Rectangle
+                        Width="273"
+                        Fill="#EFF2F8"
+                        RadiusX="20"
+                        RadiusY="20" />
+
+                    <TextBlock
+                        Margin="24,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        FontWeight="SemiBold"
+                        Foreground="Black"><Run Text="Shared" /><LineBreak /><Run Text="files" /></TextBlock>
+
+
+                    <!--  If you remember we had designed a circular progressbar in our videos, i will provide link for that video so u guys can design it and later then import it here  -->
+                    <customcontrols:CircularProgressBar
+                        Height="50"
+                        HorizontalAlignment="Center"
+                        ArcThickness="2"
+                        BackgroundBrush="White"
+                        IndicatorBrush="#6D78CB"
+                        PFontColor="#6D78CB"
+                        Value="49" />
+
+                    <TextBlock
+                        Margin="0,0,24,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        Foreground="Black"
+                        Text="today" />
+                </Grid>
+            </StackPanel>
+
+
+            <Image
+                Grid.Column="2"
+                Margin="35,125"
+                VerticalAlignment="Bottom"
+                Source="/TerminalMACS.TestDemo;component/Views/DriveStorage/Assets/morestorage.png" />
+
+            <TextBlock
+                Grid.Column="2"
+                Margin="0,100"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                FontSize="18"
+                FontWeight="SemiBold"
+                TextAlignment="Center"><Run Text="Unlock more storage now!" /><Run /><LineBreak /><Run
+                    FontSize="15"
+                    Foreground="DimGray"
+                    Text="Upgrade to Drive Plus." /></TextBlock>
+
+
+            <Button
+                Grid.Column="2"
+                Margin="0,829,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Content="UPGRADE NOW"
+                Style="{StaticResource PrimaryButton}" />
+
+
+        </Grid>
+    </Border>
+</Window>

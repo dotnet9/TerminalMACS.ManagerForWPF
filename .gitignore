@@ -40,3 +40,5 @@ src/Tools/TestSample/bin/
 src/Tools/TestSample/obj/
 src/Demo/QuartzNETTest/bin/
 src/Demo/QuartzNETTest/obj/
+src/Demo/WpfLocalizationExtensionTest/bin/
+src/Demo/WpfLocalizationExtensionTest/obj/

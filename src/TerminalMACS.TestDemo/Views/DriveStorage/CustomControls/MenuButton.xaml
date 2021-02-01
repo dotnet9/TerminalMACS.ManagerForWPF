@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="TerminalMACS.TestDemo.Views.DriveStorage.CustomControls.MenuButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TerminalMACS.TestDemo.Views.DriveStorage.CustomControls"
+             mc:Ignorable="d" x:Name="this" Background="White">
+    <UserControl.Resources>
+
+        <!--Setting default icon if we didn't bind any icon in MainWindow-->
+        <PathGeometry x:Key="DefaultIcon" Figures="M4,2L4,22 12.683594,22C12.387594,21.378,12.181078,20.707,12.080078,20L12.074219,20C12.026219,19.673 12,19.34 12,19 12,15.474 14.609,12.566078 18,12.080078 18.327,12.033078 18.66,12 19,12 19.34,12 19.673,12.033078 20,12.080078L20,8 14,2 4,2z M13,3.4550781L18.5,9 13,9 13,3.4550781z M19,14C16.25,14 14,16.25 14,19 14,21.75 16.25,24 19,24 21.75,24 24,21.75 24,19 24,16.25 21.75,14 19,14z M19,16C19.461147,16,19.892436,16.114019,20.283203,16.300781L16.300781,20.285156C16.113553,19.893994 16,19.461758 16,19 16,17.346 17.346,16 19,16z M21.699219,17.716797C21.885981,18.107564 22,18.538853 22,19 22,20.654 20.654,22 19,22 18.538242,22 18.106006,21.886447 17.714844,21.699219L21.699219,17.716797z"/>
+
+        <!--#region Menu Text Style-->
+        <Style x:Key="MenuTextStyle" TargetType="{x:Type TextBlock}">
+
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontFamily" Value="Segoe UI Semibold"/>
+            <Setter Property="Margin" Value="11,0,0,0"/>
+
+            <!--to change foreground on MouseOver and Menu item Selection-->
+
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" Value="True">
+                    <Setter Property="Foreground" Value="#515EC1"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" Value="True">
+                    <Setter Property="Foreground" Value="#515EC1"/>
+                </DataTrigger>
+            </Style.Triggers>
+
+        </Style>
+        <!--#endregion-->
+
+        <Style x:Key="MenuButtonStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Height" Value="48"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{Binding Padding, ElementName=this}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <!--column for Icon-->
+                                    <ColumnDefinition Width="Auto"/>
+
+                                    <!--Column for Text-->
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+
+
+                                <!--the Fallbackvalue is used when the binding path is not correct or null so we can set default value to use instead of that in case.. like we are using default icon here.. and so does happen with Targetnullvalue.. when there is no value provided from source our binding will use default value-->
+
+
+                                <Path Data="{Binding Icon, ElementName=this, FallbackValue={StaticResource DefaultIcon}, TargetNullValue={StaticResource DefaultIcon}}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                      Stretch="Uniform"
+                                      Height="17" Width="18" 
+                                      Fill="#515EC1"/>
+
+                                <TextBlock Style="{StaticResource MenuTextStyle}" Grid.Column="1" Text="{Binding Text, ElementName=this, FallbackValue=MenuText, TargetNullValue=MenuText}"/>
+
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!--Trigger to set our toggle button as checked on MainWindow Startup-->
+                            <DataTrigger Binding="{Binding IsSelected, ElementName=this}" Value="True">
+                                <Setter Property="IsChecked" Value="True"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+    </UserControl.Resources>
+    <!--now since we have radio button, there is a property "GroupName" which we can use for our benefit here..-->
+    <RadioButton Style="{StaticResource MenuButtonStyle}" GroupName="{Binding GroupName, ElementName=this}"/>
+</UserControl>

@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="TerminalMACS.TestDemo.Views.DriveStorage.CustomControls.CircularProgressBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" x:Name="circularProgress"
+             d:DesignHeight="50" d:DesignWidth="50" MinHeight="50" MinWidth="50">
+    <UserControl.Resources>
+        <!--<local:ValueToAngleConverter x:Key="ValueToAngleConverter"/>
+        <local:ValueToTextConverter x:Key="ValueToTextConverter"/>-->
+    </UserControl.Resources>
+    <Grid>
+        
+        <!--ProgressBar Background-->
+        <!--<ccontrols:Arc ArcThickness="{Binding ElementName=circularProgress, Path=ArcThickness}" EndAngle="360" Stretch="None" Fill="{Binding ElementName=circularProgress, Path=BackgroundBrush}"/>
+       
+        <Label Content="{Binding Converter={StaticResource ValueToTextConverter}, ElementName=circularProgress, Path=Value}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Arial" FontSize="18" Foreground="{Binding ElementName=circularProgress, Path=PFontColor}" FontWeight="{Binding ElementName=circularProgress, Path=PFontWeight}"/>
+       
+        <ccontrols:Arc ArcThickness="{Binding ElementName=circularProgress, Path=ArcThickness}" EndAngle="{Binding Converter={StaticResource ValueToAngleConverter}, ElementName=circularProgress, Path=Value}" Stretch="None" Fill="{Binding ElementName=circularProgress, Path=IndicatorBrush}"/>-->
+        
+    </Grid>
+</UserControl>

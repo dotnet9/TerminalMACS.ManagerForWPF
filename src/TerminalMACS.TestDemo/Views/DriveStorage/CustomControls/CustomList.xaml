@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="TerminalMACS.TestDemo.Views.DriveStorage.CustomControls.CustomList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TerminalMACS.TestDemo.Views.DriveStorage.CustomControls"
+             mc:Ignorable="d" x:Name="this" HorizontalAlignment="Stretch">
+    <!--New Files Listbox-->
+    <UserControl.Resources>
+        <Style x:Key="LBText" TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <!--PathIcon-->
+        <Style x:Key="LBPath" TargetType="{x:Type Path}">
+            <Setter Property="Fill" Value="#C2C3C3"/>
+            <Setter Property="Stretch" Value="Uniform"/>
+            <Setter Property="Height" Value="25"/>
+        </Style>
+
+        <DropShadowBitmapEffect x:Key="DropShadowListItem" Softness="2" ShadowDepth="1" Color="LightGray" Direction="260"/>
+        <!--Listbox Item Style-->
+        <Style TargetType="{x:Type ListBoxItem}">
+            <Setter Property="BitmapEffect" Value="{StaticResource DropShadowListItem}"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="740"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                            <Grid>
+                                <!--8 Columns-->
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="45"/>
+                                    <ColumnDefinition Width="233"/>
+                                    <ColumnDefinition Width="170"/>
+                                    <ColumnDefinition Width="123"/>
+                                    <ColumnDefinition Width="82"/>
+                                    <ColumnDefinition Width="28"/>
+                                    <ColumnDefinition Width="28"/>
+                                    <ColumnDefinition Width="28"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!--Icon-->
+                                <Path Width="36" Data="{Binding FileThumb}" Fill="{Binding Fill, TargetNullValue=#C2C3C3, FallbackValue=#C2C3C3}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource LBPath}"/>
+
+                                
+                                
+                                <TextBlock Grid.Column="1" Text="{Binding FileName}" Style="{StaticResource LBText}"/>
+                                <TextBlock Grid.Column="2" Text="{Binding FileProgram}" Style="{StaticResource LBText}"/>
+                                <TextBlock Grid.Column="3" Text="{Binding ModifiedOn}" Style="{StaticResource LBText}"/>
+                                <TextBlock Grid.Column="4" Text="{Binding FileType}" Style="{StaticResource LBText}"/>
+
+
+                                <Path Grid.Column="5" Data="{DynamicResource more}" Style="{StaticResource LBPath}" Width="15"/>
+                                <Path Grid.Column="6" Data="{DynamicResource plus}" Style="{StaticResource LBPath}" Width="15"/>
+                                <Path Grid.Column="7" Data="{DynamicResource Shared}" Style="{StaticResource LBPath}" Width="15"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="White"/>
+
+                                <!--optional trigger, :P-->
+                                <Setter Property="Width" Value="760"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <ListBox Height="{Binding Height, ElementName=this}" Width="{Binding Width, ElementName=this}" ItemsSource="{Binding getFileDetails}" Background="Transparent" BorderThickness="0"/>
+</UserControl>

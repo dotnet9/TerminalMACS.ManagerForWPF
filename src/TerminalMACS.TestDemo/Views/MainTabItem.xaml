@@ -149,6 +149,11 @@
                             <Button Content="Tree view demo" Click="ShowTreeView_Click"/>
                         </Grid>
                     </materialDesign:Badged>
+                    <materialDesign:Badged Badge="4">
+                        <Grid>
+                            <Button Content="Drive Storage" Click="ShowDriveStorageView_Click"/>
+                        </Grid>
+                    </materialDesign:Badged>
                 </StackPanel>
             </materialDesign:Card>
         </WrapPanel>

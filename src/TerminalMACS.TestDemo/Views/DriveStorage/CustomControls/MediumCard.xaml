@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="TerminalMACS.TestDemo.Views.DriveStorage.CustomControls.MediumCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TerminalMACS.TestDemo.Views.DriveStorage.CustomControls"
+             mc:Ignorable="d" x:Name="this">
+    <Border CornerRadius="20" Width="120" Height="120" Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!--File Icon-->
+            <Path Data="{Binding FileIcon, ElementName=this }" Fill="{Binding Fill, ElementName=this, FallbackValue=#C2C3C3, TargetNullValue=#C2C3C3}" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Margin="10"/>
+            
+            <!--Text-->
+            <TextBlock Grid.Row="1" Style="{StaticResource MainText}" Margin="10">
+                <Run Text="{Binding Text1, ElementName=this, FallbackValue=Text1, TargetNullValue=Text1}"/>
+                <LineBreak/>
+                <Run Text="{Binding Text2, ElementName=this, FallbackValue=Text2, TargetNullValue=Text2}"/>
+            </TextBlock>
+        </Grid>
+    </Border>
+</UserControl>

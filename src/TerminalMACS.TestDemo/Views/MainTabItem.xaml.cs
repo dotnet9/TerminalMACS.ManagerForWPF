@@ -5,6 +5,7 @@ using TerminalMACS.TestDemo.Views.AnimatedMenu;
 using TerminalMACS.TestDemo.Views.BaiduMap;
 using TerminalMACS.TestDemo.Views.Calculator;
 using TerminalMACS.TestDemo.Views.ChatView;
+using TerminalMACS.TestDemo.Views.DriveStorage;
 using TerminalMACS.TestDemo.Views.FoodAppLoginUI;
 using TerminalMACS.TestDemo.Views.InstagramRedesign;
 using TerminalMACS.TestDemo.Views.LoginUI;
@@ -149,6 +150,13 @@ namespace TerminalMACS.TestDemo.Views
 		private void ShowTreeView_Click(object sender, RoutedEventArgs e)
         {
             var view = new TreeViewDemo();
+            view.Owner = Application.Current.MainWindow;
+            view.Show();
+        }
+
+		private void ShowDriveStorageView_Click(object sender, RoutedEventArgs e)
+		{
+            var view = new DriveStorageView();
             view.Owner = Application.Current.MainWindow;
             view.Show();
         }

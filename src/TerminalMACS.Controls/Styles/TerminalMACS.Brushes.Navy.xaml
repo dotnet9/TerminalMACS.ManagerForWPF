@@ -1,8 +1,15 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
     <SolidColorBrush x:Key="LightGreyBackgroundBrush" Color="#F1F2F4" />
-    <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#293851" po:Freeze="True" />
-    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#3F487F" po:Freeze="True" />
-    
+    <SolidColorBrush
+        x:Key="PrimaryHueDarkBrush"
+        po:Freeze="True"
+        Color="#293851" />
+    <SolidColorBrush
+        x:Key="PrimaryHueMidBrush"
+        po:Freeze="True"
+        Color="#3F487F" />
+
 </ResourceDictionary>
