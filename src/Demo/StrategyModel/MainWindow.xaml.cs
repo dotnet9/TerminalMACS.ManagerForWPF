@@ -12,6 +12,8 @@ namespace StrategyModel
 		public MainWindow()
 		{
 			InitializeComponent();
+
+
 			cbxType.Items.Add("正常收费");
 			cbxType.Items.Add("打八折");
 			cbxType.Items.Add("打七折");
@@ -19,20 +21,17 @@ namespace StrategyModel
 			cbxType.SelectedIndex = 0;
 		}
 
-		double total = 0.0d;
 
+		double total = 0.0d;
 		private void btnOK_Click(object sender, RoutedEventArgs e)
 		{
-			// 利用简单工厂模式根据下拉选择框，生成相应的对象
-			CashSuper csuper = CashFactory.CreateCashAccept(cbxType.SelectedItem.ToString());
+			// 根据下拉选择框，将相应的算法类型字符串传入CashContext的对象中
+			CashContext cc = new CashContext(cbxType.SelectedItem.ToString());
+
 			double totalPrices = 0d;
-
-			// 通过多态，可以得到收取费用的结果
-			totalPrices = csuper.AcceptCash(Convert.ToDouble(txtPrice.Text)*Convert.ToDouble(txtNum.Text));
+			totalPrices = cc.GetResult(Convert.ToDouble(txtPrice.Text) * Convert.ToDouble(txtNum.Text));
 			total = total + totalPrices;
-
 			lbxList.Items.Add($"单价：{txtPrice.Text} 数量：{txtNum.Text} {cbxType.SelectedItem} 合计：{totalPrices}");
-
 			lblResult.Text = total.ToString();
 		}
 	}
