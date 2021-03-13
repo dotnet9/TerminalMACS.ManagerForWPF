@@ -5,29 +5,29 @@ namespace DPTest
 {
 	class Program
 	{
-		//static void Main(string[] args)
-		//{
-		//	try
-		//	{
-		//		Console.Write("请输入数字A：");
-		//		string strNumberA = Console.ReadLine();
-		//		Console.WriteLine("请选择运算符号（+、-、*、/）：");
-		//		string strOperate = Console.ReadLine();
-		//		Console.Write("请输入数字B：");
-		//		string strNumberB = Console.ReadLine();
-		//		Operation oper;
-		//		oper = OperationFactory.CreateOpearte("+");
-		//		oper.NumberA = 1;
-		//		oper.NumberB = 2;
-		//		double result = oper.GetResult();
-		//		Console.WriteLine("结果是：" + result);
-		//		Console.ReadLine();
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		Console.WriteLine("您的输入有错：" + ex.Message);
-		//	}
-		//}
+		static void Main(string[] args)
+		{
+			try
+			{
+				Console.Write("请输入数字A：");
+				string strNumberA = Console.ReadLine();
+				Console.WriteLine("请选择运算符号（+、-、*、/）：");
+				string strOperate = Console.ReadLine();
+				Console.Write("请输入数字B：");
+				string strNumberB = Console.ReadLine();
+				Operation oper;
+				oper = OperationFactory.CreateOpearte("+");
+				oper.NumberA = 1;
+				oper.NumberB = 2;
+				double result = oper.GetResult();
+				Console.WriteLine("结果是：" + result);
+				Console.ReadLine();
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("您的输入有错：" + ex.Message);
+			}
+		}
 	}
 
 	public class OperationFactory
