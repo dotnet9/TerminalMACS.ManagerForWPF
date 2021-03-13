@@ -108,7 +108,7 @@ namespace ConsoleAppForDotnet6
 			string 营中之事 = null;
 			if (陛下.咨之(营中之事))
 			{
-				陛下.施行(宫中之事);
+				陛下.施行(营中之事);
 				Console.WriteLine("行阵和睦，优劣得所！");
 			}
 
@@ -128,8 +128,8 @@ namespace ConsoleAppForDotnet6
 			} while (先帝.在);
 
 			if (郭攸之.为臣 == 臣德.贤
-							&& 费祎.为臣 == 臣德.贤
-							&& 董允.为臣 == 臣德.贤)
+					&& 费祎.为臣 == 臣德.贤
+					&& 董允.为臣 == 臣德.贤)
 			{
 				Console.WriteLine("此悉贞良死节之臣，愿陛下亲之信之，则汉室之隆，可计日而待也。");
 			}
