@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <AppendTargetFrameworkToOutputPath>Flase</AppendTargetFrameworkToOutputPath>
     <UseWPF>true</UseWPF>
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MaterialDesignColors" Version="2.0.0-ci2347" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.0.0-ci2347" />
+    <PackageReference Include="MaterialDesignColors" Version="2.0.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>
