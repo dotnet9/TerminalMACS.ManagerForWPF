@@ -52,3 +52,5 @@ src/Demo/ConsoleAppForDotnet6/bin/
 src/Demo/ConsoleAppForDotnet6/obj/
 src/Demo/DecoratorMode/bin/
 src/Demo/DecoratorMode/obj/
+src/Demo/PrototypeMode/bin/
+src/Demo/PrototypeMode/obj/
