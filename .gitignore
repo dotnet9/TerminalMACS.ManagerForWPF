@@ -54,3 +54,5 @@ src/Demo/DecoratorMode/bin/
 src/Demo/DecoratorMode/obj/
 src/Demo/PrototypeMode/bin/
 src/Demo/PrototypeMode/obj/
+src/Demo/BuilderPattern/obj/
+src/Demo/BuilderPattern/bin/
