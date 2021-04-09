@@ -56,3 +56,5 @@ src/Demo/PrototypeMode/bin/
 src/Demo/PrototypeMode/obj/
 src/Demo/BuilderPattern/obj/
 src/Demo/BuilderPattern/bin/
+src/Demo/WpfAppDemo/obj/
+src/Demo/WpfAppDemo/bin/
