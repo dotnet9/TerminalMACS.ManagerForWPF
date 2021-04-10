@@ -58,3 +58,5 @@ src/Demo/BuilderPattern/obj/
 src/Demo/BuilderPattern/bin/
 src/Demo/WpfAppDemo/obj/
 src/Demo/WpfAppDemo/bin/
+src/Demo/ObserverModel/bin/
+src/Demo/ObserverModel/obj/
