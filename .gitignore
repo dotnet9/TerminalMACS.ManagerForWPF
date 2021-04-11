@@ -60,3 +60,5 @@ src/Demo/WpfAppDemo/obj/
 src/Demo/WpfAppDemo/bin/
 src/Demo/ObserverModel/bin/
 src/Demo/ObserverModel/obj/
+src/Demo/AbstractFactory/obj/
+src/Demo/AbstractFactory/bin/

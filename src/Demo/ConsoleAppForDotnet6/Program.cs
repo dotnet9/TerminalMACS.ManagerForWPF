@@ -1,105 +1,114 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace ConsoleAppForDotnet6
 {
-	class Program
-	{
-		static void Main(string[] args)
-		{
-			// 使用接口工MyEnumerable代替MyList
-			IMyEnumerable list = new MyList();
-			// 得到迭代器，在循环中针对迭代嚣编码，而不是集合MyList
-			IMyEnumerator enumerator = list.GetEnumerator();
-			for (int i = 0; i < list.Count; i++)
-			{
-				object current = enumerator.Current;
-				enumerator.MoveNext();
-			}
+  public class BaseAA
+  {
+    public void Print()
+    {
+      Console.WriteLine("BaseAA");
+    }
+  }
 
-			while (enumerator.MoveNext())
-			{
-				object current = enumerator.Current;
-			}
-		}
-	}
+  public class ChildBB : BaseAA
+  {
+    public new void Print()
+    {
+      Console.WriteLine("ChildBB");
+    }
+  }
 
-	/// <summary>
-	/// 要求所有的迭代器全部实现该接口
-	/// </summary>
-	interface IMyEnumerator
-	{
-		bool MoveNext();
-		object Current { get; }
-	}
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      List<int> list = new List<int>() { 0, 1, 2, 3 };
+      for (int i = 0; i < list.Count; i++)
+      {
+        list.Remove(list[i]);
+        Console.WriteLine(list[i].ToString());
+      }
+    }
+  }
 
-	/// <summary>
-	/// 要求所有的集合实现该接口
-	/// 这样一来，客户端就可以针对该接口编码
-	/// 而无需关注具体的实现
-	/// </summary>
-	interface IMyEnumerable
-	{
-		IMyEnumerator GetEnumerator();
-		int Count { get; }
-	}
+  /// <summary>
+  /// 要求所有的迭代器全部实现该接口
+  /// </summary>
+  interface IMyEnumerator
+  {
+    bool MoveNext();
+    object Current { get; }
+  }
 
-	class MyList : IMyEnumerable
-	{
-		object[] items = new object[10];
-		IMyEnumerator myEnumerator;
+  /// <summary>
+  /// 要求所有的集合实现该接口
+  /// 这样一来，客户端就可以针对该接口编码
+  /// 而无需关注具体的实现
+  /// </summary>
+  interface IMyEnumerable
+  {
+    IMyEnumerator GetEnumerator();
+    int Count { get; }
+  }
 
-		public object this[int i]
-		{
-			get { return items[i]; }
-			set { this.items[i] = value; }
-		}
+  class MyList : IMyEnumerable
+  {
+    object[] items = new object[10];
+    IMyEnumerator myEnumerator;
 
-		public int Count
-		{
-			get { return items.Length; }
-		}
+    public object this[int i]
+    {
+      get { return items[i]; }
+      set { this.items[i] = value; }
+    }
 
-		public IMyEnumerator GetEnumerator()
-		{
-			if (myEnumerator == null)
-			{
-				myEnumerator = new MyEnumerator(this);
-			}
-			return myEnumerator;
+    public int Count
+    {
+      get { return items.Length; }
+    }
 
-		}
-	}
+    public IMyEnumerator GetEnumerator()
+    {
+      if (myEnumerator == null)
+      {
+        myEnumerator = new MyEnumerator(this);
+      }
+      return myEnumerator;
 
-	class MyEnumerator : IMyEnumerator
-	{
-		int index = 0;
-		MyList myList;
+    }
+  }
 
-		public MyEnumerator(MyList myList)
-		{
-			this.myList = myList;
-		}
+  class MyEnumerator : IMyEnumerator
+  {
+    int index = 0;
+    MyList myList;
 
-		public bool MoveNext()
-		{
-			if (index + 1 > myList.Count)
-			{
-				index = 1;
-				return false;
-			}
-			else
-			{
-				index++;
-				return true;
-			}
-		}
+    public MyEnumerator(MyList myList)
+    {
+      this.myList = myList;
+    }
 
-		public object Current
-		{
-			get { return myList[index - 1]; }
-		}
-	}
+    public bool MoveNext()
+    {
+      if (index + 1 > myList.Count)
+      {
+        index = 1;
+        return false;
+      }
+      else
+      {
+        index++;
+        return true;
+      }
+    }
+
+    public object Current
+    {
+      get { return myList[index - 1]; }
+    }
+  }
 
 }
 
