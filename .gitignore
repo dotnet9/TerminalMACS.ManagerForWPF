@@ -62,3 +62,5 @@ src/Demo/ObserverModel/bin/
 src/Demo/ObserverModel/obj/
 src/Demo/AbstractFactory/obj/
 src/Demo/AbstractFactory/bin/
+src/Demo/WebApiWithMediatR/obj/
+src/Demo/WebApiWithMediatR/bin/

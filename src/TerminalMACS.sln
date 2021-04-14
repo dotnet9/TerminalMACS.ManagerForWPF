@@ -59,7 +59,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppDemo", "Demo\WpfAppDe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObserverModel", "Demo\ObserverModel\ObserverModel.csproj", "{CB15DFC5-8528-4E58-82DF-3FE3EBB56CFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFactory", "Demo\AbstractFactory\AbstractFactory.csproj", "{FB1CF993-0C0E-4BF2-8C1F-4C6479E8D16A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractFactory", "Demo\AbstractFactory\AbstractFactory.csproj", "{FB1CF993-0C0E-4BF2-8C1F-4C6479E8D16A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiWithMediatR", "Demo\WebApiWithMediatR\WebApiWithMediatR.csproj", "{20B24C95-9652-41EF-B260-257A8F92A578}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -261,6 +263,14 @@ Global
 		{FB1CF993-0C0E-4BF2-8C1F-4C6479E8D16A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FB1CF993-0C0E-4BF2-8C1F-4C6479E8D16A}.Release|x64.ActiveCfg = Release|Any CPU
 		{FB1CF993-0C0E-4BF2-8C1F-4C6479E8D16A}.Release|x64.Build.0 = Release|Any CPU
+		{20B24C95-9652-41EF-B260-257A8F92A578}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20B24C95-9652-41EF-B260-257A8F92A578}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20B24C95-9652-41EF-B260-257A8F92A578}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{20B24C95-9652-41EF-B260-257A8F92A578}.Debug|x64.Build.0 = Debug|Any CPU
+		{20B24C95-9652-41EF-B260-257A8F92A578}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20B24C95-9652-41EF-B260-257A8F92A578}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20B24C95-9652-41EF-B260-257A8F92A578}.Release|x64.ActiveCfg = Release|Any CPU
+		{20B24C95-9652-41EF-B260-257A8F92A578}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -285,6 +295,7 @@ Global
 		{304B5487-18F6-424D-A99F-43E75270AECD} = {FFEDBAEA-EAE7-4727-BB25-2C1A2FD8B3B0}
 		{CB15DFC5-8528-4E58-82DF-3FE3EBB56CFE} = {FFEDBAEA-EAE7-4727-BB25-2C1A2FD8B3B0}
 		{FB1CF993-0C0E-4BF2-8C1F-4C6479E8D16A} = {FFEDBAEA-EAE7-4727-BB25-2C1A2FD8B3B0}
+		{20B24C95-9652-41EF-B260-257A8F92A578} = {FFEDBAEA-EAE7-4727-BB25-2C1A2FD8B3B0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73FC7CE0-9D4E-442B-AE18-58FB8F7BC4F0}
