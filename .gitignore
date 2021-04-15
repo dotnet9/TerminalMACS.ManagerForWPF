@@ -64,3 +64,5 @@ src/Demo/AbstractFactory/obj/
 src/Demo/AbstractFactory/bin/
 src/Demo/WebApiWithMediatR/obj/
 src/Demo/WebApiWithMediatR/bin/
+src/Demo/AppearanceMode/HangfireTest/bin
+src/Demo/AppearanceMode/HangfireTest/obj/

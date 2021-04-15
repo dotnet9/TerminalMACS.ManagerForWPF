@@ -4,19 +4,26 @@ using System.Diagnostics;
 
 namespace ConsoleAppForDotnet6
 {
-  public class BaseAA
+  public interface IBase
+  {
+    void Print();
+    void PrintB();
+  }
+  public abstract class BaseAA : IBase
   {
     public void Print()
     {
-      Console.WriteLine("BaseAA");
+      PrintB();
     }
+
+    public abstract void PrintB();
   }
 
   public class ChildBB : BaseAA
   {
-    public new void Print()
+    public override void PrintB()
     {
-      Console.WriteLine("ChildBB");
+      Console.WriteLine("BB==>PrintB()");
     }
   }
 
@@ -24,12 +31,8 @@ namespace ConsoleAppForDotnet6
   {
     static void Main(string[] args)
     {
-      List<int> list = new List<int>() { 0, 1, 2, 3 };
-      for (int i = 0; i < list.Count; i++)
-      {
-        list.Remove(list[i]);
-        Console.WriteLine(list[i].ToString());
-      }
+      IBase aa = new ChildBB();
+      aa.Print();
     }
   }
 
