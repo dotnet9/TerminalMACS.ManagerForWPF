@@ -24,6 +24,7 @@ namespace HangfireTest.Controllers
       _logger = logger;
       TestHangfireTask testHangfireTask = new TestHangfireTask();
       RecurringJob.AddOrUpdate(() => testHangfireTask.HangfireTask(), Cron.Minutely());
+      BackgroundJob.Enqueue(() => testHangfireTask.HangfireTaskOneTime());
     }
 
     [HttpGet]
@@ -46,6 +47,12 @@ namespace HangfireTest.Controllers
     public void HangfireTask()
     {
       Console.WriteLine("控制器内测试Hangfire" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+    }
+
+
+    public void HangfireTaskOneTime()
+    {
+      Console.WriteLine("只执行一次：控制器内测试Hangfire" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
     }
   }
 }

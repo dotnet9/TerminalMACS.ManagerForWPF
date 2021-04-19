@@ -21,7 +21,9 @@ namespace WebApiWithMediatR.Controllers
     private readonly ILogger<WeatherForecastController> _logger;
     private readonly IMediator mediator;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger, IMediator mediator)
+    public WeatherForecastController(
+      ILogger<WeatherForecastController> logger,
+      IMediator mediator)
     {
       _logger = logger;
       this.mediator = mediator;

@@ -1,5 +1,7 @@
 using Hangfire;
 using Hangfire.MemoryStorage;
+using HangfireTest.Services;
+using LogDashboard;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +24,7 @@ namespace HangfireTest
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddLogDashboard();
       services.AddHangfire(x => x.UseStorage(new MemoryStorage()));
 
       services.AddControllers();
@@ -29,6 +32,7 @@ namespace HangfireTest
       {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "HangfireTest", Version = "v1" });
       });
+      services.AddSingleton<ITestService, TestService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +48,8 @@ namespace HangfireTest
         app.UseSwagger();
         app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HangfireTest v1"));
       }
+
+      app.UseLogDashboard();
 
       app.UseHttpsRedirection();
 
