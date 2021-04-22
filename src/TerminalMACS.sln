@@ -67,9 +67,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HangfireTest", "Demo\Appear
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFWithLogDashboard", "Demo\WPFWithLogDashboard\WPFWithLogDashboard.csproj", "{1AD1B3E9-4772-410A-B3DA-15F77F7DEC36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StateMode", "Demo\StateMode\StateMode.csproj", "{2A7F2F03-FA81-42F2-ACF1-60381FE81361}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StateMode", "Demo\StateMode\StateMode.csproj", "{2A7F2F03-FA81-42F2-ACF1-60381FE81361}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Design pattern", "Design pattern", "{C060F3BD-29EE-426F-A67E-27FE78365C0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdapterMode", "Demo\AdapterMode\AdapterMode.csproj", "{2EF6C392-9DCB-45CA-8F0C-9ED54DA35F57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -303,6 +305,14 @@ Global
 		{2A7F2F03-FA81-42F2-ACF1-60381FE81361}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2A7F2F03-FA81-42F2-ACF1-60381FE81361}.Release|x64.ActiveCfg = Release|Any CPU
 		{2A7F2F03-FA81-42F2-ACF1-60381FE81361}.Release|x64.Build.0 = Release|Any CPU
+		{2EF6C392-9DCB-45CA-8F0C-9ED54DA35F57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EF6C392-9DCB-45CA-8F0C-9ED54DA35F57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EF6C392-9DCB-45CA-8F0C-9ED54DA35F57}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2EF6C392-9DCB-45CA-8F0C-9ED54DA35F57}.Debug|x64.Build.0 = Debug|Any CPU
+		{2EF6C392-9DCB-45CA-8F0C-9ED54DA35F57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EF6C392-9DCB-45CA-8F0C-9ED54DA35F57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EF6C392-9DCB-45CA-8F0C-9ED54DA35F57}.Release|x64.ActiveCfg = Release|Any CPU
+		{2EF6C392-9DCB-45CA-8F0C-9ED54DA35F57}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -332,6 +342,7 @@ Global
 		{1AD1B3E9-4772-410A-B3DA-15F77F7DEC36} = {FFEDBAEA-EAE7-4727-BB25-2C1A2FD8B3B0}
 		{2A7F2F03-FA81-42F2-ACF1-60381FE81361} = {C060F3BD-29EE-426F-A67E-27FE78365C0D}
 		{C060F3BD-29EE-426F-A67E-27FE78365C0D} = {FFEDBAEA-EAE7-4727-BB25-2C1A2FD8B3B0}
+		{2EF6C392-9DCB-45CA-8F0C-9ED54DA35F57} = {C060F3BD-29EE-426F-A67E-27FE78365C0D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73FC7CE0-9D4E-442B-AE18-58FB8F7BC4F0}

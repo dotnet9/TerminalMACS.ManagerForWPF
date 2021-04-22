@@ -29,11 +29,11 @@ namespace ConsoleAppForDotnet6
 
   class Program
   {
-    static void Main(string[] args)
-    {
-      IBase aa = new ChildBB();
-      aa.Print();
-    }
+    //static void Main(string[] args)
+    //{
+    //  IBase aa = new ChildBB();
+    //  aa.Print();
+    //}
   }
 
   /// <summary>
