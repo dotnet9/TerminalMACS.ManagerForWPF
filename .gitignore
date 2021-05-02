@@ -72,3 +72,5 @@ src/Demo/StateMode/bin/
 src/Demo/StateMode/obj/
 src/Demo/AdapterMode/bin/
 src/Demo/AdapterMode/obj/
+src/Demo/TheMementoPattern/bin/
+src/Demo/TheMementoPattern/obj/

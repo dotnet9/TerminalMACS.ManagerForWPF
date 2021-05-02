@@ -1,5 +1,6 @@
 using Hangfire;
 using Hangfire.MemoryStorage;
+using HangfireTest.Controllers;
 using HangfireTest.Services;
 using LogDashboard;
 using Microsoft.AspNetCore.Builder;
@@ -12,60 +13,62 @@ using System;
 
 namespace HangfireTest
 {
-  public class Startup
-  {
-    public Startup(IConfiguration configuration)
-    {
-      Configuration = configuration;
-    }
+	public class Startup
+	{
+		public Startup(IConfiguration configuration)
+		{
+			Configuration = configuration;
+		}
 
-    public IConfiguration Configuration { get; }
+		public IConfiguration Configuration { get; }
 
-    // This method gets called by the runtime. Use this method to add services to the container.
-    public void ConfigureServices(IServiceCollection services)
-    {
-      services.AddLogDashboard();
-      services.AddHangfire(x => x.UseStorage(new MemoryStorage()));
+		// This method gets called by the runtime. Use this method to add services to the container.
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddLogDashboard();
+			services.AddHangfire(x => x.UseStorage(new MemoryStorage()));
 
-      services.AddControllers();
-      services.AddSwaggerGen(c =>
-      {
-        c.SwaggerDoc("v1", new OpenApiInfo { Title = "HangfireTest", Version = "v1" });
-      });
-      services.AddSingleton<ITestService, TestService>();
-    }
+			services.AddControllers();
+			services.AddSwaggerGen(c =>
+			{
+				c.SwaggerDoc("v1", new OpenApiInfo { Title = "HangfireTest", Version = "v1" });
+			});
+			services.AddSingleton<ITestService, TestService>();
+		}
+		static TestHangfireTask testHangfireTask = null;
+		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		{
+			app.UseHangfireServer();
+			app.UseHangfireDashboard();
+			RecurringJob.AddOrUpdate(() => HangfireTask(), Cron.Minutely());
 
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-    {
-      app.UseHangfireServer();
-      app.UseHangfireDashboard();
-      RecurringJob.AddOrUpdate(() => HangfireTask(), Cron.Minutely());
+			if (env.IsDevelopment())
+			{
+				app.UseDeveloperExceptionPage();
+				app.UseSwagger();
+				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HangfireTest v1"));
+			}
 
-      if (env.IsDevelopment())
-      {
-        app.UseDeveloperExceptionPage();
-        app.UseSwagger();
-        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HangfireTest v1"));
-      }
+			app.UseLogDashboard();
 
-      app.UseLogDashboard();
+			app.UseHttpsRedirection();
 
-      app.UseHttpsRedirection();
+			app.UseRouting();
 
-      app.UseRouting();
+			app.UseAuthorization();
 
-      app.UseAuthorization();
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapControllers();
+			});
+			testHangfireTask = new TestHangfireTask("外部传入名称");
+			testHangfireTask.Open();
+		}
 
-      app.UseEndpoints(endpoints =>
-      {
-        endpoints.MapControllers();
-      });
-    }
-
-    public void HangfireTask()
-    {
-      Console.WriteLine("测试Hangfire" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
-    }
-  }
+		public void HangfireTask()
+		{
+			Console.WriteLine("测试Hangfire" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+		}
+	}
 }
