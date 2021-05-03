@@ -74,3 +74,5 @@ src/Demo/AdapterMode/bin/
 src/Demo/AdapterMode/obj/
 src/Demo/TheMementoPattern/bin/
 src/Demo/TheMementoPattern/obj/
+src/Demo/CompositeModel/bin/
+src/Demo/CompositeModel/obj/
