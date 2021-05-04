@@ -76,3 +76,5 @@ src/Demo/TheMementoPattern/bin/
 src/Demo/TheMementoPattern/obj/
 src/Demo/CompositeModel/bin/
 src/Demo/CompositeModel/obj/
+src/Demo/IteratorModel/obj/
+src/Demo/IteratorModel/bin/

@@ -75,7 +75,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdapterMode", "Demo\Adapter
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheMementoPattern", "Demo\TheMementoPattern\TheMementoPattern.csproj", "{12724EF0-8A87-4E70-ACF4-83664B81E3F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompositeModel", "Demo\CompositeModel\CompositeModel.csproj", "{9DAF08B3-0EF4-46B4-A0E1-FBF82D2D4F57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompositeModel", "Demo\CompositeModel\CompositeModel.csproj", "{9DAF08B3-0EF4-46B4-A0E1-FBF82D2D4F57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IteratorModel", "Demo\IteratorModel\IteratorModel.csproj", "{B4AEBA46-DE75-4406-91C1-6636119871E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -333,6 +335,14 @@ Global
 		{9DAF08B3-0EF4-46B4-A0E1-FBF82D2D4F57}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9DAF08B3-0EF4-46B4-A0E1-FBF82D2D4F57}.Release|x64.ActiveCfg = Release|Any CPU
 		{9DAF08B3-0EF4-46B4-A0E1-FBF82D2D4F57}.Release|x64.Build.0 = Release|Any CPU
+		{B4AEBA46-DE75-4406-91C1-6636119871E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4AEBA46-DE75-4406-91C1-6636119871E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4AEBA46-DE75-4406-91C1-6636119871E7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B4AEBA46-DE75-4406-91C1-6636119871E7}.Debug|x64.Build.0 = Debug|Any CPU
+		{B4AEBA46-DE75-4406-91C1-6636119871E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4AEBA46-DE75-4406-91C1-6636119871E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4AEBA46-DE75-4406-91C1-6636119871E7}.Release|x64.ActiveCfg = Release|Any CPU
+		{B4AEBA46-DE75-4406-91C1-6636119871E7}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -365,6 +375,7 @@ Global
 		{2EF6C392-9DCB-45CA-8F0C-9ED54DA35F57} = {C060F3BD-29EE-426F-A67E-27FE78365C0D}
 		{12724EF0-8A87-4E70-ACF4-83664B81E3F7} = {C060F3BD-29EE-426F-A67E-27FE78365C0D}
 		{9DAF08B3-0EF4-46B4-A0E1-FBF82D2D4F57} = {C060F3BD-29EE-426F-A67E-27FE78365C0D}
+		{B4AEBA46-DE75-4406-91C1-6636119871E7} = {C060F3BD-29EE-426F-A67E-27FE78365C0D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73FC7CE0-9D4E-442B-AE18-58FB8F7BC4F0}
