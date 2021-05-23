@@ -6,6 +6,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:markup="clr-namespace:WpfExtensions.Xaml.Markup;assembly=WpfExtensions.Xaml"
              xmlns:i18NResources="clr-namespace:TerminalMACS.Server.I18nResources"
+             xmlns:views="clr-namespace:TerminalMACS.Server.Views"
              mc:Ignorable="d">
     <TabItem.Header>
         <Grid>
@@ -22,5 +23,5 @@
                        Foreground="{StaticResource LightGreyBackgroundBrush}" FontSize="10"/>
         </Grid>
     </TabItem.Header>
-    <Grid Background="DarkOrange"/>
+    <views:ChatTest />
 </TabItem>

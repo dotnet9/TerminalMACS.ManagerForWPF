@@ -19,6 +19,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="I18nResources\Language.cs">
@@ -28,6 +29,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TerminalMACS.Controls\TerminalMACS.Controls.csproj" />
     <ProjectReference Include="..\TerminalMACS.Infrastructure.UI\TerminalMACS.Infrastructure.UI.csproj" />
   </ItemGroup>
   <ItemGroup>
