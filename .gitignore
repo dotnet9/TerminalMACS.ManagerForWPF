@@ -82,3 +82,9 @@ src/Demo/Sorting/bin/
 src/Demo/Sorting/obj/
 src/Demo/MvvmCrossDemo/bin/
 src/Demo/MvvmCrossDemo/obj/
+src/Demo/MvvmCrossDemo/MvvmCrossDemo.Core/bin/
+src/Demo/MvvmCrossDemo/MvvmCrossDemo.Core/obj/
+src/Demo/MvvmCrossDemo/.vs/
+src/Demo/MvvmCrossDemo/MvvmCrossDemo.WPF/bin/
+src/Demo/MvvmCrossDemo/MvvmCrossDemo.WPF/obj/
+src/Demo/MvvmCrossDemo/packages/
