@@ -88,3 +88,6 @@ src/Demo/MvvmCrossDemo/.vs/
 src/Demo/MvvmCrossDemo/MvvmCrossDemo.WPF/bin/
 src/Demo/MvvmCrossDemo/MvvmCrossDemo.WPF/obj/
 src/Demo/MvvmCrossDemo/packages/
+src/Demo/VSTOPowerPointPluginTest/bin/
+src/Demo/VSTOPowerPointPluginTest/obj/
+src/Demo/VSTOPowerPointPluginTest/.vs/
