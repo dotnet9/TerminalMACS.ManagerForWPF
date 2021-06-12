@@ -26,7 +26,7 @@ using Office = Microsoft.Office.Core;
 namespace VSTOPowerPointPluginTest
 {
 	[ComVisible(true)]
-	public class Ribbon :  Office.IRibbonExtensibility
+	public class Ribbon :  Office.IRibbonExtensibility//AddinExpress.MSO.ADXAddinModule,
 	{
 		private Office.IRibbonUI ribbon;
 
@@ -53,7 +53,7 @@ namespace VSTOPowerPointPluginTest
 
 		public void button1_Click(Office.IRibbonControl control)
 		{
-			//var app = HostApplication as Microsoft.Office.Interop.PowerPoint.Application;
+			//var app;
 			new Form1().Show();
 		}
 
