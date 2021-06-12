@@ -91,3 +91,9 @@ src/Demo/MvvmCrossDemo/packages/
 src/Demo/VSTOPowerPointPluginTest/bin/
 src/Demo/VSTOPowerPointPluginTest/obj/
 src/Demo/VSTOPowerPointPluginTest/.vs/
+src/Demo/CefSharpTest/bin/
+src/Demo/CefSharpTest/obj/
+src/Demo/CefSharpTest/packages/
+src/Demo/CefSharpTest/publish/
+src/Demo/EmptyWpfApp/bin/
+src/Demo/EmptyWpfApp/obj/
