@@ -97,3 +97,12 @@ src/Demo/CefSharpTest/packages/
 src/Demo/CefSharpTest/publish/
 src/Demo/EmptyWpfApp/bin/
 src/Demo/EmptyWpfApp/obj/
+src/Demo/GeckoWpf/obj/
+src/Demo/GeckoWpf/bin/
+src/Demo/GeckoWpf/Firefox/
+src/Demo/WinformWithGeckofx45/bin/
+src/Demo/WinformWithGeckofx45/obj/
+src/Demo/WinformWithGeckofx45/Firefox/
+src/Demo/WpfWithWebView2/bin/
+src/Demo/WpfWithWebView2/obj/
+src/.idea/

@@ -143,18 +143,13 @@ namespace CefSharpTest
 			}
 
 			var dir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Environment.Is64BitProcess ? "x64" : "x86");
-			foreach (var fname in DllList)
+			var fileFullPaths= Directory.GetFiles(dir);
+			foreach (var filePath in fileFullPaths)
 			{
-				try
+				var fileName = Path.GetFileName(filePath);
+				if (fileName.ToLower().StartsWith("api-ms-win-core") || fileName.ToLower().StartsWith("ucrtbase"))
 				{
-					var path = Path.Combine(dir, fname);
-					if (File.Exists(path))
-					{
-						LoadLibrary(path);
-					}
-				}
-				catch
-				{
+					LoadLibrary(filePath);
 				}
 			}
 
