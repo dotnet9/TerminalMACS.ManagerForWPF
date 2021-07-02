@@ -106,3 +106,7 @@ src/Demo/WinformWithGeckofx45/Firefox/
 src/Demo/WpfWithWebView2/bin/
 src/Demo/WpfWithWebView2/obj/
 src/.idea/
+src/Demo/MessengerDemo/Messager.Sample/bin/
+src/Demo/MessengerDemo/Messager.Sample/obj/
+src/Demo/MessengerDemo/Messager/bin/
+src/Demo/MessengerDemo/Messager/obj/
