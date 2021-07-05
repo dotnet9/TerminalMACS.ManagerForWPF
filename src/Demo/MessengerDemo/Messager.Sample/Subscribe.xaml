@@ -1,0 +1,26 @@
+﻿<Window x:Class="Messager.Sample.Subscribe"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Messager.Sample"
+        mc:Ignorable="d"
+        Title="Subscribe" Height="450" Width="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Tag："/>
+            <TextBox x:Name="tbTag" Width="100"/>
+            <Button Content="Subscribe" Click="Subscribe_Click"/>
+            <Button Content="SubscribeInThread" Click="SubscribeInThread_Click"/>
+            <Button Content="Unsubscribe" Click="Unsubscribe_Click"/>
+            <Button Content="OpenPublishWindow" Click="OpenPublishWindow_Click"/>
+            <Button Content="OpenSubscribeWindow" Click="OpenSubscribeWindow_Click"/>
+        </StackPanel>
+        <TextBox x:Name="tbSubscribe" Grid.Row="1" Margin="5"/>
+    </Grid>
+</Window>

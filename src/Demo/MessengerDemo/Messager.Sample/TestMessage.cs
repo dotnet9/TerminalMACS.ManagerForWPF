@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Messager.Sample
 {
-	class TestMessage
+	public class TestMessage : Message
 	{
+		public TestMessage(object sender, string msg) : base(sender)
+		{
+			this.Msg = msg;
+		}
 		public string Msg { get; set; }
 	}
 }

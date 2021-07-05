@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Messager
@@ -11,6 +11,7 @@ namespace Messager
 		private static readonly object CreationLock = new object();
 		private static Messenger _defaultInstance;
 		private readonly object _registerLock = new object();
+		private SynchronizationContext _synchronizationContext;
 
 		private Dictionary<Type, List<WeakActionAndToken>> _recipientsOfSubclassesAction;
 
@@ -32,18 +33,12 @@ namespace Messager
 				return _defaultInstance;
 			}
 		}
-
-		public void Subscribe<TMessage>(object recipient, Action<TMessage> action)
+		public Messenger()
 		{
-			Subscribe<TMessage>(recipient, action, false);
+			_synchronizationContext = SynchronizationContext.Current;
 		}
 
-		public void SubscribeOnMainThread<TMessage>(object recipient, Action<TMessage> action)
-		{
-			Subscribe<TMessage>(recipient, action, true);
-		}
-
-		private void Subscribe<TMessage>(object recipient, Action<TMessage> action, bool isSubscribeInMainThread)
+		public void Subscribe<TMessage>(object recipient, Action<TMessage> action, ThreadOption threadOption, string tag) where TMessage : Message
 		{
 			lock (_registerLock)
 			{
@@ -68,12 +63,13 @@ namespace Messager
 						list = _recipientsOfSubclassesAction[messageType];
 					}
 
-					var weakAction = new WeakAction<TMessage>(recipient, action, true);
 
 					var item = new WeakActionAndToken
 					{
-						Action = weakAction,
-						Token = ""
+						Recipient = recipient,
+						ThreadOption = threadOption,
+						Action = action,
+						Tag = tag
 					};
 
 					list.Add(item);
@@ -81,70 +77,42 @@ namespace Messager
 			}
 		}
 
-		public void Unsubscribe<TMessage>(object recipient)
-		{
-			UnsubscribeFromLists<TMessage>(recipient, null, null, _recipientsOfSubclassesAction);
-		}
-
-		public void Unsubscribe<TMessage>(object recipient, Action<TMessage> action)
-		{
-			UnsubscribeFromLists<TMessage>(recipient, null, action, _recipientsOfSubclassesAction);
-		}
-		private static void UnsubscribeFromLists<TMessage>(
-			object recipient,
-			object token,
-			Action<TMessage> action,
-			Dictionary<Type, List<WeakActionAndToken>> lists)
+		public void Unsubscribe<TMessage>(object recipient, Action<TMessage> action) where TMessage : Message
 		{
 			var messageType = typeof(TMessage);
 
 			if (recipient == null
-				|| lists == null
-				|| lists.Count == 0
-				|| !lists.ContainsKey(messageType))
+				|| _recipientsOfSubclassesAction == null
+				|| _recipientsOfSubclassesAction.Count == 0
+				|| !_recipientsOfSubclassesAction.ContainsKey(messageType))
 			{
 				return;
 			}
 
-			lock (lists)
+			lock (_recipientsOfSubclassesAction)
 			{
-				foreach (var item in lists[messageType])
+				var lstActions = _recipientsOfSubclassesAction[messageType];
+				for (int i = lstActions.Count - 1; i >= 0; i--)
 				{
-					var weakActionCasted = item.Action as WeakAction<TMessage>;
+					var item = lstActions[i];
+					var weakActionCasted = item.Action;
 
 					if (weakActionCasted != null
 						&& recipient == weakActionCasted.Target
 						&& (action == null
-#if NETFX_CORE
-                            || action.GetMethodInfo().Name == weakActionCasted.MethodName)
-#else
-							|| action.Method.Name == weakActionCasted.MethodName)
-#endif
-						&& (token == null
-							|| token.Equals(item.Token)))
+							|| action.Method.Name == weakActionCasted.Method.Name))
 					{
-						item.Action.MarkForDeletion();
+						lstActions.Remove(item);
 					}
 				}
 			}
 		}
-		public void Publish<TMessage>(object sender, TMessage message)
-		{
-			Publish(message, typeof(TMessage), null);
-		}
-
-		public void Publish<TMessage, TTarget>(object sender, TMessage message)
-		{
-			Publish(message, typeof(TMessage), null);
-		}
-		private void Publish<TMessage>(TMessage message, Type messageTargetType, object token)
+		public void Publish<TMessage>(object sender, TMessage message, string tag) where TMessage : Message
 		{
 			var messageType = typeof(TMessage);
 
 			if (_recipientsOfSubclassesAction != null)
 			{
-				// Clone to protect from people registering in a "receive message" method
-				// Correction Messaging BL0008.002
 				var listClone =
 					_recipientsOfSubclassesAction.Keys.Take(_recipientsOfSubclassesAction.Count()).ToList();
 
@@ -153,79 +121,78 @@ namespace Messager
 					List<WeakActionAndToken> list = null;
 
 					if (messageType == type
-#if NETFX_CORE
-                        || messageType.GetTypeInfo().IsSubclassOf(type)
-                        || type.GetTypeInfo().IsAssignableFrom(messageType.GetTypeInfo()))
-#else
 						|| messageType.IsSubclassOf(type)
 						|| type.IsAssignableFrom(messageType))
-#endif
 					{
 						lock (_recipientsOfSubclassesAction)
 						{
-							list = _recipientsOfSubclassesAction[type].Take(_recipientsOfSubclassesAction[type].Count()).ToList();
+							list = _recipientsOfSubclassesAction[type].Take(_recipientsOfSubclassesAction[type].Count()).Where(subscription => tag == null || subscription.Tag == tag).ToList();
 						}
 					}
-
-					SendToList(message, list, messageTargetType, token);
-				}
-			}
-
-			if (_recipientsOfSubclassesAction != null)
-			{
-				List<WeakActionAndToken> list = null;
-
-				lock (_recipientsOfSubclassesAction)
-				{
-					if (_recipientsOfSubclassesAction.ContainsKey(messageType))
+					if (list != null && list.Count > 0)
 					{
-						list = _recipientsOfSubclassesAction[messageType]
-							.Take(_recipientsOfSubclassesAction[messageType].Count())
-							.ToList();
+						SendToList(message, list);
 					}
-				}
-
-				if (list != null)
-				{
-					SendToList(message, list, messageTargetType, token);
 				}
 			}
 		}
 
-		private static void SendToList<TMessage>(
+		private void SendToList<TMessage>(
 			TMessage message,
-			IEnumerable<WeakActionAndToken> weakActionsAndTokens,
-			Type messageTargetType,
-			object token)
+			IEnumerable<WeakActionAndToken> weakActionsAndTokens) where TMessage : Message
 		{
 			if (weakActionsAndTokens != null)
 			{
-				// Clone to protect from people registering in a "receive message" method
-				// Correction Messaging BL0004.007
 				var list = weakActionsAndTokens.ToList();
 				var listClone = list.Take(list.Count()).ToList();
 
 				foreach (var item in listClone)
 				{
-					var executeAction = item.Action as IExecuteWithObject;
-
-					if (executeAction != null
-						&& item.Action.IsAlive
-						&& item.Action.Target != null
-						&& (messageTargetType == null
-							|| item.Action.Target.GetType() == messageTargetType
-#if NETFX_CORE
-                            || messageTargetType.GetTypeInfo().IsAssignableFrom(item.Action.Target.GetType().GetTypeInfo()))
-#else
-							|| messageTargetType.IsAssignableFrom(item.Action.Target.GetType()))
-#endif
-						&& ((item.Token == null && token == null)
-							|| item.Token != null && item.Token.Equals(token)))
+					if (item.Action != null
+						&& item.Action.Target != null)
 					{
-						executeAction.ExecuteWithObject(message);
+						switch (item.ThreadOption)
+						{
+							case ThreadOption.BackgroundThread:
+								Task.Run(() =>
+								{
+									item.ExecuteWithObject(message);
+								});
+								break;
+							case ThreadOption.UIThread:
+								_synchronizationContext.Post((o) =>
+								{
+									item.ExecuteWithObject(message);
+								}, null);
+								break;
+							default:
+								item.ExecuteWithObject(message);
+								break;
+						}
 					}
 				}
 			}
 		}
+	}
+
+	class WeakActionAndToken
+	{
+		public object Recipient;
+		public ThreadOption ThreadOption;
+
+		public Delegate Action;
+
+		public string Tag;
+		public void ExecuteWithObject<TMessage>(TMessage message) where TMessage : Message
+		{
+			((Action<TMessage>)Action)(message);
+		}
+	}
+
+	public enum ThreadOption
+	{
+		PublisherThread,
+		BackgroundThread,
+		UIThread
 	}
 }

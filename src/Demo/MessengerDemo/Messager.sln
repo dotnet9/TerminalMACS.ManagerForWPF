@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31410.414
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messager.Sample", "Messager.Sample\Messager.Sample.csproj", "{0593C1D8-3079-4923-B447-74ED3587CFC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messager", "Messager\Messager.csproj", "{A4B76856-2626-47C5-A3F9-6B3E2F53EEAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messager", "Messager\Messager.csproj", "{A4B76856-2626-47C5-A3F9-6B3E2F53EEAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
