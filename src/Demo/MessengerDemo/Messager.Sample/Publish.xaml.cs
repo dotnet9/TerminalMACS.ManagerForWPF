@@ -48,9 +48,10 @@ namespace Messager.Sample
 		private void PublishInThread_Click(object sender, RoutedEventArgs e)
 		{
 			var msg = this.tbPublish.Text;
+			var tmpTag = tag;
 			Task.Run(() =>
 			{
-				Messenger.Default.Publish(this, new TestMessage(this, msg), tag);
+				Messenger.Default.Publish(this, new TestMessage(this, msg), tmpTag);
 			});
 
 		}

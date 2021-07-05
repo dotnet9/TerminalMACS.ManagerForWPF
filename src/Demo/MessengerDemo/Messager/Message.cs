@@ -6,12 +6,7 @@ namespace Messager
     {
         protected Message(object sender)
         {
-            if (sender == null)
-            {
-                throw new ArgumentNullException(nameof(sender));
-            }
-
-            this.Sender = sender;
+            this.Sender = sender ?? throw new ArgumentNullException(nameof(sender));
         }
 
         public object Sender { get; }

@@ -8,191 +8,152 @@ namespace Messager
 {
 	public class Messenger : IMessenger
 	{
-		private static readonly object CreationLock = new object();
-		private static Messenger _defaultInstance;
-		private readonly object _registerLock = new object();
-		private SynchronizationContext _synchronizationContext;
+        public static readonly Messenger Default = new Messenger();
+        private readonly object registerLock = new object();
+        private readonly object useActionLock = new object();
 
-		private Dictionary<Type, List<WeakActionAndToken>> _recipientsOfSubclassesAction;
+        private Dictionary<Type, List<WeakActionAndToken>>? recipientsOfSubclassesAction;
 
-		public static Messenger Default
-		{
-			get
-			{
-				if (_defaultInstance == null)
-				{
-					lock (CreationLock)
-					{
-						if (_defaultInstance == null)
-						{
-							_defaultInstance = new Messenger();
-						}
-					}
-				}
+        public void Subscribe<TMessage>(object recipient, Action<TMessage> action, ThreadOption threadOption, string? tag) where TMessage : Message
+        {
+            lock (this.registerLock)
+            {
+                var messageType = typeof(TMessage);
 
-				return _defaultInstance;
-			}
-		}
-		public Messenger()
-		{
-			_synchronizationContext = SynchronizationContext.Current;
-		}
+                this.recipientsOfSubclassesAction ??= new Dictionary<Type, List<WeakActionAndToken>>();
 
-		public void Subscribe<TMessage>(object recipient, Action<TMessage> action, ThreadOption threadOption, string tag) where TMessage : Message
-		{
-			lock (_registerLock)
-			{
-				var messageType = typeof(TMessage);
+                lock (this.useActionLock)
+                {
+                    List<WeakActionAndToken> list;
 
-				if (_recipientsOfSubclassesAction == null)
-				{
-					_recipientsOfSubclassesAction = new Dictionary<Type, List<WeakActionAndToken>>();
-				}
+                    if (!this.recipientsOfSubclassesAction.ContainsKey(messageType))
+                    {
+                        list = new List<WeakActionAndToken>();
+                        this.recipientsOfSubclassesAction.Add(messageType, list);
+                    }
+                    else
+                    {
+                        list = this.recipientsOfSubclassesAction[messageType];
+                    }
 
-				lock (_recipientsOfSubclassesAction)
-				{
-					List<WeakActionAndToken> list;
+                    var item = new WeakActionAndToken { Recipient = recipient, ThreadOption = threadOption, Action = action, Tag = tag };
 
-					if (!_recipientsOfSubclassesAction.ContainsKey(messageType))
-					{
-						list = new List<WeakActionAndToken>();
-						_recipientsOfSubclassesAction.Add(messageType, list);
-					}
-					else
-					{
-						list = _recipientsOfSubclassesAction[messageType];
-					}
+                    list.Add(item);
+                }
+            }
+        }
 
+        public void Unsubscribe<TMessage>(object? recipient, Action<TMessage>? action) where TMessage : Message
+        {
+            var messageType = typeof(TMessage);
 
-					var item = new WeakActionAndToken
-					{
-						Recipient = recipient,
-						ThreadOption = threadOption,
-						Action = action,
-						Tag = tag
-					};
+            if (recipient == null || this.recipientsOfSubclassesAction == null || this.recipientsOfSubclassesAction.Count == 0 || !this.recipientsOfSubclassesAction.ContainsKey(messageType))
+            {
+                return;
+            }
 
-					list.Add(item);
-				}
-			}
-		}
+            lock (this.useActionLock)
+            {
+                var lstActions = this.recipientsOfSubclassesAction[messageType];
+                for (var i = lstActions.Count - 1; i >= 0; i--)
+                {
+                    var item = lstActions[i];
+                    var weakActionCasted = item.Action;
 
-		public void Unsubscribe<TMessage>(object recipient, Action<TMessage> action) where TMessage : Message
-		{
-			var messageType = typeof(TMessage);
+                    if (weakActionCasted != null
+                        && recipient == weakActionCasted.Target
+                        && (action == null || action.Method.Name == weakActionCasted.Method.Name))
+                    {
+                        lstActions.Remove(item);
+                    }
+                }
+            }
+        }
 
-			if (recipient == null
-				|| _recipientsOfSubclassesAction == null
-				|| _recipientsOfSubclassesAction.Count == 0
-				|| !_recipientsOfSubclassesAction.ContainsKey(messageType))
-			{
-				return;
-			}
+        public void Publish<TMessage>(object sender, TMessage message, string? tag) where TMessage : Message
+        {
+            var messageType = typeof(TMessage);
 
-			lock (_recipientsOfSubclassesAction)
-			{
-				var lstActions = _recipientsOfSubclassesAction[messageType];
-				for (int i = lstActions.Count - 1; i >= 0; i--)
-				{
-					var item = lstActions[i];
-					var weakActionCasted = item.Action;
+            if (this.recipientsOfSubclassesAction != null)
+            {
+                var listClone = this.recipientsOfSubclassesAction.Keys.Take(this.recipientsOfSubclassesAction.Count).ToList();
 
-					if (weakActionCasted != null
-						&& recipient == weakActionCasted.Target
-						&& (action == null
-							|| action.Method.Name == weakActionCasted.Method.Name))
-					{
-						lstActions.Remove(item);
-					}
-				}
-			}
-		}
-		public void Publish<TMessage>(object sender, TMessage message, string tag) where TMessage : Message
-		{
-			var messageType = typeof(TMessage);
+                foreach (var type in listClone)
+                {
+                    List<WeakActionAndToken>? list = null;
 
-			if (_recipientsOfSubclassesAction != null)
-			{
-				var listClone =
-					_recipientsOfSubclassesAction.Keys.Take(_recipientsOfSubclassesAction.Count()).ToList();
+                    if (messageType == type || messageType.IsSubclassOf(type) || type.IsAssignableFrom(messageType))
+                    {
+                        lock (this.useActionLock)
+                        {
+                            list = this.recipientsOfSubclassesAction[type]
+                                .Take(this.recipientsOfSubclassesAction[type].Count)
+                                .Where(subscription => tag == null || subscription.Tag == tag).ToList();
+                        }
+                    }
+                    if (list != null && list.Count > 0)
+                    {
+                        this.SendToList(message, list);
+                    }
+                }
+            }
+        }
 
-				foreach (var type in listClone)
-				{
-					List<WeakActionAndToken> list = null;
+        private void SendToList<TMessage>(TMessage message, IEnumerable<WeakActionAndToken> weakActionsAndTokens) where TMessage : Message
+        {
+            var list = weakActionsAndTokens.ToList();
+            var listClone = list.Take(list.Count()).ToList();
 
-					if (messageType == type
-						|| messageType.IsSubclassOf(type)
-						|| type.IsAssignableFrom(messageType))
-					{
-						lock (_recipientsOfSubclassesAction)
-						{
-							list = _recipientsOfSubclassesAction[type].Take(_recipientsOfSubclassesAction[type].Count()).Where(subscription => tag == null || subscription.Tag == tag).ToList();
-						}
-					}
-					if (list != null && list.Count > 0)
-					{
-						SendToList(message, list);
-					}
-				}
-			}
-		}
+            foreach (var item in listClone)
+            {
+                if (item.Action != null && item.Action.Target != null)
+                {
+                    switch (item.ThreadOption)
+                    {
+                        case ThreadOption.BackgroundThread:
+                            Task.Run(() =>
+                            {
+                                item.ExecuteWithObject(message);
+                            });
+                            break;
+                        case ThreadOption.UiThread:
+                            SynchronizationContext.Current.Post(_ =>
+                            {
+                                item.ExecuteWithObject(message);
+                            }, null);
+                            break;
+                        default:
+                            item.ExecuteWithObject(message);
+                            break;
+                    }
+                }
+            }
+        }
+    }
 
-		private void SendToList<TMessage>(
-			TMessage message,
-			IEnumerable<WeakActionAndToken> weakActionsAndTokens) where TMessage : Message
-		{
-			if (weakActionsAndTokens != null)
-			{
-				var list = weakActionsAndTokens.ToList();
-				var listClone = list.Take(list.Count()).ToList();
+    public class WeakActionAndToken
+    {
+        public object? Recipient { get; set; }
 
-				foreach (var item in listClone)
-				{
-					if (item.Action != null
-						&& item.Action.Target != null)
-					{
-						switch (item.ThreadOption)
-						{
-							case ThreadOption.BackgroundThread:
-								Task.Run(() =>
-								{
-									item.ExecuteWithObject(message);
-								});
-								break;
-							case ThreadOption.UIThread:
-								_synchronizationContext.Post((o) =>
-								{
-									item.ExecuteWithObject(message);
-								}, null);
-								break;
-							default:
-								item.ExecuteWithObject(message);
-								break;
-						}
-					}
-				}
-			}
-		}
-	}
+        public ThreadOption ThreadOption { get; set; }
 
-	class WeakActionAndToken
-	{
-		public object Recipient;
-		public ThreadOption ThreadOption;
+        public Delegate? Action { get; set; }
 
-		public Delegate Action;
+        public string? Tag { get; set; }
 
-		public string Tag;
-		public void ExecuteWithObject<TMessage>(TMessage message) where TMessage : Message
-		{
-			((Action<TMessage>)Action)(message);
-		}
-	}
+        public void ExecuteWithObject<TMessage>(TMessage message) where TMessage : Message
+        {
+            if (this.Action is Action<TMessage> factAction)
+            {
+                factAction.Invoke(message);
+            }
+        }
+    }
 
-	public enum ThreadOption
-	{
-		PublisherThread,
-		BackgroundThread,
-		UIThread
-	}
+    public enum ThreadOption
+    {
+        PublisherThread,
+        BackgroundThread,
+        UiThread
+    }
 }

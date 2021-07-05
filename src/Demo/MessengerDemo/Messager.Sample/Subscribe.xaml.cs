@@ -33,7 +33,7 @@ namespace Messager.Sample
 			Messenger.Default.Subscribe<TestMessage>(this, (msg) =>
 			{
 				this.tbSubscribe.AppendText(msg.Msg + "\r\n");
-			}, ThreadOption.UIThread, tag);
+			}, ThreadOption.UiThread, tag);
 		}
 
 		private void Unsubscribe_Click(object sender, RoutedEventArgs e)
