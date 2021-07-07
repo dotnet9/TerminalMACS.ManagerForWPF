@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Messager
 {
-	public class Messenger : IMessenger
-	{
+    public class Messenger : IMessenger
+    {
         public static readonly Messenger Default = new Messenger();
         private readonly object registerLock = new object();
-        private readonly object useActionLock = new object();
 
         private Dictionary<Type, List<WeakActionAndToken>>? recipientsOfSubclassesAction;
 
@@ -22,24 +21,21 @@ namespace Messager
 
                 this.recipientsOfSubclassesAction ??= new Dictionary<Type, List<WeakActionAndToken>>();
 
-                lock (this.useActionLock)
+                List<WeakActionAndToken> list;
+
+                if (!this.recipientsOfSubclassesAction.ContainsKey(messageType))
                 {
-                    List<WeakActionAndToken> list;
-
-                    if (!this.recipientsOfSubclassesAction.ContainsKey(messageType))
-                    {
-                        list = new List<WeakActionAndToken>();
-                        this.recipientsOfSubclassesAction.Add(messageType, list);
-                    }
-                    else
-                    {
-                        list = this.recipientsOfSubclassesAction[messageType];
-                    }
-
-                    var item = new WeakActionAndToken { Recipient = recipient, ThreadOption = threadOption, Action = action, Tag = tag };
-
-                    list.Add(item);
+                    list = new List<WeakActionAndToken>();
+                    this.recipientsOfSubclassesAction.Add(messageType, list);
                 }
+                else
+                {
+                    list = this.recipientsOfSubclassesAction[messageType];
+                }
+
+                var item = new WeakActionAndToken { Recipient = recipient, ThreadOption = threadOption, Action = action, Tag = tag };
+
+                list.Add(item);
             }
         }
 
@@ -52,20 +48,17 @@ namespace Messager
                 return;
             }
 
-            lock (this.useActionLock)
+            var lstActions = this.recipientsOfSubclassesAction[messageType];
+            for (var i = lstActions.Count - 1; i >= 0; i--)
             {
-                var lstActions = this.recipientsOfSubclassesAction[messageType];
-                for (var i = lstActions.Count - 1; i >= 0; i--)
-                {
-                    var item = lstActions[i];
-                    var weakActionCasted = item.Action;
+                var item = lstActions[i];
+                var pastAction = item.Action;
 
-                    if (weakActionCasted != null
-                        && recipient == weakActionCasted.Target
-                        && (action == null || action.Method.Name == weakActionCasted.Method.Name))
-                    {
-                        lstActions.Remove(item);
-                    }
+                if (pastAction != null
+                    && recipient == pastAction.Target
+                    && (action == null || action.Method.Name == pastAction.Method.Name))
+                {
+                    lstActions.Remove(item);
                 }
             }
         }
@@ -84,14 +77,11 @@ namespace Messager
 
                     if (messageType == type || messageType.IsSubclassOf(type) || type.IsAssignableFrom(messageType))
                     {
-                        lock (this.useActionLock)
-                        {
-                            list = this.recipientsOfSubclassesAction[type]
-                                .Take(this.recipientsOfSubclassesAction[type].Count)
-                                .Where(subscription => tag == null || subscription.Tag == tag).ToList();
-                        }
+                        list = this.recipientsOfSubclassesAction[type]
+                            .Take(this.recipientsOfSubclassesAction[type].Count)
+                            .Where(subscription => tag == null || subscription.Tag == tag).ToList();
                     }
-                    if (list != null && list.Count > 0)
+                    if (list is { Count: > 0 })
                     {
                         this.SendToList(message, list);
                     }
@@ -106,7 +96,7 @@ namespace Messager
 
             foreach (var item in listClone)
             {
-                if (item.Action != null && item.Action.Target != null)
+                if (item.Action is { Target: { } })
                 {
                     switch (item.ThreadOption)
                     {
