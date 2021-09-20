@@ -21,5 +21,24 @@
                        Foreground="{StaticResource LightGreyBackgroundBrush}" FontSize="10"/>
         </Grid>
     </TabItem.Header>
-    <Grid Background="Blue"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Content="Flame1" Click="ShowFlame1_Click"/>
+
+        <Grid Grid.Row="1">
+            <AdornerDecorator>
+                <Border CornerRadius="50" x:Name="spFlamePanel" ClipToBounds="True"/>
+            </AdornerDecorator>
+
+            <Grid.Clip>
+                <RectangleGeometry Rect="50 50 100 600" />
+            </Grid.Clip>
+        </Grid>
+        <Rectangle x:Name="ButtonPolygon" Fill="Black" VerticalAlignment="Bottom" Grid.Row="1"
+                   Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}, Path=ActualWidth}" 
+                   Height="40" />
+    </Grid>
 </TabItem>
