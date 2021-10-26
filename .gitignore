@@ -113,3 +113,5 @@ src/Demo/MessengerDemo/Messager/obj/
 src/Demo/MessengerDemo/.idea/
 src/Demo/MessengerDemo/.vs/
 src/Demo/MessengerDemo/.vs/Messager/v17/.suo
+/src/Demo/LazyLoadWebImage/obj
+/src/Demo/LazyLoadWebImage/bin
