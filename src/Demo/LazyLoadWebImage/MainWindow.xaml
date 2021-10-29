@@ -22,7 +22,7 @@
             </ListView.ItemTemplate>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <VirtualizingStackPanel IsItemsHost="True" 
+                    <VirtualizingStackPanel IsItemsHost="True"
                                             VirtualizingPanel.VirtualizationMode="Recycling" 
                                             VirtualizingPanel.IsVirtualizing="True"/>
                 </ItemsPanelTemplate>

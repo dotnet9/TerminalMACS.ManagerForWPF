@@ -1,0 +1,28 @@
+﻿<Window x:Class="LazyLoadWebImage.TextBlockTrimmingTest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="TextBlockTrimmingTest" Height="450" Width="200">
+    <Window.Resources>
+        <system:String x:Key="testStr">这是一段测试的文字，测试超出显示宽度是否显示...，如果显示则测试成功</system:String>
+        <Style TargetType="Hyperlink">
+            <Setter Property=""
+        </Style>
+    </Window.Resources>
+    <StackPanel>
+        <TextBlock Text="{StaticResource testStr}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+
+        <TextBlock TextTrimming="CharacterEllipsis" TextWrapping="NoWrap">
+            <Hyperlink>模拟按钮1</Hyperlink>
+            <Hyperlink>模拟按钮2</Hyperlink>
+            <Hyperlink>模拟按钮3</Hyperlink>
+            <Hyperlink>模拟按钮4</Hyperlink>
+            <Hyperlink>模拟按钮5</Hyperlink>
+            <Hyperlink>模拟按钮6</Hyperlink>
+            <Hyperlink>模拟按钮7</Hyperlink>
+        </TextBlock>
+    </StackPanel>
+</Window>
