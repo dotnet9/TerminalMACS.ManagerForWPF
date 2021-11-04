@@ -8,9 +8,6 @@
         Title="TextBlockTrimmingTest" Height="450" Width="200">
     <Window.Resources>
         <system:String x:Key="testStr">这是一段测试的文字，测试超出显示宽度是否显示...，如果显示则测试成功</system:String>
-        <Style TargetType="Hyperlink">
-            <Setter Property=""
-        </Style>
     </Window.Resources>
     <StackPanel>
         <TextBlock Text="{StaticResource testStr}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>

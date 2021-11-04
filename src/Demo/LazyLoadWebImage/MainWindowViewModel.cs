@@ -1,10 +1,28 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace LazyLoadWebImage
 {
 	public class MainWindowViewModel
 	{
-		public ObservableCollection<string> WebImages { get; set; } = new ObservableCollection<string> {
+		public ObservableCollection<string> ItemSource = new ObservableCollection<string>();
+		private int loadCount = 2;
+		public bool NeedLoadMore { get { return this.ItemSource.Count < _webImages.Count; } }
+		public void LoadMore()
+		{
+			var readIndex = this.ItemSource.Count;
+			var readCount = loadCount;
+			if (_webImages.Count < (readIndex + readCount))
+			{
+				readCount = _webImages.Count - readIndex;
+			}
+			var needLoadData = _webImages.GetRange(readIndex, readCount);
+			foreach (var item in needLoadData)
+			{
+				ItemSource.Add(item);
+			}
+		}
+		private List<string> _webImages { get; set; } = new List<string> {
 				"https://img1.baidu.com/it/u=3477268105,2677564030&fm=26&fmt=auto",
 				"https://img0.baidu.com/it/u=740107154,3498824340&fm=26&fmt=auto",
 				"https://img2.baidu.com/it/u=1059097185,3754662075&fm=26&fmt=auto",
