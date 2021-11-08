@@ -1,0 +1,142 @@
+﻿<UserControl x:Class="LazyLoadWebImage.Pagination"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <system:Double x:Key="Styles.Pagination.RadioButtonSize">30</system:Double>
+            <SolidColorBrush x:Key="Brushes.Accent.Gradient" Color="White"/>
+            <SolidColorBrush x:Key="Brushes.IdealForeground" Color="Red"/>
+            <SolidColorBrush x:Key="SecondaryRegionBrush" Color="Green"/>
+            <Style x:Key="Styles.Pagination.Button" TargetType="ButtonBase">
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Focusable" Value="False" />
+                <Setter Property="Height" Value="{StaticResource Styles.Pagination.RadioButtonSize}" />
+                <Setter Property="Margin" Value="4 9" />
+                <Setter Property="Padding" Value="10 0" />
+                <Setter Property="MinWidth" Value="{StaticResource Styles.Pagination.RadioButtonSize}" />
+            </Style>
+            <Style TargetType="RadioButton">
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="GroupName" Value="1" />
+                <Setter Property="Height" Value="{StaticResource Styles.Pagination.RadioButtonSize}" />
+                <Setter Property="Margin" Value="4 9" />
+                <Setter Property="MinWidth" Value="30" />
+                <Setter Property="Padding" Value="10 0" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RadioButton">
+                            <Border x:Name="BorderRoot"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                <ContentPresenter x:Name="contentPresenter"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource Brushes.Accent.Gradient}" />
+                                    <Setter TargetName="BorderRoot" Property="BorderBrush" Value="{DynamicResource Brushes.Accent.Gradient}" />
+                                    <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{DynamicResource Brushes.IdealForeground}" />
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="true">
+                                    <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource Brushes.Accent.Gradient}" />
+                                    <Setter TargetName="BorderRoot" Property="BorderBrush" Value="{DynamicResource Brushes.Accent.Gradient}" />
+                                    <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{DynamicResource Brushes.IdealForeground}" />
+                                </Trigger>
+                                <Trigger Property="Content" Value="{x:Null}">
+                                    <Setter TargetName="contentPresenter" Property="Visibility" Value="Collapsed" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Style.Triggers>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter Property="Panel.ZIndex" Value="{x:Static system:Int32.MaxValue}" />
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource SecondaryRegionBrush}" />
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource BorderBrush}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style TargetType="ComboBox">
+                <Setter Property="Height" Value="{StaticResource Styles.Pagination.RadioButtonSize}" />
+                <Setter Property="Margin" Value="20 0" />
+                <Setter Property="MinHeight" Value="{StaticResource Styles.Pagination.RadioButtonSize}" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="Height" Value="{StaticResource Styles.Pagination.RadioButtonSize}" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="Margin" Value="6 0" />
+                <Setter Property="MinWidth" Value="32" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+            </Style>
+            <Style TargetType="TextBlock">
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+        <TextBlock Margin="0 0 20 0"
+                   VerticalAlignment="Center"
+                   Text="{Binding PageCountString}"
+                   TextTrimming="CharacterEllipsis"
+                   TextWrapping="NoWrap" />
+        <Button x:Name="PartButtonLeft"
+                Click="ButtonPrev_OnClick"
+                KeyUp="ButtonPrev_KeyUp"
+                Style="{DynamicResource Styles.Pagination.Button}" Content="&lt;"/>
+        <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+            <RadioButton x:Name="PartButtonFirst"
+                         Checked="ToggleButton_OnChecked"
+                         Content="1"
+                         Tag="1" />
+            <RadioButton x:Name="PartButtonSecond"
+                         Checked="ToggleButton_OnChecked"
+                         Content="2"
+                         Tag="2" />
+            <RadioButton x:Name="PartMoreLeft"
+                         VerticalAlignment="Center"
+                         Checked="ToggleButton_OnChecked"
+                         Content="..." />
+            <StackPanel x:Name="PartPanelMain" Orientation="Horizontal" />
+            <RadioButton x:Name="PartMoreRight"
+                         VerticalAlignment="Center"
+                         Checked="ToggleButton_OnChecked"
+                         Content="..." />
+            <RadioButton x:Name="PartButtonLastSecond" Checked="ToggleButton_OnChecked" />
+            <RadioButton x:Name="PartButtonLast"
+                         Checked="ToggleButton_OnChecked"
+                         Content="{Binding PageCount}"
+                         Tag="{Binding PageCount}" />
+        </StackPanel>
+        <Button x:Name="PartButtonRight"
+                Click="ButtonNext_OnClick"
+                KeyUp="ButtonNext_KeyUp"
+                Style="{DynamicResource Styles.Pagination.Button}" Content="&gt;"/>
+        <ComboBox x:Name="PartJump"
+                  DisplayMemberPath="Text"
+                  ItemsSource="{Binding PageSizeItemSource}"
+                  SelectedValue="{Binding PageSize}"
+                  SelectedValuePath="PageSize" />
+        <TextBlock Text="跳至" />
+        <TextBox x:Name="PartJumpPage" KeyUp="PartJumpPage_KeyUp" />
+        <TextBlock Text="页" />
+    </StackPanel>
+</UserControl>
+
