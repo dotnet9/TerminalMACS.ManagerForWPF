@@ -8,7 +8,8 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <system:Double x:Key="Styles.Pagination.RadioButtonSize">30</system:Double>
-            <SolidColorBrush x:Key="Brushes.Accent.Gradient" Color="White"/>
+            <SolidColorBrush x:Key="Brushes.Accent.Gradient" Color="LightGray"/>
+            <SolidColorBrush x:Key="Brushes.Accent.Gradient2" Opacity="0.3" Color="LightGray"/>
             <SolidColorBrush x:Key="Brushes.IdealForeground" Color="Red"/>
             <SolidColorBrush x:Key="SecondaryRegionBrush" Color="Green"/>
             <Style x:Key="Styles.Pagination.Button" TargetType="ButtonBase">
@@ -41,8 +42,8 @@
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource Brushes.Accent.Gradient}" />
-                                    <Setter TargetName="BorderRoot" Property="BorderBrush" Value="{DynamicResource Brushes.Accent.Gradient}" />
+                                    <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource Brushes.Accent.Gradient2}" />
+                                    <Setter TargetName="BorderRoot" Property="BorderBrush" Value="{DynamicResource Brushes.Accent.Gradient2}" />
                                     <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{DynamicResource Brushes.IdealForeground}" />
                                 </Trigger>
                                 <Trigger Property="IsChecked" Value="true">

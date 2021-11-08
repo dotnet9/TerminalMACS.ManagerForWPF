@@ -298,7 +298,8 @@
         public int PageIndex
         {
             get => (int)this.GetValue(PageIndexProperty);
-            set => this.SetValue(PageIndexProperty, value);
+            // 使用SetCurrentValue原因参考：https://wpf.2000things.com/2010/12/06/147-use-setcurrentvalue-when-you-want-to-set-a-dependency-property-value-from-within-a-control/
+            set => this.SetCurrentValue(PageIndexProperty, value);
         }
 
         #endregion
