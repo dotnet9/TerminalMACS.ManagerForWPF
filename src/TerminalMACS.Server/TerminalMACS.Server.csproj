@@ -13,9 +13,9 @@
     <OutputPath>..\Build\Release\Modules</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="MaterialDesignColors" Version="2.0.0" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.0.0" />
-    <PackageReference Include="Prism.Wpf" Version="8.0.0.1909" />
+    <PackageReference Include="MaterialDesignColors" Version="2.0.4-ci82" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.3.0-ci82" />
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />

@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="WPFLocalizeExtension" Version="3.8.0" />
-    <PackageReference Include="XAMLMarkupExtensions" Version="2.0.0" />
+    <PackageReference Include="WPFLocalizeExtension" Version="3.9.0" />
+    <PackageReference Include="XAMLMarkupExtensions" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
