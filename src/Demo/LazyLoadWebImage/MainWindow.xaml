@@ -5,15 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Test lazy loading web images" Height="500" Width="525">
-    <ListView Grid.Row="1" x:Name="lvImages" Width="500" Height="400"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DataGrid>
+            <DataGrid.Columns>
+                
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <ListView Grid.Row="1" x:Name="lvImages" Width="500" Height="400"
                   ScrollViewer.IsDeferredScrollingEnabled="False" 
               ScrollViewer.ScrollChanged="lvImages_ScrollChanged"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                   ScrollViewer.VerticalScrollBarVisibility="Auto">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <Image Source="{Binding IsAsync=True}" Width="300" Stretch="Uniform"/>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding IsAsync=True}" Width="300" Stretch="Uniform"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </Window>

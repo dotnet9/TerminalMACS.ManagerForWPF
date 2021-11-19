@@ -160,5 +160,12 @@ namespace TerminalMACS.TestDemo.Views
             view.Owner = Application.Current.MainWindow;
             view.Show();
         }
+
+		private void ShowLoginView3_Click(object sender, RoutedEventArgs e)
+        {
+            var view = new LoginView3();
+            view.Owner = Application.Current.MainWindow;
+            view.Show();
+        }
 	}
 }

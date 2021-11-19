@@ -47,6 +47,7 @@
                     <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_FoodBtnContent}}" Click="ShowFoodLoginUI_Click"/>
                     <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_LoginView1BtnContent}}" Click="ShowLoginView1_Click"/>
                     <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_LoginView2BtnContent}}" Click="ShowLoginView2_Click"/>
+                    <Button Content="登录窗体3" Click="ShowLoginView3_Click"/>
                 </StackPanel>
             </materialDesign:Card>
             <materialDesign:Card 
