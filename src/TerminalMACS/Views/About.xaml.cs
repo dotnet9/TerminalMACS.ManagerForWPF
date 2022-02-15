@@ -1,15 +1,14 @@
-﻿using AduSkin.Controls.Metro;
-using System.Reflection;
+﻿using System.Reflection;
+using AduSkin.Controls.Metro;
 
-namespace TerminalMACS.Views
+namespace TerminalMACS.Views;
+
+public partial class About : MetroWindow
 {
-    public partial class About : MetroWindow
+    public About()
     {
-        public About()
-        {
-            InitializeComponent();
+        InitializeComponent();
 
-            this.txtVersion.Text = $"v {Assembly.GetExecutingAssembly().GetName().Version.ToString()}";
-        }
+        this.txtVersion.Text = $"v {Assembly.GetExecutingAssembly().GetName().Version.ToString()}";
     }
 }

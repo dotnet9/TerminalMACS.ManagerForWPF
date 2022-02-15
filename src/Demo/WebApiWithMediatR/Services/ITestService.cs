@@ -1,7 +1,6 @@
-namespace WebApiWithMediatR.Services
+namespace WebApiWithMediatR.Services;
+
+public interface ITestService
 {
-  public interface ITestService
-  {
     void WriteLine();
-  }
 }

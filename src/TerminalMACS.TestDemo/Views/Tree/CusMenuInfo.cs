@@ -1,83 +1,87 @@
-﻿using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using Prism.Mvvm;
 
-namespace TerminalMACS.TestDemo.Views.Tree
+namespace TerminalMACS.TestDemo.Views.Tree;
+
+/// <summary>
+///     menu type
+/// </summary>
+public enum CusMenuType
 {
-	/// <summary>
-	/// menu type
-	/// </summary>
-	public enum CusMenuType { RemoveChild = 1 }
-	/// <summary>
-	/// the class of client brower view menu details info
-	/// </summary>
-	public class CusMenuInfo : BindableBase
-	{
-		public CusMenuInfo(int level, string name,string icon)
-		{
-			this.Level = level;
-			this.Name = name;
-			this.Icon = icon;
-		}
-		public int Level { get; set; }
-		/// <summary>
-		/// get or set the client type
-		/// </summary>
-		public string ClientType { get; set; }
-		/// <summary>
-		/// get or set the menu type
-		/// </summary>
-		public int MenuType { get; set; }
-		private bool _IsEnabled;
-		/// <summary>
-		/// 获取或者设置菜单是否可用
-		/// </summary>
-		public bool IsEnabled
-		{
-			get { return this._IsEnabled; }
-			set { this.SetProperty(ref _IsEnabled, value); }
-		}
+    RemoveChild = 1
+}
 
-		private string _Name;
-		/// <summary>
-		/// get or set the menu name
-		/// </summary>
-		public string Name
-		{
-			get { return this._Name; }
-			set { this.SetProperty(ref _Name, value); }
-		}
-		private ObservableCollection<CusMenuInfo> _Children;
-		/// <summary>
-		/// get or set the children
-		/// </summary>
-		public ObservableCollection<CusMenuInfo> Children
-		{
-			get { return this._Children; }
-			set { this.SetProperty(ref _Children, value); }
-		}
+/// <summary>
+///     the class of client brower view menu details info
+/// </summary>
+public class CusMenuInfo : BindableBase
+{
+    private ObservableCollection<CusMenuInfo> _Children;
+    private bool _IsEnabled;
 
-		private bool _IsSelected = false;
-		/// <summary>
-		/// new IsSelected
-		/// </summary>
-		public bool IsSelected
-		{
-			get { return this._IsSelected; ; }
-			set
-			{
-				this.SetProperty(ref _IsSelected, value);
-			}
-		}
-		public string Icon { get; set; }
+    private bool _IsSelected;
 
-		/// <summary>
-		/// 获取或者父级目录
-		/// </summary>
-		public CusMenuInfo Parent { get; set; }
-	}
+    private string _Name;
+
+    public CusMenuInfo(int level, string name, string icon)
+    {
+        Level = level;
+        Name = name;
+        Icon = icon;
+    }
+
+    public int Level { get; set; }
+
+    /// <summary>
+    ///     get or set the client type
+    /// </summary>
+    public string ClientType { get; set; }
+
+    /// <summary>
+    ///     get or set the menu type
+    /// </summary>
+    public int MenuType { get; set; }
+
+    /// <summary>
+    ///     获取或者设置菜单是否可用
+    /// </summary>
+    public bool IsEnabled
+    {
+        get => _IsEnabled;
+        set => SetProperty(ref _IsEnabled, value);
+    }
+
+    /// <summary>
+    ///     get or set the menu name
+    /// </summary>
+    public string Name
+    {
+        get => _Name;
+        set => SetProperty(ref _Name, value);
+    }
+
+    /// <summary>
+    ///     get or set the children
+    /// </summary>
+    public ObservableCollection<CusMenuInfo> Children
+    {
+        get => _Children;
+        set => SetProperty(ref _Children, value);
+    }
+
+    /// <summary>
+    ///     new IsSelected
+    /// </summary>
+    public bool IsSelected
+    {
+        get => _IsSelected;
+        set => SetProperty(ref _IsSelected, value);
+    }
+
+    public string Icon { get; set; }
+
+    /// <summary>
+    ///     获取或者父级目录
+    /// </summary>
+    public CusMenuInfo Parent { get; set; }
 }

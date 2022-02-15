@@ -7,12 +7,13 @@
              mc:Ignorable="d"
              Height="auto" Width="auto">
     <Grid>
-        <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight, Duration=0:0:0.8}">
+        <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide"
+                                             OpeningEffect="{materialDesign:TransitionEffect SlideInFromRight, Duration=0:0:0.8}">
             <StackPanel Background="#33ff0000">
-                <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="White" Text="https://dotnet9.com/category/it-technology/cplusplus"/>
-                <Image Source="https://img.dotnet9.com/20200124170540.png"/>
+                <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="White"
+                         Text="https://dotnet9.com/category/it-technology/cplusplus" />
+                <Image Source="https://img.dotnet9.com/20200124170540.png" />
             </StackPanel>
         </materialDesign:TransitioningContent>
     </Grid>
 </UserControl>
-

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <AppendTargetFrameworkToOutputPath>Flase</AppendTargetFrameworkToOutputPath>
     <UseWPF>true</UseWPF>
     <AssemblyName>TerminalMACS.Home</AssemblyName>
@@ -14,10 +14,10 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AduSkin" Version="1.1.1.9" />
-    <PackageReference Include="HandyControl" Version="3.2.0" />
-    <PackageReference Include="MaterialDesignColors" Version="2.0.4-ci82" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.3.0-ci82" />
-    <PackageReference Include="Panuon.UI.Silver" Version="2.2.13.3-alpha" />
+    <PackageReference Include="HandyControl" Version="3.3.0" />
+    <PackageReference Include="MaterialDesignColors" Version="2.0.5-ci74" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.4.0-ci74" />
+    <PackageReference Include="Panuon.UI.Silver" Version="2.2.17-alpha" />
     <PackageReference Include="Prism.Wpf" Version="8.1.97" />
   </ItemGroup>
   <ItemGroup>

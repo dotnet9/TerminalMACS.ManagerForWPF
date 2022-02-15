@@ -3,7 +3,6 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
-
 #if !NETCOREAPP
 using System.Drawing;
 using WpfExtensions.Xaml.ExtensionMethods;
@@ -14,12 +13,14 @@ namespace WpfExtensions.Xaml.Markup
     [MarkupExtensionReturnType(typeof(object))]
     public class I18nExtension : MarkupExtension
     {
-        private static readonly I18nResourceConverter I18NResourceConverter = new I18nResourceConverter();
+        private static readonly I18nResourceConverter I18NResourceConverter = new();
 
-        [ConstructorArgument(nameof(Key))]
-        public ComponentResourceKey Key { get; set; }
+        public I18nExtension(ComponentResourceKey key)
+        {
+            Key = key;
+        }
 
-        public I18nExtension(ComponentResourceKey key) => Key = key;
+        [ConstructorArgument(nameof(Key))] public ComponentResourceKey Key { get; set; }
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
@@ -47,7 +48,6 @@ namespace WpfExtensions.Xaml.Markup
 #if NETCOREAPP
                 return value;
 #else
-
                 return value switch
                 {
                     Bitmap bitmap => bitmap.ToBitmapSource(),

@@ -1,16 +1,15 @@
 ﻿using System.Windows;
 
-namespace LazyLoadWebImage
+namespace LazyLoadWebImage;
+
+/// <summary>
+///     Interaction logic for PaginationTest.xaml
+/// </summary>
+public partial class PaginationTest : Window
 {
-	/// <summary>
-	/// Interaction logic for PaginationTest.xaml
-	/// </summary>
-	public partial class PaginationTest : Window
-	{
-		public PaginationTest()
-		{
-			InitializeComponent();
-			this.DataContext = new PaginationTestViewModel();
-		}
-	}
+    public PaginationTest()
+    {
+        InitializeComponent();
+        DataContext = new PaginationTestViewModel();
+    }
 }

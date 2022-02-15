@@ -8,18 +8,25 @@
             <ResourceDictionary.MergedDictionaries>
                 <!--  AduSkin  -->
                 <ResourceDictionary Source="pack://application:,,,/TerminalMACS;component/AduSkinStyle/BaseStyle.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/TerminalMACS;component/AduSkinStyle/ShowControl.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/TerminalMACS;component/AduSkinStyle/ShowControl.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/TerminalMACS;component/AduSkinStyle/Converter.xaml" />
 
                 <!--  Learn from Accelerider.Windows  -->
-                <ResourceDictionary Source="pack://application:,,,/TerminalMACS.Controls;component/Styles/TerminalMACS.Brushes.Navy.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/TerminalMACS.Controls;component/Styles/TerminalMACS.Styles.TabControl.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/TerminalMACS.Controls;component/Styles/TerminalMACS.Brushes.Navy.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/TerminalMACS.Controls;component/Styles/TerminalMACS.Styles.TabControl.xaml" />
 
                 <!--  MaterialDesignThemes  -->
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

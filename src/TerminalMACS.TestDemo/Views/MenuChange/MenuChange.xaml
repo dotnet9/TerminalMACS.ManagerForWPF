@@ -5,92 +5,111 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Height="600" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" >
+        Height="600" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
     <Grid Background="#FFEEEEEE" MouseDown="Grid_MouseDown">
         <StackPanel VerticalAlignment="Top">
-            <Grid Background="#FF0069C0" Height="10"/>
+            <Grid Background="#FF0069C0" Height="10" />
             <Grid Margin="5">
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                    <TextBlock Text="Dotnet9.com" VerticalAlignment="Center" FontSize="20" FontFamily="Champagne &amp; Limousines" Margin="20 0"/>
-                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">
-                        <materialDesign:PackIcon Kind="Wechat"/>
+                    <TextBlock Text="Dotnet9.com" VerticalAlignment="Center" FontSize="20"
+                               FontFamily="Champagne &amp; Limousines" Margin="20 0" />
+                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0"
+                            Foreground="Gray">
+                        <materialDesign:PackIcon Kind="Wechat" />
                     </Button>
-                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">
-                        <materialDesign:PackIcon Kind="Qqchat"/>
+                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0"
+                            Foreground="Gray">
+                        <materialDesign:PackIcon Kind="Qqchat" />
                     </Button>
-                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">
-                        <materialDesign:PackIcon Kind="MicrosoftGithub"/>
+                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0"
+                            Foreground="Gray">
+                        <materialDesign:PackIcon Kind="MicrosoftGithub" />
                     </Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0">
-                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">
-                        <materialDesign:PackIcon Kind="BellOutline"/>
+                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0"
+                            Foreground="Gray">
+                        <materialDesign:PackIcon Kind="BellOutline" />
                     </Button>
-                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Margin="0 0 10 0">
-                        <materialDesign:PackIcon Kind="Settings"/>
+                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0"
+                            Foreground="Gray" Margin="0 0 10 0">
+                        <materialDesign:PackIcon Kind="Settings" />
                     </Button>
-                    <Button x:Name="ButtonFechar" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Click="ButtonFechar_Click">
-                        <materialDesign:PackIcon Kind="Close"/>
+                    <Button x:Name="ButtonFechar" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}"
+                            Padding="0" Foreground="Gray" Click="ButtonFechar_Click">
+                        <materialDesign:PackIcon Kind="Close" />
                     </Button>
                 </StackPanel>
             </Grid>
         </StackPanel>
         <Grid Margin="250 55 0 0">
-            <Grid x:Name="GridPrincipal" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Grid x:Name="GridPrincipal" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Grid>
         <Grid Width="250" HorizontalAlignment="Left" Background="#FF222222">
-            <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
-                <Grid x:Name="GridCursor" Margin="0 100 0 0" Background="#FF0069C0" Width="10" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top"/>
+            <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide"
+                                                 OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
+                <Grid x:Name="GridCursor" Margin="0 100 0 0" Background="#FF0069C0" Width="10"
+                      HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" />
             </materialDesign:TransitioningContent>
-            <Image Source="https://img.dotnet9.com/logo-head.png" VerticalAlignment="Top"/>
-            <Image Source="https://img.dotnet9.com/logo-foot.png" VerticalAlignment="Bottom"/>
+            <Image Source="https://img.dotnet9.com/logo-head.png" VerticalAlignment="Top" />
+            <Image Source="https://img.dotnet9.com/logo-foot.png" VerticalAlignment="Bottom" />
             <ListView x:Name="ListViewMenu" Margin="0 100" Foreground="LightGray"
-                      FontFamily="Champagne &amp; Limousines" FontSize="18" 
+                      FontFamily="Champagne &amp; Limousines" FontSize="18"
                       SelectionChanged="ListViewMenu_SelectionChanged" SelectedIndex="0">
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Home" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="首页" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                        <materialDesign:PackIcon Kind="Home" Width="30" Height="30" VerticalAlignment="Center"
+                                                 Margin="5" />
+                        <TextBlock Text="首页" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="LanguageCsharp" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="WPF" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                        <materialDesign:PackIcon Kind="LanguageCsharp" Width="30" Height="30"
+                                                 VerticalAlignment="Center" Margin="5" />
+                        <TextBlock Text="WPF" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="LanguageCsharp" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Winform" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                        <materialDesign:PackIcon Kind="LanguageCsharp" Width="30" Height="30"
+                                                 VerticalAlignment="Center" Margin="5" />
+                        <TextBlock Text="Winform" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="LanguageCsharp" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="ASP.NET CORE" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                        <materialDesign:PackIcon Kind="LanguageCsharp" Width="30" Height="30"
+                                                 VerticalAlignment="Center" Margin="5" />
+                        <TextBlock Text="ASP.NET CORE" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="LanguageCsharp" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Xamarin.Forms" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                        <materialDesign:PackIcon Kind="LanguageCsharp" Width="30" Height="30"
+                                                 VerticalAlignment="Center" Margin="5" />
+                        <TextBlock Text="Xamarin.Forms" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="LanguageCpp" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="C++" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                        <materialDesign:PackIcon Kind="LanguageCpp" Width="30" Height="30" VerticalAlignment="Center"
+                                                 Margin="5" />
+                        <TextBlock Text="C++" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
                     </StackPanel>
                 </ListViewItem>
             </ListView>

@@ -1,21 +1,18 @@
-﻿using System;
+﻿namespace ObserverModel._4;
 
-namespace ObserverModel._4
+internal class Program
 {
-	class Program
-	{
-		//static void Main(string[] args)
-		//{
-		//	ConcreteSubject s = new ConcreteSubject();
+    //static void Main(string[] args)
+    //{
+    //	ConcreteSubject s = new ConcreteSubject();
 
-		//	s.Attach(new ConcreteObserver(s, "X"));
-		//	s.Attach(new ConcreteObserver(s, "Y"));
-		//	s.Attach(new ConcreteObserver(s, "Z"));
+    //	s.Attach(new ConcreteObserver(s, "X"));
+    //	s.Attach(new ConcreteObserver(s, "Y"));
+    //	s.Attach(new ConcreteObserver(s, "Z"));
 
-		//	s.SubjectState = "ABC";
-		//	s.Notify();
+    //	s.SubjectState = "ABC";
+    //	s.Notify();
 
-		//	Console.Read();
-		//}
-	}
+    //	Console.Read();
+    //}
 }

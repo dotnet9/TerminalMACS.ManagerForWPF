@@ -7,24 +7,24 @@
         mc:Ignorable="d"
         Title="TreeViewDemo" Height="800" Width="800">
     <Window.Resources>
-        <ResourceDictionary Source="Styles/TreeStyles.xaml"/>
+        <ResourceDictionary Source="Styles/TreeStyles.xaml" />
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Border>
             <Border.Background>
-                <ImageBrush ImageSource="/TerminalMACS.TestDemo;component/Views/Tree/Images/sidebar-3.jpg" Stretch="UniformToFill"/>                
+                <ImageBrush ImageSource="/TerminalMACS.TestDemo;component/Views/Tree/Images/sidebar-3.jpg"
+                            Stretch="UniformToFill" />
             </Border.Background>
             <Grid>
-                <Rectangle Fill="#55ffffff"/>
+                <Rectangle Fill="#55ffffff" />
                 <TreeView ItemsSource="{Binding}"
-                                 ItemTemplate="{StaticResource treeHierTemp}"                 
-                                 Grid.RowSpan="4" x:Name="tvLeft">
-                </TreeView>
+                          ItemTemplate="{StaticResource treeHierTemp}"
+                          Grid.RowSpan="4" x:Name="tvLeft" />
             </Grid>
         </Border>
     </Grid>

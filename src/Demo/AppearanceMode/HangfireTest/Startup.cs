@@ -1,3 +1,4 @@
+using System;
 using Hangfire;
 using Hangfire.MemoryStorage;
 using HangfireTest.Controllers;
@@ -9,66 +10,63 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System;
 
-namespace HangfireTest
+namespace HangfireTest;
+
+public class Startup
 {
-	public class Startup
-	{
-		public Startup(IConfiguration configuration)
-		{
-			Configuration = configuration;
-		}
+    private static TestHangfireTask testHangfireTask;
 
-		public IConfiguration Configuration { get; }
+    public Startup(IConfiguration configuration)
+    {
+        Configuration = configuration;
+    }
 
-		// This method gets called by the runtime. Use this method to add services to the container.
-		public void ConfigureServices(IServiceCollection services)
-		{
-			services.AddLogDashboard();
-			services.AddHangfire(x => x.UseStorage(new MemoryStorage()));
+    public IConfiguration Configuration { get; }
 
-			services.AddControllers();
-			services.AddSwaggerGen(c =>
-			{
-				c.SwaggerDoc("v1", new OpenApiInfo { Title = "HangfireTest", Version = "v1" });
-			});
-			services.AddSingleton<ITestService, TestService>();
-		}
-		static TestHangfireTask testHangfireTask = null;
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-		{
-			app.UseHangfireServer();
-			app.UseHangfireDashboard();
-			RecurringJob.AddOrUpdate(() => HangfireTask(), Cron.Minutely());
+    // This method gets called by the runtime. Use this method to add services to the container.
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddLogDashboard();
+        services.AddHangfire(x => x.UseStorage(new MemoryStorage()));
 
-			if (env.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-				app.UseSwagger();
-				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HangfireTest v1"));
-			}
+        services.AddControllers();
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "HangfireTest", Version = "v1" });
+        });
+        services.AddSingleton<ITestService, TestService>();
+    }
 
-			app.UseLogDashboard();
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        app.UseHangfireServer();
+        app.UseHangfireDashboard();
+        RecurringJob.AddOrUpdate(() => HangfireTask(), Cron.Minutely());
 
-			app.UseHttpsRedirection();
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HangfireTest v1"));
+        }
 
-			app.UseRouting();
+        app.UseLogDashboard();
 
-			app.UseAuthorization();
+        app.UseHttpsRedirection();
 
-			app.UseEndpoints(endpoints =>
-			{
-				endpoints.MapControllers();
-			});
-			testHangfireTask = new TestHangfireTask("外部传入名称");
-			testHangfireTask.Open();
-		}
+        app.UseRouting();
 
-		public void HangfireTask()
-		{
-			Console.WriteLine("测试Hangfire" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
-		}
-	}
+        app.UseAuthorization();
+
+        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        testHangfireTask = new TestHangfireTask("外部传入名称");
+        testHangfireTask.Open();
+    }
+
+    public void HangfireTask()
+    {
+        Console.WriteLine("测试Hangfire" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+    }
 }

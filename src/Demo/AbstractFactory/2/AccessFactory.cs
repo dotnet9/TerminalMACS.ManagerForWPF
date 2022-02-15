@@ -1,16 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace AbstractFactory._2;
 
-namespace AbstractFactory._2
+internal class AccessFactory : IFactory
 {
-  class AccessFactory : IFactory
-  {
     public IUser CreateUser()
     {
-      return new AccessUser();
+        return new AccessUser();
     }
-  }
 }

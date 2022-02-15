@@ -1,85 +1,74 @@
-﻿using IdentityModel.OidcClient.Browser;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using IdentityModel.OidcClient.Browser;
 
-namespace TerminalMACS
+namespace TerminalMACS;
+
+public class WpfEmbeddedBrowser : IBrowser
 {
-    public class WpfEmbeddedBrowser : IBrowser
+    private BrowserOptions _options;
+
+    public async Task<BrowserResult> InvokeAsync(BrowserOptions options, CancellationToken cancellationToken = default)
     {
-        private BrowserOptions _options = null;
+        _options = options;
 
-        public WpfEmbeddedBrowser()
+        var window = new Window
         {
+            Width = 900,
+            Height = 625,
+            Title = "TerminalMACS IdentityServer Login"
+        };
 
-        }
+        // Note: Unfortunately, WebBrowser is very limited and does not give sufficient information for 
+        //   robust error handling. The alternative is to use a system browser or third party embedded
+        //   library (which tend to balloon the size of your application and are complicated).
+        var webBrowser = new WebBrowser();
 
-        public async Task<BrowserResult> InvokeAsync(BrowserOptions options, CancellationToken cancellationToken = default)
+        var signal = new SemaphoreSlim(0, 1);
+
+        var result = new BrowserResult
         {
-            _options = options;
-
-            var window = new Window()
+            ResultType = BrowserResultType.UserCancel
+        };
+        var isSignalRelease = false;
+        webBrowser.Navigating += (s, e) =>
+        {
+            if (BrowserIsNavigatingToRedirectUri(e.Uri))
             {
-                Width = 900,
-                Height = 625,
-                Title = "TerminalMACS IdentityServer Login"
-            };
+                e.Cancel = true;
 
-            // Note: Unfortunately, WebBrowser is very limited and does not give sufficient information for 
-            //   robust error handling. The alternative is to use a system browser or third party embedded
-            //   library (which tend to balloon the size of your application and are complicated).
-            var webBrowser = new WebBrowser();
-
-            var signal = new SemaphoreSlim(0, 1);
-
-            var result = new BrowserResult()
-            {
-                ResultType = BrowserResultType.UserCancel
-            };
-            bool isSignalRelease = false;
-            webBrowser.Navigating += (s, e) =>
-            {
-                if (BrowserIsNavigatingToRedirectUri(e.Uri))
+                result = new BrowserResult
                 {
-                    e.Cancel = true;
+                    ResultType = BrowserResultType.Success,
+                    Response = e.Uri.AbsoluteUri
+                };
 
-                    result = new BrowserResult()
-                    {
-                        ResultType = BrowserResultType.Success,
-                        Response = e.Uri.AbsoluteUri
-                    };
+                signal.Release();
+                isSignalRelease = true;
 
-                    signal.Release();
-                    isSignalRelease = true;
+                window.Close();
+            }
+        };
 
-                    window.Close();
-                }
-            };
-
-            window.Closing += (s, e) =>
-            {
-                if (!isSignalRelease)
-                {
-                    signal.Release();
-                }
-            };
-
-            window.Content = webBrowser;
-            window.Show();
-            webBrowser.Source = new Uri(_options.StartUrl);
-
-            await signal.WaitAsync();
-
-            return result;
-        }
-
-        private bool BrowserIsNavigatingToRedirectUri(Uri uri)
+        window.Closing += (s, e) =>
         {
-            return uri.AbsoluteUri.StartsWith(_options.EndUrl);
-        }
+            if (!isSignalRelease) signal.Release();
+        };
+
+        window.Content = webBrowser;
+        window.Show();
+        webBrowser.Source = new Uri(_options.StartUrl);
+
+        await signal.WaitAsync();
+
+        return result;
+    }
+
+    private bool BrowserIsNavigatingToRedirectUri(Uri uri)
+    {
+        return uri.AbsoluteUri.StartsWith(_options.EndUrl);
     }
 }

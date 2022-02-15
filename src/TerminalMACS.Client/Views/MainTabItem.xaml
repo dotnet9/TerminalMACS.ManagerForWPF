@@ -1,36 +1,37 @@
 ﻿<TabItem x:Class="TerminalMACS.Client.Views.MainTabItem"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:markup="clr-namespace:WpfExtensions.Xaml.Markup;assembly=WpfExtensions.Xaml"
-             xmlns:i18NResources="clr-namespace:TerminalMACS.Client.I18nResources"
-             mc:Ignorable="d">
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         xmlns:markup="clr-namespace:WpfExtensions.Xaml.Markup;assembly=WpfExtensions.Xaml"
+         xmlns:i18NResources="clr-namespace:TerminalMACS.Client.I18nResources"
+         mc:Ignorable="d">
     <TabItem.Header>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="2"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="25" />
+                <RowDefinition Height="2" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <materialDesign:PackIcon Kind="Terminal" 
+            <materialDesign:PackIcon Kind="Terminal"
                                      Foreground="{StaticResource LightGreyBackgroundBrush}"
-                                     HorizontalAlignment="Center" Height="22" Width="22"/>
-            <TextBlock Grid.Row="2" Text="{markup:I18n {x:Static i18NResources:Language.MainTabItm_Header}}" HorizontalAlignment="Center" 
-                       Foreground="{StaticResource LightGreyBackgroundBrush}" FontSize="10"/>
+                                     HorizontalAlignment="Center" Height="22" Width="22" />
+            <TextBlock Grid.Row="2" Text="{markup:I18n {x:Static i18NResources:Language.MainTabItm_Header}}"
+                       HorizontalAlignment="Center"
+                       Foreground="{StaticResource LightGreyBackgroundBrush}" FontSize="10" />
         </Grid>
     </TabItem.Header>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Button Content="Flame1" Click="ShowFlame1_Click"/>
+        <Button Content="Flame1" Click="ShowFlame1_Click" />
 
         <Grid Grid.Row="1">
             <AdornerDecorator>
-                <Border CornerRadius="50" x:Name="spFlamePanel" ClipToBounds="True"/>
+                <Border CornerRadius="50" x:Name="spFlamePanel" ClipToBounds="True" />
             </AdornerDecorator>
 
             <Grid.Clip>
@@ -38,7 +39,7 @@
             </Grid.Clip>
         </Grid>
         <Rectangle x:Name="ButtonPolygon" Fill="Black" VerticalAlignment="Bottom" Grid.Row="1"
-                   Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}, Path=ActualWidth}" 
+                   Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}, Path=ActualWidth}"
                    Height="40" />
     </Grid>
 </TabItem>

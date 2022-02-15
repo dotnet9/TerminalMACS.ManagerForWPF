@@ -4,46 +4,44 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:local="clr-namespace:TerminalMACS.TestDemo.Views.LoginUI"
         mc:Ignorable="d"
         Title="登录" Height="450" Width="800">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <!--Primary-->
-            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#FFCDD2"/>
-            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#FF333333"/>
-            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#f44336"/>
-            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#FFEEEEEE"/>
-            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#b71c1c"/>
-            <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#FFFFFFFF"/>
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#f44336" />
             <!--Accent-->
-            <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#ff1744"/>
-            <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#FFFFFF"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid Background="#FF1E64AA">
         <Grid Width="300" Height="400">
-            <Border CornerRadius="3" HorizontalAlignment="Center" Width="290" Height="350" VerticalAlignment="Center" Background="White" Margin="0 35 0 0">
+            <Border CornerRadius="3" HorizontalAlignment="Center" Width="290" Height="350" VerticalAlignment="Center"
+                    Background="White" Margin="0 35 0 0">
                 <StackPanel Margin="0 50 0 0">
-                    <TextBlock Text="请登录您的账号" HorizontalAlignment="Center" Foreground="Gray" Margin="30" FontSize="21" FontFamily="Champagne &amp; Limousines" FontWeight="SemiBold"/>
-                    <TextBox Margin="20 10" materialDesign:HintAssist.Hint="邮箱"/>
-                    <PasswordBox Margin="20 10" materialDesign:HintAssist.Hint="密码"/>
+                    <TextBlock Text="请登录您的账号" HorizontalAlignment="Center" Foreground="Gray" Margin="30" FontSize="21"
+                               FontFamily="Champagne &amp; Limousines" FontWeight="SemiBold" />
+                    <TextBox Margin="20 10" materialDesign:HintAssist.Hint="邮箱" />
+                    <PasswordBox Margin="20 10" materialDesign:HintAssist.Hint="密码" />
                     <Grid Margin="20 0">
-                        <CheckBox Content="记住我" HorizontalAlignment="Left"/>
-                        <TextBlock Text="忘记密码?" Foreground="#FF2259D1" HorizontalAlignment="Right" Cursor="Hand"/>
+                        <CheckBox Content="记住我" HorizontalAlignment="Left" />
+                        <TextBlock Text="忘记密码?" Foreground="#FF2259D1" HorizontalAlignment="Right" Cursor="Hand" />
                     </Grid>
-                    <Button Content="登录" Margin="20 30"/>
+                    <Button Content="登录" Margin="20 30" />
                 </StackPanel>
             </Border>
-            <Border Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Top" Background="White" CornerRadius="50">
+            <Border Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Top" Background="White"
+                    CornerRadius="50">
                 <Border.Effect>
-                    <DropShadowEffect BlurRadius="15" ShadowDepth="0"/>
+                    <DropShadowEffect BlurRadius="15" ShadowDepth="0" />
                 </Border.Effect>
-                <materialDesign:PackIcon Kind="Mail" Foreground="{StaticResource PrimaryHueMidBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="25"/>
+                <materialDesign:PackIcon Kind="Mail" Foreground="{StaticResource PrimaryHueMidBrush}"
+                                         HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="25" />
             </Border>
         </Grid>
     </Grid>

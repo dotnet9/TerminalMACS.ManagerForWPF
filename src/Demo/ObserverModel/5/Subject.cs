@@ -1,12 +1,10 @@
-﻿namespace ObserverModel._5
-{
-	/// <summary>
-	/// 通知者接口
-	/// </summary>
-	interface Subject
-	{
-		void Notify();
+﻿namespace ObserverModel._5;
 
-		string SubjectState { get; set; }
-	}
+/// <summary>
+///     通知者接口
+/// </summary>
+internal interface Subject
+{
+    string SubjectState { get; set; }
+    void Notify();
 }

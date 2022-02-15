@@ -1,16 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AdapterMode._1
+namespace AdapterMode._1;
+
+internal class Adaptee
 {
-  class Adaptee
-  {
     public void SpecificRequest()
     {
-      Console.WriteLine("特殊请求");
+        Console.WriteLine("特殊请求");
     }
-  }
 }

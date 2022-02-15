@@ -1,11 +1,9 @@
+namespace AbstractFactory._2;
 
-namespace AbstractFactory._2
+internal class SqlServerFactory : IFactory
 {
-  class SqlServerFactory : IFactory
-  {
     public IUser CreateUser()
     {
-      return new SqlserverUser();
+        return new SqlserverUser();
     }
-  }
 }

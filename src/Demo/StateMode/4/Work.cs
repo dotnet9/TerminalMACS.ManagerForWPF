@@ -1,22 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace StateMode._4;
 
-namespace StateMode._4
+public class Work
 {
-  public class Work
-  {
-    public State current { get; set; }
-
     /// <summary>
-    /// 工作初始化为上午工作状态，即上午9点开始上班
+    ///     工作初始化为上午工作状态，即上午9点开始上班
     /// </summary>
     public Work()
     {
-      current = new ForenoonState();
+        current = new ForenoonState();
     }
+
+    public State current { get; set; }
 
     public int Hour { get; set; }
 
@@ -24,12 +18,11 @@ namespace StateMode._4
 
     public void SetState(State state)
     {
-      this.current = state;
+        current = state;
     }
 
     public void WriteProgram()
     {
-      current.WriteProgram(this);
+        current.WriteProgram(this);
     }
-  }
 }

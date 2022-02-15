@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:customcontrols="clr-namespace:TerminalMACS.TestDemo.Views.DriveStorage.CustomControls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:TerminalMACS.TestDemo.Views.DriveStorage"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MainWindow"
     Width="1438"
@@ -124,7 +123,9 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Bottom">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="/TerminalMACS.TestDemo;component/Views/DriveStorage/Assets/profile1.jpg" Stretch="UniformToFill" />
+                            <ImageBrush
+                                ImageSource="/TerminalMACS.TestDemo;component/Views/DriveStorage/Assets/profile1.jpg"
+                                Stretch="UniformToFill" />
                         </Ellipse.Fill>
                     </Ellipse>
                     <Grid
@@ -372,7 +373,6 @@
                 </Grid>
 
                 <Grid
-                    Grid.Column="2"
                     Height="82"
                     Margin="0,15,0,0"
                     HorizontalAlignment="Left"
@@ -389,7 +389,9 @@
                         VerticalAlignment="Center"
                         FontSize="14"
                         FontWeight="SemiBold"
-                        Foreground="Black"><Run Text="Available" /><LineBreak /><Run Text="Space" /></TextBlock>
+                        Foreground="Black">
+                        <Run Text="Available" /><LineBreak /><Run Text="Space" />
+                    </TextBlock>
 
 
                     <!--  If you remember we had designed a circular progressbar in our videos, i will provide link for that video so u guys can design it and later then import it here  -->
@@ -412,7 +414,6 @@
                 </Grid>
 
                 <Grid
-                    Grid.Column="2"
                     Height="82"
                     Margin="0,15,0,0"
                     HorizontalAlignment="Left"
@@ -429,7 +430,9 @@
                         VerticalAlignment="Center"
                         FontSize="14"
                         FontWeight="SemiBold"
-                        Foreground="Black"><Run Text="Shared" /><LineBreak /><Run Text="files" /></TextBlock>
+                        Foreground="Black">
+                        <Run Text="Shared" /><LineBreak /><Run Text="files" />
+                    </TextBlock>
 
 
                     <!--  If you remember we had designed a circular progressbar in our videos, i will provide link for that video so u guys can design it and later then import it here  -->
@@ -466,10 +469,13 @@
                 VerticalAlignment="Bottom"
                 FontSize="18"
                 FontWeight="SemiBold"
-                TextAlignment="Center"><Run Text="Unlock more storage now!" /><Run /><LineBreak /><Run
+                TextAlignment="Center">
+                <Run Text="Unlock more storage now!" /><Run /><LineBreak />
+                <Run
                     FontSize="15"
                     Foreground="DimGray"
-                    Text="Upgrade to Drive Plus." /></TextBlock>
+                    Text="Upgrade to Drive Plus." />
+            </TextBlock>
 
 
             <Button

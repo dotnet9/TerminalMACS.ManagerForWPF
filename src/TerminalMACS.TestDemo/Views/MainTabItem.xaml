@@ -1,72 +1,83 @@
 ﻿<TabItem x:Class="TerminalMACS.TestDemo.Views.MainTabItem"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:markup="clr-namespace:WpfExtensions.Xaml.Markup;assembly=WpfExtensions.Xaml"
-             xmlns:i18NResources="clr-namespace:TerminalMACS.TestDemo.I18nResources"
-             mc:Ignorable="d">
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         xmlns:markup="clr-namespace:WpfExtensions.Xaml.Markup;assembly=WpfExtensions.Xaml"
+         xmlns:i18NResources="clr-namespace:TerminalMACS.TestDemo.I18nResources"
+         mc:Ignorable="d">
     <TabItem.Header>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="2"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="25" />
+                <RowDefinition Height="2" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <materialDesign:PackIcon Kind="Server"
-                                     Foreground="{StaticResource LightGreyBackgroundBrush}" 
-                                     HorizontalAlignment="Center" Height="22" Width="22"/>
-            <TextBlock Grid.Row="2" Text="{markup:I18n {x:Static i18NResources:Language.MainTabItem_Header}}" 
+                                     Foreground="{StaticResource LightGreyBackgroundBrush}"
+                                     HorizontalAlignment="Center" Height="22" Width="22" />
+            <TextBlock Grid.Row="2" Text="{markup:I18n {x:Static i18NResources:Language.MainTabItem_Header}}"
                        HorizontalAlignment="Center"
-                       Foreground="{StaticResource LightGreyBackgroundBrush}" FontSize="10"/>
+                       Foreground="{StaticResource LightGreyBackgroundBrush}" FontSize="10" />
         </Grid>
     </TabItem.Header>
     <Border Background="#ccc">
         <WrapPanel Margin="10">
             <WrapPanel.Resources>
                 <Style TargetType="{x:Type materialDesign:Card}">
-                    <Setter Property="Margin" Value="10"/>
+                    <Setter Property="Margin" Value="10" />
                 </Style>
             </WrapPanel.Resources>
-            <materialDesign:Card 
+            <materialDesign:Card
                 Background="{DynamicResource PrimaryHueDarkBrush}"
                 Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
                 Width="250"
                 Padding="8">
                 <StackPanel Orientation="Vertical"
-                    Width="220">
+                            Width="220">
                     <StackPanel.Resources>
                         <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
-                            <Setter Property="Margin" Value="2 5"/>
-                            <Setter Property="materialDesign:ButtonProgressAssist.Value" Value="-1"/>
-                            <Setter Property="materialDesign:ButtonProgressAssist.IsIndicatorVisible" Value="True"/>
-                            <Setter Property="materialDesign:ButtonProgressAssist.IsIndeterminate" Value="True"/>
+                            <Setter Property="Margin" Value="2 5" />
+                            <Setter Property="materialDesign:ButtonProgressAssist.Value" Value="-1" />
+                            <Setter Property="materialDesign:ButtonProgressAssist.IsIndicatorVisible" Value="True" />
+                            <Setter Property="materialDesign:ButtonProgressAssist.IsIndeterminate" Value="True" />
                         </Style>
                     </StackPanel.Resources>
-                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_FoodBtnContent}}" Click="ShowFoodLoginUI_Click"/>
-                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_LoginView1BtnContent}}" Click="ShowLoginView1_Click"/>
-                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_LoginView2BtnContent}}" Click="ShowLoginView2_Click"/>
-                    <Button Content="登录窗体3" Click="ShowLoginView3_Click"/>
+                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_FoodBtnContent}}"
+                            Click="ShowFoodLoginUI_Click" />
+                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_LoginView1BtnContent}}"
+                            Click="ShowLoginView1_Click" />
+                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_LoginView2BtnContent}}"
+                            Click="ShowLoginView2_Click" />
+                    <Button Content="登录窗体3" Click="ShowLoginView3_Click" />
                 </StackPanel>
             </materialDesign:Card>
-            <materialDesign:Card 
+            <materialDesign:Card
                 Background="#03a9f4"
                 Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
                 Width="250"
                 Padding="8">
                 <StackPanel Orientation="Vertical"
-                    Width="220">
+                            Width="220">
                     <StackPanel.Resources>
                         <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedAccentButton}">
-                            <Setter Property="Margin" Value="2 5"/>
+                            <Setter Property="Margin" Value="2 5" />
                         </Style>
                     </StackPanel.Resources>
-                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_MusicPlayer1BtnContent}}" Click="ShowMusicPalyer1_Click"/>
-                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_AppUsageDashboardBtnContent}}" Click="ShowAppUseageDashboard_Click"/>
-                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_Dashboard2BtnContent}}" Click="ShowDashboard2_Click"/>
-                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_InstagramRedesignBtnContent}}" Click="ShowInstagramRedesign_Click"/>
-                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_LoLGoalBtnContent}}" Click="ShowLoLGoal_Click"/>
+                    <Button
+                        Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_MusicPlayer1BtnContent}}"
+                        Click="ShowMusicPalyer1_Click" />
+                    <Button
+                        Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_AppUsageDashboardBtnContent}}"
+                        Click="ShowAppUseageDashboard_Click" />
+                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_Dashboard2BtnContent}}"
+                            Click="ShowDashboard2_Click" />
+                    <Button
+                        Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_InstagramRedesignBtnContent}}"
+                        Click="ShowInstagramRedesign_Click" />
+                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_LoLGoalBtnContent}}"
+                            Click="ShowLoLGoal_Click" />
                 </StackPanel>
             </materialDesign:Card>
             <materialDesign:Card
@@ -75,47 +86,53 @@
                 Width="250"
                 Padding="8">
                 <StackPanel Orientation="Vertical"
-                    Width="220">
+                            Width="220">
                     <StackPanel.Resources>
-                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}"/>
+                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}" />
                         <Style TargetType="materialDesign:Badged">
-                            <Setter Property="Margin" Value="2 5"/>
-                            <Setter Property="BadgeColorZoneMode" Value="PrimaryDark"/>
+                            <Setter Property="Margin" Value="2 5" />
+                            <Setter Property="BadgeColorZoneMode" Value="PrimaryDark" />
                         </Style>
                     </StackPanel.Resources>
                     <materialDesign:Badged Badge="1">
                         <Grid>
-                            <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_DrawerMenuBtnContent}}" Click="ShowDrawerMenu_Click"/>
+                            <Button
+                                Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_DrawerMenuBtnContent}}"
+                                Click="ShowDrawerMenu_Click" />
                         </Grid>
                     </materialDesign:Badged>
                     <materialDesign:Badged Badge="1">
                         <Grid>
-                            <Button Content="Drawer Menu 2" Click="ShowDrawerMenu2_Click"/>
+                            <Button Content="Drawer Menu 2" Click="ShowDrawerMenu2_Click" />
                         </Grid>
                     </materialDesign:Badged>
                     <materialDesign:Badged Badge="2">
                         <Grid>
-                            <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_MenuChangeBtnContent}}" Click="ShowMenuChange_Click"/>
+                            <Button
+                                Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_MenuChangeBtnContent}}"
+                                Click="ShowMenuChange_Click" />
                         </Grid>
                     </materialDesign:Badged>
                     <materialDesign:Badged Badge="3">
                         <Grid>
-                            <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_AnimatedMenuBtnContent}}" Click="ShowAnimatedMenu_Click"/>
+                            <Button
+                                Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_AnimatedMenuBtnContent}}"
+                                Click="ShowAnimatedMenu_Click" />
                         </Grid>
                     </materialDesign:Badged>
                     <materialDesign:Badged Badge="4">
                         <Grid>
-                            <Button Content="Baidu map" Click="ShowBaiduMap_Click"/>
+                            <Button Content="Baidu map" Click="ShowBaiduMap_Click" />
                         </Grid>
                     </materialDesign:Badged>
                     <materialDesign:Badged Badge="5">
                         <Grid>
-                            <Button Content="Chat view" Click="ShowChatView_Click"/>
+                            <Button Content="Chat view" Click="ShowChatView_Click" />
                         </Grid>
                     </materialDesign:Badged>
                     <materialDesign:Badged Badge="6">
                         <Grid>
-                            <Button Content="Calculator" Click="ShowCalculator_Click"/>
+                            <Button Content="Calculator" Click="ShowCalculator_Click" />
                         </Grid>
                     </materialDesign:Badged>
                 </StackPanel>
@@ -127,32 +144,32 @@
                 Width="250"
                 Padding="8">
                 <StackPanel Orientation="Vertical"
-                    Width="220">
+                            Width="220">
                     <StackPanel.Resources>
-                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}"/>
+                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}" />
                         <Style TargetType="materialDesign:Badged">
-                            <Setter Property="Margin" Value="2 5"/>
-                            <Setter Property="BadgeColorZoneMode" Value="PrimaryDark"/>
+                            <Setter Property="Margin" Value="2 5" />
+                            <Setter Property="BadgeColorZoneMode" Value="PrimaryDark" />
                         </Style>
                     </StackPanel.Resources>
                     <materialDesign:Badged Badge="1">
                         <Grid>
-                            <Button Content="Write excel" Click="ShowWriteExcel_Click"/>
+                            <Button Content="Write excel" Click="ShowWriteExcel_Click" />
                         </Grid>
                     </materialDesign:Badged>
                     <materialDesign:Badged Badge="2">
                         <Grid>
-                            <Button Content="Test core behaviors" Click="ShowCoreBehaviors_Click"/>
+                            <Button Content="Test core behaviors" Click="ShowCoreBehaviors_Click" />
                         </Grid>
                     </materialDesign:Badged>
                     <materialDesign:Badged Badge="3">
                         <Grid>
-                            <Button Content="Tree view demo" Click="ShowTreeView_Click"/>
+                            <Button Content="Tree view demo" Click="ShowTreeView_Click" />
                         </Grid>
                     </materialDesign:Badged>
                     <materialDesign:Badged Badge="4">
                         <Grid>
-                            <Button Content="Drive Storage" Click="ShowDriveStorageView_Click"/>
+                            <Button Content="Drive Storage" Click="ShowDriveStorageView_Click" />
                         </Grid>
                     </materialDesign:Badged>
                 </StackPanel>

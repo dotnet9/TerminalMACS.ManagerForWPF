@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ObserverModel._4;
 
-namespace ObserverModel._4
+internal abstract class Observer
 {
-	abstract class Observer
-	{
-		public abstract void Update();
-	}
-
+    public abstract void Update();
 }

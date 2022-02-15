@@ -1,12 +1,11 @@
 using System;
 
-namespace WebApiWithMediatR.Services
+namespace WebApiWithMediatR.Services;
+
+public class TestService : ITestService
 {
-  public class TestService : ITestService
-  {
     public void WriteLine()
     {
-      Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff zzz"));
+        Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff zzz"));
     }
-  }
 }

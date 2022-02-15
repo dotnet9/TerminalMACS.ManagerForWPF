@@ -4,39 +4,47 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d" Height="600" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" Background="#FF410A66">
+        mc:Ignorable="d" Height="600" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        WindowStyle="None" Background="#FF410A66">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Purple.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Purple.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Blue.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <StackPanel Margin="50">
-            <Image Source="/Assets/logo2.png" Width="96" Height="96"/>
+            <Image Source="/Assets/logo2.png" Width="96" Height="96" />
             <Border Background="White" Margin="10 20" CornerRadius="5">
                 <StackPanel Margin="25">
-                    <ComboBox Margin="15" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="区域" Text="{Binding Region}">
-                        <ComboBoxItem Content="RU"/>
-                        <ComboBoxItem Content="KR"/>
-                        <ComboBoxItem Content="BR1"/>
-                        <ComboBoxItem Content="OC1"/>
-                        <ComboBoxItem Content="JP1"/>
-                        <ComboBoxItem Content="NA1"/>
-                        <ComboBoxItem Content="EUN1"/>
-                        <ComboBoxItem Content="EUW1"/>
-                        <ComboBoxItem Content="TR1"/>
-                        <ComboBoxItem Content="LA1"/>
-                        <ComboBoxItem Content="LA2"/>
+                    <ComboBox Margin="15" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                              materialDesign:HintAssist.Hint="区域" Text="{Binding Region}">
+                        <ComboBoxItem Content="RU" />
+                        <ComboBoxItem Content="KR" />
+                        <ComboBoxItem Content="BR1" />
+                        <ComboBoxItem Content="OC1" />
+                        <ComboBoxItem Content="JP1" />
+                        <ComboBoxItem Content="NA1" />
+                        <ComboBoxItem Content="EUN1" />
+                        <ComboBoxItem Content="EUW1" />
+                        <ComboBoxItem Content="TR1" />
+                        <ComboBoxItem Content="LA1" />
+                        <ComboBoxItem Content="LA2" />
                     </ComboBox>
-                    <TextBox Text="{Binding SummonerName}" Margin="15" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="召唤者"/>
+                    <TextBox Text="{Binding SummonerName}" Margin="15"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="召唤者" />
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Margin="15 50" Content="取消"/>
-                        <Button x:Name="ButtonSignUp" Margin="15 50" Content="搜索" Click="ButtonSignUp_Click"/>
+                        <Button Margin="15 50" Content="取消" />
+                        <Button x:Name="ButtonSignUp" Margin="15 50" Content="搜索" Click="ButtonSignUp_Click" />
                     </StackPanel>
                 </StackPanel>
             </Border>

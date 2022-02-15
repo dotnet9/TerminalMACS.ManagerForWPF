@@ -3,44 +3,38 @@ using System.Globalization;
 using System.Text;
 using System.Windows.Data;
 
-namespace TerminalMACS.Converter
+namespace TerminalMACS.Converter;
+
+public class StringRepeatConverter : IValueConverter
 {
-    public class StringRepeatConverter : IValueConverter
-   {
-      public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-      {
-         if (value is string strValue)
-         {
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is string strValue)
+        {
             var builder = new StringBuilder();
             int num;
             if (parameter is string numStr)
             {
-               if (!int.TryParse(numStr, out num))
-               {
-                  return strValue;
-               }
+                if (!int.TryParse(numStr, out num)) return strValue;
             }
             else if (parameter is int intValue)
             {
-               num = intValue;
+                num = intValue;
             }
             else
             {
-               return strValue;
+                return strValue;
             }
-            for (var i = 0; i < num; i++)
-            {
-               builder.Append(strValue);
-            }
+
+            for (var i = 0; i < num; i++) builder.Append(strValue);
             return builder.ToString();
-         }
-         return string.Empty;
-      }
+        }
 
-      public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-      {
-         throw new NotImplementedException();
-      }
+        return string.Empty;
+    }
 
-   }
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
 }

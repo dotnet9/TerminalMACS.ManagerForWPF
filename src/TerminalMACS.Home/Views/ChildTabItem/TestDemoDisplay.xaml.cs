@@ -1,29 +1,26 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Controls;
-using System.Linq;
-using System.Threading;
 
-namespace TerminalMACS.Home.Views.ChildTabItem
+namespace TerminalMACS.Home.Views.ChildTabItem;
+
+/// <summary>
+///     TestDemoDisplay.xaml 的交互逻辑
+/// </summary>
+public partial class TestDemoDisplay : UserControl
 {
-    /// <summary>
-    /// TestDemoDisplay.xaml 的交互逻辑
-    /// </summary>
-    public partial class TestDemoDisplay : UserControl
+    public TestDemoDisplay()
     {
-        public TestDemoDisplay()
-        {
-            InitializeComponent();
+        InitializeComponent();
 
-            var imgs = System.IO.Directory.GetFiles("./../../../assets/TestDemos");
-            if (imgs.Length > 0)
+        var imgs = Directory.GetFiles("./../../../assets/TestDemos");
+        if (imgs.Length > 0)
+            foreach (var imgPath in imgs)
             {
-                foreach (var imgPath in imgs)
-                {
-                    var fullPath = System.IO.Path.GetFullPath(imgPath);
-                    CoverFlowMain.Add(new Uri(fullPath, UriKind.RelativeOrAbsolute));
-                }
+                var fullPath = Path.GetFullPath(imgPath);
+                CoverFlowMain.Add(new Uri(fullPath, UriKind.RelativeOrAbsolute));
             }
-            CoverFlowMain.JumpTo(2);
-        }
+
+        CoverFlowMain.PageIndex = 2;
     }
 }

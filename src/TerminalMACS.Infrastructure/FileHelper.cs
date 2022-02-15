@@ -1,14 +1,13 @@
-﻿using System;
+﻿using System.Diagnostics;
 
-namespace TerminalMACS.Infrastructure
+namespace TerminalMACS.Infrastructure;
+
+public class FileHelper
 {
-    public class FileHelper
+    public static void OpenFolderAndSelectFile(string fileFullName)
     {
-        public static void OpenFolderAndSelectFile(String fileFullName)
-        {
-            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo("Explorer.exe");
-            psi.Arguments = "/e,/select," + fileFullName;
-            System.Diagnostics.Process.Start(psi);
-        }
+        var psi = new ProcessStartInfo("Explorer.exe");
+        psi.Arguments = "/e,/select," + fileFullName;
+        Process.Start(psi);
     }
 }

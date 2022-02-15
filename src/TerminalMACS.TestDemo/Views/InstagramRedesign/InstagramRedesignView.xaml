@@ -3,97 +3,115 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         MouseLeftButtonDown="MoveWindow_MouseLeftButtonDown"
         mc:Ignorable="d" Height="600" Width="1080" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
     <Grid Background="#FF44325F">
         <Grid Height="100" VerticalAlignment="Top" Background="White">
-            <Image Source="Assets/insta.jpg" HorizontalAlignment="Left" Margin="10 0"/>
-            <TextBlock Text="Sunshine mixed with a little Hurricane✨" Margin="10" FontSize="14" Foreground="#FF2A6088" HorizontalAlignment="Center"/>
+            <Image Source="Assets/insta.jpg" HorizontalAlignment="Left" Margin="10 0" />
+            <TextBlock Text="Sunshine mixed with a little Hurricane✨" Margin="10" FontSize="14" Foreground="#FF2A6088"
+                       HorizontalAlignment="Center" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <StackPanel VerticalAlignment="Bottom">
                     <TextBlock Text="追随者" Margin="10 0" FontSize="16" FontWeight="Bold" Foreground="#FF2A6088" />
-                    <TextBlock Text="2K" HorizontalAlignment="Center" Margin="5 0 5 5" FontSize="16" Foreground="#FF2A6088"/>
+                    <TextBlock Text="2K" HorizontalAlignment="Center" Margin="5 0 5 5" FontSize="16"
+                               Foreground="#FF2A6088" />
                 </StackPanel>
                 <StackPanel VerticalAlignment="Bottom">
-                    <TextBlock Text="跟随" Margin="10 0" FontSize="16" FontWeight="Bold" Foreground="#FF2A6088"/>
-                    <TextBlock Text="957" HorizontalAlignment="Center" Margin="5 0 5 5" FontSize="16" Foreground="#FF2A6088"/>
+                    <TextBlock Text="跟随" Margin="10 0" FontSize="16" FontWeight="Bold" Foreground="#FF2A6088" />
+                    <TextBlock Text="957" HorizontalAlignment="Center" Margin="5 0 5 5" FontSize="16"
+                               Foreground="#FF2A6088" />
                 </StackPanel>
                 <StackPanel VerticalAlignment="Bottom">
-                    <TextBlock Text="帖子" Margin="10 0" FontSize="16" FontWeight="Bold" Foreground="#FF2A6088"/>
-                    <TextBlock Text="145" HorizontalAlignment="Center" Margin="5 0 5 5" FontSize="16" Foreground="#FF2A6088"/>
+                    <TextBlock Text="帖子" Margin="10 0" FontSize="16" FontWeight="Bold" Foreground="#FF2A6088" />
+                    <TextBlock Text="145" HorizontalAlignment="Center" Margin="5 0 5 5" FontSize="16"
+                               Foreground="#FF2A6088" />
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20" >
-            <TextBlock FontFamily="Nirmala UI" Text="Dotnet9.com" FontSize="30" Margin="20" VerticalAlignment="Center" Foreground="White"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20">
+            <TextBlock FontFamily="Nirmala UI" Text="Dotnet9.com" FontSize="30" Margin="20" VerticalAlignment="Center"
+                       Foreground="White" />
             <StackPanel HorizontalAlignment="Right">
                 <Ellipse Height="150" Width="150" Stroke="White" StrokeThickness="3">
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="https://img.dotnet9.com/logo.png" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="https://img.dotnet9.com/logo.png" Stretch="UniformToFill" />
                     </Ellipse.Fill>
                 </Ellipse>
-                <Button HorizontalAlignment="Center" Margin="10" Content="编辑个人信息" Background="{x:Null}" BorderBrush="White"/>
+                <Button HorizontalAlignment="Center" Margin="10" Content="编辑个人信息" Background="{x:Null}"
+                        BorderBrush="White" />
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10 110">
-            <TextBox Width="150" materialDesign:HintAssist.Hint="搜索" Foreground="White"/>
-            <materialDesign:PackIcon Kind="AccountSearch" Foreground="White" VerticalAlignment="Center"/>
+            <TextBox Width="150" materialDesign:HintAssist.Hint="搜索" Foreground="White" />
+            <materialDesign:PackIcon Kind="AccountSearch" Foreground="White" VerticalAlignment="Center" />
         </StackPanel>
         <ListView HorizontalAlignment="Right" Margin="0 220 0 0">
             <ListViewItem Height="50" Width="260">
                 <Grid Height="30" Width="250">
                     <Ellipse Width="30" Height="30" StrokeThickness="0.5" Stroke="White" HorizontalAlignment="Left">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="Assets/pexels-photo-192439.jpeg" Stretch="UniformToFill"/>
+                            <ImageBrush ImageSource="Assets/pexels-photo-192439.jpeg" Stretch="UniformToFill" />
                         </Ellipse.Fill>
                     </Ellipse>
-                    <TextBlock Width="150" HorizontalAlignment="Left"  Margin="35 0" Text="Your friend John is on instagram as John_J" FontSize="10" TextWrapping="Wrap"/>
-                    <Button HorizontalAlignment="Right" Content="跟随" FontSize="10" Margin="10 0" Height="20" Padding="10 0"/>
+                    <TextBlock Width="150" HorizontalAlignment="Left" Margin="35 0"
+                               Text="Your friend John is on instagram as John_J" FontSize="10" TextWrapping="Wrap" />
+                    <Button HorizontalAlignment="Right" Content="跟随" FontSize="10" Margin="10 0" Height="20"
+                            Padding="10 0" />
                 </Grid>
             </ListViewItem>
             <ListViewItem Height="50" Width="260">
                 <Grid Height="30" Width="250">
                     <Ellipse Width="30" Height="30" StrokeThickness="0.5" Stroke="White" HorizontalAlignment="Left">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="Assets/pexels-photo-301290.jpeg" Stretch="UniformToFill"/>
+                            <ImageBrush ImageSource="Assets/pexels-photo-301290.jpeg" Stretch="UniformToFill" />
                         </Ellipse.Fill>
                     </Ellipse>
-                    <TextBlock Width="150" HorizontalAlignment="Left"  Margin="35 0" Text="Your friend Lucy is on instagram as LLucy" FontSize="10" TextWrapping="Wrap"/>
-                    <Button HorizontalAlignment="Right" Content="跟随" FontSize="10" Margin="10 0" Height="20" Padding="10 0"/>
+                    <TextBlock Width="150" HorizontalAlignment="Left" Margin="35 0"
+                               Text="Your friend Lucy is on instagram as LLucy" FontSize="10" TextWrapping="Wrap" />
+                    <Button HorizontalAlignment="Right" Content="跟随" FontSize="10" Margin="10 0" Height="20"
+                            Padding="10 0" />
                 </Grid>
             </ListViewItem>
             <ListViewItem Height="50" Width="260">
                 <Grid Height="30" Width="250">
                     <Ellipse Width="30" Height="30" StrokeThickness="0.5" Stroke="White" HorizontalAlignment="Left">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="Assets/pexels-photo-614810.jpeg" Stretch="UniformToFill"/>
+                            <ImageBrush ImageSource="Assets/pexels-photo-614810.jpeg" Stretch="UniformToFill" />
                         </Ellipse.Fill>
                     </Ellipse>
-                    <TextBlock Width="150" HorizontalAlignment="Left"  Margin="35 0" Text="Your friend _b_b_jax is on instagram as bbjax" FontSize="10" TextWrapping="Wrap"/>
-                    <Button HorizontalAlignment="Right" Content="跟随" FontSize="10" Margin="10 0" Height="20" Padding="10 0"/>
+                    <TextBlock Width="150" HorizontalAlignment="Left" Margin="35 0"
+                               Text="Your friend _b_b_jax is on instagram as bbjax" FontSize="10" TextWrapping="Wrap" />
+                    <Button HorizontalAlignment="Right" Content="跟随" FontSize="10" Margin="10 0" Height="20"
+                            Padding="10 0" />
                 </Grid>
             </ListViewItem>
             <ListViewItem Height="50" Width="260">
                 <Grid Height="30" Width="250">
                     <Ellipse Width="30" Height="30" StrokeThickness="0.5" Stroke="White" HorizontalAlignment="Left">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="Assets/pexels-photo-638791.jpeg" Stretch="UniformToFill"/>
+                            <ImageBrush ImageSource="Assets/pexels-photo-638791.jpeg" Stretch="UniformToFill" />
                         </Ellipse.Fill>
                     </Ellipse>
-                    <TextBlock Width="150" HorizontalAlignment="Left"  Margin="35 0" Text="Your friend Carl is on instagram as CJ" FontSize="10" TextWrapping="Wrap"/>
-                    <Button HorizontalAlignment="Right" Content="跟随" FontSize="10" Margin="10 0" Height="20" Padding="10 0"/>
+                    <TextBlock Width="150" HorizontalAlignment="Left" Margin="35 0"
+                               Text="Your friend Carl is on instagram as CJ" FontSize="10" TextWrapping="Wrap" />
+                    <Button HorizontalAlignment="Right" Content="跟随" FontSize="10" Margin="10 0" Height="20"
+                            Padding="10 0" />
                 </Grid>
             </ListViewItem>
         </ListView>
@@ -101,36 +119,42 @@
             <StackPanel Orientation="Horizontal" Margin="10">
                 <Ellipse Height="70" Width="70" Margin="10" Stroke="White" StrokeThickness="3">
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="Assets/pexels-photo-192439.jpeg" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="Assets/pexels-photo-192439.jpeg" Stretch="UniformToFill" />
                     </Ellipse.Fill>
                 </Ellipse>
                 <Ellipse Height="70" Width="70" Margin="10" Stroke="White" StrokeThickness="3">
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="Assets/pexels-photo-301290.jpeg" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="Assets/pexels-photo-301290.jpeg" Stretch="UniformToFill" />
                     </Ellipse.Fill>
                 </Ellipse>
                 <Ellipse Height="70" Width="70" Margin="10" Stroke="White" StrokeThickness="3">
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="Assets/pexels-photo-614810.jpeg" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="Assets/pexels-photo-614810.jpeg" Stretch="UniformToFill" />
                     </Ellipse.Fill>
                 </Ellipse>
                 <Ellipse Height="70" Width="70" Margin="10" Stroke="White" StrokeThickness="3">
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="Assets/pexels-photo-638791.jpeg" Stretch="UniformToFill"/>
+                        <ImageBrush ImageSource="Assets/pexels-photo-638791.jpeg" Stretch="UniformToFill" />
                     </Ellipse.Fill>
                 </Ellipse>
             </StackPanel>
             <ScrollViewer Height="340">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Image Width="200" Height="200" Margin="20" Source="Assets/pexels-photo-257360.jpeg" Stretch="UniformToFill"/>
-                        <Image Width="200" Height="200" Margin="20" Source="Assets/pexels-photo-288583.jpeg" Stretch="UniformToFill"/>
-                        <Image Width="200" Height="200" Margin="20" Source="Assets/pexels-photo-790164.jpeg" Stretch="UniformToFill"/>
+                        <Image Width="200" Height="200" Margin="20" Source="Assets/pexels-photo-257360.jpeg"
+                               Stretch="UniformToFill" />
+                        <Image Width="200" Height="200" Margin="20" Source="Assets/pexels-photo-288583.jpeg"
+                               Stretch="UniformToFill" />
+                        <Image Width="200" Height="200" Margin="20" Source="Assets/pexels-photo-790164.jpeg"
+                               Stretch="UniformToFill" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Image Width="200" Height="200" Margin="20" Source="Assets/food-salad-restaurant-person.jpg" Stretch="UniformToFill"/>
-                        <Image Width="200" Height="200" Margin="20" Source="Assets/pexels-photo-797640.jpeg" Stretch="UniformToFill"/>
-                        <Image Width="200" Height="200" Margin="20" Source="Assets/pexels-photo-790164.jpeg" Stretch="UniformToFill"/>
+                        <Image Width="200" Height="200" Margin="20" Source="Assets/food-salad-restaurant-person.jpg"
+                               Stretch="UniformToFill" />
+                        <Image Width="200" Height="200" Margin="20" Source="Assets/pexels-photo-797640.jpeg"
+                               Stretch="UniformToFill" />
+                        <Image Width="200" Height="200" Margin="20" Source="Assets/pexels-photo-790164.jpeg"
+                               Stretch="UniformToFill" />
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>

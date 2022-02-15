@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Text;
+﻿using System.Configuration;
 
-namespace TerminalMACS.Infrastructure.UI
+namespace TerminalMACS.Infrastructure.UI;
+
+public class ConfigHelper
 {
-    public class ConfigHelper
+    public static string ReadKey(string key)
     {
-        public static string ReadKey(string key)
-        {
-            Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            return cfa.AppSettings.Settings[key].Value.ToString();
-        }
+        var cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        return cfa.AppSettings.Settings[key].Value;
+    }
 
-        public static void SetKey(string key, string value = "")
-        {
-            Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            cfa.AppSettings.Settings[key].Value = value;
-            cfa.Save();
-        }
+    public static void SetKey(string key, string value = "")
+    {
+        var cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        cfa.AppSettings.Settings[key].Value = value;
+        cfa.Save();
     }
 }

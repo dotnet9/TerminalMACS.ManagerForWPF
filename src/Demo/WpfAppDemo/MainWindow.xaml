@@ -3,23 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfAppDemo"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
 
         <Style TargetType="{x:Type Button}">
             <Style.Setters>
-                <Setter Property="Background" Value="Green"/>
+                <Setter Property="Background" Value="Green" />
             </Style.Setters>
         </Style>
-        <Style TargetType="{x:Type Button}" x:Key="BtnStyle">
-        </Style>
-        
-        
+        <Style TargetType="{x:Type Button}" x:Key="BtnStyle" />
+
+
     </Window.Resources>
     <StackPanel>
-        <Button Content="No Key Button" Background="Red" Width="100" Height="50"/>
-        <Button Style="{StaticResource BtnStyle}" Content="With Key Button" Width="100" Height="50" Margin="5 10"/>
+        <Button Content="No Key Button" Background="Red" Width="100" Height="50" />
+        <Button Style="{StaticResource BtnStyle}" Content="With Key Button" Width="100" Height="50" Margin="5 10" />
     </StackPanel>
 </Window>

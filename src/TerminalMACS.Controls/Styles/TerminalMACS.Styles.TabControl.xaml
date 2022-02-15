@@ -22,7 +22,8 @@
                             <Border.Background>
                                 <TemplateBinding Property="Foreground">
                                     <TemplateBinding.Converter>
-                                        <converters:BrushRoundConverter HighValue="White" LowValue="{StaticResource PrimaryHueMidBrush}" />
+                                        <converters:BrushRoundConverter HighValue="White"
+                                                                        LowValue="{StaticResource PrimaryHueMidBrush}" />
                                     </TemplateBinding.Converter>
                                 </TemplateBinding>
                             </Border.Background>
@@ -34,7 +35,8 @@
                             <Border.Background>
                                 <TemplateBinding Property="Foreground">
                                     <TemplateBinding.Converter>
-                                        <converters:BrushRoundConverter HighValue="White" LowValue="{StaticResource PrimaryHueMidBrush}" />
+                                        <converters:BrushRoundConverter HighValue="White"
+                                                                        LowValue="{StaticResource PrimaryHueMidBrush}" />
                                     </TemplateBinding.Converter>
                                 </TemplateBinding>
                             </Border.Background>
@@ -332,8 +334,10 @@
     </Storyboard>
 
     <Style TargetType="{x:Type TabControl}">
-        <Setter Property="helpers:TabControlHelper.LeftToRightAnimation" Value="{StaticResource LeftToRightMovedStoryboard}" />
-        <Setter Property="helpers:TabControlHelper.RightToLeftAnimation" Value="{StaticResource RightToLeftMovedStoryboard}" />
+        <Setter Property="helpers:TabControlHelper.LeftToRightAnimation"
+                Value="{StaticResource LeftToRightMovedStoryboard}" />
+        <Setter Property="helpers:TabControlHelper.RightToLeftAnimation"
+                Value="{StaticResource RightToLeftMovedStoryboard}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
@@ -371,11 +375,13 @@
     </Style>
 
     <EventTrigger x:Key="LeftToRightMovedEventTrigger" RoutedEvent="helpers:TabControlHelper.LeftToRightMoved">
-        <BeginStoryboard Storyboard="{Binding Path=(helpers:TabControlHelper.LeftToRightAnimation), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabControl, AncestorLevel=1}}" />
+        <BeginStoryboard
+            Storyboard="{Binding Path=(helpers:TabControlHelper.LeftToRightAnimation), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabControl, AncestorLevel=1}}" />
     </EventTrigger>
 
     <EventTrigger x:Key="RightToLeftMovedEventTrigger" RoutedEvent="helpers:TabControlHelper.RightToLeftMoved">
-        <BeginStoryboard Storyboard="{Binding Path=(helpers:TabControlHelper.RightToLeftAnimation), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabControl, AncestorLevel=1}}" />
+        <BeginStoryboard
+            Storyboard="{Binding Path=(helpers:TabControlHelper.RightToLeftAnimation), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TabControl, AncestorLevel=1}}" />
     </EventTrigger>
 
 </ResourceDictionary>

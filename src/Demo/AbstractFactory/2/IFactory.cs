@@ -1,13 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace AbstractFactory._2;
 
-namespace AbstractFactory._2
+internal interface IFactory
 {
-  interface IFactory
-  {
     IUser CreateUser();
-  }
 }

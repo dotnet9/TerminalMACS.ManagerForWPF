@@ -1,10 +1,9 @@
-﻿namespace TerminalMACS.TestDemo.Views
+﻿namespace TerminalMACS.TestDemo.Views;
+
+public partial class SettingsTabItem
 {
-    public partial class SettingsTabItem
+    public SettingsTabItem()
     {
-        public SettingsTabItem()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

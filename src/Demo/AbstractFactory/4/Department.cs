@@ -1,12 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace AbstractFactory._4;
 
-namespace AbstractFactory._4
+internal class Department
 {
-  class Department
-  {
-  }
 }

@@ -1,12 +1,10 @@
-﻿using System;
+﻿namespace ObserverModel;
 
-namespace ObserverModel
-{
-	//class Program
-	//{
-	//	static void Main(string[] args)
-	//	{
-	//		Console.WriteLine("Hello World!");
-	//	}
-	//}
-}
+
+//class Program
+//{
+//	static void Main(string[] args)
+//	{
+//		Console.WriteLine("Hello World!");
+//	}
+//}

@@ -8,10 +8,10 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <system:Double x:Key="Styles.Pagination.RadioButtonSize">30</system:Double>
-            <SolidColorBrush x:Key="Brushes.Accent.Gradient" Color="LightGray"/>
-            <SolidColorBrush x:Key="Brushes.Accent.Gradient2" Opacity="0.3" Color="LightGray"/>
-            <SolidColorBrush x:Key="Brushes.IdealForeground" Color="Red"/>
-            <SolidColorBrush x:Key="SecondaryRegionBrush" Color="Green"/>
+            <SolidColorBrush x:Key="Brushes.Accent.Gradient" Color="LightGray" />
+            <SolidColorBrush x:Key="Brushes.Accent.Gradient2" Opacity="0.3" Color="LightGray" />
+            <SolidColorBrush x:Key="Brushes.IdealForeground" Color="Red" />
+            <SolidColorBrush x:Key="SecondaryRegionBrush" Color="Green" />
             <Style x:Key="Styles.Pagination.Button" TargetType="ButtonBase">
                 <Setter Property="BorderThickness" Value="1" />
                 <Setter Property="Focusable" Value="False" />
@@ -42,14 +42,20 @@
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource Brushes.Accent.Gradient2}" />
-                                    <Setter TargetName="BorderRoot" Property="BorderBrush" Value="{DynamicResource Brushes.Accent.Gradient2}" />
-                                    <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{DynamicResource Brushes.IdealForeground}" />
+                                    <Setter TargetName="BorderRoot" Property="Background"
+                                            Value="{DynamicResource Brushes.Accent.Gradient2}" />
+                                    <Setter TargetName="BorderRoot" Property="BorderBrush"
+                                            Value="{DynamicResource Brushes.Accent.Gradient2}" />
+                                    <Setter TargetName="contentPresenter" Property="TextElement.Foreground"
+                                            Value="{DynamicResource Brushes.IdealForeground}" />
                                 </Trigger>
                                 <Trigger Property="IsChecked" Value="true">
-                                    <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource Brushes.Accent.Gradient}" />
-                                    <Setter TargetName="BorderRoot" Property="BorderBrush" Value="{DynamicResource Brushes.Accent.Gradient}" />
-                                    <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="{DynamicResource Brushes.IdealForeground}" />
+                                    <Setter TargetName="BorderRoot" Property="Background"
+                                            Value="{DynamicResource Brushes.Accent.Gradient}" />
+                                    <Setter TargetName="BorderRoot" Property="BorderBrush"
+                                            Value="{DynamicResource Brushes.Accent.Gradient}" />
+                                    <Setter TargetName="contentPresenter" Property="TextElement.Foreground"
+                                            Value="{DynamicResource Brushes.IdealForeground}" />
                                 </Trigger>
                                 <Trigger Property="Content" Value="{x:Null}">
                                     <Setter TargetName="contentPresenter" Property="Visibility" Value="Collapsed" />
@@ -101,7 +107,7 @@
         <Button x:Name="PartButtonLeft"
                 Click="ButtonPrev_OnClick"
                 KeyUp="ButtonPrev_KeyUp"
-                Style="{DynamicResource Styles.Pagination.Button}" Content="&lt;"/>
+                Style="{DynamicResource Styles.Pagination.Button}" Content="&lt;" />
         <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
             <RadioButton x:Name="PartButtonFirst"
                          Checked="ToggleButton_OnChecked"
@@ -129,7 +135,7 @@
         <Button x:Name="PartButtonRight"
                 Click="ButtonNext_OnClick"
                 KeyUp="ButtonNext_KeyUp"
-                Style="{DynamicResource Styles.Pagination.Button}" Content="&gt;"/>
+                Style="{DynamicResource Styles.Pagination.Button}" Content="&gt;" />
         <ComboBox x:Name="PartJump"
                   DisplayMemberPath="Text"
                   ItemsSource="{Binding PageSizeItemSource}"
@@ -140,4 +146,3 @@
         <TextBlock Text="页" />
     </StackPanel>
 </UserControl>
-

@@ -4,43 +4,37 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 
-namespace WPFWithLogDashboard
+namespace WPFWithLogDashboard;
+
+public class Startup
 {
-	public class Startup
-	{
-		private ILogger logger;
-		public ILogger MyLoger
-		{
-			get
-			{
-				if (logger == null)
-				{
-					logger = Log.ForContext<Startup>();
-				}
-				return logger;
-			}
-		}
+    private ILogger logger;
 
-		public void ConfigureServices(IServiceCollection services)
-		{
-			MyLoger.Information("ConfigureServices");
+    public ILogger MyLoger
+    {
+        get
+        {
+            if (logger == null) logger = Log.ForContext<Startup>();
+            return logger;
+        }
+    }
 
-			services.AddLogDashboard();
-			services.AddControllers();
-		}
+    public void ConfigureServices(IServiceCollection services)
+    {
+        MyLoger.Information("ConfigureServices");
 
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-		{
-			MyLoger.Information("Configure");
+        services.AddLogDashboard();
+        services.AddControllers();
+    }
 
-			app.UseLogDashboard();
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        MyLoger.Information("Configure");
 
-			app.UseRouting();
+        app.UseLogDashboard();
 
-			app.UseEndpoints(endpoints =>
-			{
-				endpoints.MapControllers();
-			});
-		}
-	}
+        app.UseRouting();
+
+        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+    }
 }

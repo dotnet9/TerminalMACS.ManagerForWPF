@@ -1,23 +1,17 @@
 ﻿using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace TerminalMACS.ViewModels
+namespace TerminalMACS.ViewModels;
+
+public class MainWindowViewModel : BindableBase
 {
-    public class MainWindowViewModel : BindableBase
+    private string _title = "test";
+
+    public string Title
     {
-        private string _title = "test";
-        public string Title
+        get => _title;
+        set
         {
-            get { return _title; }
-            set
-            {
-                if(value!=_title)
-                {
-                    SetProperty(ref _title, value);
-                }
-            }
+            if (value != _title) SetProperty(ref _title, value);
         }
     }
 }

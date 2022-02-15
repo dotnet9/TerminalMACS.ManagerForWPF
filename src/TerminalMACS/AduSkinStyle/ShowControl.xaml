@@ -118,7 +118,8 @@
                         BorderThickness="{TemplateBinding BorderThickness}"
                         SnapsToDevicePixels="true">
                         <Metro:MetroScrollViewer Focusable="false" HorizontalScrollBarVisibility="Disabled">
-                            <ItemsPresenter Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <ItemsPresenter Margin="{TemplateBinding Padding}"
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Metro:MetroScrollViewer>
                     </Border>
                 </ControlTemplate>

@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Windows中使用Serilog" Height="250" Width="350">
     <StackPanel Margin="20">
-        <Button Content="打开日志面板" Width="100" Height="35" Click="OpenLogDashboard_Click"/>
-        <Button Content="添加普通日志" Width="100" Height="35" Margin="0 20" Click="AddInfoLog_Click"/>
-        <Button Content="添加异常日志" Width="100" Height="35" Click="AddErrorLog_Click"/>
+        <Button Content="打开日志面板" Width="100" Height="35" Click="OpenLogDashboard_Click" />
+        <Button Content="添加普通日志" Width="100" Height="35" Margin="0 20" Click="AddInfoLog_Click" />
+        <Button Content="添加异常日志" Width="100" Height="35" Click="AddErrorLog_Click" />
     </StackPanel>
 </Window>

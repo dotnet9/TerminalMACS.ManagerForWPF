@@ -1,3 +1,4 @@
+using System.Reflection;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -5,16 +6,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System.Reflection;
 using WebApiWithMediatR.Services;
 
-namespace WebApiWithMediatR
+namespace WebApiWithMediatR;
+
+public class Startup
 {
-  public class Startup
-  {
     public Startup(IConfiguration configuration)
     {
-      Configuration = configuration;
+        Configuration = configuration;
     }
 
     public IConfiguration Configuration { get; }
@@ -22,35 +22,31 @@ namespace WebApiWithMediatR
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
-      services.AddControllers();
-      services.AddSwaggerGen(c =>
-      {
-        c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApiWithMediatR", Version = "v1" });
-      });
-      services.AddSingleton<ITestService, TestService>();
+        services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
+        services.AddControllers();
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApiWithMediatR", Version = "v1" });
+        });
+        services.AddSingleton<ITestService, TestService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-      if (env.IsDevelopment())
-      {
-        app.UseDeveloperExceptionPage();
-        app.UseSwagger();
-        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApiWithMediatR v1"));
-      }
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApiWithMediatR v1"));
+        }
 
-      app.UseHttpsRedirection();
+        app.UseHttpsRedirection();
 
-      app.UseRouting();
+        app.UseRouting();
 
-      app.UseAuthorization();
+        app.UseAuthorization();
 
-      app.UseEndpoints(endpoints =>
-      {
-        endpoints.MapControllers();
-      });
+        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
-  }
 }

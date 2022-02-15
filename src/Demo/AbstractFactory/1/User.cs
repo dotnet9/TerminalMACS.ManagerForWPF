@@ -1,15 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace AbstractFactory._1;
 
-namespace AbstractFactory._1
+internal class User
 {
-  class User
-  {
     public int ID { get; set; }
 
     public string Name { get; set; }
-  }
 }

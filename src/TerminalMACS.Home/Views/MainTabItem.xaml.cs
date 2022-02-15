@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿namespace TerminalMACS.Home.Views;
 
-namespace TerminalMACS.Home.Views
+public partial class MainTabItem
 {
-    public partial class MainTabItem
+    public MainTabItem()
     {
-        public MainTabItem()
-        {
-            InitializeComponent();
-
-        }
+        InitializeComponent();
     }
 }

@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         Title="{lex:Loc Test}" Height="450" Width="800">
     <StackPanel>
-        <Button Content="获取" Click="ButtonGet_Click"/>
-        <Button Content="Change" Click="ChangeLanguge_Click"/>
+        <Button Content="获取" Click="ButtonGet_Click" />
+        <Button Content="Change" Click="ChangeLanguge_Click" />
     </StackPanel>
 </Window>

@@ -1,53 +1,50 @@
-﻿using Serilog;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Windows;
+using Serilog;
 
-namespace WPFWithLogDashboard
+namespace WPFWithLogDashboard;
+
+public partial class MainWindow : Window
 {
-	public partial class MainWindow : Window
-	{
-		private ILogger logger;
-		public ILogger MyLoger
-		{
-			get
-			{
-				if (logger == null)
-				{
-					logger = Log.ForContext<MainWindow>();
-				}
-				return logger;
-			}
-		}
+    private ILogger logger;
 
-		public MainWindow()
-		{
-			InitializeComponent();
+    public MainWindow()
+    {
+        InitializeComponent();
 
-			MyLoger.Information("WPF窗体中记录的日志");
-		}
-		private void AddInfoLog_Click(object sender, RoutedEventArgs e)
-		{
-			MyLoger.Information("测试添加Info日志");
+        MyLoger.Information("WPF窗体中记录的日志");
+    }
 
-		}
+    public ILogger MyLoger
+    {
+        get
+        {
+            if (logger == null) logger = Log.ForContext<MainWindow>();
+            return logger;
+        }
+    }
 
-		private void AddErrorLog_Click(object sender, RoutedEventArgs e)
-		{
-			MyLoger.Error("测试添加异常日志");
-		}
+    private void AddInfoLog_Click(object sender, RoutedEventArgs e)
+    {
+        MyLoger.Information("测试添加Info日志");
+    }
 
-		private void OpenLogDashboard_Click(object sender, RoutedEventArgs e)
-		{
-			OpenUrl("http://localhost:5000/logdashboard");
-		}
+    private void AddErrorLog_Click(object sender, RoutedEventArgs e)
+    {
+        MyLoger.Error("测试添加异常日志");
+    }
 
-		private void OpenUrl(string url)
-		{
-			Process.Start(new ProcessStartInfo("cmd", $"/c start {url}")
-			{
-				UseShellExecute = false,
-				CreateNoWindow = true
-			});
-		}
-	}
+    private void OpenLogDashboard_Click(object sender, RoutedEventArgs e)
+    {
+        OpenUrl("http://localhost:5000/logdashboard");
+    }
+
+    private void OpenUrl(string url)
+    {
+        Process.Start(new ProcessStartInfo("cmd", $"/c start {url}")
+        {
+            UseShellExecute = false,
+            CreateNoWindow = true
+        });
+    }
 }

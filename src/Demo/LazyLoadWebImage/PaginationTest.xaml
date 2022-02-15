@@ -3,24 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:LazyLoadWebImage"
         mc:Ignorable="d"
         Title="PaginationTest" Height="450" Width="800">
     <StackPanel>
 
         <local:Pagination HorizontalAlignment="Center"
-                                                      VerticalContentAlignment="Center"
-                                                      PageCountString="{Binding PageCountString, Mode=OneWay}"
-                                                      PageIndex="{Binding PageIndex, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                                      PageCount="{Binding PageCount, Mode=OneWay}"
-                                                      PageSizeItemSource="{Binding PageSizeItemSource}"
-                                                      PageSize="{Binding PageSize}"
-                                                      VerticalAlignment="Top"/>
+                          VerticalContentAlignment="Center"
+                          PageCountString="{Binding PageCountString, Mode=OneWay}"
+                          PageIndex="{Binding PageIndex, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                          PageCount="{Binding PageCount, Mode=OneWay}"
+                          PageSizeItemSource="{Binding PageSizeItemSource}"
+                          PageSize="{Binding PageSize}"
+                          VerticalAlignment="Top" />
         <TextBlock HorizontalAlignment="Center">
-            <Run Text="这是第"/>           
-            <Run Text="{Binding PageIndex}"/>
-            <Run Text="页"/>
+            <Run Text="这是第" />
+            <Run Text="{Binding PageIndex}" />
+            <Run Text="页" />
         </TextBlock>
     </StackPanel>
 </Window>

@@ -1,10 +1,9 @@
-﻿namespace TerminalMACS.Server.Views
+﻿namespace TerminalMACS.Server.Views;
+
+public partial class MainTabItem
 {
-    public partial class MainTabItem
+    public MainTabItem()
     {
-        public MainTabItem()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

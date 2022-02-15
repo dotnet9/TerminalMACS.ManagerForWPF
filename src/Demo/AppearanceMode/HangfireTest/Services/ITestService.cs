@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+namespace HangfireTest.Services;
 
-namespace HangfireTest.Services
+internal interface ITestService
 {
-  interface ITestService
-  {
     void WriteLine();
-  }
 }

@@ -6,68 +6,76 @@ using System.Globalization;
 using System.Resources;
 using System.Windows;
 
-namespace WpfExtensions.Xaml
+namespace WpfExtensions.Xaml;
+
+public class CurrentUICultureChangedEventArgs : EventArgs
 {
-    public class CurrentUICultureChangedEventArgs : EventArgs
+    public CurrentUICultureChangedEventArgs(CultureInfo oldUiCulture, CultureInfo newUiCulture)
     {
-        public CultureInfo OldUICulture { get; }
+        OldUICulture = oldUiCulture;
+        NewUICulture = newUiCulture;
+    }
 
-        public CultureInfo NewUICulture { get; }
+    public CultureInfo OldUICulture { get; }
 
-        public CurrentUICultureChangedEventArgs(CultureInfo oldUiCulture, CultureInfo newUiCulture)
+    public CultureInfo NewUICulture { get; }
+}
+
+public class I18nManager : INotifyPropertyChanged
+{
+    private readonly ConcurrentDictionary<string, ResourceManager> _resourceManagerStorage = new();
+    private CultureInfo _currentUICulture;
+
+    private I18nManager()
+    {
+    }
+
+    public static I18nManager Instance { get; } = new();
+
+    public CultureInfo CurrentUICulture
+    {
+        get => _currentUICulture;
+        set
         {
-            OldUICulture = oldUiCulture;
-            NewUICulture = newUiCulture;
+            if (EqualityComparer<CultureInfo>.Default.Equals(_currentUICulture, value)) return;
+
+            OnCurrentUICultureChanged(_currentUICulture, _currentUICulture = value);
+            OnPropertyChanged(nameof(CurrentUICulture));
         }
     }
 
-    public class I18nManager : INotifyPropertyChanged
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public event EventHandler<CurrentUICultureChangedEventArgs> CurrentUICultureChanged;
+
+    public void Add(ResourceManager resourceManager)
     {
-        public static I18nManager Instance { get; } = new I18nManager();
+        if (_resourceManagerStorage.ContainsKey(resourceManager.BaseName))
+            throw new ArgumentException(
+                $"The ResourceManager named {resourceManager.BaseName} already exists, cannot be added repeatedly. ",
+                nameof(resourceManager));
 
-        private readonly ConcurrentDictionary<string, ResourceManager> _resourceManagerStorage = new ConcurrentDictionary<string, ResourceManager>();
-        private CultureInfo _currentUICulture;
+        _resourceManagerStorage[resourceManager.BaseName] = resourceManager;
+    }
 
-        public event EventHandler<CurrentUICultureChangedEventArgs> CurrentUICultureChanged;
-        public event PropertyChangedEventHandler PropertyChanged;
+    public object Get(ComponentResourceKey key)
+    {
+        return GetCurrentResourceManager(key.TypeInTargetAssembly.FullName)?
+            .GetObject(key.ResourceId.ToString(), CurrentUICulture) ?? $"<MISSING: {key}>";
+    }
 
-        private I18nManager() { }
+    private ResourceManager GetCurrentResourceManager(string key)
+    {
+        return _resourceManagerStorage.TryGetValue(key, out var value) ? value : null;
+    }
 
-        public CultureInfo CurrentUICulture
-        {
-            get => _currentUICulture;
-            set
-            {
-                if (EqualityComparer<CultureInfo>.Default.Equals(_currentUICulture, value)) return;
+    protected virtual void OnCurrentUICultureChanged(CultureInfo oldCulture, CultureInfo newCulture)
+    {
+        CurrentUICultureChanged?.Invoke(this, new CurrentUICultureChangedEventArgs(oldCulture, newCulture));
+    }
 
-                OnCurrentUICultureChanged(_currentUICulture, _currentUICulture = value);
-                OnPropertyChanged(nameof(CurrentUICulture));
-            }
-        }
-
-        public void Add(ResourceManager resourceManager)
-        {
-            if (_resourceManagerStorage.ContainsKey(resourceManager.BaseName))
-                throw new ArgumentException($"The ResourceManager named {resourceManager.BaseName} already exists, cannot be added repeatedly. ", nameof(resourceManager));
-
-            _resourceManagerStorage[resourceManager.BaseName] = resourceManager;
-        }
-
-        public object Get(ComponentResourceKey key) =>
-            GetCurrentResourceManager(key.TypeInTargetAssembly.FullName)?
-                .GetObject(key.ResourceId.ToString(), CurrentUICulture) ?? $"<MISSING: {key}>";
-
-        private ResourceManager GetCurrentResourceManager(string key) =>
-            _resourceManagerStorage.TryGetValue(key, out var value) ? value : null;
-
-        protected virtual void OnCurrentUICultureChanged(CultureInfo oldCulture, CultureInfo newCulture)
-        {
-            CurrentUICultureChanged?.Invoke(this, new CurrentUICultureChangedEventArgs(oldCulture, newCulture));
-        }
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

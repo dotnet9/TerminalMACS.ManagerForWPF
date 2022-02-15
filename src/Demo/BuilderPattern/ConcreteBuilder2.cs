@@ -1,30 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace BuilderPattern;
 
-namespace BuilderPattern
+internal class ConcreteBuilder2 : Builder
 {
-	class ConcreteBuilder2 : Builder
-	{
-		private Product product = new Product();
+    private readonly Product product = new();
 
-		// 建造具体的两个部件是部件A和部件B
-		public override void BuildPartA()
-		{
+    // 建造具体的两个部件是部件A和部件B
+    public override void BuildPartA()
+    {
+        product.Add("部件X");
+    }
 
-			product.Add("部件X");
-		}
+    public override void BuildPartB()
+    {
+        product.Add("部件Y");
+    }
 
-		public override void BuildPartB()
-		{
-			product.Add("部件Y");
-		}
-
-		public override Product GetResult()
-		{
-			return product;
-		}
-	}
+    public override Product GetResult()
+    {
+        return product;
+    }
 }

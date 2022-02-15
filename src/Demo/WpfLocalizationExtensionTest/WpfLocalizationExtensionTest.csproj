@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="WPFLocalizeExtension" Version="3.9.0" />
-    <PackageReference Include="XAMLMarkupExtensions" Version="2.1.1" />
+    <PackageReference Include="WPFLocalizeExtension" Version="3.9.4" />
+    <PackageReference Include="XAMLMarkupExtensions" Version="2.1.3" />
   </ItemGroup>
 
   <ItemGroup>

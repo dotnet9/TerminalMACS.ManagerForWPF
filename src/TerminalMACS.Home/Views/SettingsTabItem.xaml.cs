@@ -1,10 +1,9 @@
-﻿namespace TerminalMACS.Home.Views
+﻿namespace TerminalMACS.Home.Views;
+
+public partial class SettingsTabItem
 {
-    public partial class SettingsTabItem
+    public SettingsTabItem()
     {
-        public SettingsTabItem()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

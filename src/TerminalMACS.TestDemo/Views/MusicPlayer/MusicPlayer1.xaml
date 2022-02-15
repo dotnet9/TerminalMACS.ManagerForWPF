@@ -4,15 +4,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         MouseLeftButtonDown="MoveWindow_MouseLeftButtonDown"
         Title="播放器" Height="500" Width="300"
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" 
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         WindowStyle="None" Foreground="LightSteelBlue">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
@@ -20,8 +24,11 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Thumb}">
                             <Grid x:Name="Grid">
-                                <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Fill="Transparent" />
-                                <Border x:Name="Rectangle1" CornerRadius="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto"  Background="{TemplateBinding Background}" />
+                                <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto"
+                                           Height="Auto" Fill="Transparent" />
+                                <Border x:Name="Rectangle1" CornerRadius="10" HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch" Width="Auto" Height="Auto"
+                                        Background="{TemplateBinding Background}" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="Tag" Value="Horizontal">
@@ -34,170 +41,135 @@
                 </Setter>
             </Style>
             <!--ScrollBars-->
-            <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
-                <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
-                <Setter Property="Foreground" Value="LightGray" />
-                <Setter Property="Background" Value="DarkGray" />
-                <Setter Property="Width" Value="10" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ScrollBar}">
-                            <Grid x:Name="GridRoot" Width="19" Background="{x:Null}">
-                                <Track x:Name="PART_Track" Grid.Row="0" IsDirectionReversed="true" Focusable="false">
-                                    <Track.Thumb>
-                                        <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}" Style="{DynamicResource ScrollThumbs}" />
-                                    </Track.Thumb>
-                                    <Track.IncreaseRepeatButton>
-                                        <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0" Focusable="false" />
-                                    </Track.IncreaseRepeatButton>
-                                    <Track.DecreaseRepeatButton>
-                                        <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand" Opacity="0" Focusable="false" />
-                                    </Track.DecreaseRepeatButton>
-                                </Track>
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger SourceName="Thumb" Property="IsMouseOver" Value="true">
-                                    <Setter Value="{DynamicResource ButtonSelectBrush}" TargetName="Thumb" Property="Background" />
-                                </Trigger>
-                                <Trigger SourceName="Thumb" Property="IsDragging" Value="true">
-                                    <Setter Value="{DynamicResource DarkBrush}" TargetName="Thumb" Property="Background" />
-                                </Trigger>
-                                <Trigger Property="IsEnabled" Value="false">
-                                    <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed" />
-                                </Trigger>
-                                <Trigger Property="Orientation" Value="Horizontal">
-                                    <Setter TargetName="GridRoot" Property="LayoutTransform">
-                                        <Setter.Value>
-                                            <RotateTransform Angle="-90" />
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Setter TargetName="PART_Track" Property="LayoutTransform">
-                                        <Setter.Value>
-                                            <RotateTransform Angle="-90" />
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Setter Property="Width" Value="Auto" />
-                                    <Setter Property="Height" Value="12" />
-                                    <Setter TargetName="Thumb" Property="Tag" Value="Horizontal" />
-                                    <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand" />
-                                    <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
         </ResourceDictionary>
     </Window.Resources>
     <Grid Background="Black">
         <Grid Background="#44444444" Margin="10" Height="300" VerticalAlignment="Top">
             <Grid VerticalAlignment="Top">
-                <Button x:Name="ButtonFechar" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" Width="20" Height="20" Margin="10,0" Click="ButtonFechar_Click">
+                <Button x:Name="ButtonFechar" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                        Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" Width="20" Height="20"
+                        Margin="10,0" Click="ButtonFechar_Click">
                     <materialDesign:PackIcon Kind="Close" VerticalAlignment="Center" Width="20" Height="20">
                         <materialDesign:PackIcon.Foreground>
-                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                                <GradientStop Color="#FFD69016"/>
-                                <GradientStop Color="#FFD6511E" Offset="0.747"/>
-                                <GradientStop Color="#FF9B330D" Offset="0.807"/>
+                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox"
+                                                 StartPoint="0.5,0">
+                                <GradientStop Color="#FFD69016" />
+                                <GradientStop Color="#FFD6511E" Offset="0.747" />
+                                <GradientStop Color="#FF9B330D" Offset="0.807" />
                             </LinearGradientBrush>
                         </materialDesign:PackIcon.Foreground>
                     </materialDesign:PackIcon>
                 </Button>
-                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="20" Height="20" Margin="10,0">
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}"
+                        BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="20" Height="20" Margin="10,0">
                     <materialDesign:PackIcon Kind="Plus" VerticalAlignment="Center" Width="20" Height="20">
                         <materialDesign:PackIcon.Foreground>
-                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                                <GradientStop Color="#FFD69016"/>
-                                <GradientStop Color="#FFD6511E" Offset="0.747"/>
-                                <GradientStop Color="#FF9B330D" Offset="0.807"/>
+                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox"
+                                                 StartPoint="0.5,0">
+                                <GradientStop Color="#FFD69016" />
+                                <GradientStop Color="#FFD6511E" Offset="0.747" />
+                                <GradientStop Color="#FF9B330D" Offset="0.807" />
                             </LinearGradientBrush>
                         </materialDesign:PackIcon.Foreground>
                     </materialDesign:PackIcon>
                 </Button>
                 <TextBlock Text="野狼disco" Margin="5" HorizontalAlignment="Center" />
             </Grid>
-            <TextBlock Text="宝石Gem &amp; 陈伟霆" Margin="25" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBlock Text="宝石Gem &amp; 陈伟霆" Margin="25" HorizontalAlignment="Center" VerticalAlignment="Top" />
             <Grid VerticalAlignment="Top" Margin="0,50">
                 <Ellipse Width="150" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Ellipse.Stroke>
                         <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                            <GradientStop x:Name="c1" Color="Black" Offset="0.71"/>
-                            <GradientStop Color="#FFB85219"/>
-                            <GradientStop x:Name="c2" Color="#FEB14F18" Offset="0.6"/>
+                            <GradientStop x:Name="c1" Color="Black" Offset="0.71" />
+                            <GradientStop Color="#FFB85219" />
+                            <GradientStop x:Name="c2" Color="#FEB14F18" Offset="0.6" />
                         </LinearGradientBrush>
                     </Ellipse.Stroke>
                 </Ellipse>
                 <Ellipse Width="145" Height="145" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Ellipse.Fill>
                         <RadialGradientBrush>
-                            <GradientStop Color="#FF0C0604" Offset="1"/>
-                            <GradientStop Color="#FF210900" Offset="0.047"/>
-                            <GradientStop Color="#FF1D0800" Offset="0.602"/>
+                            <GradientStop Color="#FF0C0604" Offset="1" />
+                            <GradientStop Color="#FF210900" Offset="0.047" />
+                            <GradientStop Color="#FF1D0800" Offset="0.602" />
                         </RadialGradientBrush>
                     </Ellipse.Fill>
                 </Ellipse>
                 <Ellipse Width="135" Height="135">
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="https://dotnet9.com/wp-content/uploads/2020/01/20200131233622.png" Stretch="Uniform"/>
+                        <ImageBrush ImageSource="https://dotnet9.com/wp-content/uploads/2020/01/20200131233622.png"
+                                    Stretch="Uniform" />
                     </Ellipse.Fill>
                 </Ellipse>
-                <Ellipse Fill="#7F000000"  Width="135" Height="135"/>
+                <Ellipse Fill="#7F000000" Width="135" Height="135" />
             </Grid>
             <Grid VerticalAlignment="Bottom" Margin="5">
-                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left">
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}"
+                        BorderBrush="{x:Null}" HorizontalAlignment="Left">
                     <materialDesign:PackIcon Kind="RotateRight" VerticalAlignment="Center" Width="30" Height="30">
                         <materialDesign:PackIcon.Foreground>
-                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                                <GradientStop Color="#FFD69016"/>
-                                <GradientStop Color="#FFD6511E" Offset="0.747"/>
-                                <GradientStop Color="#FF9B330D" Offset="0.807"/>
+                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox"
+                                                 StartPoint="0.5,0">
+                                <GradientStop Color="#FFD69016" />
+                                <GradientStop Color="#FFD6511E" Offset="0.747" />
+                                <GradientStop Color="#FF9B330D" Offset="0.807" />
                             </LinearGradientBrush>
                         </materialDesign:PackIcon.Foreground>
                     </materialDesign:PackIcon>
                 </Button>
-                <Button x:Name="Anterior" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}"  HorizontalAlignment="Left" Margin="50,0" Click="Anterior_Click">
+                <Button x:Name="Anterior" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                        Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" Margin="50,0"
+                        Click="Anterior_Click">
                     <materialDesign:PackIcon Kind="ChevronLeft" VerticalAlignment="Center" Width="30" Height="30">
                         <materialDesign:PackIcon.Foreground>
-                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                                <GradientStop Color="#FFD69016"/>
-                                <GradientStop Color="#FFD6511E" Offset="0.747"/>
-                                <GradientStop Color="#FF9B330D" Offset="0.807"/>
+                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox"
+                                                 StartPoint="0.5,0">
+                                <GradientStop Color="#FFD69016" />
+                                <GradientStop Color="#FFD6511E" Offset="0.747" />
+                                <GradientStop Color="#FF9B330D" Offset="0.807" />
                             </LinearGradientBrush>
                         </materialDesign:PackIcon.Foreground>
                     </materialDesign:PackIcon>
                 </Button>
-                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="#00000000" BorderBrush="#70702222" HorizontalAlignment="Center">
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="#00000000"
+                        BorderBrush="#70702222" HorizontalAlignment="Center">
                     <Button.Effect>
-                        <DropShadowEffect Color="#FFD67619" RenderingBias="Quality" BlurRadius="40" Direction="0"/>
+                        <DropShadowEffect Color="#FFD67619" RenderingBias="Quality" BlurRadius="40" Direction="0" />
                     </Button.Effect>
                     <materialDesign:PackIcon Kind="Pause" VerticalAlignment="Center" Width="30" Height="30">
                         <materialDesign:PackIcon.Foreground>
-                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                                <GradientStop Color="#FFD69016"/>
-                                <GradientStop Color="#FFD6511E" Offset="0.747"/>
-                                <GradientStop Color="#FF9B330D" Offset="0.807"/>
+                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox"
+                                                 StartPoint="0.5,0">
+                                <GradientStop Color="#FFD69016" />
+                                <GradientStop Color="#FFD6511E" Offset="0.747" />
+                                <GradientStop Color="#FF9B330D" Offset="0.807" />
                             </LinearGradientBrush>
                         </materialDesign:PackIcon.Foreground>
                     </materialDesign:PackIcon>
                 </Button>
-                <Button x:Name="Proxima" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}"  HorizontalAlignment="Right" Margin="50,0" Click="Proxima_Click">
+                <Button x:Name="Proxima" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                        Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right" Margin="50,0"
+                        Click="Proxima_Click">
                     <materialDesign:PackIcon Kind="ChevronRight" VerticalAlignment="Center" Width="30" Height="30">
                         <materialDesign:PackIcon.Foreground>
-                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                                <GradientStop Color="#FFD69016"/>
-                                <GradientStop Color="#FFD6511E" Offset="0.747"/>
-                                <GradientStop Color="#FF9B330D" Offset="0.807"/>
+                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox"
+                                                 StartPoint="0.5,0">
+                                <GradientStop Color="#FFD69016" />
+                                <GradientStop Color="#FFD6511E" Offset="0.747" />
+                                <GradientStop Color="#FF9B330D" Offset="0.807" />
                             </LinearGradientBrush>
                         </materialDesign:PackIcon.Foreground>
                     </materialDesign:PackIcon>
                 </Button>
-                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right">
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}"
+                        BorderBrush="{x:Null}" HorizontalAlignment="Right">
                     <materialDesign:PackIcon Kind="ShuffleVariant" VerticalAlignment="Center" Width="30" Height="30">
                         <materialDesign:PackIcon.Foreground>
-                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                                <GradientStop Color="#FFD69016"/>
-                                <GradientStop Color="#FFD6511E" Offset="0.747"/>
-                                <GradientStop Color="#FF9B330D" Offset="0.807"/>
+                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox"
+                                                 StartPoint="0.5,0">
+                                <GradientStop Color="#FFD69016" />
+                                <GradientStop Color="#FFD6511E" Offset="0.747" />
+                                <GradientStop Color="#FF9B330D" Offset="0.807" />
                             </LinearGradientBrush>
                         </materialDesign:PackIcon.Foreground>
                     </materialDesign:PackIcon>
@@ -207,80 +179,86 @@
         <ListView VerticalAlignment="Bottom" Height="150" Margin="5" Foreground="LightSteelBlue">
             <ListViewItem>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="01" Margin="5" VerticalAlignment="Center"/>
+                    <TextBlock Text="01" Margin="5" VerticalAlignment="Center" />
                     <Ellipse Width="30" Height="30">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="https://dotnet9.com/wp-content/uploads/2020/01/20200131234152.png"/>
+                            <ImageBrush ImageSource="https://dotnet9.com/wp-content/uploads/2020/01/20200131234152.png" />
                         </Ellipse.Fill>
                     </Ellipse>
-                    <TextBlock Text="我的梦 - 张靓颖" Margin="10,0" VerticalAlignment="Center" Width="100" TextTrimming="CharacterEllipsis"/>
-                    <TextBlock Text="2016" VerticalAlignment="Center"/>
-                    <TextBlock Text="4:04" Margin="10,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="我的梦 - 张靓颖" Margin="10,0" VerticalAlignment="Center" Width="100"
+                               TextTrimming="CharacterEllipsis" />
+                    <TextBlock Text="2016" VerticalAlignment="Center" />
+                    <TextBlock Text="4:04" Margin="10,0" VerticalAlignment="Center" />
                 </StackPanel>
             </ListViewItem>
             <ListViewItem>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="02" Margin="5" VerticalAlignment="Center"/>
+                    <TextBlock Text="02" Margin="5" VerticalAlignment="Center" />
                     <Ellipse Width="30" Height="30">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="https://dotnet9.com/wp-content/uploads/2020/01/20200131234746.png"/>
+                            <ImageBrush ImageSource="https://dotnet9.com/wp-content/uploads/2020/01/20200131234746.png" />
                         </Ellipse.Fill>
                     </Ellipse>
-                    <TextBlock Text="凉凉 – 杨宗纬 &amp; 张碧晨" Margin="10,0" VerticalAlignment="Center" Width="100" TextTrimming="CharacterEllipsis"/>
-                    <TextBlock Text="2017" VerticalAlignment="Center"/>
-                    <TextBlock Text="3:20" Margin="10,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="凉凉 – 杨宗纬 &amp; 张碧晨" Margin="10,0" VerticalAlignment="Center" Width="100"
+                               TextTrimming="CharacterEllipsis" />
+                    <TextBlock Text="2017" VerticalAlignment="Center" />
+                    <TextBlock Text="3:20" Margin="10,0" VerticalAlignment="Center" />
                 </StackPanel>
             </ListViewItem>
             <ListViewItem>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="03" Margin="5" VerticalAlignment="Center"/>
+                    <TextBlock Text="03" Margin="5" VerticalAlignment="Center" />
                     <Ellipse Width="30" Height="30">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="https://dotnet9.com/wp-content/uploads/2020/01/20200131235020.png"/>
+                            <ImageBrush ImageSource="https://dotnet9.com/wp-content/uploads/2020/01/20200131235020.png" />
                         </Ellipse.Fill>
                     </Ellipse>
-                    <TextBlock Text="如果这就是爱情 – 张靓颖" Margin="10,0" VerticalAlignment="Center" Width="100" TextTrimming="CharacterEllipsis"/>
-                    <TextBlock Text="2017" VerticalAlignment="Center"/>
-                    <TextBlock Text="2:57" Margin="10,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="如果这就是爱情 – 张靓颖" Margin="10,0" VerticalAlignment="Center" Width="100"
+                               TextTrimming="CharacterEllipsis" />
+                    <TextBlock Text="2017" VerticalAlignment="Center" />
+                    <TextBlock Text="2:57" Margin="10,0" VerticalAlignment="Center" />
                 </StackPanel>
             </ListViewItem>
             <ListViewItem>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="04" Margin="5" VerticalAlignment="Center"/>
+                    <TextBlock Text="04" Margin="5" VerticalAlignment="Center" />
                     <Ellipse Width="30" Height="30">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="https://dotnet9.com/wp-content/uploads/2020/01/20200131235218.png"/>
+                            <ImageBrush ImageSource="https://dotnet9.com/wp-content/uploads/2020/01/20200131235218.png" />
                         </Ellipse.Fill>
                     </Ellipse>
-                    <TextBlock Text="女儿国 – 张靓颖" Margin="10,0" VerticalAlignment="Center" Width="100" TextTrimming="CharacterEllipsis"/>
-                    <TextBlock Text="2016" VerticalAlignment="Center"/>
-                    <TextBlock Text="3:28" Margin="10,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="女儿国 – 张靓颖" Margin="10,0" VerticalAlignment="Center" Width="100"
+                               TextTrimming="CharacterEllipsis" />
+                    <TextBlock Text="2016" VerticalAlignment="Center" />
+                    <TextBlock Text="3:28" Margin="10,0" VerticalAlignment="Center" />
                 </StackPanel>
             </ListViewItem>
             <ListViewItem>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="05" Margin="5" VerticalAlignment="Center"/>
+                    <TextBlock Text="05" Margin="5" VerticalAlignment="Center" />
                     <Ellipse Width="30" Height="30">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="https://dotnet9.com/wp-content/uploads/2020/01/20200131235356.png"/>
+                            <ImageBrush ImageSource="https://dotnet9.com/wp-content/uploads/2020/01/20200131235356.png" />
                         </Ellipse.Fill>
                     </Ellipse>
-                    <TextBlock Text="另一个天堂 – 王力宏 &amp; 张靓颖" Margin="10,0" VerticalAlignment="Center" Width="100" TextTrimming="CharacterEllipsis"/>
-                    <TextBlock Text="2017" VerticalAlignment="Center"/>
-                    <TextBlock Text="3:22" Margin="10,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="另一个天堂 – 王力宏 &amp; 张靓颖" Margin="10,0" VerticalAlignment="Center" Width="100"
+                               TextTrimming="CharacterEllipsis" />
+                    <TextBlock Text="2017" VerticalAlignment="Center" />
+                    <TextBlock Text="3:22" Margin="10,0" VerticalAlignment="Center" />
                 </StackPanel>
             </ListViewItem>
             <ListViewItem>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="06" Margin="5" VerticalAlignment="Center"/>
+                    <TextBlock Text="06" Margin="5" VerticalAlignment="Center" />
                     <Ellipse Width="30" Height="30">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="https://dotnet9.com/wp-content/uploads/2020/01/20200131235528.png"/>
+                            <ImageBrush ImageSource="https://dotnet9.com/wp-content/uploads/2020/01/20200131235528.png" />
                         </Ellipse.Fill>
                     </Ellipse>
-                    <TextBlock Text="我们说好的 – 张靓颖" Margin="10,0" VerticalAlignment="Center" Width="100" TextTrimming="CharacterEllipsis"/>
-                    <TextBlock Text="2017" VerticalAlignment="Center"/>
-                    <TextBlock Text="4:02" Margin="10,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="我们说好的 – 张靓颖" Margin="10,0" VerticalAlignment="Center" Width="100"
+                               TextTrimming="CharacterEllipsis" />
+                    <TextBlock Text="2017" VerticalAlignment="Center" />
+                    <TextBlock Text="4:02" Margin="10,0" VerticalAlignment="Center" />
                 </StackPanel>
             </ListViewItem>
         </ListView>

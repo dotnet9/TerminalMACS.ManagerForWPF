@@ -3,23 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TerminalMACS.TestDemo.Views.BaiduMap"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Title="BaiduMapView" Height="600" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
-        <WebBrowser x:Name="web"/>
+        <WebBrowser x:Name="web" />
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <TextBlock Text="经度" VerticalAlignment="Center"/>
-            <TextBox Width="100" x:Name="jin" VerticalAlignment="Center" Text="113.264"/>
-            <TextBlock Text="纬度" VerticalAlignment="Center"/>
-            <TextBox Width="100" x:Name="wei" VerticalAlignment="Center" Text="23.157"/>
-            <Button Content="移动" Click="Move_Click" VerticalAlignment="Center"/>
-            <Button Content="标注" Click="Mark_Click" VerticalAlignment="Center"/>
-            <Button Content="清空" Click="Clear_Click" VerticalAlignment="Center"/>
+            <TextBlock Text="经度" VerticalAlignment="Center" />
+            <TextBox Width="100" x:Name="jin" VerticalAlignment="Center" Text="113.264" />
+            <TextBlock Text="纬度" VerticalAlignment="Center" />
+            <TextBox Width="100" x:Name="wei" VerticalAlignment="Center" Text="23.157" />
+            <Button Content="移动" Click="Move_Click" VerticalAlignment="Center" />
+            <Button Content="标注" Click="Mark_Click" VerticalAlignment="Center" />
+            <Button Content="清空" Click="Clear_Click" VerticalAlignment="Center" />
         </StackPanel>
     </Grid>
 </Window>

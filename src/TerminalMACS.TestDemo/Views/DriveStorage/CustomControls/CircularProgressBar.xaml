@@ -10,13 +10,13 @@
         <local:ValueToTextConverter x:Key="ValueToTextConverter"/>-->
     </UserControl.Resources>
     <Grid>
-        
+
         <!--ProgressBar Background-->
         <!--<ccontrols:Arc ArcThickness="{Binding ElementName=circularProgress, Path=ArcThickness}" EndAngle="360" Stretch="None" Fill="{Binding ElementName=circularProgress, Path=BackgroundBrush}"/>
        
         <Label Content="{Binding Converter={StaticResource ValueToTextConverter}, ElementName=circularProgress, Path=Value}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Arial" FontSize="18" Foreground="{Binding ElementName=circularProgress, Path=PFontColor}" FontWeight="{Binding ElementName=circularProgress, Path=PFontWeight}"/>
        
         <ccontrols:Arc ArcThickness="{Binding ElementName=circularProgress, Path=ArcThickness}" EndAngle="{Binding Converter={StaticResource ValueToAngleConverter}, ElementName=circularProgress, Path=Value}" Stretch="None" Fill="{Binding ElementName=circularProgress, Path=IndicatorBrush}"/>-->
-        
+
     </Grid>
 </UserControl>

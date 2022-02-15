@@ -1,7 +1,6 @@
-﻿namespace TerminalMACS.Infrastructure.Services
+﻿namespace TerminalMACS.Infrastructure.Services;
+
+public interface ITestService
 {
-    public interface ITestService
-    {
-        string GetCurrentTime();
-    }
+    string GetCurrentTime();
 }

@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace AgentModel;
 
-namespace AgentModel
+internal interface GiveGift
 {
-	interface GiveGift
-	{
-		void GiveDolls();
-		void GiveFlowers();
-		void GiveChocolate();
-	}
+    void GiveDolls();
+    void GiveFlowers();
+    void GiveChocolate();
 }

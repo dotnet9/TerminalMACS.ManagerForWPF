@@ -1,16 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AdapterMode._1
+namespace AdapterMode._1;
+
+internal class Target
 {
-  class Target
-  {
     public virtual void Request()
     {
-      Console.WriteLine("普通请求");
+        Console.WriteLine("普通请求");
     }
-  }
 }

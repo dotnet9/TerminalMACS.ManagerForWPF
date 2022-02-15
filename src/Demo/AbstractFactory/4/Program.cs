@@ -1,27 +1,26 @@
 using System;
 
-namespace AbstractFactory._4
+namespace AbstractFactory._4;
+
+internal class Program
 {
-  class Program
-  {
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
-      User user = new User();
-      Department dept = new Department();
+        var user = new User();
+        var dept = new Department();
 
-      // 直接得到实际的数据库访问实例，而不存在任何依赖
-      IUser iu = DataAccess.CreateUser();
+        // 直接得到实际的数据库访问实例，而不存在任何依赖
+        var iu = DataAccess.CreateUser();
 
-      iu.Insert(user);
-      iu.GetUser(1);
+        iu.Insert(user);
+        iu.GetUser(1);
 
-      // 直接得到实际的数据库访问实例，而不存在任何依赖
-      IDepartment id = DataAccess.CreateDepartment();
+        // 直接得到实际的数据库访问实例，而不存在任何依赖
+        var id = DataAccess.CreateDepartment();
 
-      id.Insert(dept);
-      id.GetDepartment(1);
+        id.Insert(dept);
+        id.GetDepartment(1);
 
-      Console.Read();
+        Console.Read();
     }
-  }
 }

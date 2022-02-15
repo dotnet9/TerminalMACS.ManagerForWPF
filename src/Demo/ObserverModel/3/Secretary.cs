@@ -1,42 +1,33 @@
 ﻿using System.Collections.Generic;
 
-namespace ObserverModel._3
+namespace ObserverModel._3;
+
+/// <summary>
+///     前台秘书类
+/// </summary>
+internal class Secretary : Subject
 {
-	/// <summary>
-	/// 前台秘书类
-	/// </summary>
-	class Secretary : Subject
-	{
-		// 同事列表
-		private IList<Observer> observers = new List<Observer>();
-		private string action;
+    // 同事列表
+    private readonly IList<Observer> observers = new List<Observer>();
 
-		//增加
-		public void Attach(Observer observer)
-		{
-			observers.Add(observer);
-		}
+    //增加
+    public void Attach(Observer observer)
+    {
+        observers.Add(observer);
+    }
 
-		//减少
-		public void Detach(Observer observer)
-		{
-			observers.Remove(observer);
-		}
+    //减少
+    public void Detach(Observer observer)
+    {
+        observers.Remove(observer);
+    }
 
-		//通知
-		public void Notify()
-		{
-			foreach (Observer o in observers)
-			{
-				o.Update();
-			}
-		}
+    //通知
+    public void Notify()
+    {
+        foreach (var o in observers) o.Update();
+    }
 
-		//老板状态
-		public string SubjectState
-		{
-			get { return action; }
-			set { action = value; }
-		}
-	}
+    //老板状态
+    public string SubjectState { get; set; }
 }

@@ -1,10 +1,9 @@
-﻿namespace ObserverModel._4
+﻿namespace ObserverModel._4;
+
+internal class ConcreteSubject : Subject
 {
-	class ConcreteSubject : Subject
-	{
-		/// <summary>
-		/// 具体被观察者状态
-		/// </summary>
-		public string SubjectState { get; set; }
-	}
+    /// <summary>
+    ///     具体被观察者状态
+    /// </summary>
+    public string SubjectState { get; set; }
 }

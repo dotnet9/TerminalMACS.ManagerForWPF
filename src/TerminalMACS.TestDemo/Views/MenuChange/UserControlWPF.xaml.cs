@@ -1,15 +1,14 @@
 ﻿using System.Windows.Controls;
 
-namespace TerminalMACS.TestDemo.Views.MenuChange
+namespace TerminalMACS.TestDemo.Views.MenuChange;
+
+/// <summary>
+///     UserControlWPF.xaml 的交互逻辑
+/// </summary>
+public partial class UserControlWPF : UserControl
 {
-    /// <summary>
-    /// UserControlWPF.xaml 的交互逻辑
-    /// </summary>
-    public partial class UserControlWPF : UserControl
+    public UserControlWPF()
     {
-        public UserControlWPF()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

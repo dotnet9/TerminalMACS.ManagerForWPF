@@ -1,18 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AbstractFactory._4;
-using System.Configuration;
-
-//引入反射，必须要写
 using System.Reflection;
+using AbstractFactory._4;
+//引入反射，必须要写
 
-namespace AbstractFactory._5
+namespace AbstractFactory._5;
+
+internal class DataAccess
 {
-  class DataAccess
-  {
     // 程序集名称："抽象工厂模式"
     private static readonly string AssemblyName = "抽象工厂模式";
 
@@ -21,14 +14,13 @@ namespace AbstractFactory._5
 
     public static IUser CreateUser()
     {
-      string className = AssemblyName + "." + db + "User";
-      return (IUser)Assembly.Load(AssemblyName).CreateInstance(className);
+        var className = AssemblyName + "." + db + "User";
+        return (IUser)Assembly.Load(AssemblyName).CreateInstance(className);
     }
 
     public static IDepartment CreateDepartment()
     {
-      string className = AssemblyName + "." + db + "Department";
-      return (IDepartment)Assembly.Load(AssemblyName).CreateInstance(className);
+        var className = AssemblyName + "." + db + "Department";
+        return (IDepartment)Assembly.Load(AssemblyName).CreateInstance(className);
     }
-  }
 }

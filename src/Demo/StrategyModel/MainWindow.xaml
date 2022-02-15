@@ -3,36 +3,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:StrategyModel"
         mc:Ignorable="d" Background="White"
         Title="商场收银系统" Height="300" Width="300">
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
-            <RowDefinition Height="35"/>
-            <RowDefinition Height="35"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="80" />
         </Grid.ColumnDefinitions>
-        <TextBlock Text="折扣：" VerticalAlignment="Center"/>
-        <ComboBox Grid.Column="1" x:Name="cbxType" VerticalAlignment="Center" Margin="10 0" Text="0.00"/>
-        
-        <TextBlock Text="单价：" Grid.Row="1" VerticalAlignment="Center"/>
-        <TextBox Grid.Column="1" Grid.Row="1" x:Name="txtPrice" VerticalAlignment="Center" Margin="10 0" Text="0.00" TextAlignment="Right"/>
-        <Button Content="确定" Grid.Row="1" x:Name="btnOK" Grid.Column="2" VerticalAlignment="Center" Click="btnOK_Click"/>
-        
-        <TextBlock Grid.Row="2" Text="数量：" VerticalAlignment="Center"/>
-        <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtNum"  VerticalAlignment="Center" Margin="10 0" Text="0" TextAlignment="Right"/>        
-        <Button Content="重置" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
+        <TextBlock Text="折扣：" VerticalAlignment="Center" />
+        <ComboBox Grid.Column="1" x:Name="cbxType" VerticalAlignment="Center" Margin="10 0" Text="0.00" />
 
-        <ListBox Grid.Row="3" Grid.ColumnSpan="3" x:Name="lbxList" Margin="0 10"/>
-        
-        <TextBlock Text="总计：" Grid.Row="4" VerticalAlignment="Center"/>
-        <TextBlock x:Name="lblResult" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Text="0.00" TextAlignment="Center" FontSize="45"/>
+        <TextBlock Text="单价：" Grid.Row="1" VerticalAlignment="Center" />
+        <TextBox Grid.Column="1" Grid.Row="1" x:Name="txtPrice" VerticalAlignment="Center" Margin="10 0" Text="0.00"
+                 TextAlignment="Right" />
+        <Button Content="确定" Grid.Row="1" x:Name="btnOK" Grid.Column="2" VerticalAlignment="Center" Click="btnOK_Click" />
+
+        <TextBlock Grid.Row="2" Text="数量：" VerticalAlignment="Center" />
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtNum" VerticalAlignment="Center" Margin="10 0" Text="0"
+                 TextAlignment="Right" />
+        <Button Content="重置" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" />
+
+        <ListBox Grid.Row="3" Grid.ColumnSpan="3" x:Name="lbxList" Margin="0 10" />
+
+        <TextBlock Text="总计：" Grid.Row="4" VerticalAlignment="Center" />
+        <TextBlock x:Name="lblResult" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center"
+                   Text="0.00" TextAlignment="Center" FontSize="45" />
     </Grid>
 </Window>

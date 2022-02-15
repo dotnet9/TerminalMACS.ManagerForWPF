@@ -1,19 +1,18 @@
 ﻿using TerminalMACS.TestDemo.Views.LoLGoal.API;
 using TerminalMACS.TestDemo.Views.LoLGoal.Utils;
 
-namespace TerminalMACS.TestDemo.Views.LoLGoal.Controller
+namespace TerminalMACS.TestDemo.Views.LoLGoal.Controller;
+
+public class ControllerMain
 {
-    public class ControllerMain
+    public bool GetSummoner(string summonerName)
     {
-        public bool GetSummoner(string summonerName)
-        {
-            Summoner_V4 summoner_V4 = new Summoner_V4(Constants.Region);
+        var summoner_V4 = new Summoner_V4(Constants.Region);
 
-            var summoner = summoner_V4.GetSummonerByName(summonerName);
+        var summoner = summoner_V4.GetSummonerByName(summonerName);
 
-            Constants.Summoner = summoner;
+        Constants.Summoner = summoner;
 
-            return summoner != null;
-        }
+        return summoner != null;
     }
 }

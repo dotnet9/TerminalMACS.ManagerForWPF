@@ -1,9 +1,7 @@
-using System;
+namespace AbstractFactory._2;
 
-namespace AbstractFactory._2
+internal class Program
 {
-  class Program
-  {
     //static void Main(string[] args)
     //{
     //  User user = new User();
@@ -18,5 +16,4 @@ namespace AbstractFactory._2
 
     //  Console.Read();
     //}
-  }
 }

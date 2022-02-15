@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converts="clr-namespace:AduSkin.Controls.Converter;assembly=AduSkin">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <LinearGradientBrush x:Key="PrimaryBrush" StartPoint="0,0" EndPoint="1,0">
         <GradientStop Offset="0" Color="{DynamicResource PrimaryColor}" />
         <GradientStop Offset="1" Color="{DynamicResource DarkPrimaryColor}" />

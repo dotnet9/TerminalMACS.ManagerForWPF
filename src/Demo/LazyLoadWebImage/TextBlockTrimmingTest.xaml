@@ -10,7 +10,7 @@
         <system:String x:Key="testStr">这是一段测试的文字，测试超出显示宽度是否显示...，如果显示则测试成功</system:String>
     </Window.Resources>
     <StackPanel>
-        <TextBlock Text="{StaticResource testStr}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+        <TextBlock Text="{StaticResource testStr}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" />
 
         <TextBlock TextTrimming="CharacterEllipsis" TextWrapping="NoWrap">
             <Hyperlink>模拟按钮1</Hyperlink>
