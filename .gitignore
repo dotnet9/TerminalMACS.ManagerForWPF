@@ -116,3 +116,5 @@ src/Demo/MessengerDemo/.vs/Messager/v17/.suo
 /src/Demo/LazyLoadWebImage/obj
 /src/Demo/LazyLoadWebImage/bin
 src/_ReSharper.Caches/
+src/Demo/ColorfulConsoleApp/bin/
+src/Demo/ColorfulConsoleApp/obj/
