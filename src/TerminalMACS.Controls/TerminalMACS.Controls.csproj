@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MaterialDesignColors" Version="2.0.5-ci74" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.4.0-ci74" />
+    <PackageReference Include="MaterialDesignColors" Version="2.0.7-ci172" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.6.0-ci172" />
   </ItemGroup>
 
   <ItemGroup>
