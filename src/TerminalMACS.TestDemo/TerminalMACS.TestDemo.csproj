@@ -41,6 +41,12 @@
     <None Remove="Views\LoLGoal\Assets\emblems\Emblem_Silver.png" />
     <None Remove="Views\LoLGoal\Assets\logo2.png" />
     <None Remove="Views\MobileAppUsageDashboardCore\pie-doughnut.html" />
+    <None Remove="Views\ModernLogin\Images\close.png" />
+    <None Remove="Views\ModernLogin\Images\email.png" />
+    <None Remove="Views\ModernLogin\Images\github.png" />
+    <None Remove="Views\ModernLogin\Images\google.png" />
+    <None Remove="Views\ModernLogin\Images\lock.png" />
+    <None Remove="Views\ModernLogin\Images\wechat.png" />
     <None Remove="Views\NavigationDrawMenu\Assets\closeBtn_default.png" />
     <None Remove="Views\NavigationDrawMenu\Assets\closeBtn_MouseOver.png" />
     <None Remove="Views\NavigationDrawMenu\Assets\img_background.png" />
@@ -62,6 +68,26 @@
     <None Remove="Views\Tree\Images\Phone.png" />
     <None Remove="Views\Tree\Images\Right.png" />
     <None Remove="Views\Tree\Images\sidebar-3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\ModernLogin\Images\close.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ModernLogin\Images\email.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ModernLogin\Images\github.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ModernLogin\Images\google.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ModernLogin\Images\lock.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ModernLogin\Images\wechat.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="2.0.7-ci172" />

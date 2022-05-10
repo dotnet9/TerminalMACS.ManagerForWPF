@@ -12,6 +12,7 @@ using TerminalMACS.TestDemo.Views.InstagramRedesign;
 using TerminalMACS.TestDemo.Views.LoginUI;
 using TerminalMACS.TestDemo.Views.LoLGoal.Views;
 using TerminalMACS.TestDemo.Views.MobileAppUsageDashboardCore;
+using TerminalMACS.TestDemo.Views.ModernLogin;
 using TerminalMACS.TestDemo.Views.MusicPlayer;
 using TerminalMACS.TestDemo.Views.NavigationDrawMenu;
 using TerminalMACS.TestDemo.Views.ReadWriteExcel;
@@ -165,6 +166,13 @@ public partial class MainTabItem
     private void ShowLoginView3_Click(object sender, RoutedEventArgs e)
     {
         var view = new LoginView3();
+        view.Owner = Application.Current.MainWindow;
+        view.Show();
+    }
+
+    private void ShowModernLogin_Click(object sender, RoutedEventArgs e)
+    {
+        var view = new ModernLoginPage();
         view.Owner = Application.Current.MainWindow;
         view.Show();
     }
