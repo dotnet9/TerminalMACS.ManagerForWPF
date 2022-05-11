@@ -56,6 +56,19 @@
                 </Grid.RowDefinitions>
                 <Border Margin="30 5" Height="150" Width="150" CornerRadius="10" HorizontalAlignment="Center">
                     <Border.Background>
+                        <ImageBrush ImageSource="/Images/lequ.co.jpg" />
+                    </Border.Background>
+                </Border>
+                <TextBlock Grid.Row="1" Text="扫码关注微信公众号：快乐玩转技术"
+                           Width="170" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" />
+            </Grid>
+            <Grid Width="200">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Border Margin="30 5" Height="150" Width="150" CornerRadius="10" HorizontalAlignment="Center">
+                    <Border.Background>
                         <ImageBrush ImageSource="/Images/mynewwechat.jpg" />
                     </Border.Background>
                 </Border>

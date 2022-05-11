@@ -16,9 +16,9 @@
         <Rectangle x:Name="freeRect" Fill="{StaticResource freeMachineImageBrush}"
                    Height="48" Width="128" Canvas.Left="186" Canvas.Top="20" />
         <TextBlock x:Name="tbMsg" FontSize="20" Canvas.Left="10" />
-        <TextBlock x:Name="tb1" Text="8866" FontSize="20" Canvas.Left="200" Canvas.Top="120" Width="1262" />
-        <TextBlock x:Name="tb2" Text="2333哈哈哈哈" FontSize="20" Canvas.Left="800" Canvas.Top="80" Width="1262" />
-        <TextBlock x:Name="tb3" Text="66666                                                                 再接再厉"
+        <TextBlock x:Name="tb1" Text="关注微信公众号：Dotnet9" FontSize="20" Canvas.Left="200" Canvas.Top="120" Width="1262" />
+        <TextBlock x:Name="tb2" Text="联系微信号：d9tools" FontSize="20" Canvas.Left="800" Canvas.Top="80" Width="1262" />
+        <TextBlock x:Name="tb3" Text="关注微信公众号：快乐玩转技术"
                    FontSize="20" Canvas.Left="450" Canvas.Top="160" Width="1262" />
         <!-- Canvas.Left="122"-->
     </Canvas>

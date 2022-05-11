@@ -27,6 +27,7 @@
     <None Remove="Images\about.png" />
     <None Remove="Images\code.png" />
     <None Remove="Images\Contact.png" />
+    <None Remove="Images\lequ.co.jpg" />
     <None Remove="Images\logo.ico" />
     <None Remove="Images\logo.png" />
     <None Remove="Images\logo2.ico" />
@@ -64,6 +65,7 @@
     <Resource Include="Images\about.png" />
     <Resource Include="Images\code.png" />
     <Resource Include="Images\Contact.png" />
+    <Resource Include="Images\lequ.co.jpg" />
     <Resource Include="Images\logo.ico" />
     <Resource Include="Images\logo2.ico" />
     <Resource Include="Images\logo.png" />

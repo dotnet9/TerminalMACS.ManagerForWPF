@@ -6,15 +6,13 @@
 
 <h1 align="center">TerminalMACS</h1>
 
-一个使用 Prism 作为模块化框架、基于多个开源控件库作为UI控件选择、集成开源 UI 界面设计的 .NET 5 WPF 客户端项目。
-
-[English](./README.md) | 简体中文
+一个使用 Prism 作为模块化框架、基于多个开源控件库作为UI控件选择、集成开源 UI 界面设计的 .NET 7 WPF 客户端项目。
 
 ## 1. 特性
 
-- 使用 [.NET 5](https://dotnet.microsoft.com/download/dotnet/5.0?utm_source=dotnet-website&utm_medium=banner&utm_campaign=preview5-banner) 开发，体验最新 .NET 平台（和 .NET Core 3.1 无缝兼容）
+- 使用 [.NET 7](https://dotnet.microsoft.com/zh-cn/) 开发，体验最新 .NET 平台
 
->.NET 5 是 .NET Framework 和 .NET Core 的未来，最终将成为一个统一平台，.NET5将包含ASP.NET核心、实体框架核心、WinForms、WPF、Xamarin 和 ML.NET。
+>.NET是免费，跨平台，开源的，用于构建所有应用的开发人员平台。
 
 - 基于 [Prism 8](https://github.com/PrismLibrary/Prism) 搭建模块化框架，方便程序扩展
 
@@ -36,7 +34,8 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 
 ## 2. 支持环境
 
-- .NET 5.0。
+- .NET 7.0。
+- Visual Studio 2022
 
 ## 3. 当前版本
 
@@ -44,7 +43,10 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 
 ## 4. 链接
 
-- 官方网站：[Dotnet9](https://dotnet9.com)
+官方网站
+
+- Dotnet9：[https://dotnet9.com](https://dotnet9.com)
+- 快乐玩转技术：[https://lequ.co](https://lequ.co)
 
 ## 5. 项目界面截图
 
