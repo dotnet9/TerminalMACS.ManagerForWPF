@@ -79,7 +79,12 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 
 ![](https://img1.dotnet9.com/2022/05/3401.gif)
 
+## 2022年05月11日 如何在 WPF 中设计漂亮的社交媒体信息仪表板
 
+
+- 参考视频：[C# WPF UI | How to Design Beautiful Social Media Info Dashboard in WPF](https://www.youtube.com/watch?v=ZqEj7BcXE9M)
+- 参考代码：[WPF-Social-Media-Info-Dashboard](https://github.com/sajjad-z/WPF-Social-Media-Info-Dashboard)
+- 介绍文章：[WPF|如何在 WPF 中设计漂亮的社交媒体信息仪表板](/)
 
 ----
 
