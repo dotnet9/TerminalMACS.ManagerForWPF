@@ -63,6 +63,6 @@ public partial class ModernLoginPage : Window
 
     private void close_MouseUp(object sender, MouseButtonEventArgs e)
     {
-        Application.Current.Shutdown();
+        this.Close();
     }
 }
