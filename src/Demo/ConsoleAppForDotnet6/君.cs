@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable enable
+using System;
 
 namespace ConsoleAppForDotnet6;
 
@@ -147,7 +148,7 @@ internal class 忠志之士
     private readonly 君 刘备 = new();
     private readonly 君 刘禅 = new();
 
-    public string 名称;
+    public string? 名称;
 
     public void 忘身于外()
     {

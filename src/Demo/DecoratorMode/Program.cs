@@ -37,7 +37,7 @@ internal enum Week
 
 internal class MyClass
 {
-    private Week week = Week.Thursday | Week.Sunday;
+    private Week _week = Week.Thursday | Week.Sunday;
 }
 
 internal class Program

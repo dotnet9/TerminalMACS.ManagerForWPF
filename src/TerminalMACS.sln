@@ -83,7 +83,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sorting", "Demo\Sorting\Sor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LazyLoadWebImage", "Demo\LazyLoadWebImage\LazyLoadWebImage.csproj", "{12DD2587-F3E6-414B-9D6E-B599C7E200DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorfulConsoleApp", "Demo\ColorfulConsoleApp\ColorfulConsoleApp.csproj", "{58AB1C9B-7A0C-4417-9C49-12A9A9E94A8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorfulConsoleApp", "Demo\ColorfulConsoleApp\ColorfulConsoleApp.csproj", "{58AB1C9B-7A0C-4417-9C49-12A9A9E94A8B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPFDesignDemos", "WPFDesignDemos", "{F530599B-E7AC-4632-A6C2-8B60897C3952}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -409,6 +411,7 @@ Global
 		{63B5A433-BE14-408E-A7B2-23D2BA89ED8D} = {FFEDBAEA-EAE7-4727-BB25-2C1A2FD8B3B0}
 		{12DD2587-F3E6-414B-9D6E-B599C7E200DD} = {FFEDBAEA-EAE7-4727-BB25-2C1A2FD8B3B0}
 		{58AB1C9B-7A0C-4417-9C49-12A9A9E94A8B} = {FFEDBAEA-EAE7-4727-BB25-2C1A2FD8B3B0}
+		{F530599B-E7AC-4632-A6C2-8B60897C3952} = {A9962531-F9F1-4B56-B0CE-345D2E2D6C61}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73FC7CE0-9D4E-442B-AE18-58FB8F7BC4F0}

@@ -36,13 +36,13 @@ internal abstract class Decorator : Component
 internal class ConcreteDecoratorA : Decorator
 {
     // 本类的独有功能，以区别于ConcreteDecoratorB
-    private string addedstate;
+    private string _addedstate;
 
     public override void Operation()
     {
         //首先运行原Component的Operation(，再执行本类的功能，如addedState，相当于对原Component进行了装饰
         base.Operation();
-        addedstate = "New State";
+        _addedstate = "New State";
         Console.WriteLine("具体装饰对象A的操作");
     }
 }

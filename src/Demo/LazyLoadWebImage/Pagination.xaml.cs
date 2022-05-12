@@ -176,7 +176,7 @@ public partial class Pagination : UserControl
         }
     }
 
-    private void ButtonNext_OnClick(object sender, RoutedEventArgs e)
+    private void ButtonNext_OnClick(object? sender, RoutedEventArgs? e)
     {
         PageIndex++;
     }

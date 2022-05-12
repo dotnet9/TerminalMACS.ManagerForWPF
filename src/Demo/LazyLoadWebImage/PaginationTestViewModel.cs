@@ -9,20 +9,20 @@ namespace LazyLoadWebImage;
 
 public class PaginationTestViewModel : BindableBase
 {
-    private int _PageCount = 101;
-    private string _PageCountString = "共100项";
-    private int _PageIndex = 1;
+    private int _pageCount = 101;
+    private string _pageCountString = "共100项";
+    private int _pageIndex = 1;
     private int _pageSize = 60;
 
-    private ObservableCollection<PageSizeInfo>? pageSizeItemSource;
-    private ICommand showCommand;
+    private readonly ObservableCollection<PageSizeInfo>? _pageSizeItemSource;
+    private ICommand? _showCommand;
 
     /// <summary>
     ///     页码改变命令
     /// </summary>
-    public ICommand ShowCommand => showCommand ?? new DelegateCommand(async () => await RaiseShowCommand());
+    public ICommand ShowCommand => _showCommand ?? new DelegateCommand(RaiseShowCommand);
 
-    public ObservableCollection<PageSizeInfo> PageSizeItemSource => pageSizeItemSource ??
+    public ObservableCollection<PageSizeInfo> PageSizeItemSource => _pageSizeItemSource ??
                                                                     new ObservableCollection<PageSizeInfo>
                                                                     {
                                                                         new(60, "60 Item / Page"),
@@ -39,27 +39,27 @@ public class PaginationTestViewModel : BindableBase
 
     public string PageCountString
     {
-        get => _PageCountString;
-        set => SetProperty(ref _PageCountString, value);
+        get => _pageCountString;
+        set => SetProperty(ref _pageCountString, value);
     }
 
     public int PageIndex
     {
-        get => _PageIndex;
-        set => SetProperty(ref _PageIndex, value);
+        get => _pageIndex;
+        set => SetProperty(ref _pageIndex, value);
     }
 
     public int PageCount
     {
-        get => _PageCount;
-        set => SetProperty(ref _PageCount, value);
+        get => _pageCount;
+        set => SetProperty(ref _pageCount, value);
     }
 
 
     /// <summary>
     ///     页码改变
     /// </summary>
-    private async Task RaiseShowCommand()
+    private void RaiseShowCommand()
     {
         MessageBox.Show($"{PageSizeItemSource.Count} + {PageSize}");
     }
