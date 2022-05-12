@@ -70,15 +70,31 @@
                         Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_MusicPlayer1BtnContent}}"
                         Click="ShowMusicPalyer1_Click" />
                     <Button
-                        Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_AppUsageDashboardBtnContent}}"
-                        Click="ShowAppUseageDashboard_Click" />
-                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_Dashboard2BtnContent}}"
-                            Click="ShowDashboard2_Click" />
-                    <Button
                         Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_InstagramRedesignBtnContent}}"
                         Click="ShowInstagramRedesign_Click" />
                     <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_LoLGoalBtnContent}}"
                             Click="ShowLoLGoal_Click" />
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card
+                Background="#03a9f4"
+                Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                Width="250"
+                Padding="8">
+                <StackPanel Orientation="Vertical"
+                            Width="220">
+                    <StackPanel.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedAccentButton}">
+                            <Setter Property="Margin" Value="2 5" />
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button
+                        Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_AppUsageDashboardBtnContent}}"
+                        Click="ShowAppUseageDashboard_Click" />
+                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_Dashboard2BtnContent}}"
+                            Click="ShowDashboard2_Click" />
+                    <Button Content="仪表盘3"
+                            Click="ShowDashboard3_Click" />
                 </StackPanel>
             </materialDesign:Card>
             <materialDesign:Card

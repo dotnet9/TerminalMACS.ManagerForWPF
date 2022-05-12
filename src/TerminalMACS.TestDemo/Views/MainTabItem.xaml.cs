@@ -176,4 +176,11 @@ public partial class MainTabItem
         view.Owner = Application.Current.MainWindow;
         view.Show();
     }
+
+    private void ShowDashboard3_Click(object sender, RoutedEventArgs e)
+    {
+        var view = new Dashboard3.MainWindow();
+        view.Owner = Application.Current.MainWindow;
+        view.Show();
+    }
 }

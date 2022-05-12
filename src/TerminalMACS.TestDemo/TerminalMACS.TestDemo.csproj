@@ -107,6 +107,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TerminalMACS.Infrastructure.UI\TerminalMACS.Infrastructure.UI.csproj" />
     <ProjectReference Include="..\TerminalMACS.Infrastructure\TerminalMACS.Infrastructure.csproj" />
+    <ProjectReference Include="..\WPFDesignDemos\Dashboard3\Dashboard3.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\bg.png" />
