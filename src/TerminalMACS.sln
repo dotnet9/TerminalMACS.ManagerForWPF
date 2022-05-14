@@ -89,6 +89,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPFDesignDemos", "WPFDesign
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dashboard3", "WPFDesignDemos\Dashboard3\Dashboard3.csproj", "{4532FE32-D3F1-4234-84D3-298DB39D6322}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalletPayment", "WPFDesignDemos\WalletPayment\WalletPayment.csproj", "{78B18BD5-82CD-4BE7-9A97-02CB74A15228}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -385,6 +387,14 @@ Global
 		{4532FE32-D3F1-4234-84D3-298DB39D6322}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4532FE32-D3F1-4234-84D3-298DB39D6322}.Release|x64.ActiveCfg = Release|Any CPU
 		{4532FE32-D3F1-4234-84D3-298DB39D6322}.Release|x64.Build.0 = Release|Any CPU
+		{78B18BD5-82CD-4BE7-9A97-02CB74A15228}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78B18BD5-82CD-4BE7-9A97-02CB74A15228}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78B18BD5-82CD-4BE7-9A97-02CB74A15228}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{78B18BD5-82CD-4BE7-9A97-02CB74A15228}.Debug|x64.Build.0 = Debug|Any CPU
+		{78B18BD5-82CD-4BE7-9A97-02CB74A15228}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78B18BD5-82CD-4BE7-9A97-02CB74A15228}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78B18BD5-82CD-4BE7-9A97-02CB74A15228}.Release|x64.ActiveCfg = Release|Any CPU
+		{78B18BD5-82CD-4BE7-9A97-02CB74A15228}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -423,6 +433,7 @@ Global
 		{58AB1C9B-7A0C-4417-9C49-12A9A9E94A8B} = {FFEDBAEA-EAE7-4727-BB25-2C1A2FD8B3B0}
 		{F85E5986-116A-468D-AB06-6F331725CFAD} = {FFEDBAEA-EAE7-4727-BB25-2C1A2FD8B3B0}
 		{4532FE32-D3F1-4234-84D3-298DB39D6322} = {F85E5986-116A-468D-AB06-6F331725CFAD}
+		{78B18BD5-82CD-4BE7-9A97-02CB74A15228} = {F85E5986-116A-468D-AB06-6F331725CFAD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {73FC7CE0-9D4E-442B-AE18-58FB8F7BC4F0}

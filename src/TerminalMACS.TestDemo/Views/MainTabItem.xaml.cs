@@ -183,4 +183,11 @@ public partial class MainTabItem
         view.Owner = Application.Current.MainWindow;
         view.Show();
     }
+
+    private void ShowDashboard4_Click(object sender, RoutedEventArgs e)
+    {
+        var view = new WalletPayment.MainWindow();
+        view.Owner = Application.Current.MainWindow;
+        view.Show();
+    }
 }

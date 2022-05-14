@@ -95,6 +95,8 @@
                             Click="ShowDashboard2_Click" />
                     <Button Content="仪表盘3"
                             Click="ShowDashboard3_Click" />
+                    <Button Content="黑暗模式钱包仪表盘"
+                            Click="ShowDashboard4_Click" />
                 </StackPanel>
             </materialDesign:Card>
             <materialDesign:Card
