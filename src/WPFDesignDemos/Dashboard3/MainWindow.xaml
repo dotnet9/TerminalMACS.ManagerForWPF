@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Dashboard3"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
@@ -71,42 +71,42 @@
             <StackPanel>
                 <Button Style="{StaticResource menuButton}" Margin="0 10 0 0" Background="#AC0F0F" Foreground="#FFFFFF">
                     <StackPanel>
-                        <fa:ImageAwesome Icon="Home" Style="{StaticResource menuButtonIcon}" />
+                        <materialDesign:PackIcon Kind="Home" Style="{StaticResource menuButtonIcon}" />
                         <TextBlock Text="仪表盘" Style="{StaticResource menuButtonText}" />
                     </StackPanel>
                 </Button>
 
                 <Button Style="{StaticResource menuButton}">
                     <StackPanel>
-                        <fa:ImageAwesome Icon="Bookmark" Style="{StaticResource menuButtonIcon}" />
+                        <materialDesign:PackIcon Kind="Bookmark" Style="{StaticResource menuButtonIcon}" />
                         <TextBlock Text="书签" Style="{StaticResource menuButtonText}" />
                     </StackPanel>
                 </Button>
 
                 <Button Style="{StaticResource menuButton}">
                     <StackPanel>
-                        <fa:ImageAwesome Icon="Tags" Style="{StaticResource menuButtonIcon}" />
+                        <materialDesign:PackIcon Kind="Tags" Style="{StaticResource menuButtonIcon}" />
                         <TextBlock Text="标签" Style="{StaticResource menuButtonText}" />
                     </StackPanel>
                 </Button>
 
                 <Button Style="{StaticResource menuButton}">
                     <StackPanel>
-                        <fa:ImageAwesome Icon="FileText" Style="{StaticResource menuButtonIcon}" />
+                        <materialDesign:PackIcon Kind="Post" Style="{StaticResource menuButtonIcon}" />
                         <TextBlock Text="帖子" Style="{StaticResource menuButtonText}" />
                     </StackPanel>
                 </Button>
 
                 <Button Style="{StaticResource menuButton}">
                     <StackPanel>
-                        <fa:ImageAwesome Icon="Comments" Style="{StaticResource menuButtonIcon}" />
+                        <materialDesign:PackIcon Kind="Comments" Style="{StaticResource menuButtonIcon}" />
                         <TextBlock Text="留言" Style="{StaticResource menuButtonText}" />
                     </StackPanel>
                 </Button>
 
                 <Button Style="{StaticResource menuButton}">
                     <StackPanel>
-                        <fa:ImageAwesome Icon="Cog" Style="{StaticResource menuButtonIcon}" />
+                        <materialDesign:PackIcon Kind="Cog" Style="{StaticResource menuButtonIcon}" />
                         <TextBlock Text="设置" Style="{StaticResource menuButtonText}" />
                     </StackPanel>
                 </Button>
@@ -135,7 +135,7 @@
                             <TextBlock Text="总浏览" Style="{StaticResource infoCardText}" />
                         </StackPanel>
 
-                        <fa:ImageAwesome Icon="Eye" Style="{StaticResource infoCardIcon}" />
+                        <materialDesign:PackIcon Kind="Eye" Style="{StaticResource infoCardIcon}" />
                     </Grid>
                 </Border>
 
@@ -152,7 +152,7 @@
                             <TextBlock Text="参与率" Style="{StaticResource infoCardText}" />
                         </StackPanel>
 
-                        <fa:ImageAwesome Icon="PieChart" Style="{StaticResource infoCardIcon}" />
+                        <materialDesign:PackIcon Kind="ChartPie" Style="{StaticResource infoCardIcon}" />
                     </Grid>
                 </Border>
 
@@ -169,7 +169,7 @@
                             <TextBlock Text="总喜欢" Style="{StaticResource infoCardText}" />
                         </StackPanel>
 
-                        <fa:ImageAwesome Icon="ThumbsUp" Style="{StaticResource infoCardIcon}" />
+                        <materialDesign:PackIcon Kind="ThumbsUp" Style="{StaticResource infoCardIcon}" />
                     </Grid>
                 </Border>
             </Grid>
@@ -192,19 +192,19 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 20 0">
                         <Button Style="{StaticResource button}">
                             <StackPanel Orientation="Horizontal">
-                                <fa:ImageAwesome Icon="BookmarkOutline" Style="{StaticResource buttonIcon}" />
+                                <materialDesign:PackIcon Kind="BookmarkOutline" Style="{StaticResource buttonIcon}" />
                                 <TextBlock Text="保存个人信息" Style="{StaticResource buttonText}" />
                             </StackPanel>
                         </Button>
 
                         <Button Style="{StaticResource button}" Background="#202934" Foreground="#e9e9e9">
                             <StackPanel Orientation="Horizontal">
-                                <fa:ImageAwesome Icon="CommentOutline" Style="{StaticResource buttonIcon}" />
+                                <materialDesign:PackIcon Kind="CommentOutline" Style="{StaticResource buttonIcon}" />
                                 <TextBlock Text="联系" Style="{StaticResource buttonText}" />
                             </StackPanel>
                         </Button>
 
-                        <fa:ImageAwesome Icon="EllipsisV" Style="{StaticResource iconBar}" />
+                        <materialDesign:PackIcon Kind="VectorEllipse" Style="{StaticResource iconBar}" />
                     </StackPanel>
                 </Grid>
             </Border>
@@ -219,10 +219,10 @@
                 <!--Social Card-->
                 <Border Style="{StaticResource socialCard}">
                     <StackPanel>
-                        <fa:ImageAwesome Icon="EllipsisH" Style="{StaticResource socialCardIconBar}" />
+                        <materialDesign:PackIcon Kind="EllipsisHorizontal" Style="{StaticResource socialCardIconBar}" />
                         <StackPanel Style="{StaticResource socialCardStack}">
-                            <fa:ImageAwesome Icon="YoutubePlay" Foreground="Red"
-                                             Style="{StaticResource socialCardIconTitle}" />
+                            <materialDesign:PackIcon Kind="YoutubePlay" Foreground="Red"
+                                                     Style="{StaticResource socialCardIconTitle}" />
                             <TextBlock Text="YouTube" Style="{StaticResource socialCardTitle}" />
                         </StackPanel>
 
@@ -256,10 +256,10 @@
                 <!--Social Card-->
                 <Border Grid.Column="1" Style="{StaticResource socialCard}">
                     <StackPanel>
-                        <fa:ImageAwesome Icon="EllipsisH" Style="{StaticResource socialCardIconBar}" />
+                        <materialDesign:PackIcon Kind="EllipsisHorizontal" Style="{StaticResource socialCardIconBar}" />
                         <StackPanel Style="{StaticResource socialCardStack}">
-                            <fa:ImageAwesome Icon="Instagram" Foreground="#512DA8"
-                                             Style="{StaticResource socialCardIconTitle}" />
+                            <materialDesign:PackIcon Kind="Instagram" Foreground="#512DA8"
+                                                     Style="{StaticResource socialCardIconTitle}" />
                             <TextBlock Text="Instagram" Style="{StaticResource socialCardTitle}" />
                         </StackPanel>
 
@@ -295,10 +295,10 @@
                 <!--Social Card-->
                 <Border Grid.Column="2" Style="{StaticResource socialCard}">
                     <StackPanel>
-                        <fa:ImageAwesome Icon="EllipsisH" Style="{StaticResource socialCardIconBar}" />
+                        <materialDesign:PackIcon Kind="EllipsisHorizontal" Style="{StaticResource socialCardIconBar}" />
                         <StackPanel Style="{StaticResource socialCardStack}">
-                            <fa:ImageAwesome Icon="FacebookSquare" Foreground="#3F51B5"
-                                             Style="{StaticResource socialCardIconTitle}" />
+                            <materialDesign:PackIcon Kind="Facebook" Foreground="#3F51B5"
+                                                     Style="{StaticResource socialCardIconTitle}" />
                             <TextBlock Text="Facebook" Style="{StaticResource socialCardTitle}" />
                         </StackPanel>
 

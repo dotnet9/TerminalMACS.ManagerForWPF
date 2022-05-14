@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:fa="http://schemas.fontawesome.io/icons/">
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Style x:Key="menuTitle" TargetType="TextBlock">
         <Setter Property="Margin" Value="0 0 25 0" />
         <Setter Property="FontSize" Value="16" />
@@ -59,7 +59,7 @@
     </Style>
 
 
-    <Style x:Key="menuButtonIcon" TargetType="fa:ImageAwesome">
+    <Style x:Key="menuButtonIcon" TargetType="materialDesign:PackIcon">
         <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
         <Setter Property="Width" Value="20" />
         <Setter Property="Height" Value="20" />
@@ -98,7 +98,7 @@
     </Style>
 
 
-    <Style x:Key="infoCardIcon" TargetType="fa:ImageAwesome">
+    <Style x:Key="infoCardIcon" TargetType="materialDesign:PackIcon">
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="Foreground" Value="#e0e0e0" />
@@ -137,7 +137,7 @@
     </Style>
 
 
-    <Style x:Key="buttonIcon" TargetType="fa:ImageAwesome">
+    <Style x:Key="buttonIcon" TargetType="materialDesign:PackIcon">
         <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
         <Setter Property="Width" Value="18" />
         <Setter Property="Height" Value="18" />
@@ -150,7 +150,7 @@
     </Style>
 
 
-    <Style x:Key="iconBar" TargetType="fa:ImageAwesome">
+    <Style x:Key="iconBar" TargetType="materialDesign:PackIcon">
         <Setter Property="Foreground" Value="#787878" />
         <Setter Property="Width" Value="18" />
         <Setter Property="Height" Value="18" />
@@ -175,7 +175,7 @@
     </Style>
 
 
-    <Style x:Key="socialCardIconBar" TargetType="fa:ImageAwesome" BasedOn="{StaticResource iconBar}">
+    <Style x:Key="socialCardIconBar" TargetType="materialDesign:PackIcon" BasedOn="{StaticResource iconBar}">
         <Setter Property="Margin" Value="0 15 20 15" />
         <Setter Property="HorizontalAlignment" Value="Right" />
     </Style>
@@ -187,7 +187,7 @@
     </Style>
 
 
-    <Style x:Key="socialCardIconTitle" TargetType="fa:ImageAwesome">
+    <Style x:Key="socialCardIconTitle" TargetType="materialDesign:PackIcon">
         <Setter Property="Width" Value="30" />
         <Setter Property="Height" Value="30" />
     </Style>
