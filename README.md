@@ -72,6 +72,14 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 以下为2022年收集的案例
 ---
 
+## 2022年05月16日 登录界面5 界面设计
+
+
+- 参考视频：[Multiple User Login Form | C# WPF](https://www.youtube.com/watch?v=t4Kg62UeSws)
+- 参考代码：[Multi-login-CSharp-WPF](https://github.com/alihaider11/Multi-login-CSharp-WPF)
+
+![](./assets/TestDemos/login5.gif)
+
 ## 2022年05月14日 黑暗模式的钱包支付仪表盘界面设计
 
 

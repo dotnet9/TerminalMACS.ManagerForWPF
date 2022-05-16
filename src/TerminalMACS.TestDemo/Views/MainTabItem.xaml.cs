@@ -190,4 +190,11 @@ public partial class MainTabItem
         view.Owner = Application.Current.MainWindow;
         view.Show();
     }
+
+    private void ShowLogin5_Click(object sender, RoutedEventArgs e)
+    {
+        var view = new Login5.MainWindow();
+        view.Owner = Application.Current.MainWindow;
+        view.Show();
+    }
 }

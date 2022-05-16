@@ -108,6 +108,7 @@
     <ProjectReference Include="..\TerminalMACS.Infrastructure.UI\TerminalMACS.Infrastructure.UI.csproj" />
     <ProjectReference Include="..\TerminalMACS.Infrastructure\TerminalMACS.Infrastructure.csproj" />
     <ProjectReference Include="..\WPFDesignDemos\Dashboard3\Dashboard3.csproj" />
+    <ProjectReference Include="..\WPFDesignDemos\Login5\Login5.csproj" />
     <ProjectReference Include="..\WPFDesignDemos\WalletPayment\WalletPayment.csproj" />
   </ItemGroup>
   <ItemGroup>

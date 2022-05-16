@@ -52,6 +52,7 @@
                             Click="ShowLoginView2_Click" />
                     <Button Content="登录窗体3" Click="ShowLoginView3_Click" />
                     <Button Content="登录窗体4" Click="ShowModernLogin_Click" />
+                    <Button Content="登录窗体5" Click="ShowLogin5_Click" />
                 </StackPanel>
             </materialDesign:Card>
             <materialDesign:Card
