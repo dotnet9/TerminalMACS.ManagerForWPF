@@ -7,4 +7,20 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Images\siteowner.jpg" />
+    <None Remove="Images\wechatpublic1.jpg" />
+    <None Remove="Images\wechatpublic2.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\siteowner.jpg" />
+    <Resource Include="Images\wechatpublic1.jpg" />
+    <Resource Include="Images\wechatpublic2.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+  </ItemGroup>
+
 </Project>
