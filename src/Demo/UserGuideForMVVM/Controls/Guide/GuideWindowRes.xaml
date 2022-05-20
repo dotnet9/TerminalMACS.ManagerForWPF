@@ -1,0 +1,41 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:UserGuideForMVVM.Controls">
+
+    <Style x:Key="Styles.GuideWindow" TargetType="{x:Type controls:GuideWindow}">
+        <Setter Property="BorderBrush" Value="Red" />
+        <Setter Property="Background" Value="DarkOrange" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:GuideWindow}">
+                    <Grid>
+                        <Border
+                            x:Name="PART_Bor"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Opacity="0.8">
+                            <Border.Effect>
+                                <DropShadowEffect
+                                    BlurRadius="8"
+                                    ShadowDepth="0"
+                                    Color="#FF414141" />
+                            </Border.Effect>
+                            <Border
+                                Margin="0"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="5"
+                                Opacity="0.5" />
+                        </Border>
+                        <Canvas x:Name="PART_Can" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  默认样式  -->
+    <Style BasedOn="{StaticResource Styles.GuideWindow}" TargetType="{x:Type controls:GuideWindow}" />
+
+</ResourceDictionary>

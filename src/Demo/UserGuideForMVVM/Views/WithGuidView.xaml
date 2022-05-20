@@ -1,0 +1,51 @@
+﻿<Window
+    x:Class="UserGuideForMVVM.Views.WithGuidView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:converter="clr-namespace:UserGuideForMVVM.Converters"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="测试引导"
+    Width="1200"
+    Height="800"
+    MouseDown="DragMove_MouseDown"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <converter:ObjectListConverter x:Key="ObjectListConverter" />
+    </Window.Resources>
+
+    <Canvas>
+        <Image
+            x:Name="ImgPublic1"
+            Width="200"
+            Margin="160,80,0,0"
+            Source="/Images/wechatpublic1.jpg" />
+        <Image
+            x:Name="ImgPublic2"
+            Width="200"
+            Margin="420,340,0,0"
+            Source="/Images/wechatpublic2.jpg" />
+        <Button
+            Canvas.Left="500"
+            Canvas.Top="100"
+            Width="100"
+            Height="50"
+            Content="快出现引导"
+            Style="{StaticResource CustomButtonStyle}"
+            Command="{Binding ShowGuideCommand}">
+            <Button.CommandParameter>
+                <MultiBinding Converter="{StaticResource ObjectListConverter}">
+                    <Binding ElementName="ImgPublic1" />
+                    <Binding ElementName="ImgPublic2" />
+                    <Binding ElementName="ImgOwner" />
+                </MultiBinding>
+            </Button.CommandParameter>
+        </Button>
+        <Image
+            x:Name="ImgOwner"
+            Width="200"
+            Margin="720,20,0,0"
+            Source="/Images/siteowner.jpg" />
+    </Canvas>
+</Window>

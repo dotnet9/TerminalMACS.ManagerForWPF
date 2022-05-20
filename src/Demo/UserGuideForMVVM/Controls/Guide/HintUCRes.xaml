@@ -1,0 +1,229 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:UserGuideForMVVM.Controls">
+
+    <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Background" Value="Blue" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="Green" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Border
+                            x:Name="Chrome"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            SnapsToDevicePixels="True">
+                            <ContentPresenter
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}"
+                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <Rectangle
+                            x:Name="focus"
+                            Margin="2"
+                            SnapsToDevicePixels="true"
+                            Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource TemplatedParent}}"
+                            StrokeDashArray="1 2"
+                            StrokeThickness="1"
+                            Visibility="Collapsed" />
+                    </Grid>
+                    <!--  触发器  -->
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="FocusVisualStyle" Value="{x:Null}" />
+                                <Condition Property="IsKeyboardFocused" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="focus" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value=".9" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Opacity" Value=".6" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="CloseButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="OrangeRed" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Border
+                            x:Name="Chrome"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            SnapsToDevicePixels="True">
+                            <ContentPresenter
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}"
+                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value=".9" />
+                <Setter Property="Foreground" Value="{DynamicResource DarkDangerBrush}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Opacity" Value=".6" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.5" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="Styles.HintUC" TargetType="{x:Type controls:HintUC}">
+        <Setter Property="Foreground" Value="Orange" />
+        <Setter Property="Background" Value="DarkBlue" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:HintUC}">
+                    <Grid>
+                        <Viewbox
+                            x:Name="PART_Viewbox"
+                            RenderTransformOrigin="0.5,0.5"
+                            SnapsToDevicePixels="True"
+                            Stretch="Fill">
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Path Fill="{TemplateBinding Foreground}">
+                                    <Path.Data>
+                                        <GeometryGroup>
+                                            <PathGeometry Figures="M 0,6 L 6,3 6,0 102,0 102,62 6,62 6,9 0,6 Z" />
+                                        </GeometryGroup>
+                                    </Path.Data>
+                                </Path>
+                                <Path
+                                    Fill="{TemplateBinding Foreground}"
+                                    Stroke="{TemplateBinding Background}"
+                                    StrokeDashArray="2,1"
+                                    StrokeThickness="1">
+                                    <Path.Data>
+                                        <GeometryGroup>
+                                            <PathGeometry Figures="M 3,6 L 8,4 8,2 100,2 100,60 8,60 8,8 3,6 Z" />
+                                        </GeometryGroup>
+                                    </Path.Data>
+                                </Path>
+                            </Grid>
+                        </Viewbox>
+                        <DockPanel>
+                            <Grid
+                                x:Name="PART_Padgrid"
+                                Width="15"
+                                DockPanel.Dock="Left" />
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Button
+                                    x:Name="PART_Btn_close"
+                                    Grid.Row="0"
+                                    Width="20"
+                                    Height="20"
+                                    Margin="6"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    Content="×"
+                                    FontSize="16"
+                                    IsCancel="True"
+                                    Style="{StaticResource CloseButtonStyle}" />
+
+                                <TextBlock
+                                    x:Name="PART_Tb_xh"
+                                    Grid.Row="0"
+                                    Margin="8"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    FontStyle="Italic"
+                                    Foreground="{TemplateBinding Background}"
+                                    Text="{TemplateBinding Title}" />
+
+                                <TextBlock
+                                    x:Name="PART_Tb_nr"
+                                    Grid.Row="1"
+                                    Margin="8,3"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Foreground="{TemplateBinding Background}"
+                                    Text="{TemplateBinding Content}"
+                                    TextWrapping="Wrap" />
+
+                                <StackPanel
+                                    x:Name="PART_Btn_stack"
+                                    Grid.Row="2"
+                                    Margin="5"
+                                    HorizontalAlignment="Right"
+                                    Orientation="Horizontal">
+                                    <Button
+                                        x:Name="PART_Btn_pre"
+                                        Margin="0,0,5,5"
+                                        Padding="5"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding Background}"
+                                        Content="上一步"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        IsCancel="True"
+                                        Style="{StaticResource ButtonStyle}"
+                                        Visibility="{TemplateBinding PreVisibility}" />
+                                    <Button
+                                        x:Name="PART_Btn_next"
+                                        Margin="0,0,5,5"
+                                        Padding="5"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding Background}"
+                                        Content="{TemplateBinding NextContent}"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        IsDefault="True"
+                                        Style="{StaticResource ButtonStyle}" />
+                                </StackPanel>
+                            </Grid>
+                        </DockPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  默认样式  -->
+    <Style BasedOn="{StaticResource Styles.HintUC}" TargetType="{x:Type controls:HintUC}" />
+</ResourceDictionary>
