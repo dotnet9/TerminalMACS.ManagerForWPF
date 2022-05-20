@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Input;
 
 namespace SimpleGuide;
 
@@ -18,19 +19,19 @@ public partial class WithGuidWindow : Window
 
     private void ShowGuide_Click(object sender, RoutedEventArgs e)
     {
-        var list = new List<GuidVo>()
+        var list = new List<GuidVo>
         {
-            new GuidVo()
+            new()
             {
                 Uc = imgPublic1,
                 Content = "第一步：关注 Dotnet9 公众号"
             },
-            new GuidVo()
+            new()
             {
                 Uc = imgPublic2,
                 Content = "第二步：关注 快乐玩转技术 公众号"
             },
-            new GuidVo()
+            new()
             {
                 Uc = imgOwner,
                 Content = "第三步：联系我"
@@ -42,8 +43,8 @@ public partial class WithGuidWindow : Window
         win.ShowDialog();
     }
 
-    private void DragMove_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    private void DragMove_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        this.DragMove();
+        DragMove();
     }
 }
