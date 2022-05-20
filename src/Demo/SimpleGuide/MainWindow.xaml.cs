@@ -1,5 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace SimpleGuide;
 
@@ -8,32 +19,25 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        Loaded += (sender, args) => ShowGuide_Click(null,null);
     }
 
-    private void ShowGuide_Click(object sender, RoutedEventArgs e)
+    private void ShowNormalWindowWithGuide_Click(object sender, RoutedEventArgs e)
     {
-        var list = new List<GuidVo>()
+        var window = new WithGuidWindow(20, 40)
         {
-            new GuidVo()
-            {
-                Uc = imgPublic1,
-                Content = "第一步：关注 Dotnet9 公众号"
-            },
-            new GuidVo()
-            {
-                Uc = imgPublic2,
-                Content = "第二步：关注 快乐玩转技术 公众号"
-            },
-            new GuidVo()
-            {
-                Uc = imgOwner,
-                Content = "第三步：联系我"
-            }
+            Title = "有边框窗体测试引导"
         };
+        window.Show();
+    }
 
-        var win = new GuideWin(this, list);
-
-        win.ShowDialog();
+    private void ShowWithoutBorderWindowWithGuide_Click(object sender, RoutedEventArgs e)
+    {
+        var window = new WithGuidWindow
+        {
+            Title = "无边框窗体测试引导",
+            AllowsTransparency = true,
+            WindowStyle = WindowStyle.None
+        };
+        window.Show();
     }
 }

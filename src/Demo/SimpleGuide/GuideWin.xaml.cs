@@ -13,8 +13,10 @@ public partial class GuideWin : Window
     PathGeometry borGeometry = new PathGeometry();
     List<GuidVo> list;
     int index = 0;
+    int offsetLeft = 0;
+    int offsetTop = 0;
 
-    public GuideWin(Window win, List<GuidVo> gl)
+    public GuideWin(Window win, List<GuidVo> gl, int offsetLeft = 0, int offsetTop = 0)
     {
         InitializeComponent();
         //设置弹出的窗体
@@ -26,6 +28,8 @@ public partial class GuideWin : Window
         this.Owner = win;
         list = gl;
         ShowGuidArea(index + 1, list[index].Uc, list[index].Content);
+        this.offsetLeft = offsetLeft;
+        this.offsetTop = offsetTop;
     }
 
     private void ShowGuidArea(int xh, FrameworkElement fe, string con, Visibility vis = Visibility.Visible)
@@ -38,7 +42,8 @@ public partial class GuideWin : Window
         bor.Clip = borGeometry;
 
         RectangleGeometry rg1 = new RectangleGeometry();
-        rg1.Rect = new Rect(point.X - 5, point.Y - 5, fe.ActualWidth + 10, fe.ActualHeight + 10);
+        rg1.Rect = new Rect(point.X - 5 + offsetLeft, point.Y - 5 + offsetTop, fe.ActualWidth + 10,
+            fe.ActualHeight + 10);
         borGeometry = Geometry.Combine(borGeometry, rg1, GeometryCombineMode.Exclude, null);
 
         bor.Clip = borGeometry;
