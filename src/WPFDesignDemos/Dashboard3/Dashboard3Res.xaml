@@ -1,8 +1,9 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Style x:Key="menuTitle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="0 0 25 0" />
+        <Setter Property="Margin" Value="0,0,25,0" />
         <Setter Property="FontSize" Value="16" />
         <Setter Property="Opacity" Value="0.7" />
         <Setter Property="Foreground" Value="#FFFFFF" />
@@ -21,7 +22,7 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="RenderTransform">
                     <Setter.Value>
-                        <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+                        <ScaleTransform ScaleX="1.1" ScaleY="1.1" />
                     </Setter.Value>
                 </Setter>
             </Trigger>
@@ -30,7 +31,7 @@
 
 
     <Style x:Key="menuButton" TargetType="{x:Type Button}">
-        <Setter Property="Margin" Value="0 7 0 0" />
+        <Setter Property="Margin" Value="0,7,0,0" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Width" Value="100" />
         <Setter Property="Height" Value="90" />
@@ -40,7 +41,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="15" Padding="15">
+                    <Border
+                        Padding="15"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="15">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                 </ControlTemplate>
@@ -67,7 +71,7 @@
 
 
     <Style x:Key="menuButtonText" TargetType="TextBlock">
-        <Setter Property="Margin" Value="0 7 0 0" />
+        <Setter Property="Margin" Value="0,7,0,0" />
     </Style>
 
 
@@ -75,20 +79,20 @@
         <Setter Property="CornerRadius" Value="15" />
         <Setter Property="Background" Value="#931B1B" />
         <Setter Property="Padding" Value="10" />
-        <Setter Property="Margin" Value="8 0 8 0" />
+        <Setter Property="Margin" Value="8,0,8,0" />
     </Style>
 
 
     <Style x:Key="infoCardStack" TargetType="StackPanel">
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Margin" Value="20 0 0 0" />
+        <Setter Property="Margin" Value="20,0,0,0" />
     </Style>
 
 
     <Style x:Key="infoCardTitle" TargetType="TextBlock">
         <Setter Property="Foreground" Value="#e9e9e9" />
         <Setter Property="FontSize" Value="22" />
-        <Setter Property="Margin" Value="0 0 0 5" />
+        <Setter Property="Margin" Value="0,0,0,5" />
     </Style>
 
 
@@ -102,7 +106,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="Foreground" Value="#e0e0e0" />
-        <Setter Property="Margin" Value="0 0 20 0" />
+        <Setter Property="Margin" Value="0,0,20,0" />
         <Setter Property="Grid.Column" Value="1" />
         <Setter Property="Width" Value="40" />
         <Setter Property="Height" Value="40" />
@@ -113,12 +117,17 @@
         <Setter Property="Height" Value="40" />
         <Setter Property="Width" Value="170" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Margin" Value="0 0 20 0" />
+        <Setter Property="Margin" Value="0,0,20,0" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="5" BorderBrush="#202934" Padding="15 0 15 0" BorderThickness="1">
+                    <Border
+                        Padding="15,0,15,0"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="#202934"
+                        BorderThickness="1"
+                        CornerRadius="5">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                 </ControlTemplate>
@@ -145,7 +154,7 @@
 
 
     <Style x:Key="buttonText" TargetType="TextBlock">
-        <Setter Property="Margin" Value="10 0 0 0" />
+        <Setter Property="Margin" Value="10,0,0,0" />
         <Setter Property="FontSize" Value="14" />
     </Style>
 
@@ -158,7 +167,7 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="RenderTransform">
                     <Setter.Value>
-                        <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+                        <ScaleTransform ScaleX="1.1" ScaleY="1.1" />
                     </Setter.Value>
                 </Setter>
             </Trigger>
@@ -169,14 +178,17 @@
     <Style x:Key="socialCard" TargetType="Border">
         <Setter Property="Background" Value="#FDFDFD" />
         <Setter Property="CornerRadius" Value="15" />
-        <Setter Property="Margin" Value="8 20 8 0" />
+        <Setter Property="Margin" Value="8,20,8,0" />
         <Setter Property="BorderBrush" Value="#dbdbdb" />
         <Setter Property="BorderThickness" Value="1" />
     </Style>
 
 
-    <Style x:Key="socialCardIconBar" TargetType="materialDesign:PackIcon" BasedOn="{StaticResource iconBar}">
-        <Setter Property="Margin" Value="0 15 20 15" />
+    <Style
+        x:Key="socialCardIconBar"
+        BasedOn="{StaticResource iconBar}"
+        TargetType="materialDesign:PackIcon">
+        <Setter Property="Margin" Value="0,15,20,15" />
         <Setter Property="HorizontalAlignment" Value="Right" />
     </Style>
 
@@ -194,7 +206,7 @@
 
 
     <Style x:Key="socialCardTitle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="10 0 0 0" />
+        <Setter Property="Margin" Value="10,0,0,0" />
         <Setter Property="FontSize" Value="18" />
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -204,7 +216,7 @@
     <Style x:Key="socialCardCounterTitle" TargetType="TextBlock">
         <Setter Property="TextAlignment" Value="Center" />
         <Setter Property="FontSize" Value="48" />
-        <Setter Property="Margin" Value="0 50 0 5" />
+        <Setter Property="Margin" Value="0,50,0,5" />
     </Style>
 
 
@@ -217,7 +229,7 @@
 
     <Style TargetType="Separator">
         <Setter Property="Background" Value="#c4c4c4" />
-        <Setter Property="Margin" Value="0 60 0 15" />
+        <Setter Property="Margin" Value="0,60,0,15" />
     </Style>
 
 
@@ -232,7 +244,7 @@
         <Setter Property="TextAlignment" Value="Center" />
         <Setter Property="FontSize" Value="18" />
         <Setter Property="Foreground" Value="#474747" />
-        <Setter Property="Margin" Value="0 5 0 0" />
+        <Setter Property="Margin" Value="0,5,0,0" />
     </Style>
 
 </ResourceDictionary>
