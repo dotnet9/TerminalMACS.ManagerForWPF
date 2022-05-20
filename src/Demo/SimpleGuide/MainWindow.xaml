@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleGuide"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="测试用户引导" Height="150" Width="300">
     <StackPanel>
-        <Button Content="带边框窗体" Click="ShowNormalWindowWithGuide_Click"></Button>
-        <Button Content="无边框窗体" Click="ShowWithoutBorderWindowWithGuide_Click"></Button>
+        <Button Content="带边框窗体" Click="ShowNormalWindowWithGuide_Click" Width="100" Height="30" Margin="10" Style="{StaticResource CustomButtonStyle}"></Button>
+        <Button Content="无边框窗体" Click="ShowWithoutBorderWindowWithGuide_Click" Width="100" Height="30" Margin="10" Style="{StaticResource CustomButtonStyle}"></Button>
     </StackPanel>
 </Window>
