@@ -17,7 +17,9 @@
     </Window.Resources>
 
     <Canvas>
-
+        <Canvas.Background>
+            <ImageBrush ImageSource="/Images/background.jpeg" />
+        </Canvas.Background>
         <Menu Margin="10">
             <MenuItem
                 x:Name="FileMenuItem"
@@ -44,7 +46,7 @@
             Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=Title}" />
 
         <Button
-            x:Name="LefTopBtn"
+            x:Name="LeftTopBtn"
             Width="80"
             Height="25"
             Margin="10,60,0,0"
@@ -52,7 +54,7 @@
             CommandParameter="{Binding ElementName=LefTopBtn}"
             Content="左上按钮"
             Style="{StaticResource CustomButtonStyle}"
-            Tag="{Binding LefTopBtnGuide}" />
+            Tag="{Binding LeftTopBtnGuide}" />
 
         <Button
             x:Name="TopCenterBtn"
@@ -86,7 +88,7 @@
             CommandParameter="{Binding ElementName=LeftCenterBtn}"
             Content="左中按钮"
             Style="{StaticResource CustomButtonStyle}"
-            Tag="{Binding LefCenterBtnGuide}" />
+            Tag="{Binding LeftCenterBtnGuide}" />
 
         <Image
             x:Name="BeautyImage"
@@ -137,7 +139,7 @@
             CommandParameter="{Binding ElementName=LeftBottomBtn}"
             Content="左下按钮"
             Style="{StaticResource CustomButtonStyle}"
-            Tag="{Binding LefBottomBtnGuide}" />
+            Tag="{Binding LeftBottomBtnGuide}" />
 
         <Button
             x:Name="BottomCenterBtn"
@@ -148,7 +150,7 @@
             CommandParameter="{Binding ElementName=BottomCenterBtn}"
             Content="下中按钮"
             Style="{StaticResource CustomButtonStyle}"
-            Tag="{Binding BottomCenterBtnuide}" />
+            Tag="{Binding BottomCenterBtnGuide}" />
 
         <Button
             x:Name="RightBottomBtn"

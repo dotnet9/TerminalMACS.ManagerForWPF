@@ -10,17 +10,17 @@ public class WithGuideViewModel : BindableBase
 {
     private GuideInfo? _beautyImageGuide;
 
-    private GuideInfo? _bottomCenterBtnuide;
+    private GuideInfo? _bottomCenterBtnGuide;
 
     private GuideInfo? _editMenuItemGuide;
 
     private GuideInfo? _fileMenuItemGuide;
 
-    private GuideInfo? _lefBottomBtnGuide;
+    private GuideInfo? _leftBottomBtnGuide;
 
-    private GuideInfo? _lefCenterBtnGuide;
+    private GuideInfo? _leftCenterBtnGuide;
 
-    private GuideInfo? _lefTopBtnGuide;
+    private GuideInfo? _leftTopBtnGuide;
 
     private GuideInfo? _rightBottomBtnGuide;
 
@@ -65,11 +65,11 @@ public class WithGuideViewModel : BindableBase
         }
     }
 
-    public GuideInfo LefTopBtnGuide
+    public GuideInfo LeftTopBtnGuide
     {
         get
         {
-            return _lefTopBtnGuide ??= new GuideInfo
+            return _leftTopBtnGuide ??= new GuideInfo
                 { Title = "控件在窗体左上角时", Content = "引导框左上角显示在该控件左下角", ButtonContent = "我知道了" };
         }
     }
@@ -99,11 +99,11 @@ public class WithGuideViewModel : BindableBase
         }
     }
 
-    public GuideInfo LefCenterBtnGuide
+    public GuideInfo LeftCenterBtnGuide
     {
         get
         {
-            return _lefCenterBtnGuide ??= new GuideInfo
+            return _leftCenterBtnGuide ??= new GuideInfo
             {
                 Title = "控件在窗体左侧中间时",
                 Content = "引导框左上角显示在该控件左下角",
@@ -138,11 +138,11 @@ public class WithGuideViewModel : BindableBase
         }
     }
 
-    public GuideInfo LefBottomBtnGuide
+    public GuideInfo LeftBottomBtnGuide
     {
         get
         {
-            return _lefBottomBtnGuide ??= new GuideInfo
+            return _leftBottomBtnGuide ??= new GuideInfo
             {
                 Title = "控件在窗体左下角时",
                 Content = "引导框左下角显示在该控件左上角",
@@ -151,11 +151,11 @@ public class WithGuideViewModel : BindableBase
         }
     }
 
-    public GuideInfo BottomCenterBtnuide
+    public GuideInfo BottomCenterBtnGuide
     {
         get
         {
-            return _bottomCenterBtnuide ??= new GuideInfo
+            return _bottomCenterBtnGuide ??= new GuideInfo
             {
                 Title = "控件在窗体下侧中间时",
                 Content = "引导框左下角显示在该控件左上角",

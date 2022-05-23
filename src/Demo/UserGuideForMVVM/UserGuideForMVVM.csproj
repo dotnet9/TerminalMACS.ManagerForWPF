@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\background.jpeg" />
     <None Remove="Images\swift.jpg" />
   </ItemGroup>
 
@@ -17,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\background.jpeg" />
     <Resource Include="Images\swift.jpg" />
   </ItemGroup>
 

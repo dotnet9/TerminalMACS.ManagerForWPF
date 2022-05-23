@@ -4,8 +4,8 @@
     xmlns:controls="clr-namespace:UserGuideForMVVM.Controls">
 
     <Style x:Key="Styles.GuideWindow" TargetType="{x:Type controls:GuideWindow}">
-        <Setter Property="BorderBrush" Value="Red" />
-        <Setter Property="Background" Value="DarkOrange" />
+        <Setter Property="BorderBrush" Value="#222222" />
+        <Setter Property="Background" Value="#99000000" />
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="Template">
             <Setter.Value>
