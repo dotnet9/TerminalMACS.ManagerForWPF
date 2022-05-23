@@ -72,6 +72,13 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 以下为2022年收集的案例
 ---
 
+## 2022年05月20日 新手引导
+
+
+- 参考文章：[WPF 简易新手引导](https://www.cnblogs.com/ZXdeveloper/p/8391864.html)
+
+![](./assets/TestDemos/SimpleGuide.gif)
+
 ## 2022年05月16日 登录界面5 界面设计
 
 
