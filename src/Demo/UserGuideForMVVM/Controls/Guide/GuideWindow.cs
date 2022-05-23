@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -50,7 +51,7 @@ public class GuideWindow : Window
         canvas = GetTemplateChild(PART_Can) as Canvas;
 
         var currentGuideInfo = list[index];
-        ShowGuidArea(currentGuideInfo.Uc,  currentGuideInfo);
+        ShowGuidArea(currentGuideInfo.Uc, currentGuideInfo);
     }
 
 
@@ -64,6 +65,8 @@ public class GuideWindow : Window
         bor.Clip = borGeometry;
 
         var rg1 = new RectangleGeometry();
+        rg1.RadiusX = 3;
+        rg1.RadiusY = 3;
         rg1.Rect = new Rect(point.X - 5, point.Y - 5, tagetControl.ActualWidth + 10, tagetControl.ActualHeight + 10);
         borGeometry = Geometry.Combine(borGeometry, rg1, GeometryCombineMode.Exclude, null);
 
@@ -80,7 +83,7 @@ public class GuideWindow : Window
         canvas.Children.Clear();
         if (index >= list.Count - 1)
         {
-            this.Close();
+            Close();
             return;
         }
 
@@ -88,5 +91,20 @@ public class GuideWindow : Window
 
         var currentGuideInfo = list[index];
         ShowGuidArea(currentGuideInfo.Uc, currentGuideInfo);
+    }
+
+    public static void ShowGuideBox(List<object> guideList)
+    {
+        var list = new List<GuideInfo>();
+        foreach (var obj in guideList.OfType<FrameworkElement>())
+        {
+            var guide = (GuideInfo)obj.Tag!;
+            guide.Uc = obj;
+            list.Add(guide);
+        }
+
+        var win = new GuideWindow(GetWindow(list[0].Uc)!, list);
+
+        win.ShowDialog();
     }
 }

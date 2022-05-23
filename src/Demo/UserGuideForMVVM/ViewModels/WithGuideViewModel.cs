@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -10,81 +8,172 @@ namespace UserGuideForMVVM.ViewModels;
 
 public class WithGuideViewModel : BindableBase
 {
+    private GuideInfo? _beautyImageGuide;
+
+    private GuideInfo? _bottomCenterBtnuide;
+
+    private GuideInfo? _editMenuItemGuide;
+
+    private GuideInfo? _fileMenuItemGuide;
+
+    private GuideInfo? _lefBottomBtnGuide;
+
+    private GuideInfo? _lefCenterBtnGuide;
+
+    private GuideInfo? _lefTopBtnGuide;
+
+    private GuideInfo? _rightBottomBtnGuide;
+
+    private GuideInfo? _rightCenterBtnGuide;
     private ICommand? _showGuideCommand;
+
+    private ICommand? _showOneGuideCommand;
+
+    private GuideInfo? _topCenterBtnGuide;
+
+    private GuideInfo? _topRightBtnGuide;
 
     public ICommand ShowGuideCommand
     {
-        get { return _showGuideCommand ??= new DelegateCommand<List<object>>(ShowGuideBox); }
+        get { return _showGuideCommand ??= new DelegateCommand<List<object>>(GuideWindow.ShowGuideBox); }
     }
 
-    private GuideInfo? _fileGuide;
-
-    public GuideInfo FileGuide
-    {
-        get { return _fileGuide ??= new GuideInfo { Title = "文件菜单", Content = "新建、打开文件都在这里", ButtonContent = "我知道了" }; }
-    }
-
-    private GuideInfo? _editGuide;
-
-    public GuideInfo EditGuide
+    public ICommand ShowOneGuideCommand
     {
         get
         {
-            return _editGuide ??= new GuideInfo { Title = "编辑菜单", Content = "复制、切换、粘贴等操作在这里哦", ButtonContent = "我知道了" };
+            return _showOneGuideCommand ??=
+                new DelegateCommand<object>(x => GuideWindow.ShowGuideBox(new List<object> { x }));
         }
     }
 
-    private GuideInfo? _loginGuide;
-
-    public GuideInfo LoginGuide
+    public GuideInfo FileMenuItemGuide
     {
         get
         {
-            return _loginGuide ??= new GuideInfo
-                { Title = "登录后惊喜", Content = "登录后，能保存下载记录、多平台共享", ButtonContent = "我知道了" };
+            return _fileMenuItemGuide ??= new GuideInfo
+                { Title = "文件菜单引导", Content = "创建文件、打开文件等操作点击这里", ButtonContent = "我知道了" };
         }
     }
 
-    private GuideInfo? _beautyGuide;
-
-    public GuideInfo BeautyGuide
+    public GuideInfo EditMenuItemGuide
     {
         get
         {
-            return _beautyGuide ??= new GuideInfo
+            return _editMenuItemGuide ??= new GuideInfo
+                { Title = "编辑菜单引导", Content = "复制、切换、粘贴等操作在这里哦", ButtonContent = "我知道了" };
+        }
+    }
+
+    public GuideInfo LefTopBtnGuide
+    {
+        get
+        {
+            return _lefTopBtnGuide ??= new GuideInfo
+                { Title = "控件在窗体左上角时", Content = "引导框左上角显示在该控件左下角", ButtonContent = "我知道了" };
+        }
+    }
+
+    public GuideInfo TopCenterBtnGuide
+    {
+        get
+        {
+            return _topCenterBtnGuide ??= new GuideInfo
             {
-                Title = "泰勒·斯威夫特", Content = "泰勒·斯威夫特（Taylor Swift），1989年12月13日出生于美国宾夕法尼亚州，美国女歌手、词曲作者、音乐制作人、演员。",
+                Title = "控件在窗体上中时", Content = "引导框左上角显示在该控件左下角",
                 ButtonContent = "我知道了"
             };
         }
     }
 
-    private GuideInfo? _logoutGuide;
-
-    public GuideInfo LogoutGuide
+    public GuideInfo TopRightBtnGuide
     {
-        get { return _logoutGuide ??= new GuideInfo { Title = "注销", Content = "切换账号登录？", ButtonContent = "我知道了" }; }
-    }
-
-    private GuideInfo? _showGuide;
-
-    public GuideInfo ShowGuide
-    {
-        get { return _showGuide ??= new GuideInfo { Title = "显示引导", Content = "点击这里再次出现引导哦", ButtonContent = "关闭" }; }
-    }
-
-    private static void ShowGuideBox(List<object> guideList)
-    {
-        var list = new List<GuideInfo>();
-        foreach (var obj in guideList.OfType<FrameworkElement>())
+        get
         {
-            var guide = (GuideInfo)obj.Tag!;
-            guide.Uc = obj;
-            list.Add(guide);
+            return _topRightBtnGuide ??= new GuideInfo
+            {
+                Title = "控件在窗体右上时",
+                Content = "引导框右上角显示在该控件右下角",
+                ButtonContent = "我知道了"
+            };
         }
+    }
 
-        var win = new GuideWindow(Window.GetWindow(list[0].Uc)!, list);
+    public GuideInfo LefCenterBtnGuide
+    {
+        get
+        {
+            return _lefCenterBtnGuide ??= new GuideInfo
+            {
+                Title = "控件在窗体左侧中间时",
+                Content = "引导框左上角显示在该控件左下角",
+                ButtonContent = "我知道了"
+            };
+        }
+    }
 
-        win.ShowDialog();
+    public GuideInfo BeautyImageGuide
+    {
+        get
+        {
+            return _beautyImageGuide ??= new GuideInfo
+            {
+                Title = "美女在这",
+                Content = "点击这里显示引导",
+                ButtonContent = "我点点点"
+            };
+        }
+    }
+
+    public GuideInfo RightCenterBtnGuide
+    {
+        get
+        {
+            return _rightCenterBtnGuide ??= new GuideInfo
+            {
+                Title = "控件在窗体右侧中间时",
+                Content = "引导框右上角显示在该控件右下角",
+                ButtonContent = "我知道了"
+            };
+        }
+    }
+
+    public GuideInfo LefBottomBtnGuide
+    {
+        get
+        {
+            return _lefBottomBtnGuide ??= new GuideInfo
+            {
+                Title = "控件在窗体左下角时",
+                Content = "引导框左下角显示在该控件左上角",
+                ButtonContent = "我知道了"
+            };
+        }
+    }
+
+    public GuideInfo BottomCenterBtnuide
+    {
+        get
+        {
+            return _bottomCenterBtnuide ??= new GuideInfo
+            {
+                Title = "控件在窗体下侧中间时",
+                Content = "引导框左下角显示在该控件左上角",
+                ButtonContent = "我知道了"
+            };
+        }
+    }
+
+    public GuideInfo RightBottomBtnGuide
+    {
+        get
+        {
+            return _rightBottomBtnGuide ??= new GuideInfo
+            {
+                Title = "控件在窗体右下角时",
+                Content = "引导框右下角显示在该控件左上角",
+                ButtonContent = "我知道了"
+            };
+        }
     }
 }

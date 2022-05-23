@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using UserGuideForMVVM.Controls;
 using UserGuideForMVVM.ViewModels;
 
@@ -10,12 +11,19 @@ public partial class MainView : Window
     {
         ViewModel ??= new MainViewModel();
         InitializeComponent();
+
+        Loaded += MainView_Loaded;
     }
 
     public MainViewModel? ViewModel
     {
         get => DataContext as MainViewModel;
         set => DataContext = value;
+    }
+
+    private void MainView_Loaded(object sender, RoutedEventArgs e)
+    {
+        GuideWindow.ShowGuideBox(new List<object> { BtnNormal, BtnNoBorder });
     }
 
     private void ShowNormalWindowWithGuide_Click(object sender, RoutedEventArgs e)

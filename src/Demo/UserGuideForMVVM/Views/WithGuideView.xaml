@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converter="clr-namespace:UserGuideForMVVM.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="测试引导"
     Width="950"
@@ -16,67 +17,148 @@
     </Window.Resources>
 
     <Canvas>
+
         <Menu Margin="10">
             <MenuItem
                 x:Name="FileMenuItem"
                 Header="文件"
-                Tag="{Binding FileGuide}">
+                Tag="{Binding FileMenuItemGuide}">
                 <MenuItem Header="新建" />
                 <MenuItem Header="打开" />
+                <MenuItem Click="Close_Click" Header="退出" />
             </MenuItem>
             <MenuItem
                 x:Name="EditMenuItem"
                 Header="编辑"
-                Tag="{Binding EditGuide}">
+                Tag="{Binding EditMenuItemGuide}">
                 <MenuItem Header="复制" />
                 <MenuItem Header="剪切" />
             </MenuItem>
         </Menu>
+
         <TextBlock
-            Margin="200,5,0,0"
+            Margin="400,5,0,0"
+            FontSize="18"
             FontWeight="Bold"
-            Foreground="Blue"
+            Foreground="Black"
             Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=Title}" />
+
         <Button
-            x:Name="LoginBtn"
-            Width="200"
-            Margin="160,80,0,0"
-            Content="登录"
+            x:Name="LefTopBtn"
+            Width="80"
+            Height="25"
+            Margin="10,60,0,0"
+            Command="{Binding ShowOneGuideCommand}"
+            CommandParameter="{Binding ElementName=LefTopBtn}"
+            Content="左上按钮"
             Style="{StaticResource CustomButtonStyle}"
-            Tag="{Binding LoginGuide}" />
+            Tag="{Binding LefTopBtnGuide}" />
+
+        <Button
+            x:Name="TopCenterBtn"
+            Canvas.Left="400"
+            Canvas.Top="50"
+            Width="100"
+            Height="40"
+            Command="{Binding ShowOneGuideCommand}"
+            CommandParameter="{Binding ElementName=TopCenterBtn}"
+            Content="上中按钮"
+            Style="{StaticResource CustomButtonStyle}"
+            Tag="{Binding TopCenterBtnGuide}" />
+
+        <Button
+            x:Name="TopRightBtn"
+            Width="80"
+            Height="25"
+            Margin="850,60,0,0"
+            Command="{Binding ShowOneGuideCommand}"
+            CommandParameter="{Binding ElementName=TopRightBtn}"
+            Content="右上按钮"
+            Style="{StaticResource CustomButtonStyle}"
+            Tag="{Binding TopRightBtnGuide}" />
+
+        <Button
+            x:Name="LeftCenterBtn"
+            Width="80"
+            Height="25"
+            Margin="10,300,0,0"
+            Command="{Binding ShowOneGuideCommand}"
+            CommandParameter="{Binding ElementName=LeftCenterBtn}"
+            Content="左中按钮"
+            Style="{StaticResource CustomButtonStyle}"
+            Tag="{Binding LefCenterBtnGuide}" />
+
         <Image
             x:Name="BeautyImage"
             Width="200"
-            Margin="420,340,0,0"
+            Margin="360,200,0,0"
             Source="/Images/swift.jpg"
-            Tag="{Binding BeautyGuide}" />
+            Tag="{Binding BeautyImageGuide}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDown">
+                    <i:InvokeCommandAction Command="{Binding ShowGuideCommand}">
+                        <i:InvokeCommandAction.CommandParameter>
+                            <MultiBinding Converter="{StaticResource ObjectListConverter}">
+                                <Binding ElementName="BeautyImage" />
+                                <Binding ElementName="FileMenuItem" />
+                                <Binding ElementName="EditMenuItem" />
+                                <Binding ElementName="LeftTopBtn" />
+                                <Binding ElementName="TopCenterBtn" />
+                                <Binding ElementName="TopRightBtn" />
+                                <Binding ElementName="LeftCenterBtn" />
+                                <Binding ElementName="RightCenterBtn" />
+                                <Binding ElementName="LeftBottomBtn" />
+                                <Binding ElementName="BottomCenterBtn" />
+                                <Binding ElementName="RightBottomBtn" />
+                            </MultiBinding>
+                        </i:InvokeCommandAction.CommandParameter>
+                    </i:InvokeCommandAction>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Image>
+
         <Button
-            x:Name="ShowGuideBtn"
-            Canvas.Left="500"
-            Canvas.Top="100"
-            Width="100"
-            Height="50"
-            Command="{Binding ShowGuideCommand}"
-            Content="快出现引导"
+            x:Name="RightCenterBtn"
+            Width="80"
+            Height="25"
+            Margin="850,300,0,0"
+            Command="{Binding ShowOneGuideCommand}"
+            CommandParameter="{Binding ElementName=RightCenterBtn}"
+            Content="右中按钮"
             Style="{StaticResource CustomButtonStyle}"
-            Tag="{Binding ShowGuide}">
-            <Button.CommandParameter>
-                <MultiBinding Converter="{StaticResource ObjectListConverter}">
-                    <Binding ElementName="FileMenuItem" />
-                    <Binding ElementName="EditMenuItem" />
-                    <Binding ElementName="LoginBtn" />
-                    <Binding ElementName="BeautyImage" />
-                    <Binding ElementName="LogoutBtn" />
-                    <Binding ElementName="ShowGuideBtn" />
-                </MultiBinding>
-            </Button.CommandParameter>
-        </Button>
+            Tag="{Binding RightCenterBtnGuide}" />
+
         <Button
-            x:Name="LogoutBtn"
-            Width="200"
-            Margin="720,20,0,0"
-            Content="注销"
+            x:Name="LeftBottomBtn"
+            Width="80"
+            Height="25"
+            Margin="10,550,0,0"
+            Command="{Binding ShowOneGuideCommand}"
+            CommandParameter="{Binding ElementName=LeftBottomBtn}"
+            Content="左下按钮"
             Style="{StaticResource CustomButtonStyle}"
-            Tag="{Binding LogoutGuide}" />
+            Tag="{Binding LefBottomBtnGuide}" />
+
+        <Button
+            x:Name="BottomCenterBtn"
+            Width="80"
+            Height="25"
+            Margin="450,550,0,0"
+            Command="{Binding ShowOneGuideCommand}"
+            CommandParameter="{Binding ElementName=BottomCenterBtn}"
+            Content="下中按钮"
+            Style="{StaticResource CustomButtonStyle}"
+            Tag="{Binding BottomCenterBtnuide}" />
+
+        <Button
+            x:Name="RightBottomBtn"
+            Width="80"
+            Height="25"
+            Margin="850,550,0,0"
+            Command="{Binding ShowOneGuideCommand}"
+            CommandParameter="{Binding ElementName=RightBottomBtn}"
+            Content="右下按钮"
+            Style="{StaticResource CustomButtonStyle}"
+            Tag="{Binding RightBottomBtnGuide}" />
     </Canvas>
 </Window>

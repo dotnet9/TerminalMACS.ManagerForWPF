@@ -1,0 +1,78 @@
+﻿<UserControl
+    x:Class="UserGuideForMVVM.Views.TestHint"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Grid>
+        <Viewbox
+            x:Name="PART_Viewbox"
+            RenderTransformOrigin="0.5,0.5"
+            SnapsToDevicePixels="True"
+            Stretch="Fill">
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Path Fill="White">
+                    <Path.Data>
+                        <CombinedGeometry GeometryCombineMode="Union">
+                            <CombinedGeometry.Geometry1>
+                                <RectangleGeometry
+                                    RadiusX="1"
+                                    RadiusY="1"
+                                    Rect="0 0 6 6">
+                                    <RectangleGeometry.Transform>
+                                        <TransformGroup>
+                                            <RotateTransform Angle="45" CenterX="3" CenterY="3" />
+                                            <TranslateTransform X="18" Y="4" />
+                                        </TransformGroup>
+                                    </RectangleGeometry.Transform>
+                                </RectangleGeometry>
+                            </CombinedGeometry.Geometry1>
+                            <CombinedGeometry.Geometry2>
+                                <RectangleGeometry
+                                    RadiusX="3"
+                                    RadiusY="3"
+                                    Rect="0 6 100 60" />
+                            </CombinedGeometry.Geometry2>
+                        </CombinedGeometry>
+                    </Path.Data>
+                </Path>
+            </Grid>
+        </Viewbox>
+        <DockPanel>
+            <Grid Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock
+                    x:Name="PART_Tb_Title"
+                    Grid.Row="0"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Text="测试提示标题" />
+
+                <TextBlock
+                    x:Name="PART_Tb_Content"
+                    Grid.Row="1"
+                    FontSize="14"
+                    Foreground="#aaa"
+                    Text="测试提示内容，这里可能显示比较多的文字"
+                    TextWrapping="Wrap" />
+
+                <Button
+                    x:Name="PART_Btn_Next"
+                    Grid.Row="2"
+                    HorizontalAlignment="Right"
+                    Content="按钮文字，比如：知道了"
+                    IsDefault="True"
+                    Style="{StaticResource CustomButtonStyle}" />
+            </Grid>
+        </DockPanel>
+    </Grid>
+</UserControl>

@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Input;
+using UserGuideForMVVM.Controls;
 using UserGuideForMVVM.ViewModels;
 
 namespace UserGuideForMVVM.Views;
@@ -15,6 +17,8 @@ public partial class WithGuideView : Window
         _offsetLeft = offsetLeft;
         _offsetTop = offsetTop;
         InitializeComponent();
+
+        Loaded += WithGuideView_Loaded;
     }
 
     public WithGuideViewModel? ViewModel
@@ -23,8 +27,24 @@ public partial class WithGuideView : Window
         set => DataContext = value;
     }
 
+    private void WithGuideView_Loaded(object sender, RoutedEventArgs e)
+    {
+        GuideWindow.ShowGuideBox(new List<object> { BeautyImage });
+    }
+
     private void DragMove_MouseDown(object sender, MouseButtonEventArgs e)
     {
-        DragMove();
+        try
+        {
+            DragMove();
+        }
+        catch
+        {
+        }
+    }
+
+    private void Close_Click(object sender, RoutedEventArgs e)
+    {
+        Close();
     }
 }

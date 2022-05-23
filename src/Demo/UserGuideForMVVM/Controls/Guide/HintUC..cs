@@ -4,18 +4,18 @@ using System.Windows.Media;
 
 namespace UserGuideForMVVM.Controls;
 
-[TemplatePart(Name = PART_Viewbox, Type = typeof(Viewbox))]
-[TemplatePart(Name = PART_Padgrid, Type = typeof(Grid))]
-[TemplatePart(Name = PART_Btn_stack, Type = typeof(StackPanel))]
-[TemplatePart(Name = PART_Btn_next, Type = typeof(Button))]
+[TemplatePart(Name = PART_Background_Viewbox, Type = typeof(Viewbox))]
+[TemplatePart(Name = PART_Btn_Next, Type = typeof(Button))]
 public class HintUc : Control
 {
     public delegate void NextHintDelegate();
 
-    private const string PART_Viewbox = "PART_Viewbox";
-    private const string PART_Padgrid = "PART_Padgrid";
-    private const string PART_Btn_stack = "PART_Btn_stack";
-    private const string PART_Btn_next = "PART_Btn_next";
+    private const string PART_Background_Viewbox = "PART_Background_Viewbox";
+    private const string PART_Btn_Next = "PART_Btn_Next";
+
+    public static readonly DependencyProperty GridMarginProperty =
+        DependencyProperty.Register(nameof(GridMargin), typeof(Thickness), typeof(HintUc),
+            new PropertyMetadata(new Thickness(20, 30, 20, 20)));
 
     public static readonly DependencyProperty TitleProperty =
         DependencyProperty.Register(nameof(Title), typeof(string), typeof(HintUc), new PropertyMetadata(null));
@@ -26,14 +26,13 @@ public class HintUc : Control
     public static readonly DependencyProperty NextContentProperty =
         DependencyProperty.Register(nameof(NextContent), typeof(string), typeof(HintUc), new PropertyMetadata("下一步"));
 
-    private readonly FrameworkElement _fe;
-
     private readonly Window _ownerWindow;
-    private Point _point;
-    private Button btnNext;
-    private Grid padGrid;
 
-    private Viewbox viewbox;
+    private readonly FrameworkElement _targetControl;
+
+    private Viewbox _backgroundViewbox;
+    private Button _btnNext;
+    private Point _targetControlPoint;
 
     static HintUc()
     {
@@ -43,8 +42,8 @@ public class HintUc : Control
     public HintUc(Window ownerWindow, Point point, FrameworkElement targetControl, GuideInfo guide)
     {
         _ownerWindow = ownerWindow;
-        _point = point;
-        _fe = targetControl;
+        _targetControlPoint = point;
+        _targetControl = targetControl;
 
         if (guide.Width != null) Width = guide.Width.Value;
         if (guide.Height != null) Height = guide.Height.Value;
@@ -68,64 +67,79 @@ public class HintUc : Control
         set => SetValue(ContentProperty, value);
     }
 
-    /// <summary>
-    ///     下一步按钮内容
-    /// </summary>
     public string NextContent
     {
         get => (string)GetValue(NextContentProperty);
         set => SetValue(NextContentProperty, value);
     }
 
+    public Thickness GridMargin
+    {
+        get => (Thickness)GetValue(GridMarginProperty);
+        set => SetValue(GridMarginProperty, value);
+    }
+
     private void HintUC_Loaded(object sender, RoutedEventArgs e)
     {
         Loaded -= HintUC_Loaded;
-        var left1 = _point.X + _fe.ActualWidth + 5;
-        var left2 = _point.X - ActualWidth - 5;
-        var top1 = _point.Y + _fe.ActualHeight - 12;
-        var top2 = _point.Y - ActualHeight + 12;
+        var leftOfTarget = _targetControlPoint.X - 5;
+        var rightOfTarget = _targetControlPoint.X + _targetControl.ActualWidth + 5;
+        var rightOfOwnerHint = _targetControlPoint.X + ActualWidth + 5;
+        var topOfTarget = _targetControlPoint.Y - 10;
+        var bottomOfTarget = _targetControlPoint.Y + _targetControl.ActualHeight + 10;
+        var bottomOfOwnerHint = _targetControlPoint.Y + ActualHeight - 10;
 
-        if (ActualWidth + left1 <= _ownerWindow.Width && ActualHeight + top1 <= _ownerWindow.Height)
+        // 1、正常情况：引导框左上角显示在该控件左下角
+        if (leftOfTarget + ActualWidth <= _ownerWindow.Width && bottomOfTarget + ActualHeight <= _ownerWindow.Height)
         {
-            Canvas.SetLeft(this, left1);
-            Canvas.SetTop(this, top1);
+            Canvas.SetLeft(this, leftOfTarget);
+            Canvas.SetTop(this, bottomOfTarget);
         }
-        else if (ActualWidth + left1 <= _ownerWindow.Width && top2 >= 0)
+        // 2、提示框下侧会显示在蒙版外
+        else if (leftOfTarget + ActualWidth <= _ownerWindow.Width &&
+                 bottomOfTarget + ActualHeight > _ownerWindow.Height)
         {
-            Canvas.SetLeft(this, left1);
-            Canvas.SetTop(this, top2);
+            Canvas.SetLeft(this, leftOfTarget);
+            Canvas.SetTop(this, topOfTarget - ActualHeight);
 
-            var scaleTransform = new ScaleTransform();
-            scaleTransform.ScaleY = -1;
-            viewbox.RenderTransform = scaleTransform;
+            var scaleTransform = new ScaleTransform
+            {
+                ScaleY = -1
+            };
+            _backgroundViewbox.RenderTransform = scaleTransform;
+            GridMargin = new Thickness(20, 20, 20, 30);
         }
-        else if (left2 >= 0 && ActualHeight + top1 <= _ownerWindow.Height)
+        // 3、提示框右侧会显示在蒙版外
+        else if (leftOfTarget + ActualWidth > _ownerWindow.Width &&
+                 bottomOfTarget + ActualHeight <= _ownerWindow.Height)
         {
-            Canvas.SetLeft(this, left2);
-            Canvas.SetTop(this, top1);
+            Canvas.SetLeft(this, rightOfTarget - ActualWidth);
+            Canvas.SetTop(this, bottomOfTarget);
 
-            var scaleTransform = new ScaleTransform();
-            scaleTransform.ScaleX = -1;
-            viewbox.RenderTransform = scaleTransform;
-
-            DockPanel.SetDock(padGrid, Dock.Right);
+            var scaleTransform = new ScaleTransform
+            {
+                ScaleX = -1
+            };
+            _backgroundViewbox.RenderTransform = scaleTransform;
         }
-        else if (left2 >= 0 && top2 >= 0)
+        // 4、提示框右侧和下方会显示在蒙版外
+        else if (leftOfTarget + ActualWidth > _ownerWindow.Width && bottomOfTarget + ActualHeight > _ownerWindow.Height)
         {
-            Canvas.SetLeft(this, left2);
-            Canvas.SetTop(this, top2);
+            Canvas.SetLeft(this, rightOfTarget - ActualWidth);
+            Canvas.SetTop(this, topOfTarget - ActualHeight);
 
-            var scaleTransform = new ScaleTransform();
-            scaleTransform.ScaleX = -1;
-            scaleTransform.ScaleY = -1;
-            viewbox.RenderTransform = scaleTransform;
-
-            DockPanel.SetDock(padGrid, Dock.Right);
+            var scaleTransform = new ScaleTransform
+            {
+                ScaleX = -1,
+                ScaleY = -1
+            };
+            _backgroundViewbox.RenderTransform = scaleTransform;
+            GridMargin = new Thickness(20, 20, 20, 30);
         }
         else //怎么放都不行，就按第一种放吧
         {
-            Canvas.SetLeft(this, left1);
-            Canvas.SetTop(this, top1);
+            Canvas.SetLeft(this, rightOfTarget);
+            Canvas.SetTop(this, bottomOfTarget);
         }
     }
 
@@ -133,20 +147,19 @@ public class HintUc : Control
     {
         base.OnApplyTemplate();
 
-        if (btnNext != null) btnNext.Click -= btn_next_Click;
+        if (_btnNext != null) _btnNext.Click -= btn_next_Click;
 
-        viewbox = GetTemplateChild(PART_Viewbox) as Viewbox;
-        padGrid = GetTemplateChild(PART_Padgrid) as Grid;
-        btnNext = GetTemplateChild(PART_Btn_next) as Button;
+        _backgroundViewbox = GetTemplateChild(PART_Background_Viewbox) as Viewbox;
+        _btnNext = GetTemplateChild(PART_Btn_Next) as Button;
 
-        if (btnNext != null) btnNext.Click += btn_next_Click;
+        if (_btnNext != null) _btnNext.Click += btn_next_Click;
     }
 
     protected override void OnRender(DrawingContext drawingContext)
     {
         base.OnRender(drawingContext);
 
-        btnNext.Focus();
+        _btnNext.Focus();
     }
 
     public event NextHintDelegate? NextHintEvent;

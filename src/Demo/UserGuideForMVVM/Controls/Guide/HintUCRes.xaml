@@ -11,68 +11,71 @@
                 <ControlTemplate TargetType="{x:Type controls:HintUc}">
                     <Grid>
                         <Viewbox
-                            x:Name="PART_Viewbox"
+                            x:Name="PART_Background_Viewbox"
                             RenderTransformOrigin="0.5,0.5"
                             SnapsToDevicePixels="True"
                             Stretch="Fill">
                             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                 <Path Fill="White">
                                     <Path.Data>
-                                        <GeometryGroup>
-                                            <PathGeometry Figures="M 0,6 L 6,3 6,0 102,0 102,62 6,62 6,9 0,6 Z" />
-                                        </GeometryGroup>
+                                        <CombinedGeometry GeometryCombineMode="Union">
+                                            <CombinedGeometry.Geometry1>
+                                                <RectangleGeometry
+                                                    RadiusX="1"
+                                                    RadiusY="1"
+                                                    Rect="0 0 6 6">
+                                                    <RectangleGeometry.Transform>
+                                                        <TransformGroup>
+                                                            <RotateTransform Angle="45" CenterX="3" CenterY="3" />
+                                                            <TranslateTransform X="18" Y="4" />
+                                                        </TransformGroup>
+                                                    </RectangleGeometry.Transform>
+                                                </RectangleGeometry>
+                                            </CombinedGeometry.Geometry1>
+                                            <CombinedGeometry.Geometry2>
+                                                <RectangleGeometry
+                                                    RadiusX="3"
+                                                    RadiusY="3"
+                                                    Rect="0 6 100 60" />
+                                            </CombinedGeometry.Geometry2>
+                                        </CombinedGeometry>
                                     </Path.Data>
                                 </Path>
                             </Grid>
                         </Viewbox>
-                        <DockPanel>
-                            <Grid
-                                x:Name="PART_Padgrid"
-                                Width="15"
-                                DockPanel.Dock="Left" />
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="30" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
+                        <Grid Margin="{TemplateBinding GridMargin}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
 
-                                <TextBlock
-                                    x:Name="PART_Tb_xh"
-                                    Grid.Row="0"
-                                    Margin="8"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Top"
-                                    FontStyle="Italic"
-                                    Foreground="{TemplateBinding Background}"
-                                    Text="{TemplateBinding Title}" />
+                            <TextBlock
+                                x:Name="PART_Tb_Title"
+                                Grid.Row="0"
+                                FontSize="16"
+                                FontWeight="Bold"
+                                Foreground="Black"
+                                Text="{TemplateBinding Title}" />
 
-                                <TextBlock
-                                    x:Name="PART_Tb_nr"
-                                    Grid.Row="1"
-                                    Margin="8,3"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Top"
-                                    Foreground="{TemplateBinding Background}"
-                                    Text="{TemplateBinding Content}"
-                                    TextWrapping="Wrap" />
+                            <TextBlock
+                                x:Name="PART_Tb_Content"
+                                Grid.Row="1"
+                                FontSize="14"
+                                Foreground="#aaa"
+                                Text="{TemplateBinding Content}"
+                                TextWrapping="Wrap" />
 
-                                <StackPanel
-                                    x:Name="PART_Btn_stack"
-                                    Grid.Row="2"
-                                    Margin="5"
-                                    HorizontalAlignment="Right"
-                                    Orientation="Horizontal">
-                                    <Button
-                                        x:Name="PART_Btn_next"
-                                        Margin="0,0,5,5"
-                                        Padding="5"
-                                        Content="{TemplateBinding NextContent}"
-                                        IsDefault="True"
-                                        Style="{StaticResource CustomButtonStyle}" />
-                                </StackPanel>
-                            </Grid>
-                        </DockPanel>
+                            <Button
+                                x:Name="PART_Btn_Next"
+                                Grid.Row="2"
+                                MinWidth="60"
+                                MinHeight="25"
+                                HorizontalAlignment="Right"
+                                Content="{TemplateBinding NextContent}"
+                                IsDefault="True"
+                                Style="{StaticResource CustomButtonStyle}" />
+                        </Grid>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
