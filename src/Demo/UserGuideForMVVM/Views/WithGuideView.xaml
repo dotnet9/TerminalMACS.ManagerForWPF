@@ -1,0 +1,82 @@
+﻿<Window
+    x:Class="UserGuideForMVVM.Views.WithGuideView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converter="clr-namespace:UserGuideForMVVM.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="测试引导"
+    Width="950"
+    Height="600"
+    MouseDown="DragMove_MouseDown"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <converter:ObjectListConverter x:Key="ObjectListConverter" />
+    </Window.Resources>
+
+    <Canvas>
+        <Menu Margin="10">
+            <MenuItem
+                x:Name="FileMenuItem"
+                Header="文件"
+                Tag="{Binding FileGuide}">
+                <MenuItem Header="新建" />
+                <MenuItem Header="打开" />
+            </MenuItem>
+            <MenuItem
+                x:Name="EditMenuItem"
+                Header="编辑"
+                Tag="{Binding EditGuide}">
+                <MenuItem Header="复制" />
+                <MenuItem Header="剪切" />
+            </MenuItem>
+        </Menu>
+        <TextBlock
+            Margin="200,5,0,0"
+            FontWeight="Bold"
+            Foreground="Blue"
+            Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}, Path=Title}" />
+        <Button
+            x:Name="LoginBtn"
+            Width="200"
+            Margin="160,80,0,0"
+            Content="登录"
+            Style="{StaticResource CustomButtonStyle}"
+            Tag="{Binding LoginGuide}" />
+        <Image
+            x:Name="BeautyImage"
+            Width="200"
+            Margin="420,340,0,0"
+            Source="/Images/swift.jpg"
+            Tag="{Binding BeautyGuide}" />
+        <Button
+            x:Name="ShowGuideBtn"
+            Canvas.Left="500"
+            Canvas.Top="100"
+            Width="100"
+            Height="50"
+            Command="{Binding ShowGuideCommand}"
+            Content="快出现引导"
+            Style="{StaticResource CustomButtonStyle}"
+            Tag="{Binding ShowGuide}">
+            <Button.CommandParameter>
+                <MultiBinding Converter="{StaticResource ObjectListConverter}">
+                    <Binding ElementName="FileMenuItem" />
+                    <Binding ElementName="EditMenuItem" />
+                    <Binding ElementName="LoginBtn" />
+                    <Binding ElementName="BeautyImage" />
+                    <Binding ElementName="LogoutBtn" />
+                    <Binding ElementName="ShowGuideBtn" />
+                </MultiBinding>
+            </Button.CommandParameter>
+        </Button>
+        <Button
+            x:Name="LogoutBtn"
+            Width="200"
+            Margin="720,20,0,0"
+            Content="注销"
+            Style="{StaticResource CustomButtonStyle}"
+            Tag="{Binding LogoutGuide}" />
+    </Canvas>
+</Window>

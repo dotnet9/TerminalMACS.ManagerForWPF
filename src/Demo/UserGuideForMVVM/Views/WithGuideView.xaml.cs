@@ -4,22 +4,22 @@ using UserGuideForMVVM.ViewModels;
 
 namespace UserGuideForMVVM.Views;
 
-public partial class WithGuidView : Window
+public partial class WithGuideView : Window
 {
     private readonly int _offsetLeft;
     private readonly int _offsetTop;
 
-    public WithGuidView(int offsetLeft = 0, int offsetTop = 0)
+    public WithGuideView(int offsetLeft = 0, int offsetTop = 0)
     {
-        ViewModel ??= new WithGuidViewModel();
+        ViewModel ??= new WithGuideViewModel();
         _offsetLeft = offsetLeft;
         _offsetTop = offsetTop;
         InitializeComponent();
     }
 
-    public WithGuidViewModel? ViewModel
+    public WithGuideViewModel? ViewModel
     {
-        get => DataContext as WithGuidViewModel;
+        get => DataContext as WithGuideViewModel;
         set => DataContext = value;
     }
 

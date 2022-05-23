@@ -7,8 +7,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/UserGuideForMVVM;component/Controls/CommonRes.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Controls/Guide/HintUCRes.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Controls/Guide/GuideWindowRes.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Controls/Guide/HintUCRes.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

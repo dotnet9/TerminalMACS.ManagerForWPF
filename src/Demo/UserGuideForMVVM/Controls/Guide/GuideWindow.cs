@@ -12,13 +12,13 @@ public class GuideWindow : Window
 {
     private const string PART_Bor = "PART_Bor";
     private const string PART_Can = "PART_Can";
+    private readonly List<GuideInfo> list;
 
     private Border bor;
 
     private PathGeometry borGeometry = new();
     private Canvas canvas;
     private int index;
-    private readonly List<GuidVo> list;
 
     static GuideWindow()
     {
@@ -26,20 +26,20 @@ public class GuideWindow : Window
             new FrameworkPropertyMetadata(typeof(GuideWindow)));
     }
 
-    public GuideWindow(Window win, List<GuidVo> gl)
+    public GuideWindow(Window targetWindow, List<GuideInfo> guideList)
     {
         WindowStyle = WindowStyle.None;
         AllowsTransparency = true;
         ShowInTaskbar = false;
 
         //设置弹出的窗体
-        Height = win.ActualHeight;
-        Width = win.ActualWidth;
-        WindowState = win.WindowState;
-        Left = win.Left;
-        Top = win.Top;
-        Owner = win;
-        list = gl;
+        Height = targetWindow.ActualHeight;
+        Width = targetWindow.ActualWidth;
+        WindowState = targetWindow.WindowState;
+        Left = targetWindow.Left;
+        Top = targetWindow.Top;
+        Owner = targetWindow;
+        list = guideList;
     }
 
     public override void OnApplyTemplate()
@@ -49,14 +49,14 @@ public class GuideWindow : Window
         bor = GetTemplateChild(PART_Bor) as Border;
         canvas = GetTemplateChild(PART_Can) as Canvas;
 
-        show(index + 1, list[index].Uc, list[index].Content, list[index].Width, list[index].Height);
+        var currentGuideInfo = list[index];
+        ShowGuidArea(currentGuideInfo.Uc,  currentGuideInfo);
     }
 
 
-    private void show(int xh, FrameworkElement fe, string con, int? width = null, int? height = null,
-        bool first = false, bool last = false)
+    private void ShowGuidArea(FrameworkElement tagetControl, GuideInfo guide)
     {
-        var point = fe.TransformToAncestor(GetWindow(fe)).Transform(new Point(0, 0)); //获取控件坐标点
+        var point = tagetControl.TransformToAncestor(GetWindow(tagetControl)!).Transform(new Point(0, 0)); //获取控件坐标点
 
         var rg = new RectangleGeometry();
         rg.Rect = new Rect(0, 0, Width, Height);
@@ -64,16 +64,14 @@ public class GuideWindow : Window
         bor.Clip = borGeometry;
 
         var rg1 = new RectangleGeometry();
-        rg1.Rect = new Rect(point.X - 5, point.Y - 5, fe.ActualWidth + 10, fe.ActualHeight + 10);
+        rg1.Rect = new Rect(point.X - 5, point.Y - 5, tagetControl.ActualWidth + 10, tagetControl.ActualHeight + 10);
         borGeometry = Geometry.Combine(borGeometry, rg1, GeometryCombineMode.Exclude, null);
 
         bor.Clip = borGeometry;
 
-        var hit = new HintUC(this, point, fe, xh.ToString(), con, width, height, first, last);
-        hit.nextHintEvent -= Hit_nextHintEvent;
-        hit.nextHintEvent += Hit_nextHintEvent;
-        hit.preHintEvent -= Hit_preHintEvent;
-        hit.preHintEvent += Hit_preHintEvent;
+        var hit = new HintUc(this, point, tagetControl, guide);
+        hit.NextHintEvent -= Hit_nextHintEvent;
+        hit.NextHintEvent += Hit_nextHintEvent;
         canvas.Children.Add(hit);
     }
 
@@ -81,27 +79,14 @@ public class GuideWindow : Window
     {
         canvas.Children.Clear();
         if (index >= list.Count - 1)
+        {
+            this.Close();
             return;
+        }
 
         index++;
 
-        if (index == list.Count - 1)
-            show(index + 1, list[index].Uc, list[index].Content, list[index].Width, list[index].Height, false, true);
-        else
-            show(index + 1, list[index].Uc, list[index].Content, list[index].Width, list[index].Height);
-    }
-
-    private void Hit_preHintEvent()
-    {
-        canvas.Children.Clear();
-        if (index == 0)
-            return;
-
-        index--;
-
-        if (index == 0)
-            show(index + 1, list[index].Uc, list[index].Content, list[index].Width, list[index].Height, true);
-        else
-            show(index + 1, list[index].Uc, list[index].Content, list[index].Width, list[index].Height);
+        var currentGuideInfo = list[index];
+        ShowGuidArea(currentGuideInfo.Uc, currentGuideInfo);
     }
 }
