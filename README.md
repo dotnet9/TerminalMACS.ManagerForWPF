@@ -72,6 +72,14 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 以下为2022年收集的案例
 ---
 
+## 2022年05月23日 新手引导（MVVM版本）
+
+
+- 参考文章：[WPF 简易新手引导](https://www.cnblogs.com/ZXdeveloper/p/8391864.html)
+- 参考开源项目：[AIStudio.Wpf.Controls](https://gitee.com/akwkevin/aistudio.-wpf.-controls)
+
+![](./assets/TestDemos/GuidWithMVVM.gif)
+
 ## 2022年05月20日 新手引导
 
 
