@@ -1,0 +1,44 @@
+﻿<Window
+    x:Class="NewbieGuideDemo.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:dotnet9="https://dotnet9.com"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Dotnet9 WPF新手引导功能" Width="800" Height="450"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    AllowsTransparency="True" Background="Transparent" WindowStyle="None" 
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <dotnet9:BindControlToGuideConverter x:Key="BindControlToGuideConverter" />
+    </Window.Resources>
+    <Border
+        Background="White" BorderBrush="#ccc" BorderThickness="1" MouseLeftButtonDown="Border_MouseDown">
+        <Grid>
+            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="点击测试新手引导">
+                <dotnet9:GuideHelper.GuideInfo>
+                    <MultiBinding Converter="{StaticResource BindControlToGuideConverter}">
+                        <Binding RelativeSource="{RelativeSource Self}" />
+                        <Binding Path="Guide" />
+                    </MultiBinding>
+                </dotnet9:GuideHelper.GuideInfo>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:ChangePropertyAction PropertyName="Display" TargetName="GuideControl" Value="True" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+
+            <dotnet9:GuideControl x:Name="GuideControl" Guides="{Binding Guides}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Loaded">
+                        <i:ChangePropertyAction PropertyName="Display" Value="True" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </dotnet9:GuideControl>
+        </Grid>
+    </Border>
+</Window>
