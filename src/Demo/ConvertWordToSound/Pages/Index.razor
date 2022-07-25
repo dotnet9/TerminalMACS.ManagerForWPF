@@ -1,0 +1,32 @@
+﻿@page "/"
+@using System.Speech.Synthesis
+
+<h1>请输入需要转换的文字，然后点击播放按钮</h1>
+
+<MRow>
+    <MCol Cols="12" Md="4">
+        <MTextField @bind-Value="_message" Label="待转换文字"></MTextField>
+    </MCol>
+</MRow>
+<MRow>
+    <MCol Cols="12" Md="4">
+        <MButton Class="mr-4" Color="@(string.IsNullOrEmpty(_message) ? "warning" : "success")" OnClick="PlayWord">播放</MButton>
+    </MCol>
+</MRow>
+
+@code{
+
+    private string _message;
+    private SpeechSynthesizer? synth;
+
+    private void PlayWord()
+    {
+        if (synth == null)
+        {
+            synth = new SpeechSynthesizer();
+            synth.SetOutputToDefaultAudioDevice();
+        }
+        synth.Speak(_message);
+    }
+
+}
