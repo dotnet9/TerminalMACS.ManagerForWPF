@@ -133,3 +133,8 @@ src/NewbieGuideDemo/obj/
 src/Demo/ConvertWordToSound/.vs/
 src/Demo/ConvertWordToSound/bin/
 src/Demo/ConvertWordToSound/obj/
+src/Demo/RabbitMQTest/.vs/
+src/Demo/RabbitMQTest/RabbitMQReceived/bin/
+src/Demo/RabbitMQTest/RabbitMQReceived/obj/
+src/Demo/RabbitMQTest/RabbitMQSend/bin/
+src/Demo/RabbitMQTest/RabbitMQSend/obj/
