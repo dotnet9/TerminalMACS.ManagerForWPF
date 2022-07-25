@@ -17,16 +17,16 @@
 @code{
 
     private string _message;
-    private SpeechSynthesizer? synth;
+    private SpeechSynthesizer _synth;
 
     private void PlayWord()
     {
-        if (synth == null)
+        if (_synth == null)
         {
-            synth = new SpeechSynthesizer();
-            synth.SetOutputToDefaultAudioDevice();
+            _synth = new SpeechSynthesizer();
+            _synth.SetOutputToDefaultAudioDevice();
         }
-        synth.Speak(_message);
+        _synth.Speak(_message);
     }
 
 }
