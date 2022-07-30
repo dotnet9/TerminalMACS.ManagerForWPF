@@ -58,6 +58,46 @@
     <None Remove="Views\NavigationDrawMenu\Assets\img_signout.png" />
     <None Remove="Views\NavigationDrawMenu\Assets\tgBtn_default.png" />
     <None Remove="Views\NavigationDrawMenu\Assets\tgBtn_MouseOver.png" />
+    <None Remove="Views\ReDesignInstagram\Images\add.png" />
+    <None Remove="Views\ReDesignInstagram\Images\close.png" />
+    <None Remove="Views\ReDesignInstagram\Images\comment.png" />
+    <None Remove="Views\ReDesignInstagram\Images\direct.png" />
+    <None Remove="Views\ReDesignInstagram\Images\explore.png" />
+    <None Remove="Views\ReDesignInstagram\Images\home.png" />
+    <None Remove="Views\ReDesignInstagram\Images\instagram.png" />
+    <None Remove="Views\ReDesignInstagram\Images\leftArrow.png" />
+    <None Remove="Views\ReDesignInstagram\Images\like.png" />
+    <None Remove="Views\ReDesignInstagram\Images\logo.ico" />
+    <None Remove="Views\ReDesignInstagram\Images\logout.png" />
+    <None Remove="Views\ReDesignInstagram\Images\message.png" />
+    <None Remove="Views\ReDesignInstagram\Images\mini.png" />
+    <None Remove="Views\ReDesignInstagram\Images\notifications.png" />
+    <None Remove="Views\ReDesignInstagram\Images\p1.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\p2.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\p3.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\p4.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\p5.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\p6.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\p7.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\p8.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\p9.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\q1.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\q10.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\q11.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\q12.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\q13.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\q14.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\q2.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\q3.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\q4.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\q5.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\q6.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\q7.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\q8.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\q9.jpg" />
+    <None Remove="Views\ReDesignInstagram\Images\setting.png" />
+    <None Remove="Views\ReDesignInstagram\Images\stats.png" />
+    <None Remove="Views\ReDesignInstagram\Images\user.jpg" />
     <None Remove="Views\Tree\Images\Avatar.png" />
     <None Remove="Views\Tree\Images\Basket.png" />
     <None Remove="Views\Tree\Images\Bell.png" />
@@ -152,6 +192,126 @@
     <Resource Include="Views\NavigationDrawMenu\Assets\img_signout.png" />
     <Resource Include="Views\NavigationDrawMenu\Assets\tgBtn_default.png" />
     <Resource Include="Views\NavigationDrawMenu\Assets\tgBtn_MouseOver.png" />
+    <Resource Include="Views\ReDesignInstagram\Images\add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\close.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\comment.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\direct.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\explore.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\home.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\instagram.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\leftArrow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\like.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\logo.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\logout.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\message.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\mini.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\notifications.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\p1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\p2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\p3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\p4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\p5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\p6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\p7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\p8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\p9.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\q1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\q10.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\q11.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\q12.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\q13.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\q14.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\q2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\q3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\q4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\q5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\q6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\q7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\q8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\q9.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\setting.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\stats.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Views\ReDesignInstagram\Images\user.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Views\Tree\Images\Avatar.png" />
     <Resource Include="Views\Tree\Images\Basket.png" />
     <Resource Include="Views\Tree\Images\Bell.png" />

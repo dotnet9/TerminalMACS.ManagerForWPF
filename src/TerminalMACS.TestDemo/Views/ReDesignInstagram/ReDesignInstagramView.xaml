@@ -1,0 +1,207 @@
+﻿<Window x:Class="TerminalMACS.TestDemo.Views.ReDesignInstagram.ReDesignInstagramView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TerminalMACS.TestDemo.Views.ReDesignInstagram"
+        mc:Ignorable="d"
+        Title="ReDesignInstagramView" FontFamily="Cambria" Background="#FFFFFF"
+        Height="710" Width="1210" MinWidth="930" MinHeight="710">
+<Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Main Menu-->
+        <StackPanel Grid.RowSpan="2" Background="#F3F3F3">
+            <Image Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram//Images/instagram.png" Height="28" Margin="0 25 0 25"/>
+
+            <local:Profile Size="100" Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/user.jpg" PaddingNum="5"/>
+
+            <TextBlock Text="Mohsen Alavi" TextAlignment="Center" FontSize="20" FontWeight="SemiBold" Margin="0 10 0 5"/>
+            <TextBlock Text="@mohsen29" TextAlignment="Center" FontSize="14" Foreground="#9a9a9a"/>
+
+            <Grid Margin="15 25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="6.9k" Style="{StaticResource mainText}"/>
+                    <TextBlock Text="Followers" Style="{StaticResource secondaryText}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="34" Style="{StaticResource mainText}"/>
+                    <TextBlock Text="Posts" Style="{StaticResource secondaryText}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="112" Style="{StaticResource mainText}"/>
+                    <TextBlock Text="Following" Style="{StaticResource secondaryText}"/>
+                </StackPanel>
+            </Grid>
+
+            <Button Style="{StaticResource activeMenuButton}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/home.png" Style="{StaticResource menuButtonIcon}"/>
+                    <TextBlock Text="Feed" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <Button Style="{StaticResource menuButton}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/explore.png" Style="{StaticResource menuButtonIcon}"/>
+                    <TextBlock Text="Explore" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <Button Style="{StaticResource menuButton}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/notifications.png" Style="{StaticResource menuButtonIcon}"/>
+                    <TextBlock Text="Notifications" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <Button Style="{StaticResource menuButton}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/message.png" Style="{StaticResource menuButtonIcon}"/>
+                    <TextBlock Text="Messages" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <Button Style="{StaticResource menuButton}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/direct.png" Style="{StaticResource menuButtonIcon}"/>
+                    <TextBlock Text="Direct" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <Button Style="{StaticResource menuButton}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/stats.png" Style="{StaticResource menuButtonIcon}"/>
+                    <TextBlock Text="Stats" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <Button Style="{StaticResource menuButton}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/setting.png" Style="{StaticResource menuButtonIcon}"/>
+                    <TextBlock Text="Settings" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <Separator Margin="40 15" Background="#cacaca" Opacity="0.6"/>
+
+            <Button Style="{StaticResource menuButton}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/logout.png" Style="{StaticResource menuButtonIcon}"/>
+                    <TextBlock Text="Logout" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <!--Top Part-->
+        <StackPanel Grid.Column="1">
+            <!--Top Menu-->
+            <Grid Margin="35 25 35 20">
+                <!--TextBox Search-->
+                <Border BorderBrush="#F3F3F3" Background="#F3F3F3" BorderThickness="1" CornerRadius="5" HorizontalAlignment="Left" Width="220">
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/explore.png" Height="20" Margin="5 0 0 0"/>
+                        <TextBlock x:Name="textSearch" MouseDown="textSearch_MouseDown" Text="Search" Style="{StaticResource textHint}"/>
+                        <TextBox Name="txtSearch" TextChanged="txtSearch_TextChanged" Style="{StaticResource textBox}"/>
+                    </Grid>
+                </Border>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Style="{StaticResource roundButton}">
+                        <Image Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/notifications.png" Width="22"/>
+                    </Button>
+
+                    <Button Style="{StaticResource roundButton}">
+                        <Image Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/message.png" Width="21"/>
+                    </Button>
+
+                    <Button Style="{StaticResource addButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/add.png" Width="23" Margin="0 0 7 0"/>
+                            <TextBlock Text="Add Post" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Grid Margin="35 0 35 15">
+                <TextBlock Text="Stories" FontSize="20" Foreground="#333333" FontWeight="Bold" HorizontalAlignment="Left"/>
+                <Label Content="Watch All" Style="{StaticResource textButton}" HorizontalAlignment="Right"/>
+            </Grid>
+
+            <!--Stories-->
+            <ScrollViewer Margin="35 0" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" Padding="0 0 0 10">
+                <StackPanel Orientation="Horizontal">
+
+                    <local:Profile Size="70" Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p1.jpg" PaddingNum="5"/>
+                    <local:Profile Size="70" Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p2.jpg" PaddingNum="5" Margin="10 0 0 0"/>
+                    <local:Profile Size="70" Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p3.jpg" PaddingNum="5" Margin="10 0 0 0"/>
+                    <local:Profile Size="70" Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p4.jpg" PaddingNum="5" Margin="10 0 0 0"/>
+                    <local:Profile Size="70" Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p5.jpg" PaddingNum="5" Margin="10 0 0 0"/>
+                    <local:Profile Size="70" Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p6.jpg" PaddingNum="5" Margin="10 0 0 0"/>
+                    <local:Profile Size="70" Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p7.jpg" PaddingNum="5" Margin="10 0 0 0"/>
+                    <local:Profile Size="70" Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p8.jpg" PaddingNum="5" Margin="10 0 0 0"/>
+                    <local:Profile Size="70" Source="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p9.jpg" PaddingNum="5" Margin="10 0 0 0"/>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <Grid Margin="35 20">
+                <Label Content="Feed" FontSize="20" Foreground="#333333" FontWeight="Bold" HorizontalAlignment="Left"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Label Content="Latest" Style="{StaticResource activeTextButton}"/>
+                    <Label Content="Popular" Style="{StaticResource textButton}" Margin="15 0 0 0"/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+
+        <!--Posts-->
+        <ScrollViewer Grid.Column="1" Grid.Row="1" Margin="35 0 35 10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <WrapPanel>
+
+                <local:Post ProfileName="John.Doe" Likes="6.2k" Comments="49" ProfileSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p7.jpg" PostSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/q7.jpg"/>
+                <local:Post ProfileName="Dom.Kelson" Likes="7.9k" Comments="10" ProfileSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p4.jpg" PostSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/q8.jpg"/>
+                <local:Post ProfileName="John.Doe" Likes="1.6k" Comments="21" ProfileSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p7.jpg" PostSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/q9.jpg"/>
+                <local:Post ProfileName="John.Doe" Likes="8.1k" Comments="57" ProfileSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p7.jpg" PostSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/q10.jpg"/>
+                <local:Post ProfileName="John.Doe" Likes="5.4k" Comments="61" ProfileSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p7.jpg" PostSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/q6.jpg"/>
+                <local:Post ProfileName="Dom.Kelson" Likes="1.5k" Comments="87" ProfileSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p4.jpg" PostSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/q5.jpg"/>
+                <local:Post ProfileName="Dom.Kelson" Likes="3.9k" Comments="43" ProfileSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p4.jpg" PostSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/q4.jpg"/>
+                <local:Post ProfileName="Dom.Kelson" Likes="9.1k" Comments="27" ProfileSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p4.jpg" PostSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/q3.jpg"/>
+                <local:Post ProfileName="Dom.Kelson" Likes="8.2k" Comments="68" ProfileSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p4.jpg" PostSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/q2.jpg"/>
+                <local:Post ProfileName="John.Doe" Likes="6.7k" Comments="12" ProfileSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p7.jpg" PostSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/q1.jpg"/>
+                <local:Post ProfileName="John.Doe" Likes="9.3k" Comments="65" ProfileSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p7.jpg" PostSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/q11.jpg"/>
+                <local:Post ProfileName="John.Doe" Likes="4.7k" Comments="23" ProfileSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p7.jpg" PostSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/q12.jpg"/>
+                <local:Post ProfileName="John.Doe" Likes="6.1k" Comments="47" ProfileSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/p7.jpg" PostSource="pack://application:,,,/TerminalMACS.TestDemo;component/Views/ReDesignInstagram/Images/q13.jpg"/>
+
+            </WrapPanel>
+        </ScrollViewer>
+
+    </Grid>
+</Window>

@@ -73,6 +73,9 @@
                     <Button
                         Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_InstagramRedesignBtnContent}}"
                         Click="ShowInstagramRedesign_Click" />
+                    <Button
+                        Content="重新设计Instagram界面"
+                        Click="ShowInstagramRedesign2_Click" />
                     <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_LoLGoalBtnContent}}"
                             Click="ShowLoLGoal_Click" />
                 </StackPanel>

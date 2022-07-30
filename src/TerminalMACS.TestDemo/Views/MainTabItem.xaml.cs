@@ -1,25 +1,4 @@
-﻿using System;
-using System.Windows;
-using TerminalMACS.Infrastructure.Services;
-using TerminalMACS.TestDemo.Views.AnimatedColorfulMenu;
-using TerminalMACS.TestDemo.Views.AnimatedMenu;
-using TerminalMACS.TestDemo.Views.BaiduMap;
-using TerminalMACS.TestDemo.Views.Calculator;
-using TerminalMACS.TestDemo.Views.ChatView;
-using TerminalMACS.TestDemo.Views.DriveStorage;
-using TerminalMACS.TestDemo.Views.FoodAppLoginUI;
-using TerminalMACS.TestDemo.Views.InstagramRedesign;
-using TerminalMACS.TestDemo.Views.LoginUI;
-using TerminalMACS.TestDemo.Views.LoLGoal.Views;
-using TerminalMACS.TestDemo.Views.MobileAppUsageDashboardCore;
-using TerminalMACS.TestDemo.Views.ModernLogin;
-using TerminalMACS.TestDemo.Views.MusicPlayer;
-using TerminalMACS.TestDemo.Views.NavigationDrawMenu;
-using TerminalMACS.TestDemo.Views.ReadWriteExcel;
-using TerminalMACS.TestDemo.Views.TestBehaviors;
-using TerminalMACS.TestDemo.Views.Tree;
-
-namespace TerminalMACS.TestDemo.Views;
+﻿namespace TerminalMACS.TestDemo.Views;
 
 public partial class MainTabItem
 {
@@ -194,6 +173,13 @@ public partial class MainTabItem
     private void ShowLogin5_Click(object sender, RoutedEventArgs e)
     {
         var view = new Login5.MainWindow();
+        view.Owner = Application.Current.MainWindow;
+        view.Show();
+    }
+
+    private void ShowInstagramRedesign2_Click(object sender, RoutedEventArgs e)
+    {
+        var view = new ReDesignInstagramView();
         view.Owner = Application.Current.MainWindow;
         view.Show();
     }
