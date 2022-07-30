@@ -13,8 +13,8 @@
     <OutputPath>..\Build\Release\Modules</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="MaterialDesignColors" Version="2.0.7-ci182" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.6.0-ci182" />
+    <PackageReference Include="MaterialDesignColors" Version="2.0.7-ci255" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.6.0-ci255" />
     <PackageReference Include="Prism.Wpf" Version="8.1.97" />
   </ItemGroup>
   <ItemGroup>
