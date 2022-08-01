@@ -1,9 +1,11 @@
-﻿namespace SkiaSharpDemo;
+﻿using SkiaSharp.Views.Desktop;
+
+namespace SkiaSharpDemo;
 
 public partial class MainWindow : Window
 {
+    public FiveRings FiveRings = new();
     public SKTypeface Font;
-    public FiveRings FiveRings = new FiveRings();
 
     public MainWindow()
     {
@@ -23,7 +25,6 @@ public partial class MainWindow : Window
         _ = Task.Run(() =>
         {
             while (true)
-            {
                 try
                 {
                     Dispatcher.Invoke(() => { skContainer.InvalidateVisual(); });
@@ -33,11 +34,10 @@ public partial class MainWindow : Window
                 {
                     break;
                 }
-            }
         });
     }
 
-    private void SkContainer_PaintSurface(object? sender, SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs e)
+    private void SkContainer_PaintSurface(object? sender, SKPaintSurfaceEventArgs e)
     {
         var canvas = e.Surface.Canvas;
         FiveRings.Render(canvas, Font, e.Info.Width, e.Info.Height);

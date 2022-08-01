@@ -2,49 +2,47 @@
 
 public class FiveRings
 {
-    public SKPoint centerPoint;
-    public int Radius = 0;
     public int BallLength = 8;
-
-    public double TargetX;
+    public List<Ball>? Balls;
+    public SKPoint CenterPoint;
+    public Ball? DraggedBall;
+    public double Friction = 0.95;
+    public int Radius;
     public double Spring = 0.03;
     public double SpringLength = 200;
-    public double Friction = 0.95;
-    public List<Ball>? Balls;
-    public Ball? draggedBall;
 
-    public void init(SKCanvas canvas, SKTypeface Font, int Width, int Height)
+    public double TargetX;
+
+    public void Init(SKCanvas canvas, SKTypeface font, int width, int height)
     {
-        if (Balls == null)
+        if (Balls != null) return;
+        Balls = new List<Ball>();
+        for (var i = 0; i < BallLength; i++)
         {
-            Balls = new List<Ball>();
-            for (int i = 0; i < BallLength; i++)
+            var random = new Random((int)DateTime.Now.Ticks);
+            Balls.Add(new Ball
             {
-                Random random = new Random((int)DateTime.Now.Ticks);
-                Balls.Add(new Ball()
-                {
-                    X = random.Next(50, Width - 50),
-                    Y = random.Next(50, Height - 50),
-                    Radius = this.Radius
-                });
-            }
+                X = random.Next(50, width - 50),
+                Y = random.Next(50, height - 50),
+                Radius = Radius
+            });
         }
     }
 
     /// <summary>
-    /// 渲染
+    ///     渲染
     /// </summary>
-    public void Render(SKCanvas canvas, SKTypeface Font, int Width, int Height)
+    public void Render(SKCanvas canvas, SKTypeface font, int width, int height)
     {
-        centerPoint = new SKPoint(Width / 2, Height / 2);
-        this.Radius = 20;
-        this.TargetX = Width / 2;
-        init(canvas, Font, Width, Height);
+        CenterPoint = new SKPoint(width / 2, height / 2);
+        Radius = 20;
+        TargetX = width / 2;
+        Init(canvas, font, width, height);
         canvas.Clear(SKColors.White);
 
 
         //划线
-        using var LinePaint = new SKPaint
+        using var linePaint = new SKPaint
         {
             Color = SKColors.Green,
             Style = SKPaintStyle.Fill,
@@ -53,9 +51,8 @@ public class FiveRings
             StrokeCap = SKStrokeCap.Round,
             IsAntialias = true
         };
-        SKPath path = null;
-        foreach (var item in Balls)
-        {
+        SKPath? path = null;
+        foreach (var item in Balls!)
             if (path == null)
             {
                 path = new SKPath();
@@ -65,21 +62,16 @@ public class FiveRings
             {
                 path.LineTo((float)item.X, (float)item.Y);
             }
-        }
 
-        path.Close();
-        canvas.DrawPath(path, LinePaint);
+        path!.Close();
+        canvas.DrawPath(path, linePaint);
 
 
         foreach (var item in Balls)
         {
             if (!item.Dragged)
-            {
                 foreach (var ball in Balls.Where(t => t != item).ToList())
-                {
                     SpringTo(item, ball);
-                }
-            }
 
             DrawCircle(canvas, item);
         }
@@ -88,15 +80,15 @@ public class FiveRings
         {
             Color = SKColors.Blue,
             IsAntialias = true,
-            Typeface = Font,
+            Typeface = font,
             TextSize = 24
         };
-        string by = $"by 蓝创精英团队";
+        const string by = "by 蓝创精英团队";
         canvas.DrawText(by, 600, 400, paint);
     }
 
     /// <summary>
-    /// 画一个圆
+    ///     画一个圆
     /// </summary>
     public void DrawCircle(SKCanvas canvas, Ball ball)
     {
@@ -112,36 +104,29 @@ public class FiveRings
 
     public void MouseMove(SKPoint sKPoint)
     {
-        if (draggedBall != null)
-        {
-            draggedBall.X = sKPoint.X;
-            draggedBall.Y = sKPoint.Y;
-        }
+        if (DraggedBall == null) return;
+        DraggedBall.X = sKPoint.X;
+        DraggedBall.Y = sKPoint.Y;
     }
 
     public void MouseDown(SKPoint sKPoint)
     {
         foreach (var item in Balls)
-        {
             if (item.CheckPoint(sKPoint))
             {
                 item.Dragged = true;
-                draggedBall = item;
+                DraggedBall = item;
             }
             else
             {
                 item.Dragged = false;
             }
-        }
     }
 
     public void MouseUp(SKPoint sKPoint)
     {
-        draggedBall = null;
-        foreach (var item in Balls)
-        {
-            item.Dragged = false;
-        }
+        DraggedBall = null;
+        foreach (var item in Balls) item.Dragged = false;
     }
 
     public void SpringTo(Ball b1, Ball b2)
