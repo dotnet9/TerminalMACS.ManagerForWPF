@@ -138,3 +138,5 @@ src/Demo/RabbitMQTest/RabbitMQReceived/bin/
 src/Demo/RabbitMQTest/RabbitMQReceived/obj/
 src/Demo/RabbitMQTest/RabbitMQSend/bin/
 src/Demo/RabbitMQTest/RabbitMQSend/obj/
+src/Demo/SkiaSharpDemo/bin/
+src/Demo/SkiaSharpDemo/obj/
