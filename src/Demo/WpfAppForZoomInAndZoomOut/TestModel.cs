@@ -2,7 +2,7 @@
 
 namespace WpfAppForZoomInAndZoomOut
 {
-    public class Test : INotifyPropertyChanged
+    public class TestModel : INotifyPropertyChanged
     {
         public int Index { get; set; }
 
