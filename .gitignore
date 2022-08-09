@@ -140,3 +140,7 @@ src/Demo/RabbitMQTest/RabbitMQSend/bin/
 src/Demo/RabbitMQTest/RabbitMQSend/obj/
 src/Demo/SkiaSharpDemo/bin/
 src/Demo/SkiaSharpDemo/obj/
+src/Demo/WpfAppForZoomInAndZoomOut/_ReSharper.Caches/
+src/Demo/WpfAppForZoomInAndZoomOut/.vs/
+src/Demo/WpfAppForZoomInAndZoomOut/bin/
+src/Demo/WpfAppForZoomInAndZoomOut/obj/
