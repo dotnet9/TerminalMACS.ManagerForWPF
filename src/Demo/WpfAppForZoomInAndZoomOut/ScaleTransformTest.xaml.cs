@@ -19,10 +19,7 @@ public partial class ScaleTransformTest : UserControl
 
     private void Scale(double scale)
     {
-        //this.st.CenterX = this.st.CenterY = this.st.ScaleX = this.st.ScaleY = scale;
-        sliderForScale.Value = scale;
-        ZoomParentBorder.Width = ZoomScrollViewer.ActualWidth * scale;
-        ZoomParentBorder.Height = ZoomScrollViewer.ActualHeight * scale;
+        SliderForScale.Value = scale;
     }
 
 
@@ -55,15 +52,15 @@ public partial class ScaleTransformTest : UserControl
     {
         if (Keyboard.Modifiers != ModifierKeys.Control) return;
 
-        var slideValue = sliderForScale.Value;
+        var slideValue = SliderForScale.Value;
         if (e.Delta > 0)
             slideValue += 0.2;
         else
             slideValue -= 0.2;
 
-        if (slideValue < sliderForScale.Minimum) slideValue = sliderForScale.Minimum;
+        if (slideValue < SliderForScale.Minimum) slideValue = SliderForScale.Minimum;
 
-        if (slideValue > sliderForScale.Maximum) slideValue = sliderForScale.Maximum;
+        if (slideValue > SliderForScale.Maximum) slideValue = SliderForScale.Maximum;
 
         Scale(slideValue);
     }

@@ -13,7 +13,7 @@ public partial class ChildView1 : UserControl
     public ChildView1()
     {
         InitializeComponent();
-        var listCount = 100;
+        const int listCount = 100;
         for (var i = 0; i < listCount; i++) _itemSource.Add(new TestModel { Index = i, Name = Helper.RandomString() });
 
         TestListBoxIns.ItemsSource = _itemSource;
@@ -24,9 +24,9 @@ public partial class ChildView1 : UserControl
     private void NewSelectedItemChanged(object sender, KeyboardFocusChangedEventArgs e)
     {
         var item = (ListBoxItem)sender;
-        var contenxt = (TestModel)item.DataContext;
-        _itemSource.Where(x => !x.Equals(contenxt)).ToList().ForEach(x => x.IsSelected = false);
-        contenxt.IsSelected = false;
+        var testModel = (TestModel)item.DataContext;
+        _itemSource.Where(x => !x.Equals(testModel)).ToList().ForEach(x => x.IsSelected = false);
+        testModel.IsSelected = false;
     }
 
     private void TestListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)

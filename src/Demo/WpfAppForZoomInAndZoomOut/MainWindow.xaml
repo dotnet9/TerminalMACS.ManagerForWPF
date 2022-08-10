@@ -5,23 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WpfAppForZoomInAndZoomOut"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="800"
+    Width="400"
     Height="600"
     mc:Ignorable="d">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
-        <GroupBox Grid.Column="0" Header="使用ScaleTransform">
-            <local:ScaleTransformTest />
-        </GroupBox>
-
-
-        <GroupBox Grid.Column="1" Header="使用ViewBox">
-            <local:ViewBoxTest />
-        </GroupBox>
-    </Grid>
+    <local:ScaleTransformTest />
 </Window>

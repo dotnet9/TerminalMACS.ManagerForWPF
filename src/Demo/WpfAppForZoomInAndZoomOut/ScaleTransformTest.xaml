@@ -21,35 +21,32 @@
             <Button Click="Button200_Click" Content="200%" />
             <Button Click="Button300_Click" Content="300%" />
             <Slider
-                x:Name="sliderForScale"
+                x:Name="SliderForScale"
                 Width="100"
                 Maximum="3"
                 Minimum="0.8"
                 TickFrequency="0.2"
                 Value="1" />
-            <TextBlock Text="{Binding Path=Value, ElementName=sliderForScale, Mode=TwoWay}" />
+            <TextBlock Text="{Binding Path=Value, ElementName=SliderForScale, Mode=TwoWay}" />
         </StackPanel>
-        <Border
+        <ScrollViewer
+            x:Name="ZoomScrollViewer"
             Grid.Row="1"
-            BorderBrush="Red"
-            BorderThickness="1"
-            PreviewMouseWheel="Window_PreviewMouseWheel">
-            <ScrollViewer
-                x:Name="ZoomScrollViewer"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                HorizontalScrollBarVisibility="Auto"
-                VerticalScrollBarVisibility="Auto">
-                <Border
-                    x:Name="ZoomParentBorder"
-                    BorderBrush="DarkOrange"
-                    BorderThickness="1">
-                    <Border.RenderTransform>
-                        <ScaleTransform x:Name="st" CenterX="{Binding Path=Value, ElementName=sliderForScale, Mode=TwoWay}" CenterY="{Binding Path=Value, ElementName=sliderForScale, Mode=TwoWay}" ScaleX="{Binding Path=Value, ElementName=sliderForScale, Mode=TwoWay}" ScaleY="{Binding Path=Value, ElementName=sliderForScale, Mode=TwoWay}" />
-                    </Border.RenderTransform>
-                    <local:ChildView1 />
-                </Border>
-            </ScrollViewer>
-        </Border>
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            HorizontalScrollBarVisibility="Auto"
+            PreviewMouseWheel="Window_PreviewMouseWheel"
+            VerticalScrollBarVisibility="Auto">
+            <Border
+                x:Name="ZoomParentBorder"
+                BorderBrush="DarkOrange"
+                BorderThickness="2">
+                <local:ChildView1>
+                    <local:ChildView1.LayoutTransform>
+                        <ScaleTransform CenterX="{Binding Path=Value, ElementName=SliderForScale, Mode=TwoWay}" CenterY="{Binding Path=Value, ElementName=SliderForScale, Mode=TwoWay}" ScaleX="{Binding Path=Value, ElementName=SliderForScale, Mode=TwoWay}" ScaleY="{Binding Path=Value, ElementName=SliderForScale, Mode=TwoWay}" />
+                    </local:ChildView1.LayoutTransform>
+                </local:ChildView1>
+            </Border>
+        </ScrollViewer>
     </Grid>
 </UserControl>
