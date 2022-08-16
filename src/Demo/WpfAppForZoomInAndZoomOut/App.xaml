@@ -1,9 +1,8 @@
-﻿<Application x:Class="WpfAppForZoomInAndZoomOut.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:WpfAppForZoomInAndZoomOut"
-             StartupUri="MainWindow.xaml">
-    <Application.Resources>
-         
-    </Application.Resources>
+﻿<Application
+    x:Class="WpfAppForZoomInAndZoomOut.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:WpfAppForZoomInAndZoomOut"
+    StartupUri="Views/MainWindow.xaml">
+    <Application.Resources />
 </Application>

@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows;
 
-namespace WpfAppForZoomInAndZoomOut
+namespace WpfAppForZoomInAndZoomOut.Helper
 {
-    internal static class Helper
+    public static class StringHelper
     {
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         private static Random rd = new Random(DateTime.Now.Millisecond);
