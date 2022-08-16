@@ -6,8 +6,13 @@ namespace WpfAppForZoomInAndZoomOut.Models
 {
     public class TestModel : BindableBase
     {
-        public int Index { get; set; }
+        private int _index;
 
+        public int Index
+        {
+            get => this._index;
+            set => this.SetProperty(ref this._index, value);
+        }
 
         private Thickness _margin;
 

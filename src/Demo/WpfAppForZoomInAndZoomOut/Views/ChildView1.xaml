@@ -16,45 +16,56 @@
     <UserControl.Resources>
 
         <DataTemplate x:Key="Styles.DataTemplates.ListBox" DataType="{x:Type models:TestModel}">
-            <StackPanel Orientation="Horizontal" Margin="{Binding Margin}">
-                <TextBlock Margin="5,0" Text="{Binding Index}" />
-                <TextBlock x:Name="TextBlock" Text="{Binding Name}" Margin="5 0"/>
-                <TextBox
-                    x:Name="TextBox"
-                    Text="{Binding Name, Mode=TwoWay}"
-                    Visibility="Collapsed" />
-                <TextBlock Margin="5 0">
-                    <Run Text="SelectionLength: " />
-                    <Run Text="{Binding SelectionLength}" />
-                </TextBlock>
-                <Border
-                    Width="16"
-                    Height="16"
-                    Background="#f5f6f9"
-                    CornerRadius="8">
-                    <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="12"
-                        FontWeight="SemiBold"
-                        Foreground="#222f40"
-                        Opacity="0.3"
-                        Text="{Binding ChildCount}" />
-                </Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-                <Popup
-                    x:Name="Popup"
-                    Grid.Row="0"
-                    AllowsTransparency="True"
-                    IsOpen="false"
-                    Placement="Top"
-                    StaysOpen="True">
-                    <StackPanel Background="White" Orientation="Horizontal">
-                        <MenuItem Header="普通" />
-                        <MenuItem Header="数字" />
-                    </StackPanel>
-                </Popup>
-            </StackPanel>
+                <TextBlock>
+                    <Run Text="P"></Run>
+                    <Run Text="{Binding Index}"></Run>
+                </TextBlock>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="{Binding Margin}">
+                    <TextBlock x:Name="TextBlock" Text="{Binding Name}" Margin="5 0"/>
+                    <TextBox
+                        x:Name="TextBox"
+                        Text="{Binding Name, Mode=TwoWay}"
+                        Visibility="Collapsed" />
+                    <TextBlock Margin="5 0">
+                        <Run Text="SelectionLength: " />
+                        <Run Text="{Binding SelectionLength}" />
+                    </TextBlock>
+                    <Border
+                        Width="16"
+                        Height="16"
+                        Background="#f5f6f9"
+                        CornerRadius="8">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="12"
+                            FontWeight="SemiBold"
+                            Foreground="#222f40"
+                            Opacity="0.3"
+                            Text="{Binding ChildCount}" />
+                    </Border>
+
+                    <Popup
+                        x:Name="Popup"
+                        Grid.Row="0"
+                        AllowsTransparency="True"
+                        IsOpen="false"
+                        Placement="Top"
+                        StaysOpen="True">
+                        <StackPanel Background="White" Orientation="Horizontal">
+                            <MenuItem Header="普通" />
+                            <MenuItem Header="数字" />
+                        </StackPanel>
+                    </Popup>
+                </StackPanel>
+            </Grid>
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding IsSelected}" Value="True">
                     <Setter TargetName="TextBlock" Property="Visibility" Value="Collapsed" />

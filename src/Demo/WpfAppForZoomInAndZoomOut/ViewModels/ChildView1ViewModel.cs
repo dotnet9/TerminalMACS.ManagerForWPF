@@ -18,7 +18,7 @@ namespace WpfAppForZoomInAndZoomOut.ViewModels
             for (var i = 0; i < listCount; i++)
                 _itemSource.Add(new TestModel
                 {
-                    Index = i, Name = $"测试{i}", ChildCount = Random.Shared.Next(0, 5),
+                    Index = i + 1, Name = $"测试{i}", ChildCount = Random.Shared.Next(0, 5),
                     Margin = new Thickness(Random.Shared.Next(10) * moveStep, 0, 0, 0)
                 });
         }
@@ -88,6 +88,15 @@ namespace WpfAppForZoomInAndZoomOut.ViewModels
             sourceItem.Margin = new Thickness(left, 0, 0, 0);
             this._itemSource.Move(sourceItemIndex,
                 sourceItemIndex > targetItemIndex ? (targetItemIndex + 1) : targetItemIndex);
+            UpdatePage();
+        }
+
+        private void UpdatePage()
+        {
+            for (var i = 0; i < _itemSource.Count; i++)
+            {
+                _itemSource[i].Index = i + 1;
+            }
         }
     }
 }
