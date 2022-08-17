@@ -1,65 +1,61 @@
-﻿using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
 using Prism.Mvvm;
 
-namespace WpfAppForZoomInAndZoomOut.Models
+namespace WpfAppForZoomInAndZoomOut.Models;
+
+public class TreeItemModel : BindableBase
 {
-    public class TreeItemModel : BindableBase
+    private int _caretIndex;
+    private int _index;
+
+    private bool _isSelected;
+
+    private Thickness _margin;
+
+    private string? _name;
+
+    private int _selectionLength;
+
+    public int Index
     {
-        private int _index;
+        get => _index;
+        set => SetProperty(ref _index, value);
+    }
 
-        public int Index
-        {
-            get => this._index;
-            set => this.SetProperty(ref this._index, value);
-        }
+    public Thickness Margin
+    {
+        get => _margin;
+        set => SetProperty(ref _margin, value);
+    }
 
-        private Thickness _margin;
+    public string? Name
+    {
+        get => _name;
+        set => SetProperty(ref _name, value);
+    }
 
-        public Thickness Margin
-        {
-            get => this._margin;
-            set => this.SetProperty(ref this._margin, value);
-        }
+    public int ChildCount { get; set; }
 
-        private string? _name;
+    public int CaretIndex
+    {
+        get => _caretIndex;
+        set => SetProperty(ref _caretIndex, value);
+    }
 
-        public string? Name
-        {
-            get => this._name;
-            set => this.SetProperty(ref this._name, value);
-        }
+    public bool IsSelected
+    {
+        get => _isSelected;
+        set => SetProperty(ref _isSelected, value);
+    }
 
-        public int ChildCount { get; set; }
+    public int SelectionLength
+    {
+        get => _selectionLength;
+        set => SetProperty(ref _selectionLength, value);
+    }
 
-
-        private int _caretIndex;
-
-        public int CaretIndex
-        {
-            get => _caretIndex;
-            set => this.SetProperty(ref this._caretIndex, value);
-        }
-
-        private bool _isSelected;
-
-        public bool IsSelected
-        {
-            get => _isSelected;
-            set => this.SetProperty(ref this._isSelected, value);
-        }
-
-        private int _selectionLength;
-
-        public int SelectionLength
-        {
-            get => _selectionLength;
-            set => this.SetProperty(ref this._selectionLength, value);
-        }
-
-        public override string ToString()
-        {
-            return $"{Index}, {Name}, {IsSelected}";
-        }
+    public override string ToString()
+    {
+        return $"{Index}, {Name}, {IsSelected}";
     }
 }
