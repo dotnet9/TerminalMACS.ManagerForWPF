@@ -55,11 +55,7 @@ public class ChildView1ViewModel : BindableBase, IDropTarget
     }
 
     public ObservableCollection<TreeItemModel> ItemSource { get; } = new();
-
-    public void DragEnter(IDropInfo dropInfo)
-    {
-        Debug.Print("DragEnter");
-    }
+    
 
     public void DragOver(IDropInfo dropInfo)
     {
@@ -82,12 +78,6 @@ public class ChildView1ViewModel : BindableBase, IDropTarget
             Debug.Print($"Can't drag, the hit test visual is {(result.VisualHit as FrameworkElement)?.Name}");
             dropInfo.Effects = DragDropEffects.None;
         }
-    }
-
-    public void DragLeave(IDropInfo dropInfo)
-    {
-        Debug.Print("DragLeave");
-        DragTargetItem = null;
     }
 
     public void Drop(IDropInfo dropInfo)

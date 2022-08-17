@@ -16,14 +16,10 @@ internal class DropTargetAdornersVisibilityConverter : IMultiValueConverter
             || values[0] is not TreeItemModel dragSourceTreeItemModel
             || values[1] is not TreeItemModel dropTargetTreeItemModel
             || values[2] is not Grid grid
-            || values[3] is not RelativeInsertPosition dropTargetPosition
+            || values[3] is not int dropTargetPosition
             || dragSourceTreeItemModel != dropTargetTreeItemModel) return Visibility.Collapsed;
-        var left = dropTargetTreeItemModel.Margin.Left;
-        if (dropTargetPosition.HasFlag(RelativeInsertPosition.BeforeTargetItem))
-            left -= 20;
-        else if (dropTargetPosition.HasFlag(RelativeInsertPosition.AfterTargetItem)) left += 20;
 
-        grid.Margin = new Thickness(left, 0, 0, 0);
+        grid.Margin = new Thickness(dropTargetTreeItemModel.Margin.Left + dropTargetPosition * 5, 0, 0, 0);
         return Visibility.Visible;
     }
 
