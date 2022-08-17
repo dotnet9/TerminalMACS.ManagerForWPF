@@ -57,6 +57,7 @@
                     Grid.Column="1"
                     Margin="{Binding Margin}"
                     Orientation="Horizontal">
+                    <ToggleButton x:Name="ToggleButton_DragRange" Style="{StaticResource Styles.DragButton}" />
                     <TextBlock
                         x:Name="TextBlock"
                         Margin="5,0"
@@ -84,7 +85,6 @@
                             Opacity="0.3"
                             Text="{Binding ChildCount}" />
                     </Border>
-                    <ToggleButton x:Name="ToggleButton_DragRange" Style="{StaticResource Styles.DragButton}" />
 
                     <Popup
                         x:Name="Popup"
@@ -159,7 +159,7 @@
             <Run Text="{Binding TargetPosition}" />
             <Run Text="目标页码： P" />
             <Run Text="{Binding DragTargetItem.Index}" />
-            <Run Text="插件方向：" />
+            <Run Text="插入方向：" />
             <Run Text="{Binding DragInsertPosition}" />
         </TextBlock>
 
@@ -170,9 +170,6 @@
             dd:DragDrop.IsDragSource="True"
             dd:DragDrop.IsDropTarget="True"
             dd:DragDrop.UseDefaultDragAdorner="True"
-            Background="AliceBlue"
-            BorderBrush="DarkRed"
-            BorderThickness="2"
             ItemsSource="{Binding ItemSource}"
             PreviewMouseWheel="TestListBox_PreviewMouseWheel"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
