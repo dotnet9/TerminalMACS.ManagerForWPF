@@ -1,8 +1,7 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace WpfAppForZoomInAndZoomOut.Helper
+namespace WpfAppForZoomInAndZoomOut.Helpers
 {
     public static class TextBoxAssist
     {

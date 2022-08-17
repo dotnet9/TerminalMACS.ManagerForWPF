@@ -2,9 +2,10 @@
     x:Class="WpfAppForZoomInAndZoomOut.ChildView1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:WpfAppForZoomInAndZoomOut.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dd="urn:gong-wpf-dragdrop"
-    xmlns:helper="clr-namespace:WpfAppForZoomInAndZoomOut.Helper"
+    xmlns:helpers="clr-namespace:WpfAppForZoomInAndZoomOut.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:WpfAppForZoomInAndZoomOut.Models"
     xmlns:viewModels="clr-namespace:WpfAppForZoomInAndZoomOut.ViewModels"
@@ -14,30 +15,62 @@
     mc:Ignorable="d">
 
     <UserControl.Resources>
-
-        <DataTemplate x:Key="Styles.DataTemplates.ListBox" DataType="{x:Type models:TestModel}">
+        <converters:DropTargetAdornersVisibilityConverter x:Key="DropTargetAdornersVisibilityConverter" />
+        <Geometry x:Key="Geometry.Drag">M0,0 L3.5,3.5 L7,0</Geometry>
+        <Style x:Key="Styles.DragButton" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Width" Value="20" />
+            <Setter Property="Height" Value="20" />
+            <Setter Property="Margin" Value="20,0,0,0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border IsHitTestVisible="True" x:Name="Border_DragPosition">
+                            <Path
+                                x:Name="Path_DragPosition"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Data="{StaticResource Geometry.Drag}"
+                                Fill="Red" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border_DragPosition" Property="Background" Value="#CCC" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate x:Key="Styles.DataTemplates.ListBox" DataType="{x:Type models:TreeItemModel}">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
                 <TextBlock>
-                    <Run Text="P"></Run>
-                    <Run Text="{Binding Index}"></Run>
+                    <Run Text="P" />
+                    <Run Text="{Binding Index}" />
                 </TextBlock>
 
-                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="{Binding Margin}">
-                    <TextBlock x:Name="TextBlock" Text="{Binding Name}" Margin="5 0"/>
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="{Binding Margin}"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        x:Name="TextBlock"
+                        Margin="5,0"
+                        Text="{Binding Name}" />
                     <TextBox
                         x:Name="TextBox"
                         Text="{Binding Name, Mode=TwoWay}"
                         Visibility="Collapsed" />
-                    <TextBlock Margin="5 0">
+                    <TextBlock Margin="5,0">
                         <Run Text="SelectionLength: " />
                         <Run Text="{Binding SelectionLength}" />
                     </TextBlock>
                     <Border
+                        x:Name="Border_DragRange"
                         Width="16"
                         Height="16"
                         Background="#f5f6f9"
@@ -51,6 +84,7 @@
                             Opacity="0.3"
                             Text="{Binding ChildCount}" />
                     </Border>
+                    <ToggleButton x:Name="ToggleButton_DragRange" Style="{StaticResource Styles.DragButton}" />
 
                     <Popup
                         x:Name="Popup"
@@ -65,6 +99,34 @@
                         </StackPanel>
                     </Popup>
                 </StackPanel>
+                <Grid
+                    x:Name="DragGrid"
+                    Grid.Column="1"
+                    VerticalAlignment="Bottom">
+                    <Grid.Visibility>
+                        <MultiBinding Converter="{StaticResource DropTargetAdornersVisibilityConverter}">
+                            <MultiBinding.Bindings>
+                                <Binding />
+                                <Binding Path="DataContext.DragTargetItem" RelativeSource="{RelativeSource FindAncestor, AncestorType=UserControl}" />
+                                <Binding RelativeSource="{RelativeSource Self}" />
+                                <Binding Path="DataContext.DragInsertPosition" RelativeSource="{RelativeSource FindAncestor, AncestorType=UserControl}" />
+                            </MultiBinding.Bindings>
+                        </MultiBinding>
+                    </Grid.Visibility>
+                    <Rectangle
+                        Width="5"
+                        Height="5"
+                        Margin="{Binding Margin}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Fill="Red" />
+                    <Rectangle
+                        Height="1"
+                        Margin="{Binding Margin}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center"
+                        Fill="Red" />
+                </Grid>
             </Grid>
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding IsSelected}" Value="True">
@@ -86,11 +148,24 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
+        <TextBlock x:Name="TxtShowListBoxInfo">
+            <Run Text="源位置：" />
+            <Run Text="{Binding SourcePosition}" />
+            <Run Text="目的位置：" />
+            <Run Text="{Binding TargetPosition}" />
+            <Run Text="目标页码： P" />
+            <Run Text="{Binding DragTargetItem.Index}" />
+            <Run Text="插件方向：" />
+            <Run Text="{Binding DragInsertPosition}" />
+        </TextBlock>
+
         <ListBox
             x:Name="TestListBoxIns"
+            Grid.Row="1"
             dd:DragDrop.DropHandler="{Binding}"
             dd:DragDrop.IsDragSource="True"
             dd:DragDrop.IsDropTarget="True"
@@ -104,6 +179,5 @@
             ScrollViewer.VerticalScrollBarVisibility="Disabled"
             Style="{StaticResource Styles.ListBox.Default}" />
 
-        <TextBlock x:Name="TxtShowListBoxInfo" Grid.Row="1" />
     </Grid>
 </UserControl>

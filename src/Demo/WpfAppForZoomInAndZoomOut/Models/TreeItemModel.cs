@@ -4,7 +4,7 @@ using Prism.Mvvm;
 
 namespace WpfAppForZoomInAndZoomOut.Models
 {
-    public class TestModel : BindableBase
+    public class TreeItemModel : BindableBase
     {
         private int _index;
 

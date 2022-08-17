@@ -2,93 +2,119 @@
 using Prism.Mvvm;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media;
+using System.Windows.Shapes;
 using WpfAppForZoomInAndZoomOut.Models;
 
 namespace WpfAppForZoomInAndZoomOut.ViewModels
 {
     public class ChildView1ViewModel : BindableBase, IDropTarget
     {
-        private ObservableCollection<TestModel> _itemSource = new();
-        private const int moveStep = 5;
+        private readonly ObservableCollection<TreeItemModel> _itemSource = new();
+        private const int MoveStep = 5;
+        private TreeItemModel? _dragTargetItem;
+        private int _dragInsertPosition;
+        private Point _sourcePosition;
+        private Point _targetPosition;
+
+        public TreeItemModel? DragTargetItem
+        {
+            get => this._dragTargetItem;
+            set => this.SetProperty(ref this._dragTargetItem, value);
+        }
+
+        public int DragInsertPosition
+        {
+            get => this._dragInsertPosition;
+            set => this.SetProperty(ref this._dragInsertPosition, value);
+        }
+
+        public Point SourcePosition
+        {
+            get => this._sourcePosition;
+            set => this.SetProperty(ref this._sourcePosition, value);
+        }
+
+        public Point TargetPosition
+        {
+            get => this._targetPosition;
+            set => this.SetProperty(ref this._targetPosition, value);
+        }
 
         public ChildView1ViewModel()
         {
-            const int listCount = 100;
+            const int listCount = 20;
             for (var i = 0; i < listCount; i++)
-                _itemSource.Add(new TestModel
+                _itemSource.Add(new TreeItemModel
                 {
                     Index = i + 1, Name = $"测试{i}", ChildCount = Random.Shared.Next(0, 5),
-                    Margin = new Thickness(Random.Shared.Next(10) * moveStep, 0, 0, 0)
+                    Margin = new Thickness(Random.Shared.Next(10) * MoveStep, 0, 0, 0)
                 });
         }
 
-        public ObservableCollection<TestModel> ItemSource
+        public ObservableCollection<TreeItemModel> ItemSource
         {
             get => this._itemSource;
         }
 
+        public void DragEnter(IDropInfo dropInfo)
+        {
+            Debug.Print("DragEnter");
+        }
+
         public void DragOver(IDropInfo dropInfo)
         {
-            if (dropInfo.Data is not TestModel sourceItem || dropInfo.TargetItem is not TestModel targetItem) return;
+            Debug.Print("DragOver");
+            var result = VisualTreeHelper.HitTest(dropInfo.VisualTarget, dropInfo.DragInfo.DragStartPosition);
 
-            if (sourceItem == targetItem)
+            if (result is { VisualHit: Path { Name: "Path_DragPosition" } or Border { Name: "Border_DragPosition" } })
             {
-                dropInfo.Effects = DragDropEffects.None;
-                return;
-            }
+                Debug.Print("draging");
 
-            var sourceItemIndex = this._itemSource.IndexOf(sourceItem);
-            var targetItemIndex = this._itemSource.IndexOf(targetItem);
-
-            if (Math.Abs(sourceItemIndex - targetItemIndex) == 1 &&
-                Math.Abs(sourceItem.Margin.Left - targetItem.Margin.Left) < 1)
-            {
-                dropInfo.Effects = DragDropEffects.None;
-                return;
-            }
-
-            dropInfo.Effects = DragDropEffects.Move;
-            dropInfo.DropTargetAdorner = DropTargetAdorners.Insert;
-            if (dropInfo.InsertPosition.HasFlag(RelativeInsertPosition.AfterTargetItem))
-            {
-                dropInfo.EffectText = "缩进";
-            }
-            else if (dropInfo.InsertPosition.HasFlag(RelativeInsertPosition.BeforeTargetItem))
-            {
-                dropInfo.EffectText = "减少缩进";
+                this.DragTargetItem = dropInfo.TargetItem as TreeItemModel;
+                this.SourcePosition = dropInfo.DropPosition;
+                this.TargetPosition = dropInfo.DragInfo.DragStartPosition;
+                this.DragInsertPosition = (int)((dropInfo.DropPosition.X - dropInfo.DragInfo.DragStartPosition.X) / 5);
+                dropInfo.Effects = DragDropEffects.Copy | DragDropEffects.Move;
+                dropInfo.DropTargetAdorner = DropTargetAdorners.Highlight;
             }
             else
             {
-                dropInfo.EffectText = "插入";
+                Debug.Print($"Can't drag, the hit test visual is {(result.VisualHit as FrameworkElement)?.Name}");
+                dropInfo.Effects = DragDropEffects.None;
             }
+        }
+
+        public void DragLeave(IDropInfo dropInfo)
+        {
+            Debug.Print("DragLeave");
+            DragTargetItem = null;
         }
 
         public void Drop(IDropInfo dropInfo)
         {
-            if (dropInfo.Data is not TestModel sourceItem || dropInfo.TargetItem is not TestModel targetItem) return;
-            if (sourceItem == targetItem)
-            {
-                return;
-            }
+            Debug.Print("Drop");
+
+            if (dropInfo.Data is not TreeItemModel sourceItem ||
+                dropInfo.TargetItem is not TreeItemModel targetItem) return;
+
+            Debug.Print("Drop-busy");
 
             var sourceItemIndex = this._itemSource.IndexOf(sourceItem);
             var targetItemIndex = this._itemSource.IndexOf(targetItem);
 
             var left = targetItem.Margin.Left;
-            if (dropInfo.InsertPosition.HasFlag(RelativeInsertPosition.AfterTargetItem))
-            {
-                left += moveStep;
-            }
-            else if (dropInfo.InsertPosition.HasFlag(RelativeInsertPosition.BeforeTargetItem))
-            {
-                left -= moveStep;
-            }
+            left += MoveStep * this.DragInsertPosition;
 
             sourceItem.Margin = new Thickness(left, 0, 0, 0);
             this._itemSource.Move(sourceItemIndex,
                 sourceItemIndex > targetItemIndex ? (targetItemIndex + 1) : targetItemIndex);
             UpdatePage();
+            DragTargetItem = null;
         }
 
         private void UpdatePage()
