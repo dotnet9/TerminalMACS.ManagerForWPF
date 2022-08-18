@@ -36,9 +36,11 @@
             VerticalAlignment="Stretch"
             HorizontalScrollBarVisibility="Auto"
             PreviewMouseWheel="Window_PreviewMouseWheel"
-            VerticalScrollBarVisibility="Auto" Margin="10">
+            VerticalScrollBarVisibility="Auto">
             <Border
-                x:Name="ZoomParentBorder">
+                x:Name="ZoomParentBorder"
+                BorderBrush="DarkOrange"
+                BorderThickness="2">
                 <local:ChildView1>
                     <local:ChildView1.LayoutTransform>
                         <ScaleTransform CenterX="{Binding Path=Value, ElementName=SliderForScale, Mode=TwoWay}" CenterY="{Binding Path=Value, ElementName=SliderForScale, Mode=TwoWay}" ScaleX="{Binding Path=Value, ElementName=SliderForScale, Mode=TwoWay}" ScaleY="{Binding Path=Value, ElementName=SliderForScale, Mode=TwoWay}" />

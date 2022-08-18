@@ -60,6 +60,10 @@ public class ChildView1ViewModel : BindableBase, IDropTarget
     public void DragOver(IDropInfo dropInfo)
     {
         Debug.Print("DragOver");
+        if (dropInfo.DragInfo == null)
+        {
+            return;
+        }
         var result = VisualTreeHelper.HitTest(dropInfo.VisualTarget, dropInfo.DragInfo.DragStartPosition);
 
         if (result is { VisualHit: Path { Name: "Path_DragPosition" } or Border { Name: "Border_DragPosition" } })
