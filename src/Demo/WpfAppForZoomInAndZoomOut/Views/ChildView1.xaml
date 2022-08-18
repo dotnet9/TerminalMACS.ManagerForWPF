@@ -24,7 +24,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Border IsHitTestVisible="True" x:Name="Border_DragPosition">
+                        <Border x:Name="Border_DragPosition" IsHitTestVisible="True">
                             <Path
                                 x:Name="Path_DragPosition"
                                 HorizontalAlignment="Center"
@@ -166,20 +166,13 @@
         <ListBox
             x:Name="TestListBoxIns"
             Grid.Row="1"
-<<<<<<< HEAD
             dragDrop:DragDrop.DropHandler="{Binding}"
             dragDrop:DragDrop.IsDragSource="True"
             dragDrop:DragDrop.IsDropTarget="True"
             dragDrop:DragDrop.UseDefaultDragAdorner="True"
-=======
-            dd:DragDrop.DropHandler="{Binding}"
-            dd:DragDrop.IsDragSource="True"
-            dd:DragDrop.IsDropTarget="True"
-            dd:DragDrop.UseDefaultDragAdorner="True"
             Background="AliceBlue"
             BorderBrush="DarkRed"
             BorderThickness="2"
->>>>>>> parent of 593902c (小调整；)
             ItemsSource="{Binding ItemSource}"
             PreviewMouseWheel="TestListBox_PreviewMouseWheel"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
