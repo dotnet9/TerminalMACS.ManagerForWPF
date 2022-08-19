@@ -62,6 +62,7 @@
                         Text="{Binding Name}" />
                     <TextBox
                         x:Name="TextBox"
+                        AllowDrop="True"
                         Text="{Binding Name, Mode=TwoWay}"
                         Visibility="Collapsed" />
                     <TextBlock Margin="5,0">
