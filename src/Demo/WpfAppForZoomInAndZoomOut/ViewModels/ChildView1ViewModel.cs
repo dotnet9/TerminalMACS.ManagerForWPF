@@ -22,7 +22,7 @@ public class ChildView1ViewModel : BindableBase //, IDropTarget
 
     public ChildView1ViewModel()
     {
-        const int listCount = 20;
+        const int listCount = 120;
         for (var i = 0; i < listCount; i++)
             ItemSource.Add(new TreeItemModel
             {

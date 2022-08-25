@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="clr-namespace:WpfAppForZoomInAndZoomOut.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dragDrop="urn:gong-wpf-dragdrop"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:WpfAppForZoomInAndZoomOut.Models"
     xmlns:viewModels="clr-namespace:WpfAppForZoomInAndZoomOut.ViewModels"
@@ -28,7 +29,7 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Data="{StaticResource Geometry.Drag}"
-                                Fill="Black" />
+                                Fill="Red" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -55,14 +56,12 @@
                     Grid.Column="1"
                     Margin="{Binding Margin}"
                     Orientation="Horizontal">
-                    <ToggleButton x:Name="ToggleButton_DragRange" Style="{StaticResource Styles.DragButton}" />
                     <TextBlock
                         x:Name="TextBlock"
                         Margin="5,0"
                         Text="{Binding Name}" />
                     <TextBox
                         x:Name="TextBox"
-                        AllowDrop="True"
                         Text="{Binding Name, Mode=TwoWay}"
                         Visibility="Collapsed" />
                     <TextBlock Margin="5,0">
@@ -84,6 +83,7 @@
                             Opacity="0.3"
                             Text="{Binding ChildCount}" />
                     </Border>
+                    <ToggleButton x:Name="ToggleButton_DragRange" Style="{StaticResource Styles.DragButton}" />
 
                     <Popup
                         x:Name="Popup"
@@ -151,28 +151,25 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock x:Name="TxtShowListBoxInfo">
-            <Run Text="源位置：" />
-            <Run Text="{Binding SourcePosition}" />
-            <Run Text="目的位置：" />
-            <Run Text="{Binding TargetPosition}" />
-            <Run Text="目标页码： P" />
-            <Run Text="{Binding DragTargetItem.Index}" />
-            <Run Text="插件方向：" />
-            <Run Text="{Binding DragInsertPosition}" />
-        </TextBlock>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock x:Name="TxtShowListBoxInfo">
+                <Run Text="源位置：" />
+                <Run Text="{Binding SourcePosition}" />
+                <Run Text="目的位置：" />
+                <Run Text="{Binding TargetPosition}" />
+                <Run Text="目标页码： P" />
+                <Run Text="{Binding DragTargetItem.Index}" />
+                <Run Text="插件方向：" />
+                <Run Text="{Binding DragInsertPosition}" />
+            </TextBlock>
+            <Button Content="截屏可视区域" Click="Capture_Click"></Button>
+            <Button Content="截屏全部" Click="CaptureAll_Click"></Button>
+        </StackPanel>
 
         <ListBox
             x:Name="TestListBoxIns"
             Grid.Row="1"
-            AllowDrop="True"
-            Background="AliceBlue"
-            BorderBrush="DarkRed"
-            BorderThickness="2"
-            DragOver="TestListBoxIns_OnDragOver"
-            Drop="TestListBoxIns_OnDrop"
             ItemsSource="{Binding ItemSource}"
-            PreviewMouseLeftButtonDown="TestListBoxIns_OnPreviewMouseLeftButtonDown"
             PreviewMouseWheel="TestListBox_PreviewMouseWheel"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Disabled"
