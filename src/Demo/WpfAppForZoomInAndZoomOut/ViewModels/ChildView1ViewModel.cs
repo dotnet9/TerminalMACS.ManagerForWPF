@@ -10,15 +10,15 @@ using WpfAppForZoomInAndZoomOut.Models;
 
 namespace WpfAppForZoomInAndZoomOut.ViewModels;
 
-public class ChildView1ViewModel : BindableBase //, IDropTarget
+public class ChildView1ViewModel : BindableBase
 {
-    private bool isDraging;
     public const int MoveStep = 5;
     private int _dragInsertPosition;
     private TreeItemModel? _dragSourceItem;
     private TreeItemModel? _dragTargetItem;
     private Point _sourcePosition;
     private Point _targetPosition;
+    private bool isDraging;
 
     public ChildView1ViewModel()
     {
@@ -105,13 +105,13 @@ public class ChildView1ViewModel : BindableBase //, IDropTarget
         var targetItem = GetDataFromListBox(parent, TargetPosition) as TreeItemModel;
         if (DragSourceItem != targetItem)
         {
-            this.DragTargetItem = targetItem;
+            DragTargetItem = targetItem;
             e.Effects = DragDropEffects.Move;
             DragInsertPosition = (int)((TargetPosition.X - SourcePosition.X) / 5);
         }
         else
         {
-            this.DragTargetItem = null;
+            DragTargetItem = null;
             e.Effects = DragDropEffects.None;
         }
     }
@@ -127,7 +127,7 @@ public class ChildView1ViewModel : BindableBase //, IDropTarget
         var targetItemIndex = ItemSource.IndexOf(DragTargetItem);
 
         var left = DragTargetItem.Margin.Left;
-        left += ChildView1ViewModel.MoveStep * DragInsertPosition;
+        left += MoveStep * DragInsertPosition;
 
         DragSourceItem.Margin = new Thickness(left, 0, 0, 0);
         ItemSource.Move(sourceItemIndex,
@@ -158,6 +158,6 @@ public class ChildView1ViewModel : BindableBase //, IDropTarget
     public void ClearDragInfo()
     {
         isDraging = false;
-        this.DragTargetItem = null;
+        DragTargetItem = null;
     }
 }

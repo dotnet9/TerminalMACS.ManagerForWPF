@@ -5,10 +5,75 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WpfAppForZoomInAndZoomOut.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:WpfAppForZoomInAndZoomOut.ViewModels"
     Title="TestWindows"
     Width="800"
     Height="450"
     mc:Ignorable="d">
+    <Window.Resources>
+        <Style x:Key="Styles.ListBox.Address" TargetType="{x:Type ListBox}">
+
+            <Setter Property="ItemsSource" Value="{Binding Address}" />
+            <Setter Property="SelectedItem" Value="{Binding SelectedAddress}" />
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Border
+                            x:Name="Border"
+                            Margin="2"
+                            Padding="5"
+                            BorderBrush="#ccc"
+                            BorderThickness="1"
+                            CornerRadius="3">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Text="{Binding}" />
+                        </Border>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=Border, Path=IsMouseOver}" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#ccc" />
+                            </DataTrigger>
+
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate x:Key="ContentTemplates.Address" DataType="{x:Type vm:AddressViewModel}">
+            <Border
+                x:Name="BorderBackground"
+                Margin="3"
+                Padding="10"
+                BorderBrush="#ccc"
+                BorderThickness="1"
+                CornerRadius="3">
+                <StackPanel>
+                    <TextBlock Margin="3" Text="{Binding Name}">
+                        <TextBlock.Padding>5</TextBlock.Padding>
+                    </TextBlock>
+                    <Button
+                        x:Name="BtnShow"
+                        Command="{Binding ChangeNameCommand}"
+                        Content="展示"
+                        Visibility="Collapsed" />
+                </StackPanel>
+            </Border>
+            <DataTemplate.Triggers>
+                <Trigger SourceName="BorderBackground" Property="IsMouseOver" Value="True">
+                    <Setter TargetName="BtnShow" Property="Visibility" Value="Visible" />
+                </Trigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+    </Window.Resources>
 
     <StackPanel>
         <Button
@@ -18,5 +83,7 @@
             PreviewMouseLeftButtonUp="UIElement_OnPreviewMouseLeftButtonUp" />
         <Button Click="ChangeTime_Click" Content="修改标题" />
         <local:TextBoxEx />
+        <ListBox Style="{StaticResource Styles.ListBox.Address}" />
+        <ContentControl Content="{Binding SelectedAddressViewModel}" ContentTemplate="{StaticResource ContentTemplates.Address}" />
     </StackPanel>
 </Window>
