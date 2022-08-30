@@ -38,6 +38,7 @@ public class TestWindowsViewModel : BindableBase
         set
         {
             SetProperty(ref _selectedAddress, value);
+            if (value == null) return;
             SelectedAddressViewModel = _addressViewModels[_address!.IndexOf(value!)];
         }
     }

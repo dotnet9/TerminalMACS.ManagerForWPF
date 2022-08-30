@@ -14,6 +14,26 @@
     d:DataContext="{d:DesignInstance vm:TestWindowsViewModel}"
     mc:Ignorable="d">
     <Window.Resources>
+
+        <Style x:Key="Styles.TextBlock.TabHeader" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Tag" Value="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext}" />
+            <Setter Property="Text" Value="{Binding}" />
+            <Setter Property="ContextMenu">
+                <Setter.Value>
+                    <ContextMenu>
+                        <MenuItem
+                            Command="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.Tag.ShowMessageCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.DataContext}"
+                            Header="删除"
+                            Tag="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.Tag}" />
+                        <MenuItem Header="编辑" />
+                    </ContextMenu>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="Styles.ListBox.Address" TargetType="{x:Type ListBox}">
 
             <Setter Property="ItemsSource" Value="{Binding Address}" />
@@ -28,21 +48,7 @@
                             BorderBrush="#ccc"
                             BorderThickness="1"
                             CornerRadius="3">
-                            <TextBlock
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Tag="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext}"
-                                Text="{Binding}">
-                                <TextBlock.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem
-                                            Command="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.Tag.ShowMessageCommand}"
-                                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.DataContext}"
-                                            Header="删除" />
-                                        <MenuItem Header="编辑" />
-                                    </ContextMenu>
-                                </TextBlock.ContextMenu>
-                            </TextBlock>
+                            <TextBlock Style="{StaticResource Styles.TextBlock.TabHeader}" />
                         </Border>
                         <DataTemplate.Triggers>
                             <DataTrigger Binding="{Binding ElementName=Border, Path=IsMouseOver}" Value="True">
