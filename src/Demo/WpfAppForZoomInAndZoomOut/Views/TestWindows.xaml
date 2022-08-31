@@ -105,6 +105,75 @@
                 </Trigger>
             </DataTemplate.Triggers>
         </DataTemplate>
+
+        <Style x:Key="Styles.ItemsControl.TestUniformGrid" TargetType="{x:Type ItemsControl}">
+            <Setter Property="ItemsSource" Value="{Binding UniformGridTests}" />
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate DataType="{x:Type system:Boolean}">
+                        <Border
+                            MinWidth="150"
+                            MinHeight="50"
+                            Margin="10,5"
+                            BorderBrush="Green"
+                            BorderThickness="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <TextBlock x:Name="DemoName" />
+                                <UniformGrid
+                                    x:Name="TestUniformGrid"
+                                    Grid.Row="1"
+                                    Columns="3"
+                                    Visibility="Collapsed">
+                                    <Button x:Name="TestUniformGridButton1" Content="按钮1" />
+                                    <Grid x:Name="TestUniformGridButton2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Rectangle Width="1" Fill="Black" />
+                                        <Button Grid.Column="1" Content="按钮2" />
+                                    </Grid>
+                                    <Grid x:Name="TestUniformGridButton3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Rectangle Width="1" Fill="Black" />
+                                        <Button Grid.Column="1" Content="按钮3" />
+                                    </Grid>
+                                </UniformGrid>
+                            </Grid>
+                        </Border>
+                        <DataTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="TestUniformGrid" Property="Visibility" Value="Visible" />
+                                <Setter TargetName="DemoName" Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                            <DataTrigger Binding="{Binding}" Value="True">
+                                <Setter TargetName="DemoName" Property="Text" Value="显示3个按钮" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding}" Value="False">
+                                <Setter TargetName="DemoName" Property="Text" Value="显示2个按钮" />
+                                <Setter TargetName="TestUniformGrid" Property="Columns" Value="2" />
+                                <Setter TargetName="TestUniformGridButton3" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Window.Resources>
 
     <StackPanel>
@@ -118,5 +187,9 @@
         <local:TextBoxEx />
         <ListBox Style="{StaticResource Styles.ListBox.Address}" />
         <ContentControl Content="{Binding SelectedAddressViewModel}" ContentTemplate="{StaticResource ContentTemplates.Address}" />
+        <TextBlock Text="下面测试动态修改UniformGrid列数(Columns)" />
+        <ItemsControl Style="{StaticResource Styles.ItemsControl.TestUniformGrid}" />
+        <TextBlock Text="------" />
     </StackPanel>
+
 </Window>

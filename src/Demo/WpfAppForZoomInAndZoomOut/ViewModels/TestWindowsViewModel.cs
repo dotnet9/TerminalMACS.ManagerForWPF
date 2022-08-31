@@ -32,6 +32,8 @@ public class TestWindowsViewModel : BindableBase
         set => SetProperty(ref _address, value);
     }
 
+    public ObservableCollection<bool> UniformGridTests { get; } = new() { true, false };
+
     public string? SelectedAddress
     {
         get => _selectedAddress;
