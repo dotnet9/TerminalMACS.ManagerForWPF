@@ -1,4 +1,6 @@
-﻿namespace TerminalMACS.TestDemo.Views;
+﻿using TerminalMACS.TestDemo.Views.DrawdownMenu3;
+
+namespace TerminalMACS.TestDemo.Views;
 
 public partial class MainTabItem
 {
@@ -180,6 +182,13 @@ public partial class MainTabItem
     private void ShowInstagramRedesign2_Click(object sender, RoutedEventArgs e)
     {
         var view = new ReDesignInstagramView();
+        view.Owner = Application.Current.MainWindow;
+        view.Show();
+    }
+
+    private void ShowDrawerMenu3_Click(object sender, RoutedEventArgs e)
+    {
+        var view = new DrawdownMenu3Window();
         view.Owner = Application.Current.MainWindow;
         view.Show();
     }

@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="TerminalMACS.TestDemo.Views.DrawdownMenu3.UserControlMenuItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TerminalMACS.TestDemo.Views.DrawdownMenu3"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <Grid>
+        <materialDesign:PackIcon Kind="{Binding Icon}" Width="15" Height="15" Margin="10 16" Foreground="White"/>
+        <ListBoxItem x:Name="ListViewItemMenu" Content="{Binding Header}" Padding="37 14" FontSize="15" Foreground="White"/>
+        <Expander x:Name="ExpanderMenu" Expanded="ExpanderMenu_OnExpanded" Collapsed="ExpanderMenu_OnExpanded"  Header="{Binding Header}" IsExpanded="False" Width="210" HorizontalAlignment="Right" Background="{x:Null}" Foreground="White">
+            <ListView x:Name="ListViewMenu" ItemsSource="{Binding SubItems}" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" Padding="20 5"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Expander>
+    </Grid>
+</UserControl>

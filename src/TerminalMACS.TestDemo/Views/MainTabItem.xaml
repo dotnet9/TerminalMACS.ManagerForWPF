@@ -129,6 +129,11 @@
                             <Button Content="Drawer Menu 2" Click="ShowDrawerMenu2_Click" />
                         </Grid>
                     </materialDesign:Badged>
+                    <materialDesign:Badged Badge="3">
+                        <Grid>
+                            <Button Content="Drawer Menu 3" Click="ShowDrawerMenu3_Click" />
+                        </Grid>
+                    </materialDesign:Badged>
                     <materialDesign:Badged Badge="2">
                         <Grid>
                             <Button
