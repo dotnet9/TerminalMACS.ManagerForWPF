@@ -1,0 +1,57 @@
+﻿<Window x:Class="WpfAppForZoomInAndZoomOut.Views.TestComboBoxWithDataGridView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:WpfAppForZoomInAndZoomOut.ViewModels"
+        xmlns:local="clr-namespace:WpfAppForZoomInAndZoomOut.Views"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance vm:TestComboBoxWithDataGridViewModel}"
+        Title="测试下拉表格" Height="450" Width="800">
+    <Grid>
+        <ComboBox Height="30" Margin="5" ItemsSource="{Binding Cities}" HorizontalContentAlignment="Stretch">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Margin="2" Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ComboBoxItem}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Grid x:Name="gd" TextElement.Foreground="Black">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Margin="5" Grid.Column="0" Text="{Binding Name}"/>
+                                    <TextBlock Margin="5" Grid.Column="1" Text="{Binding State}"/>
+                                    <TextBlock Margin="5" Grid.Column="2" Text="{Binding Population}"/>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="ComboBoxItem.IsSelected" Value="True">
+                                        <Setter TargetName="gd"  Property="Background" Value="Gray"></Setter>
+                                        <Setter TargetName="gd"  Property="TextElement.Foreground" Value="White"></Setter>
+                                    </Trigger>
+                                    <Trigger Property="ComboBoxItem.IsMouseOver" Value="True">
+                                        <Setter TargetName="gd"  Property="Background" Value="Blue"></Setter>
+                                        <Setter TargetName="gd"  Property="TextElement.Foreground" Value="White"></Setter>
+                                    </Trigger>
+
+                                    <!--IsHighlighted and IsMouseOver is showing same effect but IsHighlighted is used for showing logical focus( for understanding check using tab key)-->
+
+                                    <!--<Trigger Property="ComboBoxItem.IsHighlighted" Value="True">
+                                    <Setter TargetName="gd"  Property="Background" Value="Yellow"></Setter>
+                                    <Setter TargetName="gd"  Property="TextElement.Foreground" Value="Black"></Setter>
+                                </Trigger>-->
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ComboBox.ItemContainerStyle>
+        </ComboBox>
+    </Grid>
+</Window>
