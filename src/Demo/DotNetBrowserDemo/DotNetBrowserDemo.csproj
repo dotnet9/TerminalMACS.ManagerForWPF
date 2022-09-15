@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="dotnetbrowser.license" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="dotnetbrowser.license" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNetBrowser.Wpf" Version="2.16.1" />
+  </ItemGroup>
+
+</Project>

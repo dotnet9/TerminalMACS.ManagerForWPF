@@ -146,3 +146,7 @@ src/Demo/WpfAppForZoomInAndZoomOut/bin/
 src/Demo/WpfAppForZoomInAndZoomOut/obj/
 src/Demo/GongSolutions.WPF.DragDrop/bin/
 src/Demo/GongSolutions.WPF.DragDrop/obj/
+src/Demo/DotNetBrowserDemo/.vs/
+src/Demo/DotNetBrowserDemo/bin/
+src/Demo/DotNetBrowserDemo/obj/
+src/Demo/DotNetBrowserDemo/dotnetbrowser.license
