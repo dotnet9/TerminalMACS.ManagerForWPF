@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:WPF="clr-namespace:DotNetBrowser.Wpf;assembly=DotNetBrowser.Wpf"
         mc:Ignorable="d" Closed="MainWindow_Closed"
-        Title="MainWindow" Height="450" Width="800">
+        Title="DotNetBrowser测试" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -16,6 +16,7 @@
             <Button Content="切换错误网址" Click="ChangeFalseUrl_Click"></Button>
             <Button Content="切换中文" Click="ChangeToChinese_Click"></Button>
             <Button Content="切换英文" Click="ChangeToEnglish_Click"></Button>
+            <Button Content="scheme拦截测试" Click="InterceptTest_Click"></Button>
         </StackPanel>
         <WPF:BrowserView Name="MyBrowserView" Grid.Row="1"/>
     </Grid>
