@@ -4,9 +4,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:WPF="clr-namespace:DotNetBrowser.Wpf;assembly=DotNetBrowser.Wpf"
-        mc:Ignorable="d"
+        mc:Ignorable="d" Closed="MainWindow_Closed"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <WPF:BrowserView Name="MyBrowserView"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="切换正确网址" Click="ChangeRightUrl_Click"></Button>
+            <Button Content="切换错误网址" Click="ChangeFalseUrl_Click"></Button>
+            <Button Content="切换中文" Click="ChangeToChinese_Click"></Button>
+            <Button Content="切换英文" Click="ChangeToEnglish_Click"></Button>
+        </StackPanel>
+        <WPF:BrowserView Name="MyBrowserView" Grid.Row="1"/>
     </Grid>
 </Window>
