@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using DotNetBrowser.Browser;
 using DotNetBrowser.Handlers;
+using DotNetBrowser.Input.Keyboard;
+using DotNetBrowser.Input.Keyboard.Events;
 using DotNetBrowser.Navigation;
 using DotNetBrowser.Net;
 using DotNetBrowser.Net.Handlers;
@@ -22,13 +25,32 @@ public partial class MainWindow : Window
         CreateEngine(DotNetBrowser.Ui.Language.Chinese);
     }
 
-    private void CreateEngine(DotNetBrowser.Ui.Language language)
+    private void CreateEngine(DotNetBrowser.Ui.Language language, bool useRemoteDebuggingPort = false)
     {
         DisposeEngine();
-        _engine = EngineFactory.Create(new EngineOptions.Builder
+
+        EngineOptions CreateOption()
         {
-            Language = language
-        }.Build());
+            if (useRemoteDebuggingPort)
+            {
+                return new EngineOptions.Builder
+                {
+                    RenderingMode = RenderingMode.HardwareAccelerated,
+                    RemoteDebuggingPort = 9222,
+                    Language = language
+                }.Build();
+            }
+            else
+            {
+                return new EngineOptions.Builder
+                {
+                    RenderingMode = RenderingMode.HardwareAccelerated,
+                    Language = language
+                }.Build();
+            }
+        }
+
+        _engine = EngineFactory.Create(CreateOption());
 
         _browser = _engine.CreateBrowser();
         _browser.Navigation.LoadUrl(_currentUrl);
@@ -110,5 +132,56 @@ public partial class MainWindow : Window
         var str = new StringBuilder($"Load result: {loadResult}");
         str.AppendLine($"HTML: {_browser.MainFrame.Html}");
         Debug.WriteLine(str.ToString());
+    }
+
+    private void OpenRemoteDebuggingPort_Click(object sender, RoutedEventArgs e)
+    {
+        CreateEngine(DotNetBrowser.Ui.Language.EnglishUs, true);
+        var debugUrl = _browser!.DevTools.RemoteDebuggingUrl;
+        Clipboard.SetText(debugUrl);
+        MessageBox.Show($"调试地址已经复制到剪贴板：{debugUrl}");
+        _browser.DevTools.Show();
+    }
+
+    private void SimulateKey_Click(object sender, RoutedEventArgs e)
+    {
+        var keyboard = _browser!.Keyboard;
+        SimulateKey(keyboard, KeyCode.VkH, "H");
+        SimulateKey(keyboard, KeyCode.VkE, "e");
+        SimulateKey(keyboard, KeyCode.VkL, "l");
+        SimulateKey(keyboard, KeyCode.VkL, "l");
+        SimulateKey(keyboard, KeyCode.VkO, "o");
+        SimulateKey(keyboard, KeyCode.Space, " ");
+        // Simulate input of some non-letter characters.
+        SimulateKey(keyboard, KeyCode.Vk5, "%", new KeyModifiers { ShiftDown = true });
+        SimulateKey(keyboard, KeyCode.Vk2, "@", new KeyModifiers { ShiftDown = true });
+    }
+
+    private static void SimulateKey(IKeyboard keyboard, KeyCode key, string keyChar,
+        KeyModifiers? modifiers = null)
+    {
+        modifiers ??= new KeyModifiers();
+        var keyDownEventArgs = new KeyPressedEventArgs
+        {
+            KeyChar = keyChar,
+            VirtualKey = key,
+            Modifiers = modifiers
+        };
+
+        var keyPressEventArgs = new KeyTypedEventArgs
+        {
+            KeyChar = keyChar,
+            VirtualKey = key,
+            Modifiers = modifiers
+        };
+        var keyUpEventArgs = new KeyReleasedEventArgs
+        {
+            VirtualKey = key,
+            Modifiers = modifiers
+        };
+
+        keyboard.KeyPressed.Raise(keyDownEventArgs);
+        keyboard.KeyTyped.Raise(keyPressEventArgs);
+        keyboard.KeyReleased.Raise(keyUpEventArgs);
     }
 }
