@@ -189,7 +189,17 @@
         <ContentControl Content="{Binding SelectedAddressViewModel}" ContentTemplate="{StaticResource ContentTemplates.Address}" />
         <TextBlock Text="下面测试动态修改UniformGrid列数(Columns)" />
         <ItemsControl Style="{StaticResource Styles.ItemsControl.TestUniformGrid}" />
-        <TextBlock Text="------" />
+        <TextBlock Text="------下面显示ListBox，ListBoxItem内按钮" />
+        <ListBox ItemsSource="{Binding Address}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding}"></TextBlock>
+                        <Button Content="按一下试试" Command="{Binding ElementName=RootWindow,Path=DataContext.ShowMessageCommand}" CommandParameter="tt"></Button>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </StackPanel>
 
 </Window>
