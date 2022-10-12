@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using DotNetBrowser.Browser;
 using DotNetBrowser.Handlers;
 using DotNetBrowser.Input.Keyboard;
 using DotNetBrowser.Input.Keyboard.Events;
@@ -10,6 +13,8 @@ using DotNetBrowser.Net;
 using DotNetBrowser.Net.Handlers;
 using DotNetBrowser.Search.Handlers;
 using DotNetBrowser.Ui;
+using Clipboard = System.Windows.Clipboard;
+using MessageBox = System.Windows.MessageBox;
 
 namespace DotNetBrowserDemo;
 
@@ -220,5 +225,41 @@ public partial class MainWindow : Window
                               + result.SelectedMatch
                               + "/"
                               + result.NumberOfMatches);
+    }
+
+    private void Save_Click(object sender, RoutedEventArgs e)
+    {
+        var dialog = new FolderBrowserDialog();
+        var result = dialog.ShowDialog();
+
+        if (result == System.Windows.Forms.DialogResult.Cancel)
+        {
+            return;
+        }
+
+        var saveFolder = dialog.SelectedPath.Trim();
+        var filePath = Path.GetFullPath($"{saveFolder}\\index.html");
+        var dirPath = Path.GetFullPath($"{saveFolder}\\resources");
+        Directory.CreateDirectory(dirPath);
+
+        if (_browser?.SaveWebPage(filePath, dirPath, SavePageType.CompletePage) == true)
+        {
+            Console.WriteLine("The web page has been saved to " + filePath);
+        }
+        else
+        {
+            Console.WriteLine("Failed to save the web page to " + filePath);
+        }
+
+        OpenFolderAndSelectFile(saveFolder);
+    }
+
+    public static void OpenFolderAndSelectFile(string fileFullName)
+    {
+        var psi = new ProcessStartInfo("Explorer.exe")
+        {
+            Arguments = "/e,/select," + fileFullName
+        };
+        Process.Start(psi);
     }
 }

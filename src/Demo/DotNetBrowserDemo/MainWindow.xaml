@@ -26,6 +26,7 @@
             <TextBlock Text="查找文本" />
             <TextBox x:Name="TxtSearchWords" Width="150" />
             <Button Click="SearchWords_Click" Content="查找网页文本" />
+            <Button Click="Save_Click" Content="保存" />
         </WrapPanel>
         <WPF:BrowserView Name="MyBrowserView" Grid.Row="1" />
     </Grid>
