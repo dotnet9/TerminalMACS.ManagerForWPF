@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
-using DotNetBrowser.Browser;
 using DotNetBrowser.Handlers;
 using DotNetBrowser.Input.Keyboard;
 using DotNetBrowser.Input.Keyboard.Events;
-using DotNetBrowser.Navigation;
 using DotNetBrowser.Net;
 using DotNetBrowser.Net.Handlers;
+using DotNetBrowser.Search.Handlers;
+using DotNetBrowser.Ui;
 
 namespace DotNetBrowserDemo;
 
 public partial class MainWindow : Window
 {
-    private IEngine? _engine;
     private IBrowser? _browser;
     private string? _currentUrl = "www.baidu.com";
+    private IEngine? _engine;
 
     public MainWindow()
     {
@@ -25,29 +25,24 @@ public partial class MainWindow : Window
         CreateEngine(DotNetBrowser.Ui.Language.Chinese);
     }
 
-    private void CreateEngine(DotNetBrowser.Ui.Language language, bool useRemoteDebuggingPort = false)
+    private void CreateEngine(Language language, bool useRemoteDebuggingPort = false)
     {
         DisposeEngine();
 
         EngineOptions CreateOption()
         {
             if (useRemoteDebuggingPort)
-            {
                 return new EngineOptions.Builder
                 {
                     RenderingMode = RenderingMode.HardwareAccelerated,
                     RemoteDebuggingPort = 9222,
                     Language = language
                 }.Build();
-            }
-            else
+            return new EngineOptions.Builder
             {
-                return new EngineOptions.Builder
-                {
-                    RenderingMode = RenderingMode.HardwareAccelerated,
-                    Language = language
-                }.Build();
-            }
+                RenderingMode = RenderingMode.HardwareAccelerated,
+                Language = language
+            }.Build();
         }
 
         _engine = EngineFactory.Create(CreateOption());
@@ -55,21 +50,18 @@ public partial class MainWindow : Window
         _browser = _engine.CreateBrowser();
         _browser.Navigation.LoadUrl(_currentUrl);
 
-        this.MyBrowserView.InitializeFrom(_browser);
+        MyBrowserView.InitializeFrom(_browser);
     }
 
     private void DisposeEngine()
     {
-        if (_engine == null)
-        {
-            return;
-        }
+        if (_engine == null) return;
 
         _engine.Dispose();
         _engine = null;
     }
 
-    private void MainWindow_Closed(object? sender, System.EventArgs e)
+    private void MainWindow_Closed(object? sender, EventArgs e)
     {
         _engine?.Dispose();
     }
@@ -103,9 +95,9 @@ public partial class MainWindow : Window
         var handler = new Handler<InterceptRequestParameters, InterceptRequestResponse>(
             p =>
             {
-                var options = new UrlRequestJobOptions()
+                var options = new UrlRequestJobOptions
                 {
-                    Headers = new List<HttpHeader>()
+                    Headers = new List<HttpHeader>
                     {
                         new("Content-Type", "text/html", "charset=utf-8")
                     }
@@ -120,14 +112,14 @@ public partial class MainWindow : Window
                 return InterceptRequestResponse.Intercept(job);
             });
 
-        var engineOptions = new EngineOptions.Builder()
+        var engineOptions = new EngineOptions.Builder
         {
             Schemes = { { Scheme.Create("https"), handler } }
         }.Build();
 
         _engine = EngineFactory.Create(engineOptions);
         _browser = _engine.CreateBrowser();
-        this.MyBrowserView.InitializeFrom(_browser);
+        MyBrowserView.InitializeFrom(_browser);
         var loadResult = _browser.Navigation.LoadUrl("https://www.baidu.com").Result;
         var str = new StringBuilder($"Load result: {loadResult}");
         str.AppendLine($"HTML: {_browser.MainFrame.Html}");
@@ -183,5 +175,50 @@ public partial class MainWindow : Window
         keyboard.KeyPressed.Raise(keyDownEventArgs);
         keyboard.KeyTyped.Raise(keyPressEventArgs);
         keyboard.KeyReleased.Raise(keyUpEventArgs);
+    }
+
+    private void SearchWords_Click(object sender, RoutedEventArgs e)
+    {
+        var searchText = TxtSearchWords.Text;
+
+        IHandler<FindResultReceivedParameters> intermediateResultsHandler =
+            new Handler<FindResultReceivedParameters>(ProcessSearchResults);
+
+        Console.WriteLine("Find text (1/2)");
+        var textFinder = _browser.TextFinder;
+        var findResult =
+            textFinder.Find(searchText, null, intermediateResultsHandler)
+                .Result;
+
+        var selectedMatch = findResult.SelectedMatch;
+        var count = findResult.NumberOfMatches;
+        Console.WriteLine($"Find Result: {selectedMatch}/{count}");
+
+        Console.WriteLine("Find text (2/2)");
+        findResult = textFinder
+            .Find(searchText, null, intermediateResultsHandler)
+            .Result;
+
+        selectedMatch = findResult.SelectedMatch;
+        count = findResult.NumberOfMatches;
+        Console.WriteLine($"Find Result: {selectedMatch}/{count}");
+
+        textFinder.StopFinding();
+    }
+
+    private static void ProcessSearchResults(FindResultReceivedParameters args)
+    {
+        var result = args.FindResult;
+
+        if (args.IsSearchFinished)
+            Console.WriteLine("Found: "
+                              + result.SelectedMatch
+                              + "/"
+                              + result.NumberOfMatches);
+        else
+            Console.WriteLine("Search in progress... Found "
+                              + result.SelectedMatch
+                              + "/"
+                              + result.NumberOfMatches);
     }
 }
