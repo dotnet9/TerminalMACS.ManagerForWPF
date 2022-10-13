@@ -26,7 +26,10 @@
             <TextBlock Text="查找文本" />
             <TextBox x:Name="TxtSearchWords" Width="150" />
             <Button Click="SearchWords_Click" Content="查找网页文本" />
-            <Button Click="Save_Click" Content="保存" />
+            <Button Click="Save_Click" Content="保存为网页" />
+            <Button Click="SaveToImage_Click" Content="保存为图片" />
+            <Button Click="SwitchColor_Click" Content="切换配色" />
+            <Button Click="ScrollbarHide_Click" Content="滚动条显隐" />
         </WrapPanel>
         <WPF:BrowserView Name="MyBrowserView" Grid.Row="1" />
     </Grid>

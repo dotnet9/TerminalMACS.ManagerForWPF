@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,6 +17,7 @@ using DotNetBrowser.Net;
 using DotNetBrowser.Net.Handlers;
 using DotNetBrowser.Search.Handlers;
 using DotNetBrowser.Ui;
+using Bitmap = DotNetBrowser.Ui.Bitmap;
 using Clipboard = System.Windows.Clipboard;
 using MessageBox = System.Windows.MessageBox;
 
@@ -261,5 +266,53 @@ public partial class MainWindow : Window
             Arguments = "/e,/select," + fileFullName
         };
         Process.Start(psi);
+    }
+
+    private void SaveToImage_Click(object sender, RoutedEventArgs e)
+    {
+        var dialog = new FolderBrowserDialog();
+        var result = dialog.ShowDialog();
+
+        if (result == System.Windows.Forms.DialogResult.Cancel)
+        {
+            return;
+        }
+
+        var imgPath = Path.GetFullPath($"{dialog.SelectedPath}\\screenshot.png");
+        var image = _browser?.TakeImage();
+
+        var bitmap = ToBitmap(image);
+        bitmap.Save(imgPath, ImageFormat.Png);
+        OpenFolderAndSelectFile(imgPath);
+    }
+
+    public static System.Drawing.Bitmap ToBitmap(DotNetBrowser.Ui.Bitmap bitmap)
+    {
+        var width = (int)bitmap.Size.Width;
+        var height = (int)bitmap.Size.Height;
+
+        var data = bitmap.Pixels.ToArray();
+        var bmp = new System.Drawing.Bitmap(width,
+            height,
+            PixelFormat.Format32bppRgb);
+
+        var bmpData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height),
+            ImageLockMode.WriteOnly, bmp.PixelFormat);
+
+        Marshal.Copy(data, 0, bmpData.Scan0, data.Length);
+        bmp.UnlockBits(bmpData);
+        return bmp;
+    }
+
+    private void SwitchColor_Click(object sender, RoutedEventArgs e)
+    {
+        _browser!.Settings.PreferredColorScheme = _browser.Settings.PreferredColorScheme == PreferredColorScheme.Dark
+            ? PreferredColorScheme.Light
+            : PreferredColorScheme.Dark;
+    }
+
+    private void ScrollbarHide_Click(object sender, RoutedEventArgs e)
+    {
+        _browser!.Settings.ScrollbarsHidden = !_browser.Settings.ScrollbarsHidden;
     }
 }
