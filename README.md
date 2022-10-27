@@ -54,7 +54,7 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 官方网站
 
 - Dotnet9：[https://dotnet9.com](https://dotnet9.com)
-- 快乐玩转技术：[https://lequ.co](https://lequ.co)
+- 快乐玩转技术：[https://dotnet9.com](https://dotnet9.com)
 
 ## 5. 项目界面截图
 
@@ -108,7 +108,7 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 
 - 参考视频：[C# WPF UI | How to Design Dark Mode Wallet Payment Dashboard in WPF](https://www.youtube.com/watch?v=i2cN_JfP9fw)
 - 参考代码：[WPF-Dark-Wallet-Payment](https://github.com/sajjad-z/WPF-Dark-Wallet-Payment)
-- 介绍文章：[WPF|黑暗模式的钱包支付仪表盘界面设计](https://lequ.co/2022/05/wpf%e9%bb%91%e6%9a%97%e6%a8%a1%e5%bc%8f%e7%9a%84%e9%92%b1%e5%8c%85%e6%94%af%e4%bb%98%e4%bb%aa%e8%a1%a8%e7%9b%98%e7%95%8c%e9%9d%a2%e8%ae%be%e8%ae%a1/)
+- 介绍文章：[WPF|黑暗模式的钱包支付仪表盘界面设计](https://dotnet9.com/2022/05/wpf%e9%bb%91%e6%9a%97%e6%a8%a1%e5%bc%8f%e7%9a%84%e9%92%b1%e5%8c%85%e6%94%af%e4%bb%98%e4%bb%aa%e8%a1%a8%e7%9b%98%e7%95%8c%e9%9d%a2%e8%ae%be%e8%ae%a1/)
 
 ![](./assets/TestDemos/WalletPayment.gif)
 
@@ -117,14 +117,14 @@ ECharts：[pie-doughnut](https://echarts.apache.org/examples/zh/editor.html?c=pi
 
 - 参考视频：[C# WPF UI | How to Design Beautiful Social Media Info Dashboard in WPF](https://www.youtube.com/watch?v=ZqEj7BcXE9M)
 - 参考代码：[WPF-Social-Media-Info-Dashboard](https://github.com/sajjad-z/WPF-Social-Media-Info-Dashboard)
-- 介绍文章：[WPF|如何在 WPF 中设计漂亮的社交媒体信息仪表板](https://lequ.co/2022/05/wpf%e5%a6%82%e4%bd%95%e5%9c%a8-wpf-%e4%b8%ad%e8%ae%be%e8%ae%a1%e6%bc%82%e4%ba%ae%e7%9a%84%e7%a4%be%e4%ba%a4%e5%aa%92%e4%bd%93%e4%bf%a1%e6%81%af%e4%bb%aa%e8%a1%a8%e6%9d%bf/)
+- 介绍文章：[WPF|如何在 WPF 中设计漂亮的社交媒体信息仪表板](https://dotnet9.com/2022/05/wpf%e5%a6%82%e4%bd%95%e5%9c%a8-wpf-%e4%b8%ad%e8%ae%be%e8%ae%a1%e6%bc%82%e4%ba%ae%e7%9a%84%e7%a4%be%e4%ba%a4%e5%aa%92%e4%bd%93%e4%bf%a1%e6%81%af%e4%bb%aa%e8%a1%a8%e6%9d%bf/)
 
 ![](./assets/TestDemos/Dashboar3.gif)
 
 ## 2022年05月10日 一个比较摩登的登录界面
 
 - 参考视频：[C# WPF UI | How to Design Modern Login Page in WPF](https://www.youtube.com/watch?v=PoPUB1_q2kE&t=907s)
-- 介绍文章：[WPF|分享一个登录界面设计](https://lequ.co/2022/05/wpf%e5%88%86%e4%ba%ab%e4%b8%80%e4%b8%aa%e7%99%bb%e5%bd%95%e7%95%8c%e9%9d%a2%e8%ae%be%e8%ae%a1/)
+- 介绍文章：[WPF|分享一个登录界面设计](https://dotnet9.com/2022/05/wpf%e5%88%86%e4%ba%ab%e4%b8%80%e4%b8%aa%e7%99%bb%e5%bd%95%e7%95%8c%e9%9d%a2%e8%ae%be%e8%ae%a1/)
 
 ![](./assets/TestDemos/ModernLogin.gif)
 
