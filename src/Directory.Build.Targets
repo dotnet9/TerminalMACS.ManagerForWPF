@@ -1,0 +1,21 @@
+﻿<Project>
+
+	<!-- AssemblyInfo -->
+	<PropertyGroup>
+		<Company>Dotnet9</Company>
+		<Product>Dotnet9</Product>
+		<Copyright>Copyright © 2019-$([System.DateTime]::Today.ToString(yyyy)) dotnet9.com. All rights reserved.</Copyright>
+		<Description>Dotnet9, A blog site sharing .NET technologies.</Description>
+
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+		<Version>0.1.0.0</Version>
+		<AssemblyVersion>$(Version)</AssemblyVersion>
+		<FileVersion>$(Version)</FileVersion>
+		<InformationalVersion>$(Version)</InformationalVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Page Update="@(Page)" SubType="Designer" Generator="MSBuild:Compile" />
+	</ItemGroup>
+
+</Project>
