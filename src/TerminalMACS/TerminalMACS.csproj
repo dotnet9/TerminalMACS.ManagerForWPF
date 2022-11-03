@@ -51,7 +51,7 @@
   <ItemGroup>
     <PackageReference Include="AduSkin" Version="1.1.1.9" />
     <PackageReference Include="HandyControl" Version="3.3.0" />
-    <PackageReference Include="IdentityModel.OidcClient" Version="5.0.0" />
+    <PackageReference Include="IdentityModel.OidcClient" Version="5.1.0" />
     <PackageReference Include="Prism.Unity" Version="8.1.97" />
   </ItemGroup>
 

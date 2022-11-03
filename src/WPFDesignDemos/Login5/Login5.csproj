@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MaterialDesignColors" Version="2.0.7-ci255" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.6.0-ci255" />
+    <PackageReference Include="MaterialDesignColors" Version="2.1.0-ci350" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.7.0-ci350" />
   </ItemGroup>
 
   <ItemGroup>

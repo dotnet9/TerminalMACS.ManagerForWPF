@@ -8,8 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="LogDashboard" Version="1.4.8" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0-preview.6.22324.4" />
-    <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0-rc.2.22472.3" />
+    <PackageReference Include="Serilog.AspNetCore" Version="6.1.0-dev-00285" />
   </ItemGroup>
 
 </Project>
