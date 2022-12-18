@@ -155,3 +155,5 @@ src/Demo/GeckoWpf/.vs/
 src/publish/
 *.vs/
 src/Demo/WpfAppForZoomInAndZoomOut/Publish/
+src/Demo/WpfThemeDemo/obj/
+src/Demo/WpfThemeDemo/Publish/
