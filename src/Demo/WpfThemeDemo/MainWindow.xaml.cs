@@ -38,16 +38,30 @@ public partial class MainWindow : Window
     private void MainWindow_Closed(object? sender, EventArgs e)
     {
         _timer.Stop();
+        if (this.moveHookStatus != 0)
+        {
+            UnhookWindowsHookEx(this.moveHookStatus);
+            this.moveHookStatus = 0;
+        }
     }
 
     private void MainWindow_Loaded(object sender, RoutedEventArgs e)
     {
         _timer.Start();
+
+        if (this.moveHookStatus == 0)
+        {
+            this.MoveBoardHookProcedure = new boardProc(this.MouseHookProc);
+            this.moveHookStatus = SetWindowsHookEx(WH_MOUSE_LL, this.MoveBoardHookProcedure, IntPtr.Zero, 0);
+        }
     }
 
     private void Timer_Tick(object? sender, EventArgs e)
     {
-        var isMouseDown = GetCursorPos(out var point);
+        //var isMouseDown = GetCursorPos(out var point);
+        // 上面的取点在操作系统分辨率为175%等比例缩放时会有问题，所以使用下面的方法
+        var point = this.currentPoint;
+        
         var color = GetPixelColor((int)point.X, (int)point.Y);
         TxtColorPoint.Text = $"x:{point.X}   y:{point.Y}";
         BorderColor.Background = new SolidColorBrush(color);
@@ -83,5 +97,41 @@ public partial class MainWindow : Window
     {
         public int X;
         public int Y;
+    }
+
+
+    private int moveHookStatus = 0;
+    internal const int WM_MOUSEMOVE = 0x200;
+    internal const int WH_MOUSE_LL = 14;
+    internal delegate int boardProc(int nCode, int wParam, IntPtr lParam);
+    private boardProc MoveBoardHookProcedure;
+    private PointStruct currentPoint;
+    private int MouseHookProc(int nCode, int wParam, IntPtr lParam)
+    {
+        MouseHookStruct MyMouseHookStruct = (MouseHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseHookStruct));
+        switch (wParam)
+        {
+            case WM_MOUSEMOVE:
+            {
+                this.currentPoint = MyMouseHookStruct.pt;
+                break;
+            }
+
+        }
+        return CallNextHookEx(this.moveHookStatus, nCode, wParam, lParam);
+    }
+    [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+    internal static extern int CallNextHookEx(int idHook, int nCode, int wParam, IntPtr lParam);
+    [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+    internal static extern int SetWindowsHookEx(int idHook, boardProc lpfn, IntPtr hInstance, int threadId);
+    [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+    internal static extern bool UnhookWindowsHookEx(int idHook);
+    [StructLayout(LayoutKind.Sequential)]
+    internal class MouseHookStruct
+    {
+        public PointStruct pt;
+        public int hwnd;
+        public int wHitTestCode;
+        public int dwExtraInfo;
     }
 }
