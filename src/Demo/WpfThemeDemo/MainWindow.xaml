@@ -1,13 +1,12 @@
 ﻿<Window
     x:Class="WpfThemeDemo.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="测试切换主题色"
     Width="800"
     Height="450"
-    Background="{DynamicResource Brushes.DefaultBackgroundSolidColorBrush}"
     mc:Ignorable="d">
     <Window.Resources>
         <SolidColorBrush
@@ -32,6 +31,25 @@
                 FontWeight="Bold"
                 Foreground="{DynamicResource Brushes.LightSolidColorBrushTest}"
                 Text="主题" />
+        </Grid>
+        <Grid Margin="5" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button
+                Width="150"
+                Height="50"
+                Padding="5"
+                Content="开始取色" />
+            <StackPanel Grid.Column="1">
+                <Border
+                    x:Name="BorderColor"
+                    Height="50"
+                    BorderBrush="{DynamicResource Brushes.PrimaryTextSolidColorBrush}"
+                    BorderThickness="1" />
+                <TextBlock x:Name="TxtColorPoint" Text="x: 45" />
+            </StackPanel>
         </Grid>
     </StackPanel>
 </Window>
