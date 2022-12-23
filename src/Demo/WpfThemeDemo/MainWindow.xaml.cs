@@ -1,19 +1,28 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Security;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
+using Vanara.PInvoke;
+using Color = System.Windows.Media.Color;
+using PixelFormat = System.Drawing.Imaging.PixelFormat;
+using Point = System.Drawing.Point;
 
 namespace WpfThemeDemo;
 
 public partial class MainWindow : Window
 {
-    private const int MousePullInfoIntervalInMs = 10;
-    private readonly DispatcherTimer _timer = new DispatcherTimer();
+    internal const int WM_MOUSEMOVE = 0x200;
+    private readonly DispatcherTimer _timer = new();
+    private POINT _currentPoint;
+    private User32.HookProc? _moveBoardHookProcedure;
+    private User32.SafeHHOOK? _moveHookStatus;
 
     public MainWindow()
     {
         InitializeComponent();
-        _timer.Interval = TimeSpan.FromMilliseconds(MousePullInfoIntervalInMs);
+        _timer.Interval = TimeSpan.FromMilliseconds(10);
         _timer.Tick += Timer_Tick;
         Loaded += MainWindow_Loaded;
         Closed += MainWindow_Closed;
@@ -38,10 +47,10 @@ public partial class MainWindow : Window
     private void MainWindow_Closed(object? sender, EventArgs e)
     {
         _timer.Stop();
-        if (this.moveHookStatus != 0)
+        if (this._moveHookStatus != null)
         {
-            UnhookWindowsHookEx(this.moveHookStatus);
-            this.moveHookStatus = 0;
+            User32.UnhookWindowsHookEx(this._moveHookStatus);
+            this._moveHookStatus = null;
         }
     }
 
@@ -49,89 +58,51 @@ public partial class MainWindow : Window
     {
         _timer.Start();
 
-        if (this.moveHookStatus == 0)
+        if (this._moveHookStatus == null)
         {
-            this.MoveBoardHookProcedure = new boardProc(this.MouseHookProc);
-            this.moveHookStatus = SetWindowsHookEx(WH_MOUSE_LL, this.MoveBoardHookProcedure, IntPtr.Zero, 0);
+            this._moveBoardHookProcedure = this.MouseHookProc;
+            this._moveHookStatus = User32.SetWindowsHookEx(User32.HookType.WH_MOUSE_LL, this._moveBoardHookProcedure);
         }
     }
 
     private void Timer_Tick(object? sender, EventArgs e)
     {
-        //var isMouseDown = GetCursorPos(out var point);
+        //var isMouseDown = User32.GetCursorPos(out var point);
         // 上面的取点在操作系统分辨率为175%等比例缩放时会有问题，所以使用下面的方法
-        var point = this.currentPoint;
-        
-        var color = GetPixelColor((int)point.X, (int)point.Y);
+        var point = this._currentPoint;
+        var color = GetColorFromPoint(new Point(point.X, point.Y));
         TxtColorPoint.Text = $"x:{point.X}   y:{point.Y}";
         BorderColor.Background = new SolidColorBrush(color);
     }
 
-
-    [DllImport("user32.dll")]
-    static extern IntPtr GetDC(IntPtr hwnd);
-
-    [DllImport("user32.dll")]
-    static extern Int32 ReleaseDC(IntPtr hwnd, IntPtr hdc);
-
-    [DllImport("gdi32.dll")]
-    static extern uint GetPixel(IntPtr hdc, int nXPos, int nYPos);
-
-    public static Color GetPixelColor(int x, int y)
+    [SecuritySafeCritical]
+    internal static Color GetColorFromPoint(Point point)
     {
-        IntPtr hdc = GetDC(IntPtr.Zero);
-        uint pixel = GetPixel(hdc, x, y);
-        ReleaseDC(IntPtr.Zero, hdc);
-        Color color = Color.FromRgb(
-            (byte)(pixel & 0x000000FF),
-            (byte)((pixel & 0x0000FF00) >> 8),
-            (byte)((pixel & 0x00FF0000) >> 16));
-        return color;
-    }
-
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    internal static extern bool GetCursorPos(out PointStruct pt);
-
-    [StructLayout(LayoutKind.Sequential)]
-    internal struct PointStruct
-    {
-        public int X;
-        public int Y;
-    }
-
-
-    private int moveHookStatus = 0;
-    internal const int WM_MOUSEMOVE = 0x200;
-    internal const int WH_MOUSE_LL = 14;
-    internal delegate int boardProc(int nCode, int wParam, IntPtr lParam);
-    private boardProc MoveBoardHookProcedure;
-    private PointStruct currentPoint;
-    private int MouseHookProc(int nCode, int wParam, IntPtr lParam)
-    {
-        MouseHookStruct MyMouseHookStruct = (MouseHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseHookStruct));
-        switch (wParam)
+        var pixel = new Bitmap(1, 1, PixelFormat.Format32bppArgb);
+        using (var gDest = Graphics.FromImage(pixel))
         {
-            case WM_MOUSEMOVE:
+            using (var gSrc = Graphics.FromHwnd(IntPtr.Zero))
             {
-                this.currentPoint = MyMouseHookStruct.pt;
-                break;
+                var hSrcDC = gSrc.GetHdc();
+                var hDC = gDest.GetHdc();
+                Gdi32.BitBlt(hDC, 0, 0, 1, 1, hSrcDC, point.X, point.Y, Gdi32.RasterOperationMode.SRCCOPY);
+                gDest.ReleaseHdc();
+                gSrc.ReleaseHdc();
             }
-
         }
-        return CallNextHookEx(this.moveHookStatus, nCode, wParam, lParam);
+
+        var color = pixel.GetPixel(0, 0);
+        return Color.FromArgb(color.A, color.R, color.G, color.B);
     }
-    [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
-    internal static extern int CallNextHookEx(int idHook, int nCode, int wParam, IntPtr lParam);
-    [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
-    internal static extern int SetWindowsHookEx(int idHook, boardProc lpfn, IntPtr hInstance, int threadId);
-    [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
-    internal static extern bool UnhookWindowsHookEx(int idHook);
-    [StructLayout(LayoutKind.Sequential)]
-    internal class MouseHookStruct
+
+    private IntPtr MouseHookProc(int nCode, IntPtr wParam, IntPtr lParam)
     {
-        public PointStruct pt;
-        public int hwnd;
-        public int wHitTestCode;
-        public int dwExtraInfo;
+        var mouseHookStruct = Marshal.PtrToStructure<User32.MOUSEHOOKSTRUCT>(lParam);
+        if (wParam.ToInt32() == WM_MOUSEMOVE)
+        {
+            _currentPoint = mouseHookStruct.pt;
+        }
+
+        return User32.CallNextHookEx(this._moveHookStatus, nCode, wParam, lParam);
     }
 }
