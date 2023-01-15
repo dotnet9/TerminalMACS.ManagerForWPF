@@ -14,8 +14,6 @@ public partial class MainWindow : Window
         InitializeComponent();
     }
 
-    private double PathWidth = 20;
-
     /// <summary>
     /// 正转
     /// </summary>
@@ -23,9 +21,9 @@ public partial class MainWindow : Window
     /// <param name="e"></param>
     private void btnAnimo_Click(object sender, RoutedEventArgs e)
     {
-        AnimationByPath(this.cvsMain, this.path1, PathWidth, false, 3);
-        AnimationByPath(this.cvsMain, this.path2, PathWidth, false, 3);
-        AnimationByPath(this.cvsMain, this.path3, PathWidth, false, 3);
+        AnimationByPath(this.cvsMain, this.path1, this.path1.StrokeThickness, false, 3);
+        AnimationByPath(this.cvsMain, this.path2, this.path2.StrokeThickness, false, 3);
+        AnimationByPath(this.cvsMain, this.path3, this.path3.StrokeThickness, false, 3);
 
         StoryByOrient(this.imgFan, 0, 3);
     }
@@ -36,9 +34,9 @@ public partial class MainWindow : Window
     /// <param name="e"></param>
     private void btnReback_Click(object sender, RoutedEventArgs e)
     {
-        AnimationByPath(this.cvsMain, this.path1, PathWidth, true, 3);
-        AnimationByPath(this.cvsMain, this.path2, PathWidth, true, 3);
-        AnimationByPath(this.cvsMain, this.path3, PathWidth, true, 3);
+        AnimationByPath(this.cvsMain, this.path1, this.path1.StrokeThickness, true, 3);
+        AnimationByPath(this.cvsMain, this.path2, this.path2.StrokeThickness, true, 3);
+        AnimationByPath(this.cvsMain, this.path3, this.path3.StrokeThickness, true, 3);
 
         StoryByOrient(this.imgFan, 1, 3);
     }
