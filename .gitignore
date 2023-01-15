@@ -157,3 +157,5 @@ src/publish/
 src/Demo/WpfAppForZoomInAndZoomOut/Publish/
 src/Demo/WpfThemeDemo/obj/
 src/Demo/WpfThemeDemo/Publish/
+src/Demo/PathAnimationDemo/obj/
+src/Demo/PathAnimationDemo/Publish/

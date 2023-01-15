@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33209.295
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathAnimationDemo", "PathAnimationDemo.csproj", "{B660AA0C-0040-44F6-9FAD-BD1F6519E6E7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B660AA0C-0040-44F6-9FAD-BD1F6519E6E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B660AA0C-0040-44F6-9FAD-BD1F6519E6E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B660AA0C-0040-44F6-9FAD-BD1F6519E6E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B660AA0C-0040-44F6-9FAD-BD1F6519E6E7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5BD2E65E-D2BF-4A37-819A-24C7B6979D84}
+	EndGlobalSection
+EndGlobal

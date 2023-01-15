@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="fan-inner.png" />
+    <None Remove="fan.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="fan-inner.png" />
+    <Resource Include="fan.png" />
+  </ItemGroup>
+
+</Project>
