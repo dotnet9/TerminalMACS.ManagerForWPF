@@ -6,7 +6,20 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/WpfThemeDemo;component/Resources/Light.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/Dotnet9WPFControls;component/Themes/Dotnet9WPFControls.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <Style
+                x:Key="Styles.ButtonDemo"
+                BasedOn="{StaticResource MainButtonStyle}"
+                TargetType="{x:Type Button}">
+                <Setter Property="MinWidth" Value="100" />
+                <Setter Property="Height" Value="30" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Padding" Value="5" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
