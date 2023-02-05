@@ -159,3 +159,5 @@ src/Demo/WpfThemeDemo/obj/
 src/Demo/WpfThemeDemo/Publish/
 src/Demo/PathAnimationDemo/obj/
 src/Demo/PathAnimationDemo/Publish/
+src/Demo/WorkflowTest/Publish/
+src/Demo/WorkflowTest/WorkflowTest/obj/
