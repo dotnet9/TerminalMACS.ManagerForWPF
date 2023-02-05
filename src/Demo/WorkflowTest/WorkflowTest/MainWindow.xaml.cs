@@ -23,8 +23,8 @@ public partial class MainWindow : Window
             _serviceProvider = ConfigureServices();
             var host1 = _serviceProvider.GetService<IWorkflowHost>();
 
-            host1.RegisterWorkflow<HelloWorkflow>();
-            host1.RegisterWorkflow<HelloWorkflow2>();
+            host1?.RegisterWorkflow<HelloWorkflow>();
+            host1?.RegisterWorkflow<HelloWorkflow2>();
         }
 
 
