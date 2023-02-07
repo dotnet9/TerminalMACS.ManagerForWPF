@@ -161,3 +161,6 @@ src/Demo/PathAnimationDemo/obj/
 src/Demo/PathAnimationDemo/Publish/
 src/Demo/WorkflowTest/Publish/
 src/Demo/WorkflowTest/WorkflowTest/obj/
+src/Demo/WorkflowTest/RAPTest2/bin/
+src/Demo/WorkflowTest/RAPTest2/obj/
+src/Demo/WorkflowTest/RPATest/obj/
