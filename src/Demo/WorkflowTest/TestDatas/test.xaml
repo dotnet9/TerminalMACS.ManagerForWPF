@@ -2,6 +2,11 @@
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
  xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=System"
+ xmlns:s1="clr-namespace:System;assembly=mscorlib"
+ xmlns:s2="clr-namespace:System;assembly=System.Core"
+ xmlns:s3="clr-namespace:System;assembly=System.ServiceModel"
+ xmlns:s4="clr-namespace:System;assembly=System.Runtime.WindowsRuntime"
  xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities"
  xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
  xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
@@ -12,17 +17,36 @@
   <x:Members>
     <x:Property Name="argument1" Type="InArgument(x:String)" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>275.5,225.5</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>305,730</sap:VirtualizedContainerService.HintSize>
   <mva:VisualBasic.Settings>Assembly references and imported namespaces for internal implementation</mva:VisualBasic.Settings>
-  <Sequence sap:VirtualizedContainerService.HintSize="235.5,185.5">
+  <Sequence sap:VirtualizedContainerService.HintSize="265,690">
     <Sequence.Variables>
-      <Variable x:TypeArguments="sd:DataTable" Name="dt" />
+      <Variable x:TypeArguments="x:String" Name="str" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <WriteLine sap:VirtualizedContainerService.HintSize="213.5,61.5" Text="[str]" />
+    <Assign sap:VirtualizedContainerService.HintSize="243,60">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[str]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String" xml:space="preserve"> Hello World!</InArgument>
+      </Assign.Value>
+    </Assign>
+    <WriteLine sap:VirtualizedContainerService.HintSize="243,61.5" Text="[str]" />
+    <Assign sap:VirtualizedContainerService.HintSize="243,60">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[str]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[str.Trim()]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <WriteLine sap:VirtualizedContainerService.HintSize="243,61.5" Text="[str]" />
+    <WriteLine sap:VirtualizedContainerService.HintSize="243,61.5" Text="[str.Substring(0,5)]" />
+    <WriteLine sap:VirtualizedContainerService.HintSize="243,61.5" Text="[str.Replace(&quot;World&quot;, &quot;Hello&quot;)]" />
   </Sequence>
 </Activity>

@@ -5,20 +5,17 @@ namespace RAPTest2;
 
 public class RedirectToOutputTextWriter : TextWriter
 {
-    private MainWindow mainWindow;
+    private readonly MainWindow mainWindow;
 
     public RedirectToOutputTextWriter(MainWindow mainWindow)
     {
         this.mainWindow = mainWindow;
     }
 
-    public override Encoding Encoding
-    {
-        get { return Encoding.UTF8; }
-    }
+    public override Encoding Encoding => Encoding.UTF8;
 
     public override void WriteLine(string value)
     {
-        this.mainWindow.OutputLine(value);
+        mainWindow.OutputLine(value);
     }
 }
