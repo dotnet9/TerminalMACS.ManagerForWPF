@@ -167,3 +167,11 @@ src/Demo/WorkflowTest/RPATest/obj/
 src/Demo/WorkflowTest/packages/
 src/Demo/WorkflowTest/RibbonDockSample/bin/
 src/Demo/WorkflowTest/RibbonDockSample/obj/
+src/Demo/WorkflowTest/WorkflowActivitiesSample/InstallNupkgSample/bin/
+src/Demo/WorkflowTest/WorkflowActivitiesSample/InstallNupkgSample/obj/
+src/Demo/WorkflowTest/WorkflowActivitiesSample/MiniRPAWithActivities/bin/
+src/Demo/WorkflowTest/WorkflowActivitiesSample/MiniRPAWithActivities/obj/
+src/Demo/WorkflowTest/WorkflowActivitiesSample/packages/
+src/Demo/WorkflowTest/WorkflowActivitiesSample/Publish/
+src/Demo/WorkflowTest/WorkflowActivitiesSample/RPA.Sample.Activities/obj/
+src/Demo/WorkflowTest/WorkflowActivitiesSample/WorkflowActivitiesSample/obj/

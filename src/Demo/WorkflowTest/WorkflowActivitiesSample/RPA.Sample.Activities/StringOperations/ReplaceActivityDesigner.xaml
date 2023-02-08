@@ -1,0 +1,61 @@
+﻿<sap:ActivityDesigner x:Class="RPA.Sample.Activities.StringOperations.ReplaceActivityDesigner"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
+    xmlns:sapc="clr-namespace:System.Activities.Presentation.Converters;assembly=System.Activities.Presentation"
+    xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation">
+    <sap:ActivityDesigner.Icon>
+        <DrawingBrush>
+            <DrawingBrush.Drawing>
+                <!--注意：此处的图标为在设计器面板中显示的图标，并不是工具箱中的图标-->
+                <ImageDrawing ImageSource="pack://application:,,,/RPA.Sample.Activities;Component/Resources/StringOperations/Designer/ReplaceActivity.ico">
+                    <ImageDrawing.Rect>
+                        <Rect Location="0,0" Size="16,16"></Rect>
+                    </ImageDrawing.Rect>
+                </ImageDrawing>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+    </sap:ActivityDesigner.Icon>
+    <sap:ActivityDesigner.Resources>
+        <sapc:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />
+
+        <!--活动折叠时的显示内容-->
+        <DataTemplate x:Key="Collapsed">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" Foreground="#FF6D6D6D" Text="双击以查看"/>
+        </DataTemplate>
+        
+        <!--活动展开时的显示内容-->
+        <DataTemplate x:Key="Expanded">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>源字符串：</TextBlock>
+                    <sapv:ExpressionTextBox OwnerActivity="{Binding Path=ModelItem}" ExpressionType="s:String" HintText="源字符串，必须用双引号括起来"
+                                Expression="{Binding Path=ModelItem.SourceStr,Mode=TwoWay,Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In}" Margin="10,0,0,0" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>旧字符串：</TextBlock>
+                    <sapv:ExpressionTextBox OwnerActivity="{Binding Path=ModelItem}" ExpressionType="s:String" HintText="旧字符串，必须用双引号括起来"
+                                Expression="{Binding Path=ModelItem.OldStr,Mode=TwoWay,Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In}" Margin="10,0,0,0" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>新字符串：</TextBlock>
+                    <sapv:ExpressionTextBox OwnerActivity="{Binding Path=ModelItem}" ExpressionType="s:String" HintText="新字符串，必须用双引号括起来"
+                                Expression="{Binding Path=ModelItem.NewStr,Mode=TwoWay,Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In}" Margin="10,0,0,0" />
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+        <Style x:Key="ExpandOrCollapsedStyle" TargetType="{x:Type ContentPresenter}">
+            <Setter Property="ContentTemplate" Value="{DynamicResource Expanded}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=ShowExpanded}" Value="false">
+                    <Setter Property="ContentTemplate" Value="{DynamicResource Collapsed}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </sap:ActivityDesigner.Resources>
+    <Grid>
+        <!--Content="{Binding}"等效于{Binding Path=.}，指绑定到当前的DataContext-->
+        <ContentPresenter Style="{DynamicResource ExpandOrCollapsedStyle}" Content="{Binding}" />
+    </Grid>
+</sap:ActivityDesigner>

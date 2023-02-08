@@ -1,0 +1,266 @@
+﻿<Window x:Class="MiniRPAWithActivities.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sapt="clr-namespace:System.Activities.Presentation.Toolbox;assembly=System.Activities.Presentation"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:MiniRPAWithActivities"
+        mc:Ignorable="d"
+        Title="迷你RPA(自定义活动演示)" Height="800" Width="1000" WindowStartupLocation="CenterScreen" >
+    <Window.Resources>
+        <!--定义字符串资源，值为活动组件程序集唯一标识-->
+        <sys:String x:Key="System.Activities">System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</sys:String>
+        <sys:String x:Key="System.Activities.Core.Presentation">System.Activities.Core.Presentation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</sys:String>
+        <sys:String x:Key="RPA.Sample.Activities">RPA.Sample.Activities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</sys:String>
+    </Window.Resources>
+
+    <DockPanel>
+
+        <!--主菜单栏-->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="文件">
+                <MenuItem Header="新建" >
+                    <MenuItem Name="Sequence" Header="序列图" Click="Sequence_Click" />
+                    <MenuItem Name="Flowchart" Header="流程图" Click="Flowchart_Click" />
+                    <MenuItem Name="StateMachine" Header="状态机" Click="StateMachine_Click" />
+                </MenuItem>
+                <MenuItem Name="Open" Header="打开" Click="Open_Click" />
+                <MenuItem Name="Save" Header="保存" Click="Save_Click" />
+                <MenuItem Name="SaveAs" Header="另存为" Click="SaveAs_Click" />
+            </MenuItem>
+            <MenuItem Header="执行">
+                <MenuItem Name="Run" Header="运行" Click="Run_Click" />
+            </MenuItem>
+        </Menu>
+
+        <!--工具栏-->
+        <ToolBar DockPanel.Dock="Top">
+            <Button Content="打开" Click="Open_Click" ></Button>
+            <Button Content="保存" Click="Save_Click" ></Button>
+            <Separator />
+            <Button Content="运行" Click="Run_Click" ></Button>
+        </ToolBar>
+
+        <!--状态栏-->
+        <StatusBar DockPanel.Dock="Bottom" Height="25">
+            <TextBlock>就续</TextBlock>
+        </StatusBar>
+
+        <!--输出面板-->
+        <Border DockPanel.Dock="Bottom" Height="200" BorderThickness="1" BorderBrush="LightGray">
+            <TextBox Name="OutputTextBox" AcceptsReturn="True" IsReadOnly="True"
+                 TextWrapping="Wrap"
+                 VerticalScrollBarVisibility="Auto"
+                 HorizontalScrollBarVisibility="Auto"/>
+        </Border>
+
+        <!--组件面板-->
+        <Border DockPanel.Dock="Left" Width="200" BorderThickness="1" BorderBrush="LightGray">
+            <sapt:ToolboxControl>
+                <sapt:ToolboxCategory CategoryName="流程图">
+                    <sapt:ToolboxItemWrapper AssemblyName="{StaticResource System.Activities}" DisplayName="流程图" >
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.Flowchart
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="流程分支">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.FlowSwitch`1
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="流程决策">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.FlowDecision
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+                </sapt:ToolboxCategory>
+
+                <sapt:ToolboxCategory CategoryName="状态机">
+                    <sapt:ToolboxItemWrapper AssemblyName="{StaticResource System.Activities}" DisplayName="状态机" >
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.StateMachine
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="开始状态">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.State
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities.Core.Presentation}" DisplayName="结束状态">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Core.Presentation.FinalState
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+                </sapt:ToolboxCategory>
+
+                <sapt:ToolboxCategory CategoryName="调试">
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="输出行">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.WriteLine
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+                </sapt:ToolboxCategory>
+
+                <sapt:ToolboxCategory CategoryName="流程控制">
+                    <sapt:ToolboxItemWrapper AssemblyName="{StaticResource System.Activities}" DisplayName="序列" >
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.Sequence
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="赋值">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.Assign
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="延时">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.Delay
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="If条件">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.If
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="While循环">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.While
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="Do While循环">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.DoWhile
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="Switch分支">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.Switch`1
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="取消范围">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.CancellationScope
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="并行">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.Parallel
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="并行遍历">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.ParallelForEach`1
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="选取">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.Pick
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="选取分支">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.PickBranch
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                </sapt:ToolboxCategory>
+
+
+                <sapt:ToolboxCategory CategoryName="集合">
+                    <sapt:ToolboxItemWrapper AssemblyName="{StaticResource System.Activities}" DisplayName="添加项" >
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.AddToCollection`1
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="是否存在">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.ExistsInCollection`1
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="移除项">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.RemoveFromCollection`1
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="清空">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.ClearCollection`1
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+                </sapt:ToolboxCategory>
+
+                <sapt:ToolboxCategory CategoryName="异常处理">
+                    <sapt:ToolboxItemWrapper AssemblyName="{StaticResource System.Activities}" DisplayName="异常捕获" >
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.TryCatch
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="终止工作流">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.TerminateWorkflow
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="抛出异常">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.Throw
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+
+                    <sapt:ToolboxItemWrapper  AssemblyName="{StaticResource System.Activities}" DisplayName="再次抛出异常">
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            System.Activities.Statements.Rethrow
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+                </sapt:ToolboxCategory>
+
+
+                <sapt:ToolboxCategory CategoryName="自定义活动">
+                    <sapt:ToolboxItemWrapper AssemblyName="{StaticResource RPA.Sample.Activities}" DisplayName="字符串替换" >
+                        <sapt:ToolboxItemWrapper.ToolName>
+                            RPA.Sample.Activities.StringOperations.ReplaceActivity
+                        </sapt:ToolboxItemWrapper.ToolName>
+                    </sapt:ToolboxItemWrapper>
+                </sapt:ToolboxCategory>
+                
+            </sapt:ToolboxControl>
+        </Border>
+
+        <TabControl DockPanel.Dock="Right" TabStripPlacement="Bottom">
+            <TabItem Header="属性">
+                <!--属性面板-->
+                <Border Name="PropertyBorder"  Width="250" BorderThickness="1" BorderBrush="LightGray" />
+            </TabItem>
+            <TabItem Header="大纲">
+                <!--大纲面板-->
+                <Border Name="OutlineBorder"  Width="250" BorderThickness="1" BorderBrush="LightGray" />
+            </TabItem>
+        </TabControl>
+
+        <!--设计面板-->
+        <Border Name="DesignerBorder" BorderThickness="1" BorderBrush="LightGray">
+
+        </Border>
+
+    </DockPanel>
+</Window>

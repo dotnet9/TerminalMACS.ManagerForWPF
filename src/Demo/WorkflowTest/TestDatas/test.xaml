@@ -1,52 +1,23 @@
-<Activity mc:Ignorable="sads sap" x:Class="Main" this:Main.argument1="测试参数"
+<Activity mc:Ignorable="sads sap" x:Class="Main" sap:VirtualizedContainerService.HintSize="275.5,373.5" mva:VisualBasic.Settings="Assembly references and imported namespaces for internal implementation"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
  xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
- xmlns:s="clr-namespace:System;assembly=System"
- xmlns:s1="clr-namespace:System;assembly=mscorlib"
- xmlns:s2="clr-namespace:System;assembly=System.Core"
- xmlns:s3="clr-namespace:System;assembly=System.ServiceModel"
- xmlns:s4="clr-namespace:System;assembly=System.Runtime.WindowsRuntime"
+ xmlns:rsas="clr-namespace:RPA.Sample.Activities.StringOperations;assembly=RPA.Sample.Activities"
  xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities"
  xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
  xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
  xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
- xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
- xmlns:this="clr-namespace:"
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <x:Members>
-    <x:Property Name="argument1" Type="InArgument(x:String)" />
-  </x:Members>
-  <sap:VirtualizedContainerService.HintSize>305,730</sap:VirtualizedContainerService.HintSize>
-  <mva:VisualBasic.Settings>Assembly references and imported namespaces for internal implementation</mva:VisualBasic.Settings>
-  <Sequence sap:VirtualizedContainerService.HintSize="265,690">
+  <Sequence sap:VirtualizedContainerService.HintSize="235.5,333.5">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="str" />
+      <Variable x:TypeArguments="x:String" Default="[result]" Name="result" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign sap:VirtualizedContainerService.HintSize="243,60">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[str]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:String" xml:space="preserve"> Hello World!</InArgument>
-      </Assign.Value>
-    </Assign>
-    <WriteLine sap:VirtualizedContainerService.HintSize="243,61.5" Text="[str]" />
-    <Assign sap:VirtualizedContainerService.HintSize="243,60">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[str]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[str.Trim()]</InArgument>
-      </Assign.Value>
-    </Assign>
-    <WriteLine sap:VirtualizedContainerService.HintSize="243,61.5" Text="[str]" />
-    <WriteLine sap:VirtualizedContainerService.HintSize="243,61.5" Text="[str.Substring(0,5)]" />
-    <WriteLine sap:VirtualizedContainerService.HintSize="243,61.5" Text="[str.Replace(&quot;World&quot;, &quot;Hello&quot;)]" />
+    <rsas:ReplaceActivity sap:VirtualizedContainerService.HintSize="213.5,108" NewStr="您" OldStr="你" Result="[result]" SourceStr="你好" />
+    <WriteLine sap:VirtualizedContainerService.HintSize="213.5,61.5" Text="[result]" />
   </Sequence>
 </Activity>
