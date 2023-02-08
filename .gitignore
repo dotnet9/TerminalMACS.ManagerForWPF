@@ -175,3 +175,5 @@ src/Demo/WorkflowTest/WorkflowActivitiesSample/packages/
 src/Demo/WorkflowTest/WorkflowActivitiesSample/Publish/
 src/Demo/WorkflowTest/WorkflowActivitiesSample/RPA.Sample.Activities/obj/
 src/Demo/WorkflowTest/WorkflowActivitiesSample/WorkflowActivitiesSample/obj/
+src/Demo/WorkflowTest/TrackingParticipantSample/TrackingParticipantSample/bin/
+src/Demo/WorkflowTest/TrackingParticipantSample/TrackingParticipantSample/obj/
