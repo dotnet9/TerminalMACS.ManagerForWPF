@@ -1,0 +1,17 @@
+﻿<Window x:Class="RibbonDockSample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RibbonDockSample"
+        mc:Ignorable="d"
+        Title="Ribbon Dock示例" Height="350" Width="525" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel Margin="10">
+            <Button Name="FluentRibbonButton" Height="30" Click="FluentRibbonButton_Click">Fluent.Ribbon示例</Button>
+            <Button Name="AvalonDockButton" Height="30" Margin="0,10,0,0" Click="AvalonDockButton_Click">Avalon Dock示例</Button>
+            <Button Name="FluentRibbonAndAvalonDockButton" Height="30"  Margin="0,10,0,0" Click="FluentRibbonAndAvalonDockButton_Click">Fluent.Ribbon + Avalon Dock示例</Button>
+            <Button Name="ActiproRibbonDockButton" Height="30" Margin="0,10,0,0" Click="ActiproRibbonDockButton_Click">商业界面库Actipro Software的Ribbon+Dock示例</Button>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,121 @@
+﻿<ribbon:RibbonWindow x:Class="RibbonDockSample.Windows.ActiproRibbonDockWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ribbon="http://schemas.actiprosoftware.com/winfx/xaml/ribbon"
+        xmlns:themes="http://schemas.actiprosoftware.com/winfx/xaml/themes"
+        xmlns:views="clr-namespace:RibbonDockSample.Views"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:local="clr-namespace:RibbonDockSample.Windows"
+        mc:Ignorable="d"
+        ApplicationName="商业界面库Actipro Software的Ribbon+Dock示例" Height="600" Width="800" WindowState="Maximized">
+    <DockPanel>
+        <ribbon:Ribbon FontFamily="Microsoft YaHei" DockPanel.Dock="Top" TabIndex="0"
+			ApplicationButtonLabel="主页"
+			QuickAccessToolBarLocation="Above"
+			IsCustomizeQuickAccessToolBarMenuItemVisible="False"
+			IsQuickAccessToolBarCustomizationEnabled="False"
+			IsMinimized="False"
+			ApplicationButtonScreenTipHeader="{x:Null}"
+			FontSize="13" >
+            <ribbon:Ribbon.TabPanelItems>
+                <ribbon:ToggleMinimizationButton />
+            </ribbon:Ribbon.TabPanelItems>
+            <ribbon:Ribbon.ApplicationMenu>
+                <ribbon:Backstage>
+                    <ribbon:Button Label="打开" StaysOpenOnClick="True" />
+                    <ribbon:Button Label="关闭" StaysOpenOnClick="True" />
+                    <ribbon:Separator />
+                    <ribbon:BackstageTab Header="开始">
+                        <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black">这里是开始页面</TextBlock>
+                    </ribbon:BackstageTab>
+                    <ribbon:BackstageTab Header="工具">
+                        <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black">这里是工具页面</TextBlock>
+                    </ribbon:BackstageTab>
+                    <ribbon:BackstageTab Header="设置">
+                        <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black">这里是设置页面</TextBlock>
+                    </ribbon:BackstageTab>
+                    <ribbon:BackstageTab Header="帮助">
+                        <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black">这里是帮助页面</TextBlock>
+                    </ribbon:BackstageTab>
+                </ribbon:Backstage>
+
+            </ribbon:Ribbon.ApplicationMenu>
+            <ribbon:Ribbon.Tabs>
+                <ribbon:Tab Label="设计" >
+                    <ribbon:Group Label="工作流">
+                        <ribbon:PopupButton ImageSourceLarge="pack://application:,,,/Resources/Image/Ribbon/new.png" Label="新建" ToolTip="新建序列图、流程图或状态机">
+                            <ribbon:Menu>
+                                <ribbon:Button ImageSourceLarge="pack://application:,,,/Resources/Image/Ribbon/sequence.png" Label="序列图" ToolTip="序列图（Ctrl+N）" />
+                                <ribbon:Button ImageSourceLarge="pack://application:,,,/Resources/Image/Ribbon/flowchart.png" Label="流程图" ToolTip="流程图" />
+                                <ribbon:Button ImageSourceLarge="pack://application:,,,/Resources/Image/Ribbon/state-machine.png" Label="状态机" ToolTip="状态机" />
+                            </ribbon:Menu>
+                        </ribbon:PopupButton>
+                        <ribbon:SplitButton ImageSourceLarge="pack://application:,,,/Resources/Image/Ribbon/save.png" Label="保存" ToolTip="保存（Ctrl+S）" >
+                            <ribbon:Menu>
+                                <ribbon:Button ImageSourceLarge="pack://application:,,,/Resources/Image/Ribbon/save-as.png" Label="另存为" ToolTip="另存为" />
+                                <ribbon:Button ImageSourceLarge="pack://application:,,,/Resources/Image/Ribbon/save-all.png" Label="全部保存" ToolTip="全部保存（Ctrl+Shift+S）" />
+                            </ribbon:Menu>
+                        </ribbon:SplitButton>
+                        <ribbon:Button ImageSourceLarge="pack://application:,,,/Resources/Image/Ribbon/run.png" Label="运行" ToolTip="运行（F5）" />
+                    </ribbon:Group>
+                    <ribbon:Group Label="编辑" >
+                        <ribbon:StackPanel  ItemVariantBehavior="MediumThenSmallWhenSmall">
+                            <ribbon:Button ImageSourceSmall="pack://application:,,,/Resources/Image/Ribbon/cut.png" Label="剪切" ToolTip="剪切（Ctrl+X）" Focusable="False"/>
+                            <ribbon:Button ImageSourceSmall="pack://application:,,,/Resources/Image/Ribbon/copy.png" Label="复制" ToolTip="复制（Ctrl+C）" Focusable="False"/>
+                            <ribbon:Button ImageSourceSmall="pack://application:,,,/Resources/Image/Ribbon/paste.png" Label="粘贴" ToolTip="粘贴（Ctrl+V）" Focusable="False"/>
+                        </ribbon:StackPanel>
+                    </ribbon:Group>
+                    <ribbon:Group Label="部署" >
+                        <ribbon:Button ImageSourceSmall="pack://application:,,,/Resources/Image/Ribbon/publish.png" Label="发布" ToolTip="发布项目"  />
+                    </ribbon:Group>
+                </ribbon:Tab>
+                <ribbon:Tab Label="调试" >
+                    <ribbon:Group Label="启动" >
+                        <ribbon:Button ImageSourceSmall="pack://application:,,,/Resources/Image/Ribbon/run.png" Label="运行" ToolTip="运行（F5）" />
+                        <ribbon:Button ImageSourceSmall="pack://application:,,,/Resources/Image/Ribbon/stop.png" Label="停止" ToolTip="停止（F12）" />
+
+                        <ribbon:Button ImageSourceSmall="pack://application:,,,/Resources/Image/Ribbon/debug.png" Label="调试" ToolTip="调试（F7）" />
+                        
+                    </ribbon:Group>
+                    <ribbon:Group Label="调试" >
+                        <ribbon:StackPanel  ItemVariantBehavior="MediumThenSmallWhenSmall">
+                            <ribbon:Button ImageSourceSmall="pack://application:,,,/Resources/Image/Ribbon/break.png" Label="中断" ToolTip="中断执行（暂停）" />
+                            <ribbon:Button ImageSourceSmall="pack://application:,,,/Resources/Image/Ribbon/step-into.png" Label="逐语句" ToolTip="逐语句（F11）" />
+                            <ribbon:Button ImageSourceSmall="pack://application:,,,/Resources/Image/Ribbon/step-over.png" Label="逐过程" ToolTip="逐过程（Shift+F11）" />
+                        </ribbon:StackPanel>
+                        <ribbon:Button ImageSourceSmall="pack://application:,,,/Resources/Image/Ribbon/validate.png" Label="校验" ToolTip="检查错误（F8）" />
+                        <ribbon:SplitButton ImageSourceLarge="pack://application:,,,/Resources/Image/Ribbon/breakpoints.png" Label="断点" ToolTip="切换断点（F9）" >
+                            <ribbon:Menu>
+                                <ribbon:Button ImageSourceLarge="pack://application:,,,/Resources/Image/Ribbon/breakpoints.png" Label="切换断点" ToolTip="切换断点（F9）" />
+                                <ribbon:Button ImageSourceLarge="pack://application:,,,/Resources/Image/Ribbon/remove-all-breakpoints.png" Label="清除所有断点" ToolTip="清除所有断点（Shift+F9）" />
+                            </ribbon:Menu>
+                        </ribbon:SplitButton>
+                        <ribbon:PopupButton ImageSourceLarge="pack://application:,,,/Resources/Image/Ribbon/options.png" Label="选项" ToolTip="选项">
+                            <ribbon:Menu>
+                                <MenuItem Header="记录活动" IsCheckable="True" IsChecked="True" />
+                            </ribbon:Menu>
+                        </ribbon:PopupButton>
+                    </ribbon:Group>
+                    <ribbon:Group Label="日志" >
+                        <ribbon:Button ImageSourceSmall="pack://application:,,,/Resources/Image/Ribbon/open-logs.png" Label="打开日志" ToolTip="打开日志文件所在目录（Ctrl+L）" />
+                    </ribbon:Group>
+                </ribbon:Tab>
+            </ribbon:Ribbon.Tabs>
+
+        </ribbon:Ribbon>
+
+        <!--停靠视图展示-->
+        <views:ActiproDocksView />
+
+    </DockPanel>
+
+    <ribbon:RibbonWindow.StatusBar>
+        <StatusBar Height="20" FocusManager.IsFocusScope="True" Style="{DynamicResource {x:Static themes:SharedResourceKeys.StatusBarStyleKey}}"
+				   FontSize="{x:Static ribbon:RibbonMeasurements.UIFontSize}">
+            <TextBlock>就绪</TextBlock>
+        </StatusBar>
+    </ribbon:RibbonWindow.StatusBar>
+</ribbon:RibbonWindow>
+

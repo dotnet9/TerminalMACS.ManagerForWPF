@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="RibbonDockSample.Views.ActiproDocksView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:docking="http://schemas.actiprosoftware.com/winfx/xaml/docking"
+             xmlns:local="clr-namespace:RibbonDockSample.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <docking:DockSite ToolWindowsHaveTabImages="True"
+                          CanDocumentWindowsFloat="True"
+			              AreNewTabsInsertedBeforeExistingTabs="False"
+			              AutoHidePerContainer="False"
+			              AreDocumentWindowsDestroyedOnClose="True"
+			              UseHostedPopups="False"
+			              IsLiveSplittingEnabled="False"
+			              CanDocumentWindowsDragToLinkedDockSites="False"
+			              CanToolWindowsBecomeDocuments="False"
+						  >
+            <docking:SplitContainer Orientation="Vertical">
+                <docking:SplitContainer Orientation="Horizontal">
+                    <docking:ToolWindowContainer>
+                        <docking:ToolWindow Title="项目" ContainerDockedSize="330, 800" 
+										ImageSource="pack://application:,,,/Resources/Image/Dock/project.png" CanClose="False">
+                            <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" >这里是项目视图</TextBlock>
+                        </docking:ToolWindow>
+                        <docking:ToolWindow Title="活动" ContainerDockedSize="330, 800" 
+										ImageSource="pack://application:,,,/Resources/Image/Dock/activities.png" CanClose="False">
+                            <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" >这里是活动视图</TextBlock>
+                        </docking:ToolWindow>
+                        <docking:ToolWindow Title="代码片断" ContainerDockedSize="330, 800" 
+										ImageSource="pack://application:,,,/Resources/Image/Dock/snippets.png" CanClose="False">
+                            <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" >这里是代码片断视图</TextBlock>
+                        </docking:ToolWindow>
+                    </docking:ToolWindowContainer>
+                    <docking:Workspace>
+                        <docking:TabbedMdiHost>
+                            <docking:TabbedMdiContainer>
+                                <docking:DocumentWindow Title="文档1" TabToolTip="文档1的提示信息" ImageSource="pack://application:,,,/Resources/Image/Dock/document.png">
+                                    <TextBox VerticalScrollBarVisibility="Auto" AcceptsReturn="True" AcceptsTab="True" AutoWordSelection="True" TextWrapping="Wrap">文档1的内容</TextBox>
+                                </docking:DocumentWindow>
+                                <docking:DocumentWindow Title="文档2" TabToolTip="文档2的提示信息" ImageSource="pack://application:,,,/Resources/Image/Dock/document.png">
+                                    <TextBox VerticalScrollBarVisibility="Auto" AcceptsReturn="True" AcceptsTab="True" AutoWordSelection="True" TextWrapping="Wrap">文档2的内容</TextBox>
+                                </docking:DocumentWindow>
+                            </docking:TabbedMdiContainer>
+                        </docking:TabbedMdiHost>
+                    </docking:Workspace>
+
+                    <docking:ToolWindowContainer>
+                        <docking:ToolWindow Title="属性" ContainerDockedSize="430, 800" 
+										ImageSource="pack://application:,,,/Resources/Image/Dock/property.png" CanClose="False">
+                            <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black">这里是属性视图</TextBlock>
+                        </docking:ToolWindow>
+                        <docking:ToolWindow Title="大纲" ContainerDockedSize="430, 800" 
+										ImageSource="pack://application:,,,/Resources/Image/Dock/outline.png" CanClose="False">
+                            <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black">这里是大纲视图</TextBlock>
+                        </docking:ToolWindow>
+                    </docking:ToolWindowContainer>
+                </docking:SplitContainer>
+                <docking:ToolWindowContainer>
+                    <docking:ToolWindow Title="输出" ContainerDockedSize="800, 230" 
+										ImageSource="pack://application:,,,/Resources/Image/Dock/output.png" CanClose="False">
+                        <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black">这里是输出视图</TextBlock>
+                    </docking:ToolWindow>
+                </docking:ToolWindowContainer>
+            </docking:SplitContainer>
+        </docking:DockSite>
+    </Grid>
+</UserControl>

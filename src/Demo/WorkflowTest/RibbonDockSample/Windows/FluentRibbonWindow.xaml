@@ -1,0 +1,201 @@
+﻿<fluent:RibbonWindow x:Class="RibbonDockSample.Windows.FluentRibbonWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RibbonDockSample.Windows"
+        xmlns:fluent="clr-namespace:Fluent;assembly=Fluent"
+        mc:Ignorable="d"
+        Title="Fluent.Ribbon示例" Height="600" Width="800" WindowState="Maximized">
+    <fluent:RibbonWindow.Resources>
+        <!--Fluent.Ribbon样式-->
+        <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Generic.xaml" />
+    </fluent:RibbonWindow.Resources>
+    <!--快捷键绑定-->
+    <fluent:RibbonWindow.InputBindings>
+        <!--<KeyBinding Command="{Binding SaveCommand}" Key="S" Modifiers="Ctrl" />
+        <KeyBinding Command="{Binding SaveAllCommand}" Key="S" Modifiers="Ctrl+Shift" />
+        <KeyBinding Command="{Binding NewSequenceDocumentCommand}" Key="N" Modifiers="Ctrl" />
+        <KeyBinding Command="{Binding RunWorkflowCommand}" Key="F5" />
+
+        <KeyBinding Command="{Binding StopWorkflowCommand}" Key="F12" />
+        <KeyBinding Command="{Binding StepIntoCommand}" Key="F11" />
+        <KeyBinding Command="{Binding StepOverCommand}" Key="F11" Modifiers="Shift" />
+        <KeyBinding Command="{Binding ValidateWorkflowCommand}" Key="F8" />
+        <KeyBinding Command="{Binding ToggleBreakpointCommand}" Key="F9" />
+        <KeyBinding Command="{Binding RemoveAllBreakpointsCommand}" Key="F9" Modifiers="Shift" />
+        <KeyBinding Command="{Binding OpenLogsCommand}" Key="L" Modifiers="Ctrl" />-->
+    </fluent:RibbonWindow.InputBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <fluent:Ribbon AutomaticStateManagement="True" >
+            <fluent:Ribbon.Menu>
+                <fluent:Backstage Header="开始" >
+                    <fluent:BackstageTabControl SelectedIndex="3" IsBackButtonVisible="True">
+                        <fluent:Button Header="打开" IsDefinitive="False" />
+                        <fluent:Button Header="关闭" IsDefinitive="False" />
+                        
+                        <fluent:SeparatorTabItem />
+
+                        <fluent:BackstageTabItem Header="开始">
+                            <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black">这里是开始页面</TextBlock>
+                        </fluent:BackstageTabItem>
+                        <fluent:BackstageTabItem Header="工具">
+                            <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black">这里是工具页面</TextBlock>
+                        </fluent:BackstageTabItem>
+                        <fluent:BackstageTabItem Header="设置" >
+                            <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black">这里是设置页面</TextBlock>
+                        </fluent:BackstageTabItem>
+                        <fluent:BackstageTabItem Header="帮助" >
+                            <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black">这里是帮助页面</TextBlock>
+                        </fluent:BackstageTabItem>
+                    </fluent:BackstageTabControl>
+                </fluent:Backstage>
+            </fluent:Ribbon.Menu>
+            <fluent:Ribbon.ToolBarItems>
+                <fluent:Button Size="Small" Icon="pack://application:,,,/Resources/Image/Ribbon/help.png" ToolTip="帮助" />
+            </fluent:Ribbon.ToolBarItems>
+            <fluent:Ribbon.QuickAccessItems>
+                <fluent:QuickAccessMenuItem Target="{Binding Source={x:Reference saveButton}}" />
+                <fluent:QuickAccessMenuItem Target="{Binding Source={x:Reference runButton}}" />
+                <fluent:QuickAccessMenuItem Target="{Binding Source={x:Reference stopButton}}" />
+            </fluent:Ribbon.QuickAccessItems>
+            <fluent:RibbonTabItem Header="设计">
+                <fluent:RibbonGroupBox Header="文件" >
+                    <fluent:DropDownButton  Header="新建"
+                                           LargeIcon="pack://application:,,,/Resources/Image/Ribbon/new.png"
+                                           IsEnabled="True"
+                                           VerticalAlignment="Top">
+                        <fluent:MenuItem Header="序列图" 
+                                         Icon="pack://application:,,,/Resources/Image/Ribbon/sequence.png"
+                                         ToolTip="序列图（Ctrl+N）"
+                                        />
+                        <fluent:MenuItem Header="流程图" 
+                                         Icon="pack://application:,,,/Resources/Image/Ribbon/flowchart.png"
+                                         ToolTip="流程图"
+                                        />
+                        <fluent:MenuItem Header="状态机" 
+                                         Icon="pack://application:,,,/Resources/Image/Ribbon/state-machine.png"
+                                         ToolTip="状态机"
+                                        />
+                    </fluent:DropDownButton>
+                    <fluent:SplitButton x:Name="saveButton" Header="保存" ToolTip="保存（Ctrl+S）"
+                                        Icon="pack://application:,,,/Resources/Image/Ribbon/save.png"
+                                        LargeIcon="pack://application:,,,/Resources/Image/Ribbon/save.png"
+                                        FocusManager.IsFocusScope="True">
+                        <fluent:MenuItem Header="另存为" 
+                                         Icon="pack://application:,,,/Resources/Image/Ribbon/save-as.png"
+                                        />
+                        <fluent:MenuItem Header="全部保存" ToolTip="全部保存（Ctrl+Shift+S）"
+                                         Icon="pack://application:,,,/Resources/Image/Ribbon/save-all.png"
+                                        />
+                    </fluent:SplitButton>
+                    <fluent:Button Header="运行"
+                                   LargeIcon="pack://application:,,,/Resources/Image/Ribbon/run.png"
+                                   ToolTip="运行（F5）"
+                                   />
+                </fluent:RibbonGroupBox>
+                <fluent:RibbonGroupBox Header="编辑">
+                    <fluent:Button Header="剪切"
+                                   Icon="pack://application:,,,/Resources/Image/Ribbon/cut.png"
+                                   SizeDefinition="Middle,Small"
+                                   FocusManager.IsFocusScope="True" >
+                    </fluent:Button>
+                    <fluent:Button Header="复制"
+                                   Icon="pack://application:,,,/Resources/Image/Ribbon/copy.png"
+                                   SizeDefinition="Middle,Small"
+                                   FocusManager.IsFocusScope="True" >
+                    </fluent:Button>
+                    <fluent:Button Header="粘贴"
+                                   Icon="pack://application:,,,/Resources/Image/Ribbon/paste.png"
+                                   SizeDefinition="Middle,Small"
+                                   FocusManager.IsFocusScope="True" >
+                    </fluent:Button>
+                </fluent:RibbonGroupBox>
+               
+                <fluent:RibbonGroupBox Header="部署">
+                    <fluent:Button Header="发布" 
+                                   LargeIcon="pack://application:,,,/Resources/Image/Ribbon/publish.png"
+                                   ToolTip="打包发布"
+                                   />
+                </fluent:RibbonGroupBox>
+            </fluent:RibbonTabItem>
+            <fluent:RibbonTabItem Header="执行">
+                <fluent:RibbonGroupBox Header="启动">
+                    <fluent:Button Header="运行" x:Name="runButton" 
+                                   Icon="pack://application:,,,/Resources/Image/Ribbon/run.png"
+                                   LargeIcon="pack://application:,,,/Resources/Image/Ribbon/run.png"
+                                   ToolTip="运行（F5）"
+                                   />
+                    <fluent:Button Header="停止" x:Name="stopButton"
+                                   Icon="pack://application:,,,/Resources/Image/Ribbon/stop.png"
+                                   LargeIcon="pack://application:,,,/Resources/Image/Ribbon/stop.png"
+                                   ToolTip="停止（F12）"
+                                   />
+                </fluent:RibbonGroupBox>
+                <fluent:RibbonGroupBox Header="调试" >
+                    <fluent:Button Header="中断"
+                                   Icon="pack://application:,,,/Resources/Image/Ribbon/break.png"
+                                   SizeDefinition="Middle,Small"
+                                   ToolTip="中断执行（暂停）"
+                                   FocusManager.IsFocusScope="True" >
+                    </fluent:Button>
+                    <fluent:Button Header="逐语句"
+                                   Icon="pack://application:,,,/Resources/Image/Ribbon/step-into.png"
+                                   SizeDefinition="Middle,Small"
+                                   ToolTip="逐语句（F11）"
+                                   FocusManager.IsFocusScope="True" >
+                    </fluent:Button>
+                    <fluent:Button Header="逐过程"
+                                   Icon="pack://application:,,,/Resources/Image/Ribbon/step-over.png"
+                                   SizeDefinition="Middle,Small"
+                                   ToolTip="逐过程（Shift+F11）"
+                                   FocusManager.IsFocusScope="True" >
+                    </fluent:Button>
+                    <fluent:Button Header="校验"
+                                   Icon="pack://application:,,,/Resources/Image/Ribbon/validate.png"
+                                   LargeIcon="pack://application:,,,/Resources/Image/Ribbon/validate.png"
+                                   ToolTip="检查错误（F8）"
+                                   />
+                    <fluent:SplitButton Header="断点" ToolTip="切换断点（F9）"
+                                        Icon="pack://application:,,,/Resources/Image/Ribbon/breakpoints.png"
+                                        LargeIcon="pack://application:,,,/Resources/Image/Ribbon/breakpoints.png"
+                                        FocusManager.IsFocusScope="True">
+                        <fluent:MenuItem Header="切换断点"  ToolTip="切换断点（F9）"
+                                         Icon="pack://application:,,,/Resources/Image/Ribbon/breakpoints.png"
+                                        />
+                        <fluent:MenuItem Header="清除所有断点" ToolTip="清除所有断点（Shift+F9）"
+                                         Icon="pack://application:,,,/Resources/Image/Ribbon/remove-all-breakpoints.png"
+                                        />
+                    </fluent:SplitButton>
+
+ 
+                </fluent:RibbonGroupBox>
+
+                <fluent:RibbonGroupBox Header="日志">
+                    <fluent:Button Header="打开日志"
+                                   Icon="pack://application:,,,/Resources/Image/Ribbon/open-logs.png"
+                                   LargeIcon="pack://application:,,,/Resources/Image/Ribbon/open-logs.png"
+                                   ToolTip="打开日志（Ctrl+L）"
+                                   />
+                </fluent:RibbonGroupBox>
+
+            </fluent:RibbonTabItem>
+        </fluent:Ribbon>
+
+        <Grid Grid.Row="1">
+            
+        </Grid>
+        <fluent:StatusBar HorizontalAlignment="Stretch"
+                          VerticalAlignment="Bottom"
+                          Grid.Row="2">
+            <fluent:StatusBarItem HorizontalAlignment="Left" Margin="5,0,0,0">
+                <TextBlock>就绪</TextBlock>
+            </fluent:StatusBarItem>
+        </fluent:StatusBar>
+    </Grid>
+</fluent:RibbonWindow>

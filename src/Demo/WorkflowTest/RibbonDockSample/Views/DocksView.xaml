@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="RibbonDockSample.Views.DocksView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
+             xmlns:local="clr-namespace:RibbonDockSample.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <xcad:DockingManager AllowMixedOrientation="True" BorderThickness="0" >
+            <xcad:DockingManager.Theme>
+                <!--AvalonDock样式更改-->
+                <xcad:GenericTheme />
+            </xcad:DockingManager.Theme>
+
+            <xcad:LayoutRoot>
+                <xcad:LayoutPanel Orientation="Horizontal">
+                    <xcad:LayoutAnchorablePaneGroup DockWidth="350" DockMinWidth="150">
+                        <xcad:LayoutAnchorablePane>
+                            <xcad:LayoutAnchorable
+                                       Title="项目"
+                                       IconSource="pack://application:,,,/Resources/Image/Dock/project.png"
+                                       CanHide="False"
+                                       CanClose="False">
+                                <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black">这里是项目视图</TextBlock>
+                            </xcad:LayoutAnchorable>
+                            <xcad:LayoutAnchorable
+                                       Title="活动"
+                                       IconSource="pack://application:,,,/Resources/Image/Dock/activities.png"
+                                       CanHide="False"
+                                       CanClose="False">
+                                <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black">这里是活动视图</TextBlock>
+                            </xcad:LayoutAnchorable>
+                            <xcad:LayoutAnchorable
+                                       Title="代码片断"
+                                       IconSource="pack://application:,,,/Resources/Image/Dock/snippets.png"
+                                       CanHide="False"
+                                       CanClose="False">
+                                <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black">这里是代码片断视图</TextBlock>
+                            </xcad:LayoutAnchorable>
+                        </xcad:LayoutAnchorablePane>
+                    </xcad:LayoutAnchorablePaneGroup>
+                    <xcad:LayoutDocumentPaneGroup>
+                        <xcad:LayoutDocumentPane >
+                            <xcad:LayoutDocument Title="文档1" ToolTip="文档1的提示信息" >
+                                <TextBox VerticalScrollBarVisibility="Auto" AcceptsReturn="True" AcceptsTab="True" AutoWordSelection="True" TextWrapping="Wrap">文档1的内容</TextBox>
+                            </xcad:LayoutDocument>
+                            <xcad:LayoutDocument Title="文档2" ToolTip="文档2的提示信息" >
+                                <TextBox VerticalScrollBarVisibility="Auto" AcceptsReturn="True" AcceptsTab="True" AutoWordSelection="True" TextWrapping="Wrap">文档2的内容</TextBox>
+                            </xcad:LayoutDocument>
+                        </xcad:LayoutDocumentPane>
+                    </xcad:LayoutDocumentPaneGroup>
+                    <xcad:LayoutAnchorablePaneGroup DockWidth="300" DockMinWidth="150">
+                        <xcad:LayoutAnchorablePane>
+                            <xcad:LayoutAnchorable
+                                       Title="属性"
+                                       IconSource="pack://application:,,,/Resources/Image/Dock/property.png"
+                                       CanHide="False"
+                                       CanClose="False">
+                                <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black">这里是属性视图</TextBlock>
+                            </xcad:LayoutAnchorable>
+                            <xcad:LayoutAnchorable
+                                       Title="大纲"
+                                       IconSource="pack://application:,,,/Resources/Image/Dock/outline.png"
+                                       CanHide="False"
+                                       CanClose="False">
+                                <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black">这里是大纲视图</TextBlock>
+                            </xcad:LayoutAnchorable>
+                        </xcad:LayoutAnchorablePane>
+                    </xcad:LayoutAnchorablePaneGroup>
+                </xcad:LayoutPanel>
+
+                <xcad:LayoutRoot.BottomSide >
+                    <xcad:LayoutAnchorSide>
+                        <xcad:LayoutAnchorGroup>
+                            <xcad:LayoutAnchorable Title="输出"
+                                     CanHide="False"
+                                     CanClose="False"
+                                     IconSource="pack://application:,,,/Resources/Image/Dock/output.png" AutoHideMinHeight="200" CanAutoHide="True">
+                                <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black">这里是输出视图</TextBlock>
+                            </xcad:LayoutAnchorable>
+                        </xcad:LayoutAnchorGroup>
+                    </xcad:LayoutAnchorSide>
+                </xcad:LayoutRoot.BottomSide>
+            </xcad:LayoutRoot>
+        </xcad:DockingManager>
+    </Grid>
+</UserControl>

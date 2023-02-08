@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPATest", "RPATest\RPATest.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAPTest2", "RAPTest2\RAPTest2.csproj", "{ACB54B5B-6A95-41D1-A469-9C423697FAD4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RibbonDockSample", "RibbonDockSample\RibbonDockSample.csproj", "{C109E5C4-3836-4313-AE84-736F39D72731}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{ACB54B5B-6A95-41D1-A469-9C423697FAD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACB54B5B-6A95-41D1-A469-9C423697FAD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACB54B5B-6A95-41D1-A469-9C423697FAD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C109E5C4-3836-4313-AE84-736F39D72731}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C109E5C4-3836-4313-AE84-736F39D72731}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C109E5C4-3836-4313-AE84-736F39D72731}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C109E5C4-3836-4313-AE84-736F39D72731}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
