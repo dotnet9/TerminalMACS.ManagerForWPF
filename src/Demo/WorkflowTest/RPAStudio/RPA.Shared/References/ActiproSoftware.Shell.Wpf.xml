@@ -1,0 +1,1126 @@
+<?xml version="1.0"?><doc><assembly><name>ActiproSoftware.Shell.Wpf</name></assembly><members><member name="T:ActiproSoftware.Windows.Themes.ShellThemeCatalog"><summary>
+            A theme catalog that describes the theme group name implementations and available themed resource dictionaries within this assembly.
+            </summary></member><member name="P:ActiproSoftware.Windows.Themes.ShellThemeCatalog.DictionaryReferences"><summary>
+            Gets the collection of <see cref="T:ActiproSoftware.Windows.Themes.ThemedResourceDictionaryReference" /> objects for the assembly.
+            </summary><value>
+            The collection of <see cref="T:ActiproSoftware.Windows.Themes.ThemedResourceDictionaryReference" /> objects for the assembly.
+            </value></member><member name="T:ActiproSoftware.Windows.Themes.ShellThemeCatalogRegistrar"><summary>
+            Represents a class that registers the <see cref="T:ActiproSoftware.Windows.Themes.ShellThemeCatalog" /> with the theme manager.
+            </summary></member><member name="T:ActiproSoftware.Windows.Controls.Shell.ShellListView"><summary>
+            Represents a list view control that enumerates shell objects.
+            </summary></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellListView.DisposeShellInstances"><summary>
+            Disposes any unmanaged resources held by the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootShellFolder" /> and <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.DefaultShellService" /> instances, 
+            and also sets both property values to <see langword="null" />.
+            </summary><remarks>
+            This method should be called when the control will no longer be used since it ensures any unmanaged resources
+            held by the shell object hierarchy and shell service are disposed.
+            </remarks></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellListView.GetContainerForItemOverride"><summary>
+            Creates or identifies the element used to display the specified item.
+            </summary><returns>The element that is used to display the given item. </returns></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellListView.NotifyDpiChanged"><summary>
+            Notifies that the DPI has changed.
+            </summary><remarks>
+            The shell controls are currently based on .NET 4.0 and can't access the <c>DpiChanged</c> event.
+            If you watch the <c>DpiChanged</c> event for your window, call this method to tell the shell controls the DPI changed so they can adjust their images as needed.
+            </remarks></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellListView.OnApplyTemplate"><summary>
+            Invoked whenever application code or internal processes call <c>ApplyTemplate</c>.
+            </summary></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellListView.OnContextMenuOpening(System.Windows.Controls.ContextMenuEventArgs)"><summary>
+            Occurs when a context menu is requested.
+            </summary><param name="e">The <see cref="T:System.Windows.Controls.ContextMenuEventArgs" /> that contains the event data.</param></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellListView.OnItemDefaultActionExecuting(ActiproSoftware.Windows.Controls.Grids.TreeListBoxItemEventArgs)"><summary>
+            Occurs before the default action is executed for an item.
+            </summary><param name="e">The <c>TreeListBoxItemEventArgs</c> that contains the event data.</param></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellListView.OnItemMenuRequested(ActiproSoftware.Windows.Controls.Grids.TreeListBoxItemMenuEventArgs)"><summary>
+            Occurs when an item requests a context menu.
+            </summary><param name="e">The <c>TreeListBoxItemMenuEventArgs</c> that contains the event data.</param></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellListView.OnColumnHeaderTapped(ActiproSoftware.Windows.Controls.Grids.TreeListViewColumnEventArgs)"><summary>
+            Occurs when a column's header is tapped.
+            </summary><param name="e">The <c>TreeListViewColumnEventArgs</c> that contains the event data.</param></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellListView.ProcessKeyDown(System.Windows.Input.KeyEventArgs)"><summary>
+            Processes a key down event.
+            </summary><param name="e">The <see cref="T:System.Windows.Input.KeyEventArgs" /> that contains the event data.</param></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellListView.#ctor"><summary>
+            Initializes an instance of the <see cref="T:ActiproSoftware.Windows.Controls.Shell.ShellListView" /> class.
+            </summary></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.AssemblyInfo"><summary>
+            Gets the <see cref="T:ActiproSoftware.Products.AssemblyInfo" /> to use.
+            </summary><value>The <see cref="T:ActiproSoftware.Products.AssemblyInfo" /> to use.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanExpandAll"><summary>
+            Gets whether any expand all operations can occur.
+            </summary><value><c>true</c> if any expand all operations can occur; otherwise, <c>false</c>.
+            The default value is <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanIncludeFiles"><summary>
+            Gets or sets whether files should be displayed.
+            </summary><value><c>true</c> if files should be displayed; otherwise, <c>false</c>.
+            The default value is <c>true</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanIncludeFolders"><summary>
+            Gets or sets whether folders should be displayed.
+            </summary><value><c>true</c> if folders should be displayed; otherwise, <c>false</c>.
+            The default value is <c>true</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanIncludeLinks"><summary>
+            Gets or sets whether links should be displayed.
+            </summary><value><c>true</c> if links should be displayed; otherwise, <c>false</c>.
+            The default value is <c>true</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanNavigateIntoChildFolders"><summary>
+            Gets or sets whether the default action for folders should be to navigate into the child folder.
+            </summary><value><c>true</c> if the default action for folders should be to navigate into the child folder; otherwise, <c>false</c>.
+            The default value is <c>true</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanUseThumbnails"><summary>
+            Gets or sets whether thumbnail images can be used in place of icons when available.
+            </summary><value><c>true</c> if thumbnail images can be used in place of icons when available; otherwise, <c>false</c>.
+            The default value is <c>true</c>.
+            </value><remarks>
+            Thumbnails are only used in certain <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.LayoutMode" /> options that render larger images.
+            </remarks></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.ColumnHeaderTemplate"><summary>
+            Gets or sets the <c>DataTemplate</c> to use for rendering column headers.
+            </summary><value>The <c>DataTemplate</c> to use for rendering column headers.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.DefaultShellService"><summary>
+            Gets or sets the default <see cref="T:ActiproSoftware.Shell.IShellService" /> that should be used when <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootShellFolderParsingName" /> or <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootSpecialFolderKind" /> are set.
+            </summary><value>
+            The default <see cref="T:ActiproSoftware.Shell.IShellService" /> that should be used when <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootShellFolderParsingName" /> or <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootSpecialFolderKind" /> are set.
+            The default value is an instance of <see cref="T:ActiproSoftware.Shell.WindowsShellService" />.
+            </value><remarks>
+            This property is not used if the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootShellFolder" /> property is set directly.
+            </remarks></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.DetailsLayoutModeItemTemplate"><summary>
+            Gets or sets the <see cref="T:System.Windows.DataTemplate" /> to use as the <c>ItemTemplate</c> when the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.LayoutMode" /> is <c>Details</c>.
+            </summary><value>The <see cref="T:System.Windows.DataTemplate" /> to use as the <c>ItemTemplate</c> when the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.LayoutMode" /> is <c>Details</c>.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.ExtraLargeIconsLayoutModeItemTemplate"><summary>
+            Gets or sets the <see cref="T:System.Windows.DataTemplate" /> to use as the <c>ItemTemplate</c> when the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.LayoutMode" /> is <c>ExtraLargeIcons</c>.
+            </summary><value>The <see cref="T:System.Windows.DataTemplate" /> to use as the <c>ItemTemplate</c> when the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.LayoutMode" /> is <c>ExtraLargeIcons</c>.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.IsDefaultItemContextMenuEnabled"><summary>
+            Gets or sets whether the default context menu is enabled for shell objects.
+            </summary><value><c>true</c> if the default context menu is enabled for shell objects; otherwise <c>false</c>.
+            The default value is <c>true</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.IsRenamingEnabled"><summary>
+            Gets or sets whether objects can be renamed.
+            </summary><value><c>true</c> if objects can be renamed; otherwise, <c>false</c>.
+            The default value is <c>true</c>.
+            </value><remarks>
+            The shell objects themselves must also support renaming via <see cref="P:ActiproSoftware.Shell.IShellObject.CanRename" />.
+            </remarks></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.LargeIconsLayoutModeItemTemplate"><summary>
+            Gets or sets the <see cref="T:System.Windows.DataTemplate" /> to use as the <c>ItemTemplate</c> when the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.LayoutMode" /> is <c>LargeIcons</c>.
+            </summary><value>The <see cref="T:System.Windows.DataTemplate" /> to use as the <c>ItemTemplate</c> when the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.LayoutMode" /> is <c>LargeIcons</c>.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.LayoutMode"><summary>
+            Gets or sets a <see cref="T:ActiproSoftware.Windows.Controls.Shell.ShellListViewLayoutMode" /> value indicating the item layout mode.
+            </summary><value>
+            A <see cref="T:ActiproSoftware.Windows.Controls.Shell.ShellListViewLayoutMode" /> value indicating the item layout mode.
+            The default value is <c>Details</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.ListLayoutModeItemTemplate"><summary>
+            Gets or sets the <see cref="T:System.Windows.DataTemplate" /> to use as the <c>ItemTemplate</c> when the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.LayoutMode" /> is <c>List</c>.
+            </summary><value>The <see cref="T:System.Windows.DataTemplate" /> to use as the <c>ItemTemplate</c> when the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.LayoutMode" /> is <c>List</c>.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.MediumIconsLayoutModeItemTemplate"><summary>
+            Gets or sets the <see cref="T:System.Windows.DataTemplate" /> to use as the <c>ItemTemplate</c> when the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.LayoutMode" /> is <c>MediumIcons</c>.
+            </summary><value>The <see cref="T:System.Windows.DataTemplate" /> to use as the <c>ItemTemplate</c> when the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.LayoutMode" /> is <c>MediumIcons</c>.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootShellFolder"><summary>
+            Gets or sets the root <see cref="T:ActiproSoftware.Shell.IShellObject" /> to display.
+            </summary><value>The root <see cref="T:ActiproSoftware.Shell.IShellObject" /> to display.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootShellFolderParsingName"><summary>
+            Gets or sets the root folder's full parsing name (commonly the same as the file system path), if known.
+            </summary><value>The root folder's full parsing name, if known.</value><remarks>
+            Setting this property will update the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootShellFolder" /> property.
+            </remarks></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootSpecialFolderKind"><summary>
+            Gets or sets the <see cref="T:ActiproSoftware.Shell.SpecialFolderKind" /> that indicates the root special folder to display.
+            </summary><value>The <see cref="T:ActiproSoftware.Shell.SpecialFolderKind" /> that indicates the root special folder to display.</value><remarks>
+            Setting this property will update the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootShellFolder" /> property.
+            </remarks></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.SmallIconsLayoutModeItemTemplate"><summary>
+            Gets or sets the <see cref="T:System.Windows.DataTemplate" /> to use as the <c>ItemTemplate</c> when the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.LayoutMode" /> is <c>SmallIcons</c>.
+            </summary><value>The <see cref="T:System.Windows.DataTemplate" /> to use as the <c>ItemTemplate</c> when the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.LayoutMode" /> is <c>SmallIcons</c>.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanIncludeFilesProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanIncludeFiles" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanIncludeFiles" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanIncludeFoldersProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanIncludeFolders" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanIncludeFolders" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanIncludeLinksProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanIncludeLinks" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanIncludeLinks" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanNavigateIntoChildFoldersProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanNavigateIntoChildFolders" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanNavigateIntoChildFolders" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanUseThumbnailsProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanUseThumbnails" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.CanUseThumbnails" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListView.ColumnHeaderTemplateProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.ColumnHeaderTemplate" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.ColumnHeaderTemplate" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListView.DefaultShellServiceProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.DefaultShellService" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.DefaultShellService" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListView.DetailsLayoutModeItemTemplateProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.DetailsLayoutModeItemTemplate" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.DetailsLayoutModeItemTemplate" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListView.ExtraLargeIconsLayoutModeItemTemplateProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.ExtraLargeIconsLayoutModeItemTemplate" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.ExtraLargeIconsLayoutModeItemTemplate" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListView.IsDefaultItemContextMenuEnabledProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.IsDefaultItemContextMenuEnabled" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.IsDefaultItemContextMenuEnabled" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListView.IsRenamingEnabledProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.IsRenamingEnabled" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.IsRenamingEnabled" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListView.LargeIconsLayoutModeItemTemplateProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.LargeIconsLayoutModeItemTemplate" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.LargeIconsLayoutModeItemTemplate" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListView.LayoutModeProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.LayoutMode" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.LayoutMode" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListView.ListLayoutModeItemTemplateProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.ListLayoutModeItemTemplate" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.ListLayoutModeItemTemplate" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListView.MediumIconsLayoutModeItemTemplateProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.MediumIconsLayoutModeItemTemplate" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.MediumIconsLayoutModeItemTemplate" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootShellFolderProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootShellFolder" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootShellFolder" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootShellFolderParsingNameProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootShellFolderParsingName" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootShellFolderParsingName" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootSpecialFolderKindProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootSpecialFolderKind" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.RootSpecialFolderKind" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListView.SmallIconsLayoutModeItemTemplateProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.SmallIconsLayoutModeItemTemplate" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellListView.SmallIconsLayoutModeItemTemplate" /> dependency property.</value></member><member name="T:ActiproSoftware.Windows.Controls.Shell.ShellListViewItemTemplateSelector"><summary>
+            Chooses a <see cref="T:System.Windows.DataTemplate" /> based on the data object and the data-bound element for a <see cref="T:ActiproSoftware.Windows.Controls.Shell.ShellListView" /> item.
+            </summary></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellListViewItemTemplateSelector.SelectTemplate(System.Object,System.Windows.DependencyObject)"><summary>
+            Returns a <see cref="T:System.Windows.DataTemplate" /> based on custom logic.
+            </summary><param name="item">The data object.</param><param name="container">The data-bound element.</param><returns>The <see cref="T:System.Windows.DataTemplate" /> to use.</returns></member><member name="T:ActiproSoftware.Windows.Controls.Shell.ShellListViewLayoutMode"><summary>
+            Specifies the item layout mode for a <see cref="T:ActiproSoftware.Windows.Controls.Shell.ShellListView" /> control.
+            </summary></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListViewLayoutMode.Details"><summary>
+            A detailed vertical list mode with multiple column display.
+            </summary></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListViewLayoutMode.List"><summary>
+            A vertical list mode that renders a small icon and name.
+            </summary></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListViewLayoutMode.SmallIcons"><summary>
+            A horizontal list mode that renders a small icon and name.
+            </summary></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListViewLayoutMode.MediumIcons"><summary>
+            A horizontal list mode that renders a medium icon and name.
+            </summary></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListViewLayoutMode.LargeIcons"><summary>
+            A horizontal list mode that renders a large icon and name.
+            </summary></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellListViewLayoutMode.ExtraLargeIcons"><summary>
+            A horizontal list mode that renders an extra large icon and name.
+            </summary></member><member name="T:ActiproSoftware.Windows.Controls.Shell.ShellObjectItemAdapter"><summary>
+            Provides an abstract base class for a <see cref="T:ActiproSoftware.Windows.Controls.Grids.TreeListBoxItemAdapter" /> that can be used in a <see cref="T:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox" /> or <see cref="T:ActiproSoftware.Windows.Controls.Shell.ShellListView" />.
+            </summary></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectItemAdapter.CanHaveChildren(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object)"><summary>
+            Returns whether the specified item is capable of having child items.
+            </summary><param name="ownerControl">The owner control.</param><param name="item">The item to examine.</param><returns><c>true</c> if the specified item is capable of having child items; otherwise, <c>false</c>.
+            </returns><remarks>
+            The default implementation of this method returns <c>true</c>.
+            This method should only return <c>false</c> if an item is not capable of having child items and is always a 'leaf' node in the tree.
+            It should not return <c>false</c> if the item can have child items, but doesn't at the current time.
+            <para>
+            Optimizations are in place to not call <see cref="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectItemAdapter.GetChildren(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object)" /> when this method returns <c>true</c>.
+            This method should be overridden if <see cref="F:ActiproSoftware.Windows.Controls.Grids.TreeItemChildrenQueryMode.OnExpansion" /> is used and certain items are known to be 'leaf' nodes.
+            </para></remarks></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectItemAdapter.CreateShellObjectViewModel(ActiproSoftware.Windows.Controls.Grids.TreeListBox,ActiproSoftware.Shell.IShellObject)"><summary>
+            Creates a new <see cref="T:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel" /> that wraps the specified <see cref="T:ActiproSoftware.Shell.IShellObject" />.
+            </summary><param name="ownerControl">The owner control.</param><param name="shellObject">The <see cref="T:ActiproSoftware.Shell.IShellObject" /> to wrap.</param><returns>The <see cref="T:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel" /> that was created.</returns><remarks>
+            Override this method to customize the <see cref="T:ActiproSoftware.Shell.IShellObject" /> before it is added to the user interface.
+            Return <see langword="null" /> to prevent the <see cref="T:ActiproSoftware.Shell.IShellObject" /> from being added.
+            </remarks></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectItemAdapter.GetBackgroundContextMenu(ActiproSoftware.Windows.Controls.Grids.TreeListBox,ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel)"><summary>
+            Returns the <c>ContextMenu</c> for the background of a control with the specified root view-model.
+            </summary><param name="ownerControl">The owner control.</param><param name="rootViewModel">The root view-model.</param><returns>The <c>ContextMenu</c> for the background of a control with the specified root view-model.</returns></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectItemAdapter.GetChildren(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object)"><summary>
+            Returns an <see cref="T:System.Collections.IEnumerable" /> that will be used to provide child items for the specified parent item.
+            </summary><param name="ownerControl">The owner control.</param><param name="item">The item to examine.</param><returns>An <see cref="T:System.Collections.IEnumerable" /> that will be used to provide child items for the specified parent item.</returns></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectItemAdapter.GetIsEditable(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object)"><summary>
+            Returns whether the specified item is editable.
+            </summary><param name="ownerControl">The owner control.</param><param name="item">The item to examine.</param><returns><c>true</c> if the specified item is editable; otherwise, <c>false</c>.
+            </returns></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectItemAdapter.GetIsEditing(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object)"><summary>
+            Returns whether the specified item is currently being edited.
+            </summary><param name="ownerControl">The owner control.</param><param name="item">The item to examine.</param><returns><c>true</c> if the specified item is currently being edited; otherwise, <c>false</c>.
+            </returns></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectItemAdapter.GetIsExpanded(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object)"><summary>
+            Returns whether the specified item is expanded.
+            </summary><param name="ownerControl">The owner control.</param><param name="item">The item to examine.</param><returns><c>true</c> if the specified item is expanded; otherwise, <c>false</c>.
+            </returns></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectItemAdapter.GetIsSelected(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object)"><summary>
+            Returns whether the specified item is selected.
+            </summary><param name="ownerControl">The owner control.</param><param name="item">The item to examine.</param><returns><c>true</c> if the specified item is selected; otherwise, <c>false</c>.
+            </returns></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectItemAdapter.GetItemContextMenu(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Collections.Generic.IList{ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel})"><summary>
+            Returns the <c>ContextMenu</c> for the specified collection of view-models.
+            </summary><param name="ownerControl">The owner control.</param><param name="viewModels">The view-models to examine.</param><returns>The <c>ContextMenu</c> for the specified collection of view-models.</returns></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectItemAdapter.GetPath(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object)"><summary>
+            Returns the item's string path.
+            </summary><param name="ownerControl">The owner control.</param><param name="item">The item to examine.</param><returns>The item's string path.</returns></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectItemAdapter.SetIsEditing(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object,System.Boolean)"><summary>
+            Sets whether the specified item is currently being edited. 
+            </summary><param name="ownerControl">The owner control.</param><param name="item">The item to update.</param><param name="value">The new value.</param></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectItemAdapter.SetIsExpanded(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object,System.Boolean)"><summary>
+            Sets whether the specified item is expanded. 
+            </summary><param name="ownerControl">The owner control.</param><param name="item">The item to update.</param><param name="value">The new value.</param></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectItemAdapter.SetIsSelected(ActiproSoftware.Windows.Controls.Grids.TreeListBox,System.Object,System.Boolean)"><summary>
+            Sets whether the specified item is selected. 
+            </summary><param name="ownerControl">The owner control.</param><param name="item">The item to update.</param><param name="value">The new value.</param></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectItemAdapter.#ctor"><summary>
+            Initializes a new instance of the <see cref="T:ActiproSoftware.Windows.Controls.Shell.ShellObjectItemAdapter" /> class.
+            </summary></member><member name="T:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel"><summary>
+            Represents a view-model wrapper for an <see cref="T:ActiproSoftware.Shell.IShellObject" />.
+            </summary></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.ToString"><summary>
+            Returns a <see cref="T:System.String" /> representation of this instance.
+            </summary><returns>
+            A <see cref="T:System.String" /> representation of this instance.
+            </returns></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.CreateChildFolder(System.String)"><summary>
+            Creates a child folder with the specified name.
+            </summary><param name="name">The name of the child folder.</param><returns><c>true</c> if the child folder was created; otherwise, <c>false</c>.
+            </returns><remarks>
+            Only shell folders can create child folders.
+            </remarks></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.StartWatching"><summary>
+            Starts watching the shell object's tree hierarchy for change notifications.
+            </summary><returns><c>true</c> if the shell object is watching its tree hierarchy; otherwise, <c>false</c>.
+            </returns></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.StopWatching"><summary>
+            Stops watching the shell object's tree hierarchy for change notifications.
+            </summary></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.#ctor(ActiproSoftware.Shell.IShellObject)"><summary>
+            Initializes a new instance of the <see cref="T:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel" /> class.
+            </summary><param name="shellObject">The <see cref="T:ActiproSoftware.Shell.IShellObject" /> model wrapped by this view model.</param></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.CanUseThumbnails"><summary>
+            Gets or sets whether thumbnail images can be used in place of icons when available.
+            </summary><value><c>true</c> if thumbnail images can be used in place of icons when available; otherwise, <c>false</c>.
+            The default value is <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.Children"><summary>
+            Gets the collection of child view-models, which is initialized by an item adapter.
+            </summary><value>The collection of child view-models, which is initialized by an item adapter.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.CreateChildFolderCommand"><summary>
+            Gets the <see cref="T:System.Windows.Input.ICommand" /> used to add a new child into to an associated collection/parent.
+            </summary><value>The <see cref="T:System.Windows.Input.ICommand" /> used to add a new child into to an associated collection/parent.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.IsEditing"><summary>
+            Gets or sets whether the node is currently being edited.
+            </summary><value><c>true</c> if the node is currently being edited; otherwise, <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.IsExpanded"><summary>
+            Gets or sets whether the node is expanded.
+            </summary><value><c>true</c> if the node is expanded; otherwise, <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.IsSelected"><summary>
+            Gets or sets whether the node is selected.
+            </summary><value><c>true</c> if the node is selected; otherwise, <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.Model"><summary>
+            Gets the <see cref="T:ActiproSoftware.Shell.IShellObject" /> model wrapped by this view-model.
+            </summary><value>The <see cref="T:ActiproSoftware.Shell.IShellObject" /> model wrapped by this view-model.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.Tag"><summary>
+            Gets or sets custom data for the node.
+            </summary><value>The custom data for the node.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.CanCreateChildFolder"><summary>
+            Gets whether the shell object can create a child folder.
+            </summary><value><c>true</c> if the shell object can create a child folder; otherwise, <c>false</c>.
+            </value><remarks>
+            Only shell folders can create child folders.
+            </remarks></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.CanHaveChildFolders"><summary>
+            Gets whether the shell object may have child folders.
+            </summary><value><c>true</c> if the shell object may have child folders; otherwise, <c>false</c>.
+            </value><remarks>
+            Some shell objects can immediately return that they don't have any child folders, whereas others might require a query to determine if there are any.
+            </remarks></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.CanRename"><summary>
+            Gets whether the shell object may be renamed.
+            </summary><value><c>true</c> if the shell object may be renamed; otherwise, <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.EditingName"><summary>
+            Gets the full user-friendly editing name of the shell object, if available.
+            </summary><value>The full user-friendly editing name of the shell object, if available.</value><remarks>
+            This value is usually the same as <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.FileSystemPath" />, except that it can also return a special value to identify special shell objects.
+            </remarks></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.ExtraLargeIcon"><summary>
+            Gets the extra-large icon.
+            </summary><value>The extra-large icon.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.ExtraLargeIconOverlay"><summary>
+            Gets the extra-large icon overlay.
+            </summary><value>The extra-large icon overlay.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.ExtraLargeThumbnail"><summary>
+            Gets the extra-large thumbnail.
+            </summary><value>The extra-large thumbnail.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.FileSystemPath"><summary>
+            Gets the file system path of the shell object, if available.
+            </summary><value>The file system path of the shell object, if available.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.HasExtraLargeThumbnail"><summary>
+            Gets whether a <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.ExtraLargeThumbnail" /> is available.
+            </summary><value><c>true</c> if a <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.ExtraLargeThumbnail" /> is available; otherwise, <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.HasLargeThumbnail"><summary>
+            Gets whether a <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.LargeThumbnail" /> is available.
+            </summary><value><c>true</c> if a <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.LargeThumbnail" /> is available; otherwise, <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.HasMediumThumbnail"><summary>
+            Gets whether a <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.MediumThumbnail" /> is available.
+            </summary><value><c>true</c> if a <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.MediumThumbnail" /> is available; otherwise, <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.IsFolder"><summary>
+            Gets whether the shell object is a folder, which is anything that can contain other shell objects.
+            </summary><value><c>true</c> if the shell object is a folder, which is anything that can contain other shell objects; otherwise, <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.IsLink"><summary>
+            Gets whether the shell object is a link, meaning a shortcut to another shell object.
+            </summary><value><c>true</c> if the shell object is a link, meaning a shortcut to another shell object; otherwise, <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.IsRemovable"><summary>
+            Gets whether the shell object is on removable media or is a removable device.
+            </summary><value><c>true</c> if the shell object is on removable media or is a removable device; otherwise, <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.IsVirtual"><summary>
+            Gets whether the shell object is not part of the file system (files, directories, or root directories).
+            </summary><value><c>true</c> if the shell object is not part of the file system (files, directories, or root directories); otherwise, <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.IsWatching"><summary>
+            Gets whether the shell object's tree hierarchy is currently watching for change notifications.
+            </summary><value><c>true</c> if the shell object's tree hierarchy is currently watching for change notifications; otherwise, <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.Kind"><summary>
+            Gets a <see cref="T:ActiproSoftware.Shell.ShellObjectKind" /> that specifies the kind of this shell object.
+            </summary><value>A <see cref="T:ActiproSoftware.Shell.ShellObjectKind" /> that specifies the kind of this shell object.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.LargeIcon"><summary>
+            Gets the large icon.
+            </summary><value>The large icon.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.LargeIconOverlay"><summary>
+            Gets the large icon overlay.
+            </summary><value>The large icon overlay.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.LargeThumbnail"><summary>
+            Gets the large thumbnail.
+            </summary><value>The large thumbnail.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.MediumIcon"><summary>
+            Gets the medium icon.
+            </summary><value>The medium icon.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.MediumIconOverlay"><summary>
+            Gets the medium icon overlay.
+            </summary><value>The medium icon overlay.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.Name"><summary>
+            Gets or sets the name of the shell object.
+            </summary><value>The name of the shell object.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.ParsingName"><summary>
+            Gets the full parsing name of the shell object, if available.
+            </summary><value>The full parsing name of the shell object, if available.</value><remarks>
+            This value is usually the same as <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.FileSystemPath" />, except that it can also return a special syntax to identify special shell objects.
+            </remarks></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.RelativeParsingName"><summary>
+            Gets the parent-relative parsing name of the shell object, if available.
+            </summary><value>The parent-relative parsing name of the shell object, if available.</value><remarks>
+            This value is usually the same as <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.Name" />, except that it can also return a special syntax to identify special shell objects.
+            </remarks></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.ShellService"><summary>
+            Gets the <see cref="T:ActiproSoftware.Shell.IShellService" /> used to return this shell object's children.
+            </summary><value>The <see cref="T:ActiproSoftware.Shell.IShellService" /> used to return this shell object's children.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.SmallIcon"><summary>
+            Gets the small icon.
+            </summary><value>The small icon.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.SmallIconOverlay"><summary>
+            Gets the small icon overlay.
+            </summary><value>The small icon overlay.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.MediumThumbnail"><summary>
+            Gets the medium thumbnail.
+            </summary><value>The medium thumbnail.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.SortOrder"><summary>
+            Gets a numeric sort order for sorting the shell object within other shell objects.
+            </summary><value>
+            A numeric sort order for sorting the shell object within other shell objects.
+            The default value is <c>0</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.SpecialFolderKind"><summary>
+            Gets a <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.SpecialFolderKind" /> that specifies kind of special folder represented by this shell object, if applicable.
+            </summary><value>A <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.SpecialFolderKind" /> that specifies kind of special folder represented by this shell object, if applicable.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.ToolTip"><summary>
+            Gets the tool-tip object that is displayed for this shell object in the user interface (UI).
+            </summary><value>The tool-tip object.</value></member><member name="T:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox"><summary>
+            Represents a single-column tree view control that enumerates shell objects.
+            </summary></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.DisposeShellInstances"><summary>
+            Disposes any unmanaged resources held by the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootShellFolder" /> and <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.DefaultShellService" /> instances, 
+            and also sets both property values to <see langword="null" />.
+            </summary><remarks>
+            This method should be called when the control will no longer be used since it ensures any unmanaged resources
+            held by the shell object hierarchy and shell service are disposed.
+            </remarks></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.NotifyDpiChanged"><summary>
+            Notifies that the DPI has changed.
+            </summary><remarks>
+            The shell controls are currently based on .NET 4.0 and can't access the <c>DpiChanged</c> event.
+            If you watch the <c>DpiChanged</c> event for your window, call this method to tell the shell controls the DPI changed so they can adjust their images as needed.
+            </remarks></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.OnApplyTemplate"><summary>
+            Invoked whenever application code or internal processes call <c>ApplyTemplate</c>.
+            </summary></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.OnContextMenuOpening(System.Windows.Controls.ContextMenuEventArgs)"><summary>
+            Occurs when a context menu is requested.
+            </summary><param name="e">The <see cref="T:System.Windows.Controls.ContextMenuEventArgs" /> that contains the event data.</param></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.OnIsRootItemVisibleChanged(System.Windows.RoutedEventArgs)"><summary>
+            Occurs after the <c>IsRootItemVisible</c> property is changed.
+            </summary><param name="e">The <c>RoutedEventArgs</c> that contains the event data.</param></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.OnItemMenuRequested(ActiproSoftware.Windows.Controls.Grids.TreeListBoxItemMenuEventArgs)"><summary>
+            Occurs when an item requests a context menu.
+            </summary><param name="e">The <c>TreeListBoxItemMenuEventArgs</c> that contains the event data.</param></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.OnSelectionChanged(System.Windows.Controls.SelectionChangedEventArgs)"><summary>
+            Occurs when the selection is changed.
+            </summary><param name="e">The <c>SelectionChangedEventArgs</c> that contains the event data.</param></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.SelectItemByFullPath(System.String)"><summary>
+            Sets the <c>SelectedItem</c> to the node with the specified full path.
+            </summary><param name="fullPath">The full path to the node whose container should be selected.</param><returns><c>true</c> if a node was selected; otherwise, <c>false</c>.
+            </returns><remarks>
+            This method requires that the <c>ItemAdapter</c> supplies a path for each item.
+            </remarks></member><member name="M:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.#ctor"><summary>
+            Initializes an instance of the <see cref="T:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox" /> class.
+            </summary></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.AssemblyInfo"><summary>
+            Gets the <see cref="T:ActiproSoftware.Products.AssemblyInfo" /> to use.
+            </summary><value>The <see cref="T:ActiproSoftware.Products.AssemblyInfo" /> to use.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.CanExpandAll"><summary>
+            Gets whether any expand all operations can occur.
+            </summary><value><c>true</c> if any expand all operations can occur; otherwise, <c>false</c>.
+            The default value is <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.CanIncludeFiles"><summary>
+            Gets or sets whether files should be displayed.
+            </summary><value><c>true</c> if files should be displayed; otherwise, <c>false</c>.
+            The default value is <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.CanIncludeLinks"><summary>
+            Gets or sets whether links should be displayed.
+            </summary><value><c>true</c> if links should be displayed; otherwise, <c>false</c>.
+            The default value is <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.DefaultShellService"><summary>
+            Gets or sets the default <see cref="T:ActiproSoftware.Shell.IShellService" /> that should be used when <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootShellFolderParsingName" /> or <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootSpecialFolderKind" /> are set.
+            </summary><value>
+            The default <see cref="T:ActiproSoftware.Shell.IShellService" /> that should be used when <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootShellFolderParsingName" /> or <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootSpecialFolderKind" /> are set.
+            The default value is an instance of <see cref="T:ActiproSoftware.Shell.WindowsShellService" />.
+            </value><remarks>
+            This property is not used if the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootShellFolder" /> property is set directly.
+            </remarks></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.IsDefaultItemContextMenuEnabled"><summary>
+            Gets or sets whether the default context menu is enabled for shell objects.
+            </summary><value><c>true</c> if the default context menu is enabled for shell objects; otherwise <c>false</c>.
+            The default value is <c>true</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.IsNewFolderContextMenuItemAllowed"><summary>
+            Gets or sets whether a "New / Folder" menu item can be injected into the context menu for file system folders.
+            </summary><value><c>true</c> if a "New / Folder" menu item can be injected into the context menu for file system folders; otherwise, <c>false</c>.
+            The default value is <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.IsRenamingEnabled"><summary>
+            Gets or sets whether objects can be renamed.
+            </summary><value><c>true</c> if objects can be renamed; otherwise, <c>false</c>.
+            The default value is <c>true</c>.
+            </value><remarks>
+            The shell objects themselves must also support renaming via <see cref="P:ActiproSoftware.Shell.IShellObject.CanRename" />.
+            </remarks></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.MoveUpCommand"><summary>
+            Gets the <see cref="T:System.Windows.Input.ICommand" /> used to move the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.SelectedShellObject" /> up a level.
+            </summary><value>The <see cref="T:System.Windows.Input.ICommand" /> used to move the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.SelectedShellObject" /> up a level.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootShellFolder"><summary>
+            Gets or sets the root <see cref="T:ActiproSoftware.Shell.IShellObject" /> to display.
+            </summary><value>The root <see cref="T:ActiproSoftware.Shell.IShellObject" /> to display.</value></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootShellFolderParsingName"><summary>
+            Gets or sets the root folder's full parsing name (commonly the same as the file system path), if known.
+            </summary><value>The root folder's full parsing name, if known.</value><remarks>
+            Setting this property will update the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootShellFolder" /> property.
+            </remarks></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootSpecialFolderKind"><summary>
+            Gets or sets the <see cref="T:ActiproSoftware.Shell.SpecialFolderKind" /> that indicates the root special folder to display.
+            </summary><value>The <see cref="T:ActiproSoftware.Shell.SpecialFolderKind" /> that indicates the root special folder to display.</value><remarks>
+            Setting this property will update the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootShellFolder" /> property.
+            </remarks></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.SelectedShellObject"><summary>
+            Gets or sets the primary <see cref="T:ActiproSoftware.Shell.IShellObject" /> that is selected in this control.
+            </summary><value>The primary <see cref="T:ActiproSoftware.Shell.IShellObject" /> that is selected in this control.</value><remarks>
+            This property is the same as taking the <see cref="T:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel" /> value of the <c>SelectedItem</c> property,
+            and getting its <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel.Model" /> property.
+            </remarks></member><member name="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.SelectedShellObjectEditingName"><summary>
+            Gets or sets the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.SelectedShellObject" />'s full user-friendly editing name (commonly the same as the file system path), if known.
+            </summary><value>The <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.SelectedShellObject" />'s full user-friendly editing name, if known.</value><remarks>
+            Setting this property will update the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.SelectedShellObject" /> property.
+            </remarks></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.CanIncludeFilesProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.CanIncludeFiles" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.CanIncludeFiles" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.CanIncludeLinksProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.CanIncludeLinks" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.CanIncludeLinks" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.DefaultShellServiceProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.DefaultShellService" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.DefaultShellService" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.IsDefaultItemContextMenuEnabledProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.IsDefaultItemContextMenuEnabled" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.IsDefaultItemContextMenuEnabled" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.IsNewFolderContextMenuItemAllowedProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.IsNewFolderContextMenuItemAllowed" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.IsNewFolderContextMenuItemAllowed" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.IsRenamingEnabledProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.IsRenamingEnabled" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.IsRenamingEnabled" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootShellFolderProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootShellFolder" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootShellFolder" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootShellFolderParsingNameProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootShellFolderParsingName" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootShellFolderParsingName" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootSpecialFolderKindProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootSpecialFolderKind" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.RootSpecialFolderKind" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.SelectedShellObjectProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.SelectedShellObject" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.SelectedShellObject" /> dependency property.</value></member><member name="F:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.SelectedShellObjectEditingNameProperty"><summary>
+            Identifies the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.SelectedShellObjectEditingName" /> dependency property.  This field is read-only.
+            </summary><value>The identifier for the <see cref="P:ActiproSoftware.Windows.Controls.Shell.ShellTreeListBox.SelectedShellObjectEditingName" /> dependency property.</value></member><member name="T:ActiproSoftware.Windows.Controls.Shell.Primitives.ShellEditableContentControl"><summary>
+            Represents a control that displays shell name content by default but can toggle to an editable mode for editing the content.
+            </summary></member><member name="M:ActiproSoftware.Windows.Controls.Shell.Primitives.ShellEditableContentControl.SelectText(System.Windows.Controls.TextBox)"><summary>
+            Selects the text in the specified <see cref="T:System.Windows.Controls.TextBox" /> when editing starts.
+            </summary><param name="textBox">The <see cref="T:System.Windows.Controls.TextBox" /> to update.</param><remarks>
+            The default implementation of this method selects all text.
+            Override it to select a range of text instead, such as a filename's actual name range before the extension.
+            </remarks></member><member name="T:ActiproSoftware.Shell.IShellObject"><summary>
+            Provides the requirements for a shell object.
+            </summary></member><member name="M:ActiproSoftware.Shell.IShellObject.CreateChildFolder(System.String)"><summary>
+            Creates a child folder with the specified name.
+            </summary><param name="name">The name of the child folder.</param><returns><c>true</c> if the child folder was created; otherwise, <c>false</c>.
+            </returns><remarks>
+            Only shell folders can create child folders.
+            </remarks></member><member name="M:ActiproSoftware.Shell.IShellObject.RefreshChildren"><summary>
+            Refreshes the <see cref="P:ActiproSoftware.Shell.IShellObject.Children" /> collection.
+            </summary></member><member name="M:ActiproSoftware.Shell.IShellObject.StartWatching"><summary>
+            Starts watching the shell object's tree hierarchy for change notifications.
+            </summary><returns><c>true</c> if the shell object is watching its tree hierarchy; otherwise, <c>false</c>.
+            </returns></member><member name="M:ActiproSoftware.Shell.IShellObject.StopWatching"><summary>
+            Stops watching the shell object's tree hierarchy for change notifications.
+            </summary></member><member name="P:ActiproSoftware.Shell.IShellObject.AreChildrenLoaded"><summary>
+            Gets whether the <see cref="P:ActiproSoftware.Shell.IShellObject.Children" /> collection is loaded.
+            </summary><value><c>true</c> if the <see cref="P:ActiproSoftware.Shell.IShellObject.Children" /> collection is loaded; otherwise, <c>false</c>.
+            </value><remarks>
+            Since the <see cref="P:ActiproSoftware.Shell.IShellObject.Children" /> collection is lazy-loaded when called, this property returns whether it has been loaded without triggering a load.
+            </remarks></member><member name="P:ActiproSoftware.Shell.IShellObject.CanCreateChildFolder"><summary>
+            Gets whether the shell object can create a child folder.
+            </summary><value><c>true</c> if the shell object can create a child folder; otherwise, <c>false</c>.
+            </value><remarks>
+            Only shell folders can create child folders.
+            </remarks></member><member name="P:ActiproSoftware.Shell.IShellObject.CanHaveChildFolders"><summary>
+            Gets whether the shell object may have child folders.
+            </summary><value><c>true</c> if the shell object may have child folders; otherwise, <c>false</c>.
+            </value><remarks>
+            Some shell objects can immediately return that they don't have any child folders, whereas others might require a query to determine if there are any.
+            </remarks></member><member name="P:ActiproSoftware.Shell.IShellObject.CanRename"><summary>
+            Gets whether the shell object may be renamed.
+            </summary><value><c>true</c> if the shell object may be renamed; otherwise, <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.IShellObject.Children"><summary>
+            Gets the collection of child shell objects.
+            </summary><value>The collection of child shell objects.</value></member><member name="P:ActiproSoftware.Shell.IShellObject.EditingName"><summary>
+            Gets the full user-friendly editing name of the shell object, if available.
+            </summary><value>The full user-friendly editing name of the shell object, if available.</value><remarks>
+            This value is usually the same as <see cref="P:ActiproSoftware.Shell.IShellObject.FileSystemPath" />, except that it can also return a special value to identify special shell objects.
+            </remarks></member><member name="P:ActiproSoftware.Shell.IShellObject.ExtraLargeIcon"><summary>
+            Gets or sets the extra-large icon.
+            </summary><value>The extra-large icon.</value></member><member name="P:ActiproSoftware.Shell.IShellObject.ExtraLargeIconOverlay"><summary>
+            Gets or sets the extra-large icon overlay.
+            </summary><value>The extra-large icon overlay.</value></member><member name="P:ActiproSoftware.Shell.IShellObject.ExtraLargeThumbnail"><summary>
+            Gets or sets the extra-large thumbnail.
+            </summary><value>The extra-large thumbnail.</value></member><member name="P:ActiproSoftware.Shell.IShellObject.FileSystemPath"><summary>
+            Gets the file system path of the shell object, if available.
+            </summary><value>The file system path of the shell object, if available.</value></member><member name="P:ActiproSoftware.Shell.IShellObject.IsFolder"><summary>
+            Gets whether the shell object is a folder, which is anything that can contain other shell objects.
+            </summary><value><c>true</c> if the shell object is a folder, which is anything that can contain other shell objects; otherwise, <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.IShellObject.IsLink"><summary>
+            Gets whether the shell object is a link, meaning a shortcut to another shell object.
+            </summary><value><c>true</c> if the shell object is a link, meaning a shortcut to another shell object; otherwise, <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.IShellObject.IsRemovable"><summary>
+            Gets whether the shell object is on removable media or is a removable device.
+            </summary><value><c>true</c> if the shell object is on removable media or is a removable device; otherwise, <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.IShellObject.IsVirtual"><summary>
+            Gets whether the shell object is not part of the file system (files, directories, or root directories).
+            </summary><value><c>true</c> if the shell object is not part of the file system (files, directories, or root directories); otherwise, <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.IShellObject.IsWatching"><summary>
+            Gets whether the shell object's tree hierarchy is currently watching for change notifications.
+            </summary><value><c>true</c> if the shell object's tree hierarchy is currently watching for change notifications; otherwise, <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.IShellObject.Kind"><summary>
+            Gets a <see cref="T:ActiproSoftware.Shell.ShellObjectKind" /> that specifies the kind of this shell object.
+            </summary><value>A <see cref="T:ActiproSoftware.Shell.ShellObjectKind" /> that specifies the kind of this shell object.</value></member><member name="P:ActiproSoftware.Shell.IShellObject.LargeIcon"><summary>
+            Gets or sets the large icon.
+            </summary><value>The large icon.</value></member><member name="P:ActiproSoftware.Shell.IShellObject.LargeIconOverlay"><summary>
+            Gets or sets the large icon overlay.
+            </summary><value>The large icon overlay.</value></member><member name="P:ActiproSoftware.Shell.IShellObject.LargeThumbnail"><summary>
+            Gets or sets the large thumbnail.
+            </summary><value>The large thumbnail.</value></member><member name="P:ActiproSoftware.Shell.IShellObject.MediumIcon"><summary>
+            Gets or sets the medium icon.
+            </summary><value>The medium icon.</value></member><member name="P:ActiproSoftware.Shell.IShellObject.MediumIconOverlay"><summary>
+            Gets or sets the medium icon overlay.
+            </summary><value>The medium icon overlay.</value></member><member name="P:ActiproSoftware.Shell.IShellObject.MediumThumbnail"><summary>
+            Gets or sets the medium thumbnail.
+            </summary><value>The medium thumbnail.</value></member><member name="P:ActiproSoftware.Shell.IShellObject.Name"><summary>
+            Gets or sets the name of the shell object.
+            </summary><value>The name of the shell object.</value></member><member name="P:ActiproSoftware.Shell.IShellObject.ParsingName"><summary>
+            Gets the full parsing name of the shell object, if available.
+            </summary><value>The full parsing name of the shell object, if available.</value><remarks>
+            This value is usually the same as <see cref="P:ActiproSoftware.Shell.IShellObject.FileSystemPath" />, except that it can also return a special syntax to identify special shell objects.
+            </remarks></member><member name="P:ActiproSoftware.Shell.IShellObject.RelativeParsingName"><summary>
+            Gets the parent-relative parsing name of the shell object, if available.
+            </summary><value>The parent-relative parsing name of the shell object, if available.</value><remarks>
+            This value is usually the same as <see cref="P:ActiproSoftware.Shell.IShellObject.Name" />, except that it can also return a special syntax to identify special shell objects.
+            </remarks></member><member name="P:ActiproSoftware.Shell.IShellObject.ShellService"><summary>
+            Gets the <see cref="T:ActiproSoftware.Shell.IShellService" /> used to return this shell object's children.
+            </summary><value>The <see cref="T:ActiproSoftware.Shell.IShellService" /> used to return this shell object's children.</value></member><member name="P:ActiproSoftware.Shell.IShellObject.SmallIcon"><summary>
+            Gets or sets the small icon.
+            </summary><value>The small icon.</value></member><member name="P:ActiproSoftware.Shell.IShellObject.SmallIconOverlay"><summary>
+            Gets or sets the small icon overlay.
+            </summary><value>The small icon overlay.</value></member><member name="P:ActiproSoftware.Shell.IShellObject.SortOrder"><summary>
+            Gets or sets a numeric sort order for sorting the shell object within other shell objects.
+            </summary><value>
+            A numeric sort order for sorting the shell object within other shell objects.
+            The default value is <c>0</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.IShellObject.SpecialFolderKind"><summary>
+            Gets a <see cref="P:ActiproSoftware.Shell.IShellObject.SpecialFolderKind" /> that specifies kind of special folder represented by this shell object, if applicable.
+            </summary><value>A <see cref="P:ActiproSoftware.Shell.IShellObject.SpecialFolderKind" /> that specifies kind of special folder represented by this shell object, if applicable.</value></member><member name="P:ActiproSoftware.Shell.IShellObject.ToolTip"><summary>
+            Gets or sets the tool-tip object that is displayed for this shell object in the user interface (UI).
+            </summary><value>The tool-tip object.</value></member><member name="E:ActiproSoftware.Shell.IShellObject.Changed"><summary>
+            Occurs when the shell object has changed.
+            </summary><eventdata>
+            The event handler receives an argument of type <c>ShellObjectChangedEventArgs</c> containing data related to this event.
+            </eventdata></member><member name="T:ActiproSoftware.Shell.IShellProperty"><summary>
+            Provides the requirements for a property that can be applied to a shell object.
+            </summary></member><member name="P:ActiproSoftware.Shell.IShellProperty.CanonicalName"><summary>
+            Gets the case-sensitive name by which a property is known to the system, regardless of its localized name.
+            </summary><value>The case-sensitive name by which a property is known to the system, regardless of its localized name.</value></member><member name="P:ActiproSoftware.Shell.IShellProperty.ColumnDefaultSortDirection"><summary>
+            Gets the default sort direction of a column created for this property.
+            </summary><value>A <c>ColumnSortDirection</c> specifying the default sort direction of a column created for this property.</value></member><member name="P:ActiproSoftware.Shell.IShellProperty.ColumnHorizontalAlignment"><summary>
+            Gets the horizontal alignment of a column created for this property.
+            </summary><value>The horizontal alignment of a column created for this property.</value></member><member name="P:ActiproSoftware.Shell.IShellProperty.DefaultColumnWidth"><summary>
+            Gets the default column width for this property.
+            </summary><value>The default column width for this property.</value></member><member name="P:ActiproSoftware.Shell.IShellProperty.IsNameProperty"><summary>
+            Gets whether this property is the primary property that returns the name of a shell object.
+            </summary><value><c>true</c> if this property is the primary property that returns the name of a shell object; otherwise, <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.IShellProperty.Key"><summary>
+            Gets the key that uniquely identifies the property.
+            </summary><value>The key that uniquely identifies the property.</value></member><member name="P:ActiproSoftware.Shell.IShellProperty.Name"><summary>
+            Gets the display name, which is a localized property name.
+            </summary><value>The display name, which is a localized property name.</value></member><member name="T:ActiproSoftware.Shell.IShellService"><summary>
+            Provides the requirements for an object that can create and manage shell objects and properties.
+            </summary></member><member name="M:ActiproSoftware.Shell.IShellService.CompareObjectsUsingProperty(ActiproSoftware.Shell.IShellObject,ActiproSoftware.Shell.IShellObject,ActiproSoftware.Shell.IShellProperty)"><summary>
+            Compares two <see cref="T:ActiproSoftware.Shell.IShellObject" /> instances using the specified <see cref="T:ActiproSoftware.Shell.IShellProperty" />.
+            </summary><param name="shellObject1">The first <see cref="T:ActiproSoftware.Shell.IShellObject" />.</param><param name="shellObject2">The second <see cref="T:ActiproSoftware.Shell.IShellObject" />.</param><param name="shellProperty">The <see cref="T:ActiproSoftware.Shell.IShellProperty" /> to use for comparison.</param><returns>A value indicating whether one is less than, equal to or greater than the other.</returns></member><member name="M:ActiproSoftware.Shell.IShellService.CreateObjectChildren(ActiproSoftware.Shell.IShellObject)"><summary>
+            Creates the child <see cref="T:ActiproSoftware.Shell.IShellObject" /> collection for the specified parent <see cref="T:ActiproSoftware.Shell.IShellObject" />.
+            </summary><param name="parentShellObject">The parent <see cref="T:ActiproSoftware.Shell.IShellObject" /> to examine.</param><returns>The child <see cref="T:ActiproSoftware.Shell.IShellObject" /> collection for the specified parent <see cref="T:ActiproSoftware.Shell.IShellObject" />.</returns></member><member name="M:ActiproSoftware.Shell.IShellService.CreateObjectForParsingName(System.String)"><summary>
+            Creates the <see cref="T:ActiproSoftware.Shell.IShellObject" /> for the specified full parsing name (commonly the same as the file system path).
+            </summary><param name="path">The parsing name to examine.</param><returns>The <see cref="T:ActiproSoftware.Shell.IShellObject" /> for the specified full parsing name.</returns></member><member name="M:ActiproSoftware.Shell.IShellService.CreateProperties(System.Collections.Generic.IList{ActiproSoftware.Shell.IShellObject},ActiproSoftware.Shell.ShellPropertyRequestKind)"><summary>
+            Creates a collection of <see cref="T:ActiproSoftware.Shell.IShellProperty" /> objects.
+            </summary><param name="shellObjects">One or more <see cref="T:ActiproSoftware.Shell.IShellObject" /> objects to examine.</param><param name="kind">The kind of properties to request.</param><returns>A <see cref="T:ActiproSoftware.Shell.ShellPropertyCollection" /> that contains the results.</returns></member><member name="M:ActiproSoftware.Shell.IShellService.GetFullPath(ActiproSoftware.Shell.IShellObject,System.String)"><summary>
+            Returns the full path of the specified <see cref="T:ActiproSoftware.Shell.IShellObject" />.
+            </summary><param name="shellObject">The <see cref="T:ActiproSoftware.Shell.IShellObject" /> to examine.</param><param name="pathSeparator">The path separator.</param><returns>The full path of the specified <see cref="T:ActiproSoftware.Shell.IShellObject" />.</returns></member><member name="M:ActiproSoftware.Shell.IShellService.GetPropertyValue(ActiproSoftware.Shell.IShellObject,ActiproSoftware.Shell.IShellProperty)"><summary>
+            Returns the property value on the specified <see cref="T:ActiproSoftware.Shell.IShellObject" />.
+            </summary><param name="shellObject">The <see cref="T:ActiproSoftware.Shell.IShellObject" /> to examine.</param><param name="shellProperty">The <see cref="T:ActiproSoftware.Shell.IShellProperty" /> whose value should be returned.</param><returns>The property value on the specified <see cref="T:ActiproSoftware.Shell.IShellObject" />.</returns></member><member name="T:ActiproSoftware.Shell.ShellObjectBase"><summary>
+            Provides an abstract base class for an <see cref="T:ActiproSoftware.Shell.IShellObject" /> implementation.
+            </summary></member><member name="M:ActiproSoftware.Shell.ShellObjectBase.CreateChildFolder(System.String)"><summary>
+            Creates a child folder with the specified name.
+            </summary><param name="name">The name of the child folder.</param><returns><c>true</c> if the child folder was created; otherwise, <c>false</c>.
+            </returns><remarks>
+            Only shell folders can create child folders.
+            The default implementation of this method does nothing and returns <c>false</c>.
+            </remarks></member><member name="M:ActiproSoftware.Shell.ShellObjectBase.Dispose(System.Boolean)"><summary>
+            Releases the unmanaged resources used by the object and optionally releases the managed resources.
+            </summary><param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources. 
+            </param><remarks>
+            This method is called by the public <c>Dispose</c> method and the <c>Finalize</c> method. 
+            <c>Dispose</c> invokes this method with the <paramref name="disposing" /> parameter set to <c>true</c>. 
+            <c>Finalize</c> invokes this method with <paramref name="disposing" /> set to <c>false</c>.
+            </remarks></member><member name="M:ActiproSoftware.Shell.ShellObjectBase.NotifyPropertyChanged(System.String)"><summary>
+            Notifies that a property has changed.
+            </summary><param name="propertyName">The name of the property that was changed.</param></member><member name="M:ActiproSoftware.Shell.ShellObjectBase.RaiseChangedEvent(ActiproSoftware.Shell.ShellObjectChangedEventArgs)"><summary>
+            Raises the <see cref="E:ActiproSoftware.Shell.ShellObjectBase.Changed" /> event.
+            </summary><param name="e">The <c>ShellObjectChangedEventArgs</c> that contains the event data.</param></member><member name="M:ActiproSoftware.Shell.ShellObjectBase.RaisePropertyChangedEvent(System.ComponentModel.PropertyChangedEventArgs)"><summary>
+            Raises the <see cref="E:ActiproSoftware.Shell.ShellObjectBase.PropertyChanged" /> event.
+            </summary><param name="e">The <see cref="T:System.ComponentModel.PropertyChangedEventArgs" /> that contains the event data.</param></member><member name="M:ActiproSoftware.Shell.ShellObjectBase.RefreshChildren"><summary>
+            Refreshes the <see cref="P:ActiproSoftware.Shell.ShellObjectBase.Children" /> collection.
+            </summary></member><member name="M:ActiproSoftware.Shell.ShellObjectBase.StartWatching"><summary>
+            Starts watching the shell object's tree hierarchy for change notifications.
+            </summary><returns><c>true</c> if the shell object is watching its tree hierarchy; otherwise, <c>false</c>.
+            </returns><remarks>
+            The default implementation of this method does nothing, and returns <c>false</c>.
+            </remarks></member><member name="M:ActiproSoftware.Shell.ShellObjectBase.StopWatching"><summary>
+            Stops watching the shell object's tree hierarchy for change notifications.
+            </summary><remarks>
+            The default implementation of this method does nothing.
+            </remarks></member><member name="M:ActiproSoftware.Shell.ShellObjectBase.ToString"><summary>
+            Returns a <c>String</c> that represents the current <c>Object</c>.
+            </summary><returns>A <c>String</c> that represents the current <c>Object</c>.</returns></member><member name="M:ActiproSoftware.Shell.ShellObjectBase.#ctor(ActiproSoftware.Shell.IShellService)"><summary>
+            Initializes an instance of the <see cref="T:ActiproSoftware.Shell.ShellObjectBase" /> class.
+            </summary><param name="shellService">The <see cref="T:ActiproSoftware.Shell.IShellService" /> used to return this shell object's children.</param></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.AreChildrenLoaded"><summary>
+            Gets whether the <see cref="P:ActiproSoftware.Shell.ShellObjectBase.Children" /> collection is loaded.
+            </summary><value><c>true</c> if the <see cref="P:ActiproSoftware.Shell.ShellObjectBase.Children" /> collection is loaded; otherwise, <c>false</c>.
+            </value><remarks>
+            Since the <see cref="P:ActiproSoftware.Shell.ShellObjectBase.Children" /> collection is lazy-loaded when called, this property returns whether it has been loaded without triggering a load.
+            </remarks></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.CanCreateChildFolder"><summary>
+            Gets whether the shell object can create a child folder.
+            </summary><value><c>true</c> if the shell object can create a child folder; otherwise, <c>false</c>.
+            The default implementation of this property returns <c>false</c>.
+            </value><remarks>
+            Only shell folders can create child folders.
+            </remarks></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.CanHaveChildFolders"><summary>
+            Gets whether the shell object may have child folders.
+            </summary><value><c>true</c> if the shell object may have child folders; otherwise, <c>false</c>.
+            The default implementation of this property returns the <see cref="P:ActiproSoftware.Shell.ShellObjectBase.IsFolder" /> property value.
+            </value><remarks>
+            Some shell objects can immediately return that they don't have any child folders, whereas others might require a query to determine if there are any.
+            </remarks></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.CanRename"><summary>
+            Gets whether the shell object may be renamed.
+            </summary><value><c>true</c> if the shell object may be renamed; otherwise, <c>false</c>.
+            The default implementation of this property returns <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.Children"><summary>
+            Gets the collection of child shell objects using lazy-loading.
+            </summary><value>The collection of child shell objects using lazy-loading.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.EditingName"><summary>
+            Gets the full user-friendly editing name of the shell object, if available.
+            </summary><value>The full user-friendly editing name of the shell object, if available.</value><remarks>
+            This value is usually the same as <see cref="P:ActiproSoftware.Shell.ShellObjectBase.FileSystemPath" />, except that it can also return a special value to identify special shell objects.
+            </remarks></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.ExtraLargeIcon"><summary>
+            Gets or sets the extra-large icon.
+            </summary><value>The extra-large icon.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.ExtraLargeIconOverlay"><summary>
+            Gets or sets the extra-large icon overlay.
+            </summary><value>The extra-large icon overlay.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.ExtraLargeThumbnail"><summary>
+            Gets or sets the extra-large thumbnail.
+            </summary><value>The extra-large thumbnail.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.FileSystemPath"><summary>
+            Gets the file system path of the shell object, if available.
+            </summary><value>
+            The file system path of the shell object, if available.
+            The default implementation of this property returns <see langword="null" />.
+            </value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.IsFolder"><summary>
+            Gets whether the shell object is a folder, which is anything that can contain other shell objects.
+            </summary><value><c>true</c> if the shell object is a folder, which is anything that can contain other shell objects; otherwise, <c>false</c>.
+            The default implementation of this property returns <c>true</c> based on an applicable <see cref="P:ActiproSoftware.Shell.ShellObjectBase.Kind" /> property value.
+            </value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.IsLink"><summary>
+            Gets whether the shell object is a link, meaning a shortcut to another shell object.
+            </summary><value><c>true</c> if the shell object is a link, meaning a shortcut to another shell object; otherwise, <c>false</c>.
+            The default implementation of this property returns <c>true</c> based on an applicable <see cref="P:ActiproSoftware.Shell.ShellObjectBase.Kind" /> property value.
+            </value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.IsRemovable"><summary>
+            Gets whether the shell object is on removable media or is a removable device.
+            </summary><value><c>true</c> if the shell object is on removable media or is a removable device; otherwise, <c>false</c>.
+            The default implementation of this property returns <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.IsVirtual"><summary>
+            Gets whether the shell object is not part of the file system (files, directories, or root directories).
+            </summary><value><c>true</c> if the shell object is not part of the file system (files, directories, or root directories); otherwise, <c>false</c>.
+            The default implementation of this property returns <c>true</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.IsWatching"><summary>
+            Gets whether the shell object's tree hierarchy is currently watching for change notifications.
+            </summary><value><c>true</c> if the shell object's tree hierarchy is currently watching for change notifications; otherwise, <c>false</c>.
+            The default implementation of this property returns <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.Kind"><summary>
+            Gets a <see cref="T:ActiproSoftware.Shell.ShellObjectKind" /> that specifies the kind of this shell object.
+            </summary><value>A <see cref="T:ActiproSoftware.Shell.ShellObjectKind" /> that specifies the kind of this shell object.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.LargeIcon"><summary>
+            Gets or sets the large icon.
+            </summary><value>The large icon.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.LargeIconOverlay"><summary>
+            Gets or sets the large icon overlay.
+            </summary><value>The large icon overlay.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.LargeThumbnail"><summary>
+            Gets or sets the large thumbnail.
+            </summary><value>The large thumbnail.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.MediumIcon"><summary>
+            Gets or sets the medium icon.
+            </summary><value>The medium icon.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.MediumIconOverlay"><summary>
+            Gets or sets the medium icon overlay.
+            </summary><value>The medium icon overlay.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.MediumThumbnail"><summary>
+            Gets or sets the medium thumbnail.
+            </summary><value>The medium thumbnail.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.Name"><summary>
+            Gets or sets the name of the shell object.
+            </summary><value>The name of the shell object.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.ParsingName"><summary>
+            Gets the full parsing name of the shell object, if available.
+            </summary><value>
+            The full parsing name of the shell object, if available.
+            The default implementation of this property returns the <see cref="P:ActiproSoftware.Shell.ShellObjectBase.FileSystemPath" /> property value.
+            </value><remarks>
+            This value is usually the same as <see cref="P:ActiproSoftware.Shell.ShellObjectBase.FileSystemPath" />, except that it can also return a special syntax to identify special shell objects.
+            </remarks></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.RelativeParsingName"><summary>
+            Gets the parent-relative parsing name of the shell object, if available.
+            </summary><value>The parent-relative parsing name of the shell object, if available.</value><remarks>
+            This value is usually the same as <see cref="P:ActiproSoftware.Shell.ShellObjectBase.Name" />, except that it can also return a special syntax to identify special shell objects.
+            </remarks></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.ShellService"><summary>
+            Gets the <see cref="T:ActiproSoftware.Shell.IShellService" /> used to return this shell object's children.
+            </summary><value>The <see cref="T:ActiproSoftware.Shell.IShellService" /> used to return this shell object's children.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.SmallIcon"><summary>
+            Gets or sets the small icon.
+            </summary><value>The small icon.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.SmallIconOverlay"><summary>
+            Gets or sets the small icon overlay.
+            </summary><value>The small icon overlay.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.SortOrder"><summary>
+            Gets or sets a numeric sort order for sorting the shell object within other shell objects.
+            </summary><value>
+            A numeric sort order for sorting the shell object within other shell objects.
+            The default value is <c>0</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.SpecialFolderKind"><summary>
+            Gets a <see cref="P:ActiproSoftware.Shell.ShellObjectBase.SpecialFolderKind" /> that specifies kind of special folder represented by this shell object, if applicable.
+            </summary><value>
+            A <see cref="P:ActiproSoftware.Shell.ShellObjectBase.SpecialFolderKind" /> that specifies kind of special folder represented by this shell object, if applicable.
+            The default implementation of this property returns <c>None</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.ShellObjectBase.ToolTip"><summary>
+            Gets or sets the tool-tip object that is displayed for this shell object in the user interface (UI).
+            </summary><value>The tool-tip object.</value></member><member name="E:ActiproSoftware.Shell.ShellObjectBase.Changed"><summary>
+            Occurs when the shell object has changed.
+            </summary><eventdata>
+            The event handler receives an argument of type <c>ShellObjectChangedEventArgs</c> containing data related to this event.
+            </eventdata></member><member name="E:ActiproSoftware.Shell.ShellObjectBase.PropertyChanged"><summary>
+            Occurs when a property has been changed.
+            </summary><eventdata>
+            The event handler receives an argument of type <c>PropertyChangedEventArgs</c> containing data related to this event.
+            </eventdata></member><member name="T:ActiproSoftware.Shell.ShellObjectChangedEventArgs"><summary>
+            Provides notification event args for an <see cref="T:ActiproSoftware.Shell.IShellObject" />.
+            </summary></member><member name="M:ActiproSoftware.Shell.ShellObjectChangedEventArgs.#ctor(ActiproSoftware.Shell.ShellObjectChangeKind,ActiproSoftware.Shell.IShellObject)"><summary>
+            Initializes an instance of the <see cref="T:ActiproSoftware.Shell.ShellObjectChangedEventArgs" /> class.
+            </summary><param name="kind">The <see cref="T:ActiproSoftware.Shell.ShellObjectChangeKind" /> that indicates the kind of change notification.</param><param name="childShellObject">The child <see cref="T:ActiproSoftware.Shell.IShellObject" /> if the change event is related to a child.</param></member><member name="P:ActiproSoftware.Shell.ShellObjectChangedEventArgs.ChildShellObject"><summary>
+            Gets the child <see cref="T:ActiproSoftware.Shell.IShellObject" /> if the change event is related to a child.
+            </summary><value>The child <see cref="T:ActiproSoftware.Shell.IShellObject" /> if the change event is related to a child.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectChangedEventArgs.Kind"><summary>
+            Gets the <see cref="T:ActiproSoftware.Shell.ShellObjectChangeKind" /> that indicates the kind of change notification.
+            </summary><value>The <see cref="T:ActiproSoftware.Shell.ShellObjectChangeKind" /> that indicates the kind of change notification.</value></member><member name="T:ActiproSoftware.Shell.ShellObjectChangeKind"><summary>
+            Specifies the kind of <see cref="T:ActiproSoftware.Shell.IShellObject" /> change notification.
+            </summary></member><member name="F:ActiproSoftware.Shell.ShellObjectChangeKind.ChildAdded"><summary>
+            A child shell object was added.
+            </summary></member><member name="F:ActiproSoftware.Shell.ShellObjectChangeKind.ChildRemoved"><summary>
+            A child shell object was removed.
+            </summary></member><member name="F:ActiproSoftware.Shell.ShellObjectChangeKind.SortRequested"><summary>
+            A sort is requested.
+            </summary></member><member name="T:ActiproSoftware.Shell.ShellObjectKind"><summary>
+            Specifies the kind of shell object.
+            </summary></member><member name="F:ActiproSoftware.Shell.ShellObjectKind.Unknown"><summary>
+            An unknown kind of object.
+            </summary></member><member name="F:ActiproSoftware.Shell.ShellObjectKind.File"><summary>
+            A file in the file system.
+            </summary></member><member name="F:ActiproSoftware.Shell.ShellObjectKind.Folder"><summary>
+            A file system folder, such as a directory on a hard drive.
+            </summary></member><member name="F:ActiproSoftware.Shell.ShellObjectKind.SpecialFolder"><summary>
+            A special file system folder, such as "Desktop" or "OneDrive".
+            </summary></member><member name="F:ActiproSoftware.Shell.ShellObjectKind.VirtualSpecialFolder"><summary>
+            A special non-file system folder, such as "This PC" or "Recycle Bin".
+            </summary></member><member name="F:ActiproSoftware.Shell.ShellObjectKind.Library"><summary>
+            A library folder, which is a collection of shell objects, potentially from multiple locations.
+            </summary></member><member name="F:ActiproSoftware.Shell.ShellObjectKind.Link"><summary>
+            A link to another object.
+            </summary></member><member name="F:ActiproSoftware.Shell.ShellObjectKind.VirtualObject"><summary>
+            A virtual object, which is a non-folder and non-file system object, such as "Network" computers.
+            </summary></member><member name="T:ActiproSoftware.Shell.ShellObjectWrapper"><summary>
+            Provides an abstract base class that wraps another <see cref="T:ActiproSoftware.Shell.IShellObject" /> implementation, allowing for easy customization.
+            </summary></member><member name="M:ActiproSoftware.Shell.ShellObjectWrapper.CreateChildFolder(System.String)"><summary>
+            Creates a child folder with the specified name.
+            </summary><param name="name">The name of the child folder.</param><returns><c>true</c> if the child folder was created; otherwise, <c>false</c>.
+            </returns><remarks>
+            Only shell folders can create child folders.
+            The default implementation of this method does nothing and returns <c>false</c>.
+            </remarks></member><member name="M:ActiproSoftware.Shell.ShellObjectWrapper.Dispose(System.Boolean)"><summary>
+            Releases the unmanaged resources used by the object and optionally releases the managed resources.
+            </summary><param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources. 
+            </param><remarks>
+            This method is called by the public <c>Dispose</c> method and the <c>Finalize</c> method. 
+            <c>Dispose</c> invokes this method with the <paramref name="disposing" /> parameter set to <c>true</c>. 
+            <c>Finalize</c> invokes this method with <paramref name="disposing" /> set to <c>false</c>.
+            </remarks></member><member name="M:ActiproSoftware.Shell.ShellObjectWrapper.RefreshChildren"><summary>
+            Refreshes the <see cref="P:ActiproSoftware.Shell.ShellObjectBase.Children" /> collection.
+            </summary></member><member name="M:ActiproSoftware.Shell.ShellObjectWrapper.StartWatching"><summary>
+            Starts watching the shell object's tree hierarchy for change notifications.
+            </summary><returns><c>true</c> if the shell object is watching its tree hierarchy; otherwise, <c>false</c>.
+            </returns><remarks>
+            The default implementation of this method does nothing, and returns <c>false</c>.
+            </remarks></member><member name="M:ActiproSoftware.Shell.ShellObjectWrapper.StopWatching"><summary>
+            Stops watching the shell object's tree hierarchy for change notifications.
+            </summary><remarks>
+            The default implementation of this method does nothing.
+            </remarks></member><member name="M:ActiproSoftware.Shell.ShellObjectWrapper.#ctor(ActiproSoftware.Shell.IShellService,ActiproSoftware.Shell.IShellObject)"><summary>
+            Initializes an instance of the <see cref="T:ActiproSoftware.Shell.ShellObjectWrapper" /> class.
+            </summary><param name="shellService">The <see cref="T:ActiproSoftware.Shell.IShellService" /> used to return this shell object's children.</param><param name="wrappedShellObject">The <see cref="T:ActiproSoftware.Shell.IShellObject" /> to be wrapped by this class.</param></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.AreChildrenLoaded"><summary>
+            Gets whether the <see cref="P:ActiproSoftware.Shell.ShellObjectWrapper.Children" /> collection is loaded.
+            </summary><value><c>true</c> if the <see cref="P:ActiproSoftware.Shell.ShellObjectWrapper.Children" /> collection is loaded; otherwise, <c>false</c>.
+            </value><remarks>
+            Since the <see cref="P:ActiproSoftware.Shell.ShellObjectWrapper.Children" /> collection is lazy-loaded when called, this property returns whether it has been loaded without triggering a load.
+            </remarks></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.CanCreateChildFolder"><summary>
+            Gets whether the shell object can create a child folder.
+            </summary><value><c>true</c> if the shell object can create a child folder; otherwise, <c>false</c>.
+            The default implementation of this property returns <c>false</c>.
+            </value><remarks>
+            Only shell folders can create child folders.
+            </remarks></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.CanHaveChildFolders"><summary>
+            Gets whether the shell object may have child folders.
+            </summary><value><c>true</c> if the shell object may have child folders; otherwise, <c>false</c>.
+            The default implementation of this property returns the <see cref="P:ActiproSoftware.Shell.ShellObjectWrapper.IsFolder" /> property value.
+            </value><remarks>
+            Some shell objects can immediately return that they don't have any child folders, whereas others might require a query to determine if there are any.
+            </remarks></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.CanRename"><summary>
+            Gets whether the shell object may be renamed.
+            </summary><value><c>true</c> if the shell object may be renamed; otherwise, <c>false</c>.
+            The default implementation of this property returns <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.Children"><summary>
+            Gets the collection of child shell objects using lazy-loading.
+            </summary><value>The collection of child shell objects using lazy-loading.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.EditingName"><summary>
+            Gets the full user-friendly editing name of the shell object, if available.
+            </summary><value>The full user-friendly editing name of the shell object, if available.</value><remarks>
+            This value is usually the same as <see cref="P:ActiproSoftware.Shell.ShellObjectWrapper.FileSystemPath" />, except that it can also return a special value to identify special shell objects.
+            </remarks></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.ExtraLargeIcon"><summary>
+            Gets or sets the extra-large icon.
+            </summary><value>The extra-large icon.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.ExtraLargeIconOverlay"><summary>
+            Gets or sets the extra-large icon overlay.
+            </summary><value>The extra-large icon overlay.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.FileSystemPath"><summary>
+            Gets the file system path of the shell object, if available.
+            </summary><value>
+            The file system path of the shell object, if available.
+            The default implementation of this property returns <see langword="null" />.
+            </value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.IsFolder"><summary>
+            Gets whether the shell object is a folder, which is anything that can contain other shell objects.
+            </summary><value><c>true</c> if the shell object is a folder, which is anything that can contain other shell objects; otherwise, <c>false</c>.
+            The default implementation of this property returns <c>true</c> based on an applicable <see cref="P:ActiproSoftware.Shell.ShellObjectWrapper.Kind" /> property value.
+            </value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.IsLink"><summary>
+            Gets whether the shell object is a link, meaning a shortcut to another shell object.
+            </summary><value><c>true</c> if the shell object is a link, meaning a shortcut to another shell object; otherwise, <c>false</c>.
+            The default implementation of this property returns <c>true</c> based on an applicable <see cref="P:ActiproSoftware.Shell.ShellObjectWrapper.Kind" /> property value.
+            </value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.IsRemovable"><summary>
+            Gets whether the shell object is on removable media or is a removable device.
+            </summary><value><c>true</c> if the shell object is on removable media or is a removable device; otherwise, <c>false</c>.
+            The default implementation of this property returns <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.IsVirtual"><summary>
+            Gets whether the shell object is not part of the file system (files, directories, or root directories).
+            </summary><value><c>true</c> if the shell object is not part of the file system (files, directories, or root directories); otherwise, <c>false</c>.
+            The default implementation of this property returns <c>true</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.IsWatching"><summary>
+            Gets whether the shell object's tree hierarchy is currently watching for change notifications.
+            </summary><value><c>true</c> if the shell object's tree hierarchy is currently watching for change notifications; otherwise, <c>false</c>.
+            The default implementation of this property returns <c>false</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.Kind"><summary>
+            Gets a <see cref="T:ActiproSoftware.Shell.ShellObjectKind" /> that specifies the kind of this shell object.
+            </summary><value>A <see cref="T:ActiproSoftware.Shell.ShellObjectKind" /> that specifies the kind of this shell object.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.LargeIcon"><summary>
+            Gets or sets the large icon.
+            </summary><value>The large icon.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.LargeIconOverlay"><summary>
+            Gets or sets the large icon overlay.
+            </summary><value>The large icon overlay.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.MediumIcon"><summary>
+            Gets or sets the medium icon.
+            </summary><value>The medium icon.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.MediumIconOverlay"><summary>
+            Gets or sets the medium icon overlay.
+            </summary><value>The medium icon overlay.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.Name"><summary>
+            Gets or sets the name of the shell object.
+            </summary><value>The name of the shell object.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.ParsingName"><summary>
+            Gets the full parsing name of the shell object, if available.
+            </summary><value>
+            The full parsing name of the shell object, if available.
+            The default implementation of this property returns the <see cref="P:ActiproSoftware.Shell.ShellObjectWrapper.FileSystemPath" /> property value.
+            </value><remarks>
+            This value is usually the same as <see cref="P:ActiproSoftware.Shell.ShellObjectWrapper.FileSystemPath" />, except that it can also return a special syntax to identify special shell objects.
+            </remarks></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.RelativeParsingName"><summary>
+            Gets the parent-relative parsing name of the shell object, if available.
+            </summary><value>The parent-relative parsing name of the shell object, if available.</value><remarks>
+            This value is usually the same as <see cref="P:ActiproSoftware.Shell.ShellObjectWrapper.Name" />, except that it can also return a special syntax to identify special shell objects.
+            </remarks></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.SmallIcon"><summary>
+            Gets or sets the small icon.
+            </summary><value>The small icon.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.SmallIconOverlay"><summary>
+            Gets or sets the small icon overlay.
+            </summary><value>The small icon overlay.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.SortOrder"><summary>
+            Gets or sets a numeric sort order for sorting the shell object within other shell objects.
+            </summary><value>
+            A numeric sort order for sorting the shell object within other shell objects.
+            The default value is <c>0</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.SpecialFolderKind"><summary>
+            Gets a <see cref="P:ActiproSoftware.Shell.ShellObjectWrapper.SpecialFolderKind" /> that specifies kind of special folder represented by this shell object, if applicable.
+            </summary><value>
+            A <see cref="P:ActiproSoftware.Shell.ShellObjectWrapper.SpecialFolderKind" /> that specifies kind of special folder represented by this shell object, if applicable.
+            The default implementation of this property returns <c>None</c>.
+            </value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.ToolTip"><summary>
+            Gets or sets the tool-tip object that is displayed for this shell object in the user interface (UI).
+            </summary><value>The tool-tip object.</value></member><member name="P:ActiproSoftware.Shell.ShellObjectWrapper.WrappedShellObject"><summary>
+            Gets the <see cref="T:ActiproSoftware.Shell.IShellObject" /> that is wrapped by this class.
+            </summary><value>The <see cref="T:ActiproSoftware.Shell.IShellObject" /> that is wrapped by this class.</value></member><member name="T:ActiproSoftware.Shell.ShellPropertyCollection"><summary>
+            Implements a collection of <see cref="T:ActiproSoftware.Shell.IShellProperty" /> objects.
+            </summary></member><member name="M:ActiproSoftware.Shell.ShellPropertyCollection.IndexOfKey(System.Object)"><summary>
+            Returns the index of the property with the specified key.
+            </summary><param name="key">The key for which to search.</param><returns>The index of the property with the specified key.</returns></member><member name="T:ActiproSoftware.Shell.ShellPropertyRequestKind"><summary>
+            Specifies the kind of <see cref="T:ActiproSoftware.Shell.IShellProperty" /> objects to request.
+            </summary></member><member name="F:ActiproSoftware.Shell.ShellPropertyRequestKind.DefaultColumns"><summary>
+            The properties that make up the default columns in a details list.
+            </summary></member><member name="F:ActiproSoftware.Shell.ShellPropertyRequestKind.AllColumns"><summary>
+            The properties that make up all possible columns in a details list.
+            </summary></member><member name="T:ActiproSoftware.Shell.SpecialFolderKind"><summary>
+            Specifies the kind of special Windows shell folder.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.None"><summary>
+            No special folder.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.Default"><summary>
+            Special-cased folder whose contents are similar to Windows Explorer's roots.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.CameraRoll"><summary>
+            Camera roll.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.CameraRollLibrary"><summary>
+            Camera roll library.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.Captures"><summary>
+            Captures.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.Computer"><summary>
+            Computer (a.k.a. My Computer).
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.Desktop"><summary>
+            The desktop, which is the computer root.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.Documents"><summary>
+            Documents (a.k.a. My Documents).
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.DocumentsLibrary"><summary>
+            Documents library.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.Downloads"><summary>
+            Downloads (a.k.a. My Downloads).
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.HomeGroup"><summary>
+            Home group.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.Libraries"><summary>
+            Libraries.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.LocalDocuments"><summary>
+            Local documents.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.LocalDownloads"><summary>
+            Local downloads.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.LocalMusic"><summary>
+            Local music.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.LocalPictures"><summary>
+            Local pictures.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.LocalVideos"><summary>
+            Local videos.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.Music"><summary>
+            Music (a.k.a. My Music).
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.MusicLibrary"><summary>
+            Music library.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.Network"><summary>
+            Network.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.OneDrive"><summary>
+            OneDrive.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.Pictures"><summary>
+            Pictures (a.k.a. My Pictures).
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.PicturesLibrary"><summary>
+            Pictures library.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.Printers"><summary>
+            Printers.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.Public"><summary>
+            Public folders.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.PublicDesktop"><summary>
+            Public desktop.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.PublicDocuments"><summary>
+            Public documents.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.PublicDownloads"><summary>
+            Public downloads.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.PublicMusic"><summary>
+            Public music.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.PublicPictures"><summary>
+            Public pictures.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.PublicVideos"><summary>
+            Public videos.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.QuickAccess"><summary>
+            Quick access.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.Recent"><summary>
+            Recent.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.RecordedCalls"><summary>
+            Recorded calls.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.RecycleBin"><summary>
+            Recycle bin.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.SavedPictures"><summary>
+            Saved pictures.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.SavedPicturesLibrary"><summary>
+            Saved pictures library.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.Screenshots"><summary>
+            Screenshots.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.ThisPCDesktop"><summary>
+            This PC's desktop.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.ThreeDObjects"><summary>
+            3D objects.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.UsersFiles"><summary>
+            User files.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.UsersLibraries"><summary>
+            User libraries.
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.Videos"><summary>
+            Videos (a.k.a. My Videos).
+            </summary></member><member name="F:ActiproSoftware.Shell.SpecialFolderKind.VideosLibrary"><summary>
+            Videos library.
+            </summary></member><member name="T:ActiproSoftware.Shell.WindowsShellMenuItemCommand"><summary>
+            Represents an <see cref="T:System.Windows.Input.ICommand" /> to be used on a menu item for one or more Windows shell objects.
+            </summary><remarks>
+            The command parameter is of type <c>UInt32</c>, which passes the related Windows shell context menu command ID.
+            </remarks></member><member name="M:ActiproSoftware.Shell.WindowsShellMenuItemCommand.RaiseCanExecuteChanged"><summary>
+            Raises the <c>CanExecuteChanged</c> event.
+            </summary></member><member name="M:ActiproSoftware.Shell.WindowsShellMenuItemCommand.CanExecute(System.Object)"><summary>
+            Returns whether the command can execute.
+            </summary><param name="parameter">The parameter to examine.</param><returns><c>true</c> if the command can execute; otherwise, <c>false</c>.
+            </returns></member><member name="M:ActiproSoftware.Shell.WindowsShellMenuItemCommand.Execute(System.Object)"><summary>
+            Executes the command.
+            </summary><param name="parameter">The parameter to examine.</param></member><member name="P:ActiproSoftware.Shell.WindowsShellMenuItemCommand.TargetViewModels"><summary>
+            Gets the collection of target <see cref="T:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel" /> objects that are affected by the command.
+            </summary><value>The collection of target <see cref="T:ActiproSoftware.Windows.Controls.Shell.ShellObjectViewModel" /> objects that are affected by the command.</value></member><member name="P:ActiproSoftware.Shell.WindowsShellMenuItemCommand.Verb"><summary>
+            Gets the string verb related to the command, if known.
+            </summary><value>The string verb related to the command, if known.</value></member><member name="E:ActiproSoftware.Shell.WindowsShellMenuItemCommand.CanExecuteChanged"><summary>
+            Occurs after the can-execute state has changed.
+            </summary><eventdata>
+            The event handler receives an argument of type <c>EventArgs</c> containing data related to this event.
+            </eventdata></member><member name="T:ActiproSoftware.Shell.WindowsShellService"><summary>
+            A <see cref="T:ActiproSoftware.Shell.IShellService" /> implementation for the Windows shell.
+            </summary></member><member name="M:ActiproSoftware.Shell.WindowsShellService.CreateObjectChildren(ActiproSoftware.Shell.IShellObject)"><summary>
+            Creates the child <see cref="T:ActiproSoftware.Shell.IShellObject" /> collection for the specified parent <see cref="T:ActiproSoftware.Shell.IShellObject" />.
+            </summary><param name="parentShellObject">The parent <see cref="T:ActiproSoftware.Shell.IShellObject" /> to examine.</param><returns>The child <see cref="T:ActiproSoftware.Shell.IShellObject" /> collection for the specified parent <see cref="T:ActiproSoftware.Shell.IShellObject" />.</returns></member><member name="M:ActiproSoftware.Shell.WindowsShellService.CreateObjectForParsingName(System.String)"><summary>
+            Creates the <see cref="T:ActiproSoftware.Shell.IShellObject" /> for the specified full parsing name (commonly the same as the file system path).
+            </summary><param name="path">The parsing name to examine.</param><returns>The <see cref="T:ActiproSoftware.Shell.IShellObject" /> for the specified full parsing name.</returns></member><member name="M:ActiproSoftware.Shell.WindowsShellService.CreateSpecialFolder(ActiproSoftware.Shell.SpecialFolderKind)"><summary>
+            Creates the <see cref="T:ActiproSoftware.Shell.IShellObject" /> for the specified special folder kind.
+            </summary><param name="kind">A <see cref="T:ActiproSoftware.Shell.SpecialFolderKind" /> that indicates the special folder kind.</param><returns>The <see cref="T:ActiproSoftware.Shell.IShellObject" /> for the specified special folder kind.</returns></member><member name="M:ActiproSoftware.Shell.WindowsShellService.Dispose(System.Boolean)"><summary>
+            Releases the unmanaged resources used by the object and optionally releases the managed resources.
+            </summary><param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources. 
+            </param><remarks>
+            This method is called by the public <c>Dispose</c> method and the <c>Finalize</c> method. 
+            <c>Dispose</c> invokes this method with the <paramref name="disposing" /> parameter set to <c>true</c>. 
+            <c>Finalize</c> invokes this method with <paramref name="disposing" /> set to <c>false</c>.
+            </remarks></member><member name="M:ActiproSoftware.Shell.WindowsShellService.GetFullPath(ActiproSoftware.Shell.IShellObject,System.String)"><summary>
+            Returns the full path of the specified <see cref="T:ActiproSoftware.Shell.IShellObject" />.
+            </summary><param name="shellObject">The <see cref="T:ActiproSoftware.Shell.IShellObject" /> to examine.</param><param name="pathSeparator">The path separator.</param><returns>The full path of the specified <see cref="T:ActiproSoftware.Shell.IShellObject" />.</returns></member><member name="M:ActiproSoftware.Shell.WindowsShellService.CompareObjectsUsingProperty(ActiproSoftware.Shell.IShellObject,ActiproSoftware.Shell.IShellObject,ActiproSoftware.Shell.IShellProperty)"><summary>
+            Compares two <see cref="T:ActiproSoftware.Shell.IShellObject" /> instances using the specified <see cref="T:ActiproSoftware.Shell.IShellProperty" />.
+            </summary><param name="shellObject1">The first <see cref="T:ActiproSoftware.Shell.IShellObject" />.</param><param name="shellObject2">The second <see cref="T:ActiproSoftware.Shell.IShellObject" />.</param><param name="shellProperty">The <see cref="T:ActiproSoftware.Shell.IShellProperty" /> to use for comparison.</param><returns>A value indicating whether one is less than, equal to or greater than the other.</returns></member><member name="M:ActiproSoftware.Shell.WindowsShellService.CreateProperties(System.Collections.Generic.IList{ActiproSoftware.Shell.IShellObject},ActiproSoftware.Shell.ShellPropertyRequestKind)"><summary>
+            Creates a collection of <see cref="T:ActiproSoftware.Shell.IShellProperty" /> objects.
+            </summary><param name="shellObjects">One or more <see cref="T:ActiproSoftware.Shell.IShellObject" /> objects to examine.</param><param name="kind">The kind of properties to request.</param><returns>A <see cref="T:ActiproSoftware.Shell.ShellPropertyCollection" /> that contains the results.</returns></member><member name="M:ActiproSoftware.Shell.WindowsShellService.GetPropertyValue(ActiproSoftware.Shell.IShellObject,ActiproSoftware.Shell.IShellProperty)"><summary>
+            Returns the property value on the specified <see cref="T:ActiproSoftware.Shell.IShellObject" />.
+            </summary><param name="shellObject">The <see cref="T:ActiproSoftware.Shell.IShellObject" /> to examine.</param><param name="shellProperty">The <see cref="T:ActiproSoftware.Shell.IShellProperty" /> whose value should be returned.</param><returns>The property value on the specified <see cref="T:ActiproSoftware.Shell.IShellObject" />.</returns></member><member name="T:ActiproSoftware.Products.Shell.AssemblyInfo"><summary>
+            Provides a class for retrieving information about the <c>ActiproSoftware.Shell</c> assembly.
+            </summary></member><member name="P:ActiproSoftware.Products.Shell.AssemblyInfo.Instance"><summary>
+            Gets the instance of the <see cref="T:ActiproSoftware.Products.AssemblyInfo" /> class for this assembly.
+            </summary><value>The instance of the <see cref="T:ActiproSoftware.Products.AssemblyInfo" /> class for this assembly.</value></member><member name="P:ActiproSoftware.Products.Shell.AssemblyInfo.LicenseType"><summary>
+            Gets the type of license that is available for the assembly.
+            </summary><value>A <see cref="T:ActiproSoftware.Products.AssemblyLicenseType" /> specifying the type of license that is available for the assembly.</value></member><member name="P:ActiproSoftware.Products.Shell.AssemblyInfo.Platform"><summary>
+            Gets the target platform for the assembly.
+            </summary><value>A <see cref="T:ActiproSoftware.Products.AssemblyPlatform" /> specifying the target platform for the assembly.</value></member><member name="P:ActiproSoftware.Products.Shell.AssemblyInfo.ProductCode"><summary>
+            Gets the product code of the assembly.
+            </summary><value>A three-letter product code of the assembly.</value></member><member name="P:ActiproSoftware.Products.Shell.AssemblyInfo.ProductId"><summary>
+            Gets the product ID of the assembly.
+            </summary><value>The product ID of the assembly.</value></member><member name="T:ActiproSoftware.Products.Shell.Resources"><summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary></member><member name="P:ActiproSoftware.Products.Shell.Resources.ResourceManager"><summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary></member><member name="P:ActiproSoftware.Products.Shell.Resources.Culture"><summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary></member><member name="P:ActiproSoftware.Products.Shell.Resources.UIFolderText"><summary>
+              Looks up a localized string similar to Folder.
+            </summary></member><member name="P:ActiproSoftware.Products.Shell.Resources.UINewFolderText"><summary>
+              Looks up a localized string similar to New folder.
+            </summary></member><member name="P:ActiproSoftware.Products.Shell.Resources.UINewText"><summary>
+              Looks up a localized string similar to New.
+            </summary></member><member name="T:ActiproSoftware.Products.Shell.ShellLogo"><summary>
+            Represents the logo for this product.
+            </summary><summary>
+            ShellLogo
+            </summary></member><member name="M:ActiproSoftware.Products.Shell.ShellLogo.InitializeComponent"><summary>
+            InitializeComponent
+            </summary></member><member name="M:ActiproSoftware.Products.Shell.ShellLogo.#ctor"><summary>
+            Initializes a new instance of the <c>ShellLogo</c> class.
+            </summary></member><member name="T:ActiproSoftware.Products.Shell.SR"><summary>
+            Provides access to the string resources of this assembly, also allowing for their customization.
+            </summary><remarks>
+            Call the <see cref="M:ActiproSoftware.Products.Shell.SR.GetString(System.String)" /> method to return a resolved resource string.
+            If a custom string has been set for a specified string resource name, it will be returned.
+            Otherwise, the default string resource value is returned.
+            <para>
+            If any of the resource strings are customized via a call to <see cref="M:ActiproSoftware.Products.Shell.SR.SetCustomString(System.String,System.String)" />,
+            it is best to do so before any other classes in this assembly are referenced,
+            such as in the application startup.
+            </para></remarks></member><member name="M:ActiproSoftware.Products.Shell.SR.ClearCustomStrings"><summary>
+            Removes all custom strings.
+            </summary></member><member name="M:ActiproSoftware.Products.Shell.SR.ContainsCustomString(System.String)"><summary>
+            Returns whether a custom string is defined for the specified string resource.
+            </summary><param name="name">The name of the resource for which to search.</param><returns><c>true</c> if a custom string is defined for the specified string resource; otherwise, <c>false</c>.
+            </returns></member><member name="M:ActiproSoftware.Products.Shell.SR.GetCustomString(System.String)"><summary>
+            Returns custom string that is stored for the specified string resource, if any.
+            </summary><param name="name">The name of the resource to get.</param><returns>The custom string that is stored for the specified string resource, if any.</returns></member><member name="M:ActiproSoftware.Products.Shell.SR.GetString(System.String)"><summary>
+            Returns the resolved value of the specified string resource.
+            </summary><param name="name">The name of the resource to get.</param><returns>
+            The value of the resource localized for the caller's current culture settings. 
+            If a best match is not possible, <see langword="null" /> is returned.
+            </returns></member><member name="M:ActiproSoftware.Products.Shell.SR.GetString(ActiproSoftware.Products.Shell.SRName)"><summary>
+            Returns the resolved value of the specified string resource.
+            </summary><param name="name">The name of the resource to get.</param><returns>
+            The value of the resource localized for the caller's current culture settings. 
+            If a best match is not possible, <see langword="null" /> is returned.
+            </returns></member><member name="M:ActiproSoftware.Products.Shell.SR.GetString(System.String,System.Object[])"><summary>
+            Returns the resolved value of the specified string resource, by calling <c>String.Format</c> using supplied arguments.
+            </summary><param name="name">The name of the resource to get.</param><param name="args">The arguments to pass to <c>String.Format</c>.</param><returns>
+            The value of the resource localized for the caller's current culture settings. 
+            If a best match is not possible, <see langword="null" /> is returned.
+            </returns></member><member name="M:ActiproSoftware.Products.Shell.SR.GetString(ActiproSoftware.Products.Shell.SRName,System.Object[])"><summary>
+            Returns the resolved value of the specified string resource, by calling <c>String.Format</c> using supplied arguments.
+            </summary><param name="name">The name of the resource to get.</param><param name="args">The arguments to pass to <c>String.Format</c>.</param><returns>
+            The value of the resource localized for the caller's current culture settings. 
+            If a best match is not possible, <see langword="null" /> is returned.
+            </returns></member><member name="M:ActiproSoftware.Products.Shell.SR.RemoveCustomString(System.String)"><summary>
+            Removes any custom string that is defined for the specified string resource.
+            </summary><param name="name">The name of the resource to remove.</param></member><member name="M:ActiproSoftware.Products.Shell.SR.SetCustomString(System.String,System.String)"><summary>
+            Sets a custom string value for the specified string resource.
+            </summary><param name="name">The name of the resource to set.</param><param name="value">The value of the resource to set.</param></member><member name="P:ActiproSoftware.Products.Shell.SR.ResourceManager"><summary>
+            Gets the <see cref="P:ActiproSoftware.Products.Shell.SR.ResourceManager" /> that provides the default resources. 
+            </summary><value>The <see cref="P:ActiproSoftware.Products.Shell.SR.ResourceManager" /> that provides the default resources.</value></member><member name="T:ActiproSoftware.Products.Shell.SRExtension"><summary>
+            Provides a markup extension for loading a string resource from the assembly that could possibly be customized.
+            </summary></member><member name="M:ActiproSoftware.Products.Shell.SRExtension.ProvideValue(System.IServiceProvider)"><summary>
+            Returns the string resource based on the supplied name.
+            </summary><param name="serviceProvider">An object that can provide services for the markup extension.</param><returns>The object value to set on the property where the extension is applied.</returns></member><member name="M:ActiproSoftware.Products.Shell.SRExtension.#ctor"><summary>
+            Creates an instance of the <c>SRExtension</c> class.
+            </summary></member><member name="M:ActiproSoftware.Products.Shell.SRExtension.#ctor(System.String)"><summary>
+            Creates an instance of the <c>SRExtension</c> class.
+            </summary><param name="name">The name of the string resource.</param></member><member name="P:ActiproSoftware.Products.Shell.SRExtension.Name"><summary>
+            Gets or sets the name of the string resource.
+            </summary><value>The name of the string resource.</value></member><member name="T:ActiproSoftware.Products.Shell.SRName"><summary>
+            Specifies the names of string resources for this assembly.
+            </summary></member><member name="F:ActiproSoftware.Products.Shell.SRName.UIFolderText"><summary>A user interface string.</summary></member><member name="F:ActiproSoftware.Products.Shell.SRName.UINewText"><summary>A user interface string.</summary></member><member name="F:ActiproSoftware.Products.Shell.SRName.UINewFolderText"><summary>A user interface string.</summary></member></members></doc>

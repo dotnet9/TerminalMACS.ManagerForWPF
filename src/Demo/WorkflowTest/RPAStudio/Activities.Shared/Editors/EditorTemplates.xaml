@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:Class="Activities.Shared.Editors.EditorTemplates"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib"
+                    xmlns:sapc="clr-namespace:System.Activities.Presentation.Converters;assembly=System.Activities.Presentation"
+                    xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
+                    xmlns:PropertyEditing="clr-namespace:System.Activities.Presentation.PropertyEditing;assembly=System.Activities.Presentation">
+    
+   
+    <DataTemplate x:Key="CollectionArgumentEditor">
+        <DockPanel LastChildFill="True">
+            <PropertyEditing:EditModeSwitchButton TargetEditMode="Dialog" HorizontalAlignment="Right" DockPanel.Dock="Right" />
+            <TextBlock Text="(集合)" TextTrimming="CharacterEllipsis" />
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DictionaryArgumentEditor">
+        <DockPanel LastChildFill="True">
+            <PropertyEditing:EditModeSwitchButton TargetEditMode="Dialog" HorizontalAlignment="Right" DockPanel.Dock="Right" />
+            <TextBlock Text="(集合)" TextTrimming="CharacterEllipsis" />
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ArgumentDictionaryEditor">
+        <DockPanel LastChildFill="True">
+            <TextBlock Text="(集合)" TextTrimming="CharacterEllipsis" IsEnabled="False"/>
+            <PropertyEditing:EditModeSwitchButton TargetEditMode="Dialog" HorizontalAlignment="Right" DockPanel.Dock="Right" />
+        </DockPanel>
+    </DataTemplate>
+</ResourceDictionary>

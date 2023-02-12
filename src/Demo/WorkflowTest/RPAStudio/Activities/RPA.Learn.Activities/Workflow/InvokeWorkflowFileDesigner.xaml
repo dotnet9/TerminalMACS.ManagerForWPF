@@ -1,0 +1,35 @@
+﻿<sap:ActivityDesigner x:Class="RPA.Learn.Activities.Workflow.InvokeWorkflowFileDesigner"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sap="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation"
+    xmlns:sapv="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"         
+    xmlns:controls="clr-namespace:Activities.Shared.Controls;assembly=Activities.Shared"
+    xmlns:attached="clr-namespace:Activities.Shared.Attached;assembly=Activities.Shared"
+    attached:ActivityDesignerAttached.Icon="Image/Workflow/InvokeWorkflowFile.png"
+    attached:ActivityDesignerAttached.Resources="pack://application:,,,/Activities.Shared;Component/Styles/Index.xaml"
+    >
+    <controls:CollapsableActivity>
+        <Grid Height="100">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <sapv:ExpressionTextBox Margin="0,0,30,0" OwnerActivity="{Binding Path=ModelItem}" ExpressionType="s:String" HintText="工作流文件路径，必须用双引号括起来"
+                                Expression="{Binding Path=ModelItem.WorkflowFilePath,Mode=TwoWay,Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In}" />
+                <Button x:Name="BrowserBtn" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,1,0" Click="BrowserBtn_Click" >...</Button>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="EditArgumentsBtn" Content="编辑参数" Width="100" Height="25" HorizontalAlignment="Center" Click="EditArgumentsBtn_Click"/>
+                <Button x:Name="ImportArgumentsBtn" Content="导入参数" Width="100" Height="25" HorizontalAlignment="Center" Grid.Column="1" Click="ImportArgumentsBtn_Click"/>
+            </Grid>
+        </Grid>
+    </controls:CollapsableActivity>
+
+</sap:ActivityDesigner>
+

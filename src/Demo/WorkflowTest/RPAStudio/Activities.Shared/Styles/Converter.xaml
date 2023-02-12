@@ -1,0 +1,15 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="clr-namespace:System.Windows.Controls.Primitives;assembly=PresentationFramework"
+    xmlns:converters="clr-namespace:Activities.Shared.Converters"
+    xmlns:sapc="clr-namespace:System.Activities.Presentation.Converters;assembly=System.Activities.Presentation"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sapc:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />
+    <sapc:ModelToObjectValueConverter x:Key="ModelToObjectValueConverter" />
+    <converters:ProjectPathConverter x:Key="ProjectPathConverters"/>
+
+    <sapc:ModelPropertyEntryToOwnerActivityConverter x:Key="ModelPropertyEntryToOwnerActivityConverter" />
+    <sapc:ArgumentToExpressionModelItemConverter x:Key="ArgumentToExpressionModelItemConverter" />
+</ResourceDictionary>

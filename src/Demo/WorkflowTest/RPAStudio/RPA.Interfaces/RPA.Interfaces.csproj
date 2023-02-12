@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EE4A987C-743B-4EBA-8D3F-99B8A6761EC8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RPA.Interfaces</RootNamespace>
+    <AssemblyName>RPA.Interfaces</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ActiproSoftware.Text.Wpf, Version=19.1.685.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RPA.Shared\References\ActiproSoftware.Text.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Activities.Presentation" />
+    <Reference Include="System.AddIn.Contract" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Activities\ActivityGroupItem.cs" />
+    <Compile Include="Activities\ActivityGroupOrLeafItem.cs" />
+    <Compile Include="Activities\ActivityLeafItem.cs" />
+    <Compile Include="Activities\IActivitiesDefaultAttributesService.cs" />
+    <Compile Include="Activities\IActivitiesService.cs" />
+    <Compile Include="Activities\IActivitiesServiceProxy.cs" />
+    <Compile Include="Activities\IActivityFavoritesService.cs" />
+    <Compile Include="Activities\IActivityMountService.cs" />
+    <Compile Include="Activities\IActivityRecentService.cs" />
+    <Compile Include="Activities\ISystemActivityIconService.cs" />
+    <Compile Include="AppDomains\IAppDomainContainerService.cs" />
+    <Compile Include="AppDomains\IAppDomainControllerService.cs" />
+    <Compile Include="AppDomains\IAppDomainServiceHost.cs" />
+    <Compile Include="AppDomains\IAssemblyResolveService.cs" />
+    <Compile Include="AppDomains\MarshalByRefServiceBase.cs" />
+    <Compile Include="AppDomains\MarshalByRefServiceProxyBase.cs" />
+    <Compile Include="App\IApplication.cs" />
+    <Compile Include="ExpressionEditor\ISyntaxService.cs" />
+    <Compile Include="ExpressionEditor\IWorkflowImportReferenceService.cs" />
+    <Compile Include="Nupkg\IPackageExportService.cs" />
+    <Compile Include="Nupkg\IPackageExportSettingsService.cs" />
+    <Compile Include="Nupkg\IPackageIdentityService.cs" />
+    <Compile Include="Nupkg\IPackageImportService.cs" />
+    <Compile Include="Nupkg\IPackageRepositoryService.cs" />
+    <Compile Include="Nupkg\NugetPackageItem.cs" />
+    <Compile Include="Project\IProjectConfigFileService.cs" />
+    <Compile Include="Project\IProjectManagerService.cs" />
+    <Compile Include="Project\IRecentProjectsConfigService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\IServiceLocator.cs" />
+    <Compile Include="Share\LogToOutputWindowTextWriter.cs" />
+    <Compile Include="Share\SharedObject.cs" />
+    <Compile Include="Share\SharedVars.cs" />
+    <Compile Include="Workflow\IWorkflowBreakpointsService.cs" />
+    <Compile Include="Workflow\IWorkflowBreakpointsServiceProxy.cs" />
+    <Compile Include="Workflow\IWorkflowDebugService.cs" />
+    <Compile Include="Workflow\IWorkflowDesignerCollectService.cs" />
+    <Compile Include="Workflow\IWorkflowDesignerCollectServiceProxy.cs" />
+    <Compile Include="Workflow\IWorkflowDesignerService.cs" />
+    <Compile Include="Workflow\IWorkflowDesignerServiceProxy.cs" />
+    <Compile Include="Workflow\IWorkflowRunService.cs" />
+    <Compile Include="Workflow\IWorkflowRuntime.cs" />
+    <Compile Include="Workflow\IWorkflowStateService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RPA.Shared\RPA.Shared.csproj">
+      <Project>{a950f9be-8d77-4a5a-bc73-170b68dce0d6}</Project>
+      <Name>RPA.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

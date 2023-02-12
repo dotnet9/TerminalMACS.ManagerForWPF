@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--系统组件-->
+<AvailableActivities>
+  <Group Name="程序设计" >
+    <Group Name="数据集合">
+      <Activity Name="数据添加到集合"  TypeOf="AddToCollection" ToolTip="将项添加到指定的集合"/>
+      <Activity  Name="清空整个集合"  TypeOf="ClearCollection" ToolTip="清除指定的项集合" />
+      <Activity  Name="判断集合中数据是否存在"  TypeOf="ExistsInCollection" ToolTip="指示给定集合中是否存在给定项" />
+      <Activity  Name="移除集合中的某一项"  TypeOf="RemoveFromCollection" ToolTip="从指定集合中移除项" />
+    </Group>
+    <Group Name="调试">
+      <Activity Name="输出行"  TypeOf="WriteLine" />
+    </Group>
+    <Group Name="流程图">
+      <Activity Name="流程决策"  TypeOf="FlowDecision" />
+      <Activity Name="流程切换"  TypeOf="FlowSwitch" />
+      <Activity Name="流程图"  TypeOf="Flowchart" />
+    </Group>
+    <Group Name="状态机" >
+      <Activity Name="状态结束"  TypeOf="FinalState" />
+      <Activity Name="状态开始"  TypeOf="State" />
+      <Activity Name="状态机"  TypeOf="StateMachine" />
+    </Group>
+    <Group Name="异常处理" >
+      <Activity Name="再次引发"  TypeOf="Rethrow" />
+      <Activity Name="终止工作流"  TypeOf="TerminateWorkflow" />
+      <Activity Name="引发"  TypeOf="Throw" />
+      <Activity Name="异常处理"  TypeOf="TryCatch" />
+    </Group>
+    <Group Name="流程控制" >
+      <Activity Name="赋值"  TypeOf="Assign" />
+      <Activity Name="取消范围"  TypeOf="CancellationScope" />
+      <Activity Name="延时"  TypeOf="Delay" />
+      <Activity Name="DoWhile循环"  TypeOf="DoWhile" />
+      <Activity Name="If条件"  TypeOf="If" />
+      <Activity Name="并行"  TypeOf="Parallel" />
+      <Activity Name="并行遍历"  TypeOf="ParallelForEach" />
+      <Activity Name="选取"  TypeOf="Pick" />
+      <Activity Name="选取分支"  TypeOf="PickBranch" />
+      <Activity Name="序列"  TypeOf="Sequence" />
+      <Activity Name="Switch分支"  TypeOf="Switch" />
+      <Activity Name="While循环"  TypeOf="While" />
+    </Group>
+  </Group>
+</AvailableActivities>

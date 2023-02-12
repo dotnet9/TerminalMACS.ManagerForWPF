@@ -1,0 +1,140 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                     >
+
+
+    <ContextMenu x:Key="EmptyContextMenu" Visibility="Collapsed">
+    </ContextMenu>
+
+    <ContextMenu x:Key="SaveDropdownContextMenu">
+        <MenuItem Header="另存为" Command="{Binding SaveAsCommand}" CommandParameter="{Binding}"/>
+        <MenuItem Header="全部保存" Command="{Binding SaveAllCommand}" CommandParameter="{Binding}"/>
+    </ContextMenu>
+
+    <ContextMenu x:Key="OutputItemContextMenu">
+        <MenuItem Header="复制（Ctrl+C）"  Command="{Binding CopyItemMsgCommand}" CommandParameter="{Binding}"/>
+        <MenuItem Header="查看消息详情"  Command="{Binding ViewItemMsgDetailCommand}" CommandParameter="{Binding}"/>
+    </ContextMenu>
+
+    <ContextMenu x:Key="ProjectViewContextMenu">
+        <MenuItem Header="刷新" Command="{Binding RefreshCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="全部展开" Command="{Binding ExpandAllCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="全部折叠" Command="{Binding CollapseAllCommand}" CommandParameter="{Binding}" />
+    </ContextMenu>
+    
+
+    <!--项目根节点上右击-->
+    <ContextMenu x:Key="ProjectRootItemContextMenu">
+        <MenuItem Header="打开项目文件夹" Command="{Binding OpenDirCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="项目设置" Command="{Binding OpenProjectSettingsCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="新建文件夹" Command="{Binding NewFolderCommand}" CommandParameter="{Binding}" />
+        <Separator />
+        <MenuItem Header="新建序列图" Command="{Binding NewSequenceCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="新建流程图" Command="{Binding NewFlowchartCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="新建状态机" Command="{Binding NewStateMachineCommand}" CommandParameter="{Binding}" />
+        <Separator />
+        <MenuItem Header="导入工作流" Command="{Binding ImportWorkflowCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="导出项目" Command="{Binding ExportNupkgCommand}" CommandParameter="{Binding}" />
+        <Separator />
+        <MenuItem Header="关闭项目" Command="{Binding CloseProjectCommand}" CommandParameter="{Binding}"/>
+    </ContextMenu>
+
+    <!--项目目录上右击-->
+    <ContextMenu x:Key="ProjectDirItemContextMenu">
+        <MenuItem Header="打开" Command="{Binding OpenDirCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="重命名" Command="{Binding RenameDirCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="删除" Command="{Binding DeleteDirCommand}" CommandParameter="{Binding}" />
+        <Separator />
+        <MenuItem Header="新建文件夹" Command="{Binding NewFolderCommand}" CommandParameter="{Binding}" />
+        <Separator />
+        <MenuItem Header="新建序列图" Command="{Binding NewSequenceCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="新建流程图" Command="{Binding NewFlowchartCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="新建状态机" Command="{Binding NewStateMachineCommand}" CommandParameter="{Binding}" />
+    </ContextMenu>
+
+    <!--项目截图目录.screenshots上右击-->
+    <ContextMenu x:Key="ProjectDirItemScreenshotsContextMenu">
+        <MenuItem Header="打开" Command="{Binding OpenDirCommand}" CommandParameter="{Binding}" />
+        <Separator />
+        <MenuItem Header="移除无用的截图" Command="{Binding RemoveUnusedScreenshotsCommand}" CommandParameter="{Binding}" />
+    </ContextMenu>
+    
+
+    <!--项目Main xaml上右击-->
+    <ContextMenu x:Key="ProjectFileItemMainXamlContextMenu">
+        <MenuItem Header="打开" Command="{Binding OpenXamlCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="重命名" Command="{Binding RenameFileCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="删除" Command="{Binding DeleteFileCommand}" CommandParameter="{Binding}" />
+        <Separator />
+        <MenuItem Header="运行" Command="{Binding RunCommand}" CommandParameter="{Binding}" />
+    </ContextMenu>
+
+    <!--项目非Main的xaml上右击-->
+    <ContextMenu x:Key="ProjectFileItemXamlContextMenu">
+        <MenuItem Header="打开" Command="{Binding OpenXamlCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="重命名" Command="{Binding RenameFileCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="删除" Command="{Binding DeleteFileCommand}" CommandParameter="{Binding}" />
+        <Separator />
+        <MenuItem Header="运行" Command="{Binding RunCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="设置为主文件" Command="{Binding SetAsMainCommand}" CommandParameter="{Binding}" />
+    </ContextMenu>
+
+    <!--项目非xaml的普通文件上右击-->
+    <ContextMenu x:Key="ProjectFileItemContextMenu">
+        <MenuItem Header="重命名" Command="{Binding RenameFileCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="删除" Command="{Binding DeleteFileCommand}" CommandParameter="{Binding}" />
+    </ContextMenu>
+
+
+    <ContextMenu x:Key="ActivityViewContextMenu">
+        <MenuItem Header="全部展开" Command="{Binding ExpandAllCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="全部折叠" Command="{Binding CollapseAllCommand}" CommandParameter="{Binding}" />
+    </ContextMenu>
+    
+    <ContextMenu x:Key="AddToFavoritesContextMenu">
+        <MenuItem Header="添加到收藏夹"  Command="{Binding AddToFavoritesCommand}" CommandParameter="{Binding}"/>
+    </ContextMenu>
+
+    <ContextMenu x:Key="RemoveFromFavoritesContextMenu">
+        <MenuItem Header="从收藏夹移除"  Command="{Binding RemoveFromFavoritesCommand}" CommandParameter="{Binding}"/>
+    </ContextMenu>
+
+    <!--起始页最近列表项目上右击-->
+    <ContextMenu x:Key="RecentUsedProjectItemContextMenu">
+        <MenuItem Header="打开项目" Command="{Binding OpenCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="打开所在的文件夹" Command="{Binding OpenDirCommand}" CommandParameter="{Binding}" />
+        <Separator />
+        <MenuItem Header="从列表中移除" Command="{Binding RemoveFromRecentUsedProjectsCommand}" CommandParameter="{Binding}" />
+    </ContextMenu>
+
+    <ContextMenu x:Key="SnippetItemUserAddContextMenu">
+        <MenuItem Header="打开" Command="{Binding OpenSnippetCommand}" CommandParameter="{Binding}" >
+            <MenuItem.Icon>
+                <Image Source="pack://application:,,,/Image/Dock/snippet-file.png"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Header="移除" Command="{Binding RemoveSnippetCommand}" CommandParameter="{Binding}" >
+            <MenuItem.Icon>
+                <Image Source="pack://application:,,,/Image/Dock/menu-remove.png"/>
+            </MenuItem.Icon>
+        </MenuItem>
+    </ContextMenu>
+
+    <ContextMenu x:Key="SnippetItemContextMenu">
+        <MenuItem Header="打开" Command="{Binding OpenSnippetCommand}" CommandParameter="{Binding}" >
+            <MenuItem.Icon>
+                <Image Source="pack://application:,,,/Image/Dock/menu-open.png"/>
+            </MenuItem.Icon>
+        </MenuItem>
+    </ContextMenu>
+
+    <ContextMenu x:Key="SnippetsViewContextMenu">
+        <MenuItem Header="刷新" Command="{Binding RefreshCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="全部展开" Command="{Binding ExpandAllCommand}" CommandParameter="{Binding}" />
+        <MenuItem Header="全部折叠" Command="{Binding CollapseAllCommand}" CommandParameter="{Binding}" />
+        <Separator />
+        <MenuItem Header="添加文件夹" Command="{Binding AddFolderCommand}" CommandParameter="{Binding}" />
+    </ContextMenu>
+
+</ResourceDictionary>

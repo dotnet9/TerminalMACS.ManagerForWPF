@@ -1,0 +1,206 @@
+﻿<ribbon:RibbonWindow x:Class="RPAStudio.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="http://www.galasoft.ch/mvvmlight"
+        xmlns:local="clr-namespace:RPAStudio.Views"
+        xmlns:ribbon="http://schemas.actiprosoftware.com/winfx/xaml/ribbon"
+        xmlns:themes="http://schemas.actiprosoftware.com/winfx/xaml/themes"
+        xmlns:docking="http://schemas.actiprosoftware.com/winfx/xaml/docking"
+        xmlns:actiproShared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
+        xmlns:adorners="http://gu.se/Adorners"
+        mc:Ignorable="d"
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
+	    ApplicationName="{Binding ApplicationName}"
+        ribbon:IsRibbonVisibleWithBackstage="False"
+	    ribbon:IsGlassEnabled="False"
+	    IsManipulationEnabled="False"
+	    TextOptions.TextFormattingMode="Display"
+	    Width="1024"
+	    Height="640"
+	    MinHeight="600"
+	    MinWidth="900"
+	    WindowStartupLocation="CenterScreen"
+        WindowState="Maximized" Icon="/RPAStudio;component/Resources/ICON/RPAStudio.ico">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <cmd:EventToCommand Command="{Binding LoadedCommand}" PassEventArgsToCommand="True" ></cmd:EventToCommand>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Closing">
+            <cmd:EventToCommand Command="{Binding ClosingCommand}" PassEventArgsToCommand="True" ></cmd:EventToCommand>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Closed">
+            <cmd:EventToCommand Command="{Binding ClosedCommand}" PassEventArgsToCommand="True" ></cmd:EventToCommand>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <!--快捷键绑定-->
+    <ribbon:RibbonWindow.InputBindings>
+        <KeyBinding Command="{Binding SaveCommand}" Key="S" Modifiers="Ctrl" />
+        <KeyBinding Command="{Binding SaveAllCommand}" Key="S" Modifiers="Ctrl+Shift" />
+        <KeyBinding Command="{Binding NewSequenceCommand}" Key="N" Modifiers="Ctrl" />
+        <KeyBinding Command="{Binding RunWorkflowCommand}" Key="F5" />
+
+        <KeyBinding Command="{Binding DebugOrContinueWorkflowCommand}" Key="F7" />
+        <KeyBinding Command="{Binding StopWorkflowCommand}" Key="F12" />
+        <KeyBinding Command="{Binding StepIntoCommand}" Key="F11" />
+        <KeyBinding Command="{Binding StepOverCommand}" Key="F11" Modifiers="Shift" />
+        <KeyBinding Command="{Binding ValidateWorkflowCommand}" Key="F8" />
+        <KeyBinding Command="{Binding ToggleBreakpointCommand}" Key="F9" />
+        <KeyBinding Command="{Binding RemoveAllBreakpointsCommand}" Key="F9" Modifiers="Shift" />
+        <KeyBinding Command="{Binding OpenLogsCommand}" Key="L" Modifiers="Ctrl" />
+    </ribbon:RibbonWindow.InputBindings>
+    <DockPanel>
+        <ribbon:Ribbon FontFamily="Microsoft YaHei" DockPanel.Dock="Top" TabIndex="0"
+			ApplicationButtonLabel="主页"
+			QuickAccessToolBarLocation="Above"
+			IsCustomizeQuickAccessToolBarMenuItemVisible="False"
+			IsQuickAccessToolBarCustomizationEnabled="False"
+			IsMinimized="False"
+			ApplicationButtonScreenTipHeader="{x:Null}"
+			IsApplicationMenuOpen="{Binding IsShowHomePage,Mode=TwoWay}" FontSize="13" >
+            <ribbon:Ribbon.TabPanelItems>
+                <ribbon:ToggleMinimizationButton />
+            </ribbon:Ribbon.TabPanelItems>
+            <ribbon:Ribbon.ApplicationMenu>
+                <ribbon:Backstage CanClose="{Binding IsHomePageCanClose}" 
+                                  adorners:Overlay.Visibility="{Binding IsLoading,Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <i:Interaction.Triggers>
+                        <!--添加Unloaded事件触发来让VS调试时关闭主窗口不报System.InvalidOperationException，原因不明（主因是adorners:Overlay引起异常）-->
+                        <i:EventTrigger EventName="Unloaded" />
+                    </i:Interaction.Triggers>
+                    <ribbon:Button Label="打开" StaysOpenOnClick="True" Command="{Binding OpenProjectCommand}" />
+                    <ribbon:Button Label="关闭" StaysOpenOnClick="True" Command="{Binding CloseProjectCommand}" />
+                    <ribbon:Separator />
+                    <ribbon:BackstageTab Header="开始">
+                        <local:StartPageView />
+                    </ribbon:BackstageTab>
+                    <ribbon:BackstageTab Header="工具">
+                        <local:ToolsPageView />
+                    </ribbon:BackstageTab>
+                    <ribbon:BackstageTab Header="设置">
+                        <local:SettingsPageView />
+                    </ribbon:BackstageTab>
+                    <ribbon:BackstageTab Header="关于">
+                        <local:AboutPageView />
+                    </ribbon:BackstageTab>
+                    <adorners:Overlay.Content>
+                        <Grid Background="{DynamicResource Loading.Mask.Background}" Opacity="0.5">
+                            <actiproShared:RingSpinner
+						Width="48"
+						Height="48"
+						LineCap="Round"
+						BorderThickness="5"
+						BorderBrush="{DynamicResource RingSpinner.BorderBrush}"
+						IsHitTestVisible="False"
+						IsSpinning="True" />
+                        </Grid>
+                    </adorners:Overlay.Content>
+                </ribbon:Backstage>
+
+            </ribbon:Ribbon.ApplicationMenu>
+            <ribbon:Ribbon.Tabs>
+                <ribbon:Tab Label="设计" >
+                    <ribbon:Group Label="工作流">
+                        <ribbon:PopupButton ImageSourceLarge="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/new.png" Label="新建" ToolTip="新建序列图、流程图或状态机">
+                            <ribbon:Menu>
+                                <ribbon:Button ImageSourceLarge="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/sequence.png" Label="序列图" ToolTip="序列图（Ctrl+N）" Command="{Binding NewSequenceCommand}" />
+                                <ribbon:Button ImageSourceLarge="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/flowchart.png" Label="流程图" ToolTip="流程图" Command="{Binding NewFlowchartCommand}"/>
+                                <ribbon:Button ImageSourceLarge="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/state-machine.png" Label="状态机" ToolTip="状态机" Command="{Binding NewStateMachineCommand}"/>
+                            </ribbon:Menu>
+                        </ribbon:PopupButton>
+                        <ribbon:SplitButton ImageSourceLarge="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/save.png" Label="保存" ToolTip="保存（Ctrl+S）" Command="{Binding SaveCommand}">
+                            <ribbon:Menu>
+                                <ribbon:Button ImageSourceLarge="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/save-as.png" Label="另存为" ToolTip="另存为" Command="{Binding SaveAsCommand}"/>
+                                <ribbon:Button ImageSourceLarge="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/save-all.png" Label="全部保存" ToolTip="全部保存（Ctrl+Shift+S）" Command="{Binding SaveAllCommand}"/>
+                            </ribbon:Menu>
+                        </ribbon:SplitButton>
+                        <ribbon:Button ImageSourceLarge="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/run.png" Label="运行" ToolTip="运行（F5）" Command="{Binding RunWorkflowCommand}"/>
+                    </ribbon:Group>
+                    <ribbon:Group Label="编辑" >
+                        <ribbon:StackPanel  ItemVariantBehavior="MediumThenSmallWhenSmall">
+                            <ribbon:Button ImageSourceSmall="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/cut.png" Label="剪切" ToolTip="剪切（Ctrl+X）" Command="{Binding CutCommand}" Focusable="False"/>
+                            <ribbon:Button ImageSourceSmall="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/copy.png" Label="复制" ToolTip="复制（Ctrl+C）" Command="{Binding CopyCommand}" Focusable="False"/>
+                            <ribbon:Button ImageSourceSmall="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/paste.png" Label="粘贴" ToolTip="粘贴（Ctrl+V）" Command="{Binding PasteCommand}" Focusable="False"/>
+                        </ribbon:StackPanel>
+                    </ribbon:Group>
+                    <ribbon:Group Label="部署" >
+                        <ribbon:Button ImageSourceSmall="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/export.png" Label="导出" ToolTip="导出项目为Nupkg包"  Command="{Binding ExportNupkgCommand}"/>
+                    </ribbon:Group>
+                </ribbon:Tab>
+                <ribbon:Tab Label="调试" >
+                    <ribbon:Group Label="启动" >
+                        <ribbon:Button ImageSourceSmall="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/run.png" Label="运行" ToolTip="运行（F5）" Command="{Binding RunWorkflowCommand}"/>
+                        <ribbon:Button ImageSourceSmall="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/stop.png" Label="停止" ToolTip="停止（F12）" Command="{Binding StopWorkflowCommand}"/>
+
+                        <ribbon:Button ImageSourceSmall="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/debug.png" Label="调试" ToolTip="调试（F7）" Command="{Binding DebugWorkflowCommand}" Visibility="{Binding IsShowDebug,Mode=OneWay, Converter={StaticResource BooleanToCollapsedVisibilityConverter}}"/>
+                        <ribbon:Button ImageSourceSmall="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/debug.png" Label="继续" ToolTip="继续调试（F7）" Command="{Binding ContinueWorkflowCommand}" Visibility="{Binding IsShowContinue,Mode=OneWay, Converter={StaticResource BooleanToCollapsedVisibilityConverter}}"/>
+                    </ribbon:Group>
+                    <ribbon:Group Label="调试" >
+                        <ribbon:StackPanel  ItemVariantBehavior="MediumThenSmallWhenSmall">
+                            <ribbon:Button ImageSourceSmall="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/break.png" Label="中断" ToolTip="中断执行（暂停）" Command="{Binding BreakCommand}"/>
+                            <ribbon:Button ImageSourceSmall="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/step-into.png" Label="逐语句" ToolTip="逐语句（F11）" Command="{Binding StepIntoCommand}"/>
+                            <ribbon:Button ImageSourceSmall="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/step-over.png" Label="逐过程" ToolTip="逐过程（Shift+F11）" Command="{Binding StepOverCommand}"/>
+                        </ribbon:StackPanel>
+                        <ribbon:Button ImageSourceSmall="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/validate.png" Label="校验" ToolTip="检查错误（F8）" Command="{Binding ValidateWorkflowCommand}"/>
+                        <ribbon:SplitButton ImageSourceLarge="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/breakpoints.png" Label="断点" ToolTip="切换断点（F9）" Command="{Binding ToggleBreakpointCommand}">
+                            <ribbon:Menu>
+                                <ribbon:Button ImageSourceLarge="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/breakpoints.png" Label="切换断点" ToolTip="切换断点（F9）" Command="{Binding ToggleBreakpointCommand}"/>
+                                <ribbon:Button ImageSourceLarge="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/remove-all-breakpoints.png" Label="清除所有断点" ToolTip="清除所有断点（Shift+F9）" Command="{Binding RemoveAllBreakpointsCommand}"/>
+                            </ribbon:Menu>
+                        </ribbon:SplitButton>
+                        <ribbon:Button Label="慢速 调试" ToolTip="慢速调试，从最慢的1倍到最快的4倍速进行调试" Command="{Binding SlowStepCommand}">
+                            <ribbon:Button.Style>
+                                <Style TargetType="ribbon:Button">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="ImageSourceSmall" Value="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/slow-step-off.png"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SlowStepSpeed}" Value="One">
+                                            <Setter Property="Background" Value="{DynamicResource ToolBar.SlowStepButton.Background}"/>
+                                            <Setter Property="ImageSourceSmall" Value="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/slow-step-1x.png"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding SlowStepSpeed}" Value="Two">
+                                            <Setter Property="Background" Value="{DynamicResource ToolBar.SlowStepButton.Background}"/>
+                                            <Setter Property="ImageSourceSmall" Value="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/slow-step-2x.png"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding SlowStepSpeed}" Value="Three">
+                                            <Setter Property="Background" Value="{DynamicResource ToolBar.SlowStepButton.Background}"/>
+                                            <Setter Property="ImageSourceSmall" Value="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/slow-step-3x.png"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding SlowStepSpeed}" Value="Four">
+                                            <Setter Property="Background" Value="{DynamicResource ToolBar.SlowStepButton.Background}"/>
+                                            <Setter Property="ImageSourceSmall" Value="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/slow-step-4x.png"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ribbon:Button.Style>
+                        </ribbon:Button>
+                        <ribbon:PopupButton ImageSourceLarge="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/options.png" Label="选项" ToolTip="选项">
+                            <ribbon:Menu>
+                                <MenuItem Header="记录活动" IsCheckable="True" IsChecked="{Binding IsLogActivities}" />
+                            </ribbon:Menu>
+                        </ribbon:PopupButton>
+                    </ribbon:Group>
+                    <ribbon:Group Label="日志" >
+                        <ribbon:Button ImageSourceSmall="pack://application:,,,/RPA.Resources;Component/Image/Toolbar/open-logs.png" Label="打开日志" ToolTip="打开日志文件所在目录（Ctrl+L）" Command="{Binding OpenLogsCommand}"/>
+                    </ribbon:Group>
+                </ribbon:Tab>
+            </ribbon:Ribbon.Tabs>
+
+        </ribbon:Ribbon>
+
+        <local:DocksView />
+
+
+    </DockPanel>
+
+
+
+    <ribbon:RibbonWindow.StatusBar>
+        <StatusBar Height="25" FocusManager.IsFocusScope="True" Style="{DynamicResource {x:Static themes:SharedResourceKeys.StatusBarStyleKey}}"
+				   FontSize="{x:Static ribbon:RibbonMeasurements.UIFontSize}">
+            <StatusBarItem Content="就绪" />
+        </StatusBar>
+    </ribbon:RibbonWindow.StatusBar>
+</ribbon:RibbonWindow>

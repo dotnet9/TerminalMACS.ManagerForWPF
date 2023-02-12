@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DCE51A65-6E4D-4E1A-81EF-22EB37797594}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RPA.Learn.Activities</RootNamespace>
+    <AssemblyName>RPA.Learn.Activities</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Python.Runtime, Version=2.5.2.0, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\..\packages\pythonnet_py37_win_x86.2.5.2\lib\net40\Python.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Activities.Core.Presentation" />
+    <Reference Include="System.Activities.Presentation" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Python\InvokePythonFileActivity.cs" />
+    <Compile Include="Python\InvokePythonFileDesigner.xaml.cs">
+      <DependentUpon>InvokePythonFileDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Python\PythonPrintRedirectObject.cs" />
+    <Compile Include="Workflow\InvokeWorkflowFileActivity.cs" />
+    <Compile Include="Workflow\InvokeWorkflowFileDesigner.xaml.cs">
+      <DependentUpon>InvokeWorkflowFileDesigner.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Python\InvokePythonFileDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workflow\InvokeWorkflowFileDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Activities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Python\InvokePythonFile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Workflow\InvokeWorkflowFile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Activities.Shared\Activities.Shared.csproj">
+      <Project>{1D51C4FC-72A1-4011-8517-87B1CDF32FF2}</Project>
+      <Name>Activities.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\RPA.Interfaces\RPA.Interfaces.csproj">
+      <Project>{EE4A987C-743B-4EBA-8D3F-99B8A6761EC8}</Project>
+      <Name>RPA.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\RPA.Services\RPA.Services.csproj">
+      <Project>{8D0D7CEE-7C68-4F19-BF7F-40E8735C007F}</Project>
+      <Name>RPA.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\RPA.Shared\RPA.Shared.csproj">
+      <Project>{A950F9BE-8D77-4A5A-BC73-170B68DCE0D6}</Project>
+      <Name>RPA.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>del "$(ProjectDir)..\nupkgs\$(TargetName).*.nupkg"
+
+for /D %25%25f in (%25LocalAppData%25\RPAStudio\Packages\Installed\RPA.*.Activities.*) do (
+    rmdir  /S /Q %25%25f
+)</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>if $(ConfigurationName) == Debug (
+nuget pack "$(ProjectPath)" -properties Configuration=Debug
+)
+
+if $(ConfigurationName) == Release (
+nuget pack "$(ProjectPath)" -properties Configuration=Release
+)
+
+xcopy "$(TargetDir)*.nupkg" "$(ProjectDir)..\nupkgs\"  /Y
+
+xcopy "$(TargetDir)*.nupkg" "$(SolutionDir)RPAStudio\$(OutDir)OfflinePackages\"  /Y
+
+del "$(TargetDir)*.nupkg"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

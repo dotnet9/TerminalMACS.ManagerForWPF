@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:RPA.Shared.Converters"
+                     >
+    <!--系统自带了该转换器-->
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+    <!--扩展的转换器-->
+    <converters:OppositeBooleanToVisibilityConverter x:Key="OppositeBooleanToVisibilityConverter" />
+    <converters:BooleanToCollapsedVisibilityConverter x:Key="BooleanToCollapsedVisibilityConverter" />
+    <converters:OppositeBooleanToCollapsedVisibilityConverter x:Key="OppositeBooleanToCollapsedVisibilityConverter" />
+    <converters:NullOrEmptyToVisibilityConverter x:Key="NullOrEmptyToVisibilityConverter" />
+    <converters:SingleLineTextConverter x:Key="SingleLineTextConverter"/>
+    <converters:NullImageConverter x:Key="NullImageConverter"/>
+    <converters:BooleanNotConverter x:Key="BooleanNotConverter"/>
+</ResourceDictionary>

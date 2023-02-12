@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     >
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/RPA.Resources;component/Colors/GlobalColors.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RPA.Resources;component/Menu/ContextMenuResource.xaml" />
+        
+        <ResourceDictionary Source="pack://application:,,,/RPA.Resources;component/Styles/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RPA.Resources;component/Styles/ComboBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RPA.Resources;component/Styles/GroupBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RPA.Resources;component/Styles/ScrollBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RPA.Resources;component/Styles/Separator.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RPA.Resources;component/Styles/TabControl.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RPA.Resources;component/Styles/TaskTabControl.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RPA.Resources;component/Styles/TextBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/RPA.Resources;component/Styles/TreeView.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

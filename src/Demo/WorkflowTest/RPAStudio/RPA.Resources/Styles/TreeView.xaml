@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:themes="http://schemas.actiprosoftware.com/winfx/xaml/themes" 
+                     >
+    <Style x:Key="TreeViewStyle" TargetType="TreeView"  BasedOn="{StaticResource {x:Static themes:SharedResourceKeys.TreeViewStyleKey}}">
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style x:Key="TreeViewItemStyle" TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource {x:Static themes:SharedResourceKeys.TreeViewItemStyleKey}}">
+        <Setter Property="Margin" Value="0,2" />
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Foreground" Value="{DynamicResource TreeViewItem.Foreground}" />
+        <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+
+        <Style.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding IsSearching}" Value="True" />
+                    <Condition Binding="{Binding IsMatch}" Value="False" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Visibility"  Value="Collapsed"/>
+            </MultiDataTrigger>
+        </Style.Triggers>
+
+    </Style>
+
+</ResourceDictionary>

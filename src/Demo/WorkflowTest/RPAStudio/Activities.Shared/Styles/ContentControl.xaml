@@ -1,0 +1,51 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="clr-namespace:System.Windows.Controls.Primitives;assembly=PresentationFramework"
+    xmlns:controls="clr-namespace:Activities.Shared.Controls"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    >
+    <Style TargetType="{x:Type controls:CollapsableActivity}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:CollapsableActivity}">
+                    <Grid>
+                        <Grid>
+                            <Grid.Style>
+                                <Style>
+                                    <Setter Property="Grid.Visibility" Value="Visible" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=ShowExpanded}" Value="true">
+                                            <Setter Property="Grid.Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontStyle="Italic" Foreground="#FF6D6D6D" Text="双击以查看"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.Style>
+                                <Style>
+                                    <Setter Property="Grid.Visibility" Value="Visible" />
+                                    <Setter Property="Grid.MinWidth" Value="100" />
+
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=ShowExpanded}" Value="false">
+                                            <Setter Property="Grid.MinWidth" Value="30" />
+                                            <Setter Property="Grid.Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            
+                            <!--默认活动组件的宽度设置-->
+                            <Grid Width="280" />
+                            <ContentPresenter  />
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

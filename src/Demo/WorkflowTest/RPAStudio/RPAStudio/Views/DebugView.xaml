@@ -1,0 +1,123 @@
+﻿<UserControl x:Class="RPAStudio.Views.DebugView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cmd="http://www.galasoft.ch/mvvmlight"
+             xmlns:datagrid="http://schemas.actiprosoftware.com/winfx/xaml/datagrid"
+             xmlns:ribbon="http://schemas.actiprosoftware.com/winfx/xaml/ribbon"
+             xmlns:themes="http://schemas.actiprosoftware.com/winfx/xaml/themes"
+             xmlns:datagridThemes="clr-namespace:ActiproSoftware.Windows.Themes;assembly=ActiproSoftware.DataGrid.Contrib.Wpf"
+             xmlns:local="clr-namespace:RPAStudio.Views"
+             mc:Ignorable="d" 
+             DataContext="{Binding Debug, Source={StaticResource Locator}}"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <datagrid:ThemedDataGrid
+			BorderThickness="0 1 0 0"
+			CanUserAddRows="False"
+			AutoGenerateColumns="False"
+			CanUserSortColumns="False"
+			SelectionUnit="FullRow"
+			SelectionMode="Extended"
+			GridLinesVisibility="All"
+			HeadersVisibility="Column"
+			AlternatingRowBackground="{x:Null}"
+			ItemsSource="{Binding TrackerItems}">
+            <FrameworkElement.Resources>
+                <ResourceDictionary>
+                    <SolidColorBrush
+						Color="{Binding Color, Source={StaticResource {x:Static themes:AssetResourceKeys.ListColumnHeaderBackgroundNormalBrushKey}}}"
+						x:Key="{x:Static themes:AssetResourceKeys.ListColumnHeaderBackgroundSelectedNormalBrushKey}" />
+                    <SolidColorBrush
+						Color="{Binding Color, Source={StaticResource {x:Static themes:AssetResourceKeys.ListColumnHeaderBackgroundNormalBrushKey}}}"
+						x:Key="{x:Static themes:AssetResourceKeys.ListColumnHeaderBackgroundHoverBrushKey}" />
+                    <SolidColorBrush
+						Color="{Binding Color, Source={StaticResource {x:Static themes:AssetResourceKeys.ListColumnHeaderBackgroundNormalBrushKey}}}"
+						x:Key="{x:Static themes:AssetResourceKeys.ListColumnHeaderBackgroundPressedBrushKey}" />
+                </ResourceDictionary>
+            </FrameworkElement.Resources>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn
+					IsReadOnly="True"
+					Width="*"
+					MinWidth="20">
+                    <DataGridColumn.CellStyle>
+                        <Style
+							BasedOn="{StaticResource {x:Static datagridThemes:DataGridResourceKeys.DataGridCellStyleKey}}"
+							TargetType="{x:Type DataGridCell}" />
+                    </DataGridColumn.CellStyle>
+                    <DataGridColumn.Header>
+                        <TextBlock Foreground="{DynamicResource TextBlock.Foreground}"
+							Margin="5"
+							Text="名称"
+							TextTrimming="CharacterEllipsis" />
+                    </DataGridColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ribbon:TextBox  BorderThickness="0" IsReadOnly="True"
+								Margin="5"
+								Background="Transparent"
+                                ToolTip="{Binding Property}"
+								Text="{Binding Property}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn
+					IsReadOnly="True"
+					Width="*"
+					MinWidth="20">
+                    <DataGridColumn.CellStyle>
+                        <Style
+							BasedOn="{StaticResource {x:Static datagridThemes:DataGridResourceKeys.DataGridCellStyleKey}}"
+							TargetType="{x:Type DataGridCell}" />
+                    </DataGridColumn.CellStyle>
+                    <DataGridColumn.Header>
+                        <TextBlock  Foreground="{DynamicResource TextBlock.Foreground}"
+							Margin="5"
+							Text="值"
+							TextTrimming="CharacterEllipsis" />
+                    </DataGridColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ribbon:TextBox BorderThickness="0" IsReadOnly="True"
+								Margin="5"
+								Background="Transparent"
+                                ToolTip="{Binding Value}"
+								Text="{Binding Value}" />
+                                <Button BorderBrush="Transparent" Background="Transparent" ToolTip="查看更多" Grid.Column="1" Command="{Binding ViewMoreCommand}" >
+                                    <FrameworkElement.Style>
+                                        <Style
+										TargetType="{x:Type Button}">
+                                            <Setter
+											Property="Visibility"
+											Value="Hidden" />
+                                            <Style.Triggers>
+                                                <DataTrigger
+												Value="True"
+												Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridRow}}">
+                                                    <Setter
+													Property="Visibility"
+													Value="Visible" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </FrameworkElement.Style>
+                                    <Image Width="16" Height="16" Source="pack://application:,,,/RPA.Resources;component/Image/Share/magnifier.png" />
+                                </Button>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </datagrid:ThemedDataGrid>
+    </Grid>
+</UserControl>

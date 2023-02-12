@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--系统配置为默认配置，内嵌到程序中，不允许用户修改-->
+<RPAStudio>
+  <KeyValue Key="Sequence.Title" Value="新建序列图" />
+  <KeyValue Key="Sequence.Description" Value="创建一个新的序列工作流" />
+  <KeyValue Key="Sequence.FileName" Value="Sequence" />
+
+  <KeyValue Key="Flowchart.Title" Value="新建流程图" />
+  <KeyValue Key="Flowchart.Description" Value="创建一个新的流程图工作流" />
+  <KeyValue Key="Flowchart.FileName" Value="Flowchart" />
+  
+  <KeyValue Key="StateMachine.Title" Value="新建状态机" />
+  <KeyValue Key="StateMachine.Description" Value="创建一个新的状态机工作流" />
+  <KeyValue Key="StateMachine.FileName" Value="StateMachine" />
+</RPAStudio>

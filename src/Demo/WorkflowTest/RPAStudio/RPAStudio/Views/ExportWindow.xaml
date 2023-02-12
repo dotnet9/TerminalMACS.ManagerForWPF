@@ -1,0 +1,134 @@
+﻿<Window x:Class="RPAStudio.Views.ExportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="http://www.galasoft.ch/mvvmlight"
+        xmlns:local="clr-namespace:RPAStudio.Views"
+        mc:Ignorable="d"
+        DataContext="{Binding Export, Source={StaticResource Locator}}"
+        Height="420" Width="600" Title="导出Nupkg包" ResizeMode="NoResize" Icon="/RPAStudio;component/Resources/ICON/RPAStudio.ico">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"  Margin="15,0,15,15" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="110"/>
+                </Grid.RowDefinitions>
+                <GroupBox Header="导出位置" Grid.Row="0">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0">导出到</TextBlock>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <StackPanel Orientation="Horizontal">
+                                    <RadioButton VerticalAlignment="Center" IsChecked="{Binding IsExportToLocalRobot}">本地机器人</RadioButton>
+                                    <RadioButton VerticalAlignment="Center" Margin="79,0,0,0">自定义</RadioButton>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                        <Grid Height="30" Visibility="{Binding IsExportToLocalRobot,Mode=OneWay, Converter={StaticResource OppositeBooleanToCollapsedVisibilityConverter}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left">自定义位置</TextBlock>
+                            <Grid Grid.Column="1">
+                                <ComboBox ToolTip="{Binding CustomLocation}" ItemsSource="{Binding CustomLocations}" Text="{Binding CustomLocation}" Padding="2,2,16,2" Height="25" Margin="0,0,28,0" IsEditable="True" VerticalContentAlignment="Center"></ComboBox>
+                                <Grid >
+                                    <Border Height="25" Margin="0,0,28,0" BorderBrush="{DynamicResource Border.Correct.BorderBrush}" BorderThickness="1" Visibility="{Binding IsCustomLocationCorrect,Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        <Image ToolTip="位置字段校验成功" Width="16" Source="pack://application:,,,/RPA.Resources;Component/Image/Project/correct.png" HorizontalAlignment="Right" Margin="0,0,20,0"></Image>
+                                    </Border>
+                                    <Border Height="25" Margin="0,0,28,0" BorderBrush="{DynamicResource Border.Wrong.BorderBrush}" BorderThickness="1" Visibility="{Binding IsCustomLocationCorrect,Mode=OneWay, Converter={StaticResource OppositeBooleanToVisibilityConverter}}">
+                                        <Image ToolTip="{Binding CustomLocationValidatedWrongTip}" Width="16" Source="pack://application:,,,/RPA.Resources;Component/Image/Project/wrong.png" HorizontalAlignment="Right" Margin="0,0,20,0"></Image>
+                                    </Border>
+                                </Grid>
+
+                                <Button Command="{Binding BrowserFolderCommand}" Width="25" Height="25" HorizontalAlignment="Right">...</Button>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                    <!--<Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid >
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Margin="19,0,0,0">自定义位置</TextBlock>
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="1" >
+                            <ComboBox ToolTip="{Binding CustomLocation}" ItemsSource="{Binding CustomLocations}" Text="{Binding CustomLocation}" Padding="2,2,16,2" Height="25" Margin="0,0,28,0" IsEditable="True" VerticalContentAlignment="Center"></ComboBox>
+                            <Grid >
+                                <Border Height="25" Margin="0,0,28,0" BorderBrush="{DynamicResource Border.Correct.BorderBrush}" BorderThickness="1" Visibility="{Binding IsCustomLocationCorrect,Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <Image ToolTip="位置字段校验成功" Width="16" Source="pack://application:,,,/RPA.Resources;Component/Image/Project/correct.png" HorizontalAlignment="Right" Margin="0,0,20,0"></Image>
+                                </Border>
+                                <Border Height="25" Margin="0,0,28,0" BorderBrush="{DynamicResource Border.Wrong.BorderBrush}" BorderThickness="1" Visibility="{Binding IsCustomLocationCorrect,Mode=OneWay, Converter={StaticResource OppositeBooleanToVisibilityConverter}}">
+                                    <Image ToolTip="{Binding CustomLocationValidatedWrongTip}" Width="16" Source="pack://application:,,,/RPA.Resources;Component/Image/Project/wrong.png" HorizontalAlignment="Right" Margin="0,0,20,0"></Image>
+                                </Border>
+                            </Grid>
+
+                            <Button Command="{Binding BrowserFolderCommand}" Width="25" Height="25" HorizontalAlignment="Right">...</Button>
+                        </Grid>
+                    </Grid>-->
+                </GroupBox>
+                <GroupBox Height="100" Header="导出说明" Grid.Row="1" >
+                    <TextBox Text="{Binding ReleaseNotes}" AcceptsReturn="True" TextWrapping="Wrap" Margin="5" VerticalScrollBarVisibility="Auto" />
+                </GroupBox>
+                <GroupBox Height="100" Header="版本号" Grid.Row="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <TextBlock VerticalAlignment="Center" Margin="20,0,0,0">当前版本</TextBlock>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <TextBox BorderThickness="0" IsReadOnly="True" Height="25" VerticalAlignment="Center" Text="{Binding CurrentProjectVersion}" VerticalContentAlignment="Center" />
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <TextBlock VerticalAlignment="Center" Margin="20,0,0,0">新版本</TextBlock>
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="1">
+                            <TextBox Height="25" VerticalAlignment="Center" Text="{Binding NewProjectVersion,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" Padding="0,0,21,0" />
+                            <Border Height="25" BorderBrush="{DynamicResource Border.Correct.BorderBrush}" BorderThickness="1" Visibility="{Binding IsNewProjectVersionCorrect,Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Image ToolTip="版本字段校验成功" Width="16" Source="pack://application:,,,/RPA.Resources;Component/Image/Project/correct.png" HorizontalAlignment="Right" Margin="0,0,5,0" ></Image>
+                            </Border>
+                            <Border Height="25" BorderBrush="{DynamicResource Border.Wrong.BorderBrush}" BorderThickness="1" Visibility="{Binding IsNewProjectVersionCorrect,Mode=OneWay, Converter={StaticResource OppositeBooleanToVisibilityConverter}}">
+                                <Image ToolTip="{Binding NewProjectVersionValidatedWrongTip}" Width="16" Source="pack://application:,,,/RPA.Resources;Component/Image/Project/wrong.png" HorizontalAlignment="Right" Margin="0,0,5,0" ></Image>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="{StaticResource Window.StatusBar.Background}">
+                <Border VerticalAlignment="Top" BorderThickness="0,1,0,0" BorderBrush="{StaticResource Window.StatusBar.splitter.BorderBrush}"></Border>
+                <Button Width="80" Height="25" HorizontalAlignment="Right" Content="导出" Command="{Binding OkCommand}" Margin="0,0,100,0" IsDefault="True"></Button>
+                <Button Width="80" Height="25" HorizontalAlignment="Right" Content="取消" Command="{Binding CancelCommand}" Margin="0,0,10,0" ></Button>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Window>

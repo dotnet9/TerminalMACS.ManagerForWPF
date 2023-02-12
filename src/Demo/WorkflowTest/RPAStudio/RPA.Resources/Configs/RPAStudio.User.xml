@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--用户配置允许程序设置或用户手动修改-->
+<RPAStudio>
+  <KeyValue Key="Project.DefaultCreatePath" Value="" /><!--项目创建位置，为空代表默认位置-->
+</RPAStudio>

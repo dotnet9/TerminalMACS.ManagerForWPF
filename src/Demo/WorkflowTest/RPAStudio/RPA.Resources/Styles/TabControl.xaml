@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:themes="http://schemas.actiprosoftware.com/winfx/xaml/themes" 
+                     >
+    <Style TargetType="{x:Type TabControl}" BasedOn="{StaticResource {x:Static themes:SharedResourceKeys.TabControlStyleKey}}" />
+    <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource {x:Static themes:SharedResourceKeys.TabItemStyleKey}}" />
+
+    <SolidColorBrush Color="{DynamicResource TabControl.Background}"
+						x:Key="{x:Static themes:AssetResourceKeys.TabItemBackgroundSelectedHoverBrushKey}" />
+
+    <SolidColorBrush Color="{DynamicResource TabControl.Background}"
+						x:Key="{x:Static themes:AssetResourceKeys.TabItemBackgroundSelectedNormalBrushKey}" />
+</ResourceDictionary>

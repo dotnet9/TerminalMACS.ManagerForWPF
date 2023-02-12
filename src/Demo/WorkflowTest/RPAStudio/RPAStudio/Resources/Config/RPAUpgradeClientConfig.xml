@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RPAUpgradeClientConfig>
+  <!--更新日志-->
+  <UpdateLog>
+    <Item>RPA教学版框架搭建</Item>
+    <Item>示例活动组件添加</Item>
+    <Item>命令行程序添加</Item>
+    <Item>机器人程序添加</Item>
+  </UpdateLog>
+</RPAUpgradeClientConfig>

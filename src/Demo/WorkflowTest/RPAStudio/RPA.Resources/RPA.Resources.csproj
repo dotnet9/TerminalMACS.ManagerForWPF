@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{54049522-BDA4-4BD6-B4B8-DE9CEE4B31ED}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RPA.Resources</RootNamespace>
+    <AssemblyName>RPA.Resources</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ActiproSoftware.DataGrid.Contrib.Wpf, Version=19.1.685.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RPA.Shared\References\ActiproSoftware.DataGrid.Contrib.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Docking.Wpf, Version=19.1.685.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RPA.Shared\References\ActiproSoftware.Docking.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Editors.Wpf, Version=19.1.685.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RPA.Shared\References\ActiproSoftware.Editors.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Grids.Wpf, Version=19.1.685.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RPA.Shared\References\ActiproSoftware.Grids.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Ribbon.Wpf, Version=19.1.685.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RPA.Shared\References\ActiproSoftware.Ribbon.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Shared.Wpf, Version=19.1.685.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RPA.Shared\References\ActiproSoftware.Shared.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Shell.Wpf, Version=19.1.685.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RPA.Shared\References\ActiproSoftware.Shell.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.SyntaxEditor.Addons.DotNet.Wpf, Version=19.1.685.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RPA.Shared\References\ActiproSoftware.SyntaxEditor.Addons.DotNet.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.SyntaxEditor.Addons.Xml.Wpf, Version=19.1.685.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RPA.Shared\References\ActiproSoftware.SyntaxEditor.Addons.Xml.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.SyntaxEditor.Wpf, Version=19.1.685.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RPA.Shared\References\ActiproSoftware.SyntaxEditor.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Text.Addons.DotNet.Wpf, Version=19.1.685.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RPA.Shared\References\ActiproSoftware.Text.Addons.DotNet.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Text.Addons.Xml.Wpf, Version=19.1.685.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RPA.Shared\References\ActiproSoftware.Text.Addons.Xml.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Text.LLParser.Wpf, Version=19.1.685.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RPA.Shared\References\ActiproSoftware.Text.LLParser.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Text.Wpf, Version=19.1.685.0, Culture=neutral, PublicKeyToken=36ff2196ab5654b9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RPA.Shared\References\ActiproSoftware.Text.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Activities.Presentation" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Colors\GlobalColors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WorkflowDesigner\WorkflowDesignerStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="FileTemplates\Flowchart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="FileTemplates\Main.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="FileTemplates\Sequence.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="FileTemplates\StateMachine.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Page Include="Menu\ContextMenuResource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\GroupBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Index.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Button.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ScrollBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Separator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\TabControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\TaskTabControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\TextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\TreeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RPA.Shared\RPA.Shared.csproj">
+      <Project>{a950f9be-8d77-4a5a-bc73-170b68dce0d6}</Project>
+      <Name>RPA.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Activities\activities.png" />
+    <Resource Include="Image\Activities\favorites.png" />
+    <Resource Include="Image\Activities\recent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Dock\activities-collapse-all.png" />
+    <Resource Include="Image\Dock\activities-expand-all.png" />
+    <Resource Include="Image\Dock\activities-menu.png" />
+    <Resource Include="Image\Dock\activities.png" />
+    <Resource Include="Image\Dock\add-dir.png" />
+    <Resource Include="Image\Dock\debug.png" />
+    <Resource Include="Image\Dock\dir-collapsed.png" />
+    <Resource Include="Image\Dock\dir-expand.png" />
+    <Resource Include="Image\Dock\document.png" />
+    <Resource Include="Image\Dock\file-explorer.png" />
+    <Resource Include="Image\Dock\menu-open.png" />
+    <Resource Include="Image\Dock\menu-remove.png" />
+    <Resource Include="Image\Dock\null.png" />
+    <Resource Include="Image\Dock\outline.png" />
+    <Resource Include="Image\Dock\output.png" />
+    <Resource Include="Image\Dock\project.png" />
+    <Resource Include="Image\Dock\property.png" />
+    <Resource Include="Image\Dock\refresh.png" />
+    <Resource Include="Image\Dock\remove-unused-screenshots.png" />
+    <Resource Include="Image\Dock\remove.png" />
+    <Resource Include="Image\Dock\search-clear.png" />
+    <Resource Include="Image\Dock\search-magnifier.png" />
+    <Resource Include="Image\Dock\settings.png" />
+    <Resource Include="Image\Dock\snippet-file.png" />
+    <Resource Include="Image\Dock\snippets.png" />
+    <Resource Include="Image\Dock\source.png" />
+    <Resource Include="Image\Dock\view-variable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Output\clear-all.png" />
+    <Resource Include="Image\Output\error.png" />
+    <Resource Include="Image\Output\Information.png" />
+    <Resource Include="Image\Output\timestamp.png" />
+    <Resource Include="Image\Output\trace.png" />
+    <Resource Include="Image\Output\warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Project\correct.png" />
+    <Resource Include="Image\Project\depend-item.png" />
+    <Resource Include="Image\Project\dependencies.png" />
+    <Resource Include="Image\Project\dir-collapsed.png" />
+    <Resource Include="Image\Project\dir-expand.png" />
+    <Resource Include="Image\Project\project.png" />
+    <Resource Include="Image\Project\wrong.png" />
+    <Resource Include="Image\Project\xaml.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\SettingsPage\component.png" />
+    <Resource Include="Image\SettingsPage\general.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Share\magnifier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Toolbar\break.png" />
+    <Resource Include="Image\Toolbar\breakpoints.png" />
+    <Resource Include="Image\Toolbar\copy.png" />
+    <Resource Include="Image\Toolbar\cut.png" />
+    <Resource Include="Image\Toolbar\debug.png" />
+    <Resource Include="Image\Toolbar\export.png" />
+    <Resource Include="Image\Toolbar\flowchart.png" />
+    <Resource Include="Image\Toolbar\new.png" />
+    <Resource Include="Image\Toolbar\open-logs.png" />
+    <Resource Include="Image\Toolbar\open.png" />
+    <Resource Include="Image\Toolbar\options.png" />
+    <Resource Include="Image\Toolbar\paste.png" />
+    <Resource Include="Image\Toolbar\remove-all-breakpoints.png" />
+    <Resource Include="Image\Toolbar\run.png" />
+    <Resource Include="Image\Toolbar\save-all.png" />
+    <Resource Include="Image\Toolbar\save-as.png" />
+    <Resource Include="Image\Toolbar\save.png" />
+    <Resource Include="Image\Toolbar\sequence.png" />
+    <Resource Include="Image\Toolbar\slow-step-1x.png" />
+    <Resource Include="Image\Toolbar\slow-step-2x.png" />
+    <Resource Include="Image\Toolbar\slow-step-3x.png" />
+    <Resource Include="Image\Toolbar\slow-step-4x.png" />
+    <Resource Include="Image\Toolbar\slow-step-off.png" />
+    <Resource Include="Image\Toolbar\state-machine.png" />
+    <Resource Include="Image\Toolbar\step-into.png" />
+    <Resource Include="Image\Toolbar\step-over.png" />
+    <Resource Include="Image\Toolbar\stop.png" />
+    <Resource Include="Image\Toolbar\validate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Configs\RPAStudio.User.xml" />
+    <Resource Include="Configs\RPAStudio.System.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Configs\SystemActivities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Configs\RecentProjects.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Nuget\NuGet.Default.Config" />
+    <None Include="Nuget\NuGet.User.Config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Configs\FavoriteActivities.xml" />
+    <Resource Include="Configs\RecentActivities.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Configs\CodeSnippets.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Nuget\nuget.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Configs\RecentExportPaths.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>xcopy "$(ProjectDir)Nuget\nuget.exe" %25windir%25  /D /Y</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(ProjectDir)Nuget\NuGet.*.Config" "$(SolutionDir)RPAStudio\$(OutDir)"  /Y</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

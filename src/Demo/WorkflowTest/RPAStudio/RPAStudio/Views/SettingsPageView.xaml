@@ -1,0 +1,137 @@
+﻿<UserControl x:Class="RPAStudio.Views.SettingsPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
+             xmlns:ribbon="http://schemas.actiprosoftware.com/winfx/xaml/ribbon"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cmd="http://www.galasoft.ch/mvvmlight"
+             xmlns:local="clr-namespace:RPAStudio.Views"
+             mc:Ignorable="d" 
+             DataContext="{Binding SettingsPage, Source={StaticResource Locator}}"
+             d:DesignHeight="300" d:DesignWidth="800">
+    <Grid>
+        <shared:ZeroSizeContentControl
+		Name="ZeroSizeContentControl"
+		HasHeight="False"
+		HasWidth="False"
+		Margin="20 0 0 18"
+		HorizontalAlignment="Stretch"
+		VerticalAlignment="Stretch"
+		VerticalContentAlignment="Stretch"
+		HorizontalContentAlignment="Stretch">
+            <ribbon:TaskTabControl
+			SelectedIndex="1"
+			HorizontalAlignment="Left"
+			Width="{Binding ElementName=ZeroSizeContentControl, Path=ActualWidth, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True, UpdateSourceTrigger=PropertyChanged}">
+                <ribbon:Separator
+				Label="设置"
+				Context="BackstageItem"
+				Style="{DynamicResource BackstageItemSeparatorStyle}"
+				Margin="0 8 0 5" />
+                <ribbon:TaskTabItem
+				MinWidth="200"
+				ScrollViewer.CanContentScroll="False">
+                    <HeaderedContentControl.Header>
+                        <DockPanel>
+                            <Image
+							Height="32"
+							Width="32"
+							Margin="15 0 0 0"
+							VerticalAlignment="Center"
+							Source="pack://application:,,,/RPA.Resources;Component/Image/SettingsPage/general.png" />
+                            <TextBlock
+							Text="常规"
+							VerticalAlignment="Center"
+							Margin="10 0 0 0"
+							FontWeight="Bold" />
+                        </DockPanel>
+                    </HeaderedContentControl.Header>
+                    <DockPanel>
+                        <ribbon:Separator
+						Label="常规"
+						Context="BackstageItem"
+						Style="{DynamicResource BackstageItemSeparatorStyle}"
+						DockPanel.Dock="Top" />
+                        <StackPanel>
+                            <StackPanel >
+                                <TextBlock Text="项目" FontWeight="Bold"  />
+                                <TextBlock Text="更改新建项目时的默认路径" Margin="0,5,0,0"   />
+                                <Grid Height="30" Margin="0,5,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="30"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!--创建隐藏输入框用来初次接收焦点-->
+                                    <TextBox Height="0" Width="0" />
+                                    
+                                    <xctk:WatermarkTextBox Text="{Binding ProjectsCustomLocation,UpdateSourceTrigger=PropertyChanged}" Watermark="默认路径为 &quot;我的文档\RPAStudio\Projects&quot; 目录"  Height="28" VerticalContentAlignment="Center"/>
+                                    <Button Grid.Column="1" Height="30" Content="浏览..." Margin="5,0,0,0" Command="{Binding SelectProjectsCustomLocationCommand}"></Button>
+                                    <Grid Grid.Column="2">
+                                        <Image ToolTip="位置字段校验成功" Visibility="{Binding IsProjectsCustomLocationCorrect,Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" Width="16" Source="pack://application:,,,/RPA.Resources;Component/Image/Project/correct.png" ></Image>
+                                        <Image ToolTip="{Binding ProjectsCustomLocationValidatedWrongTip}" Visibility="{Binding IsProjectsCustomLocationCorrect,Mode=OneWay, Converter={StaticResource OppositeBooleanToVisibilityConverter}}" Width="16" Source="pack://application:,,,/RPA.Resources;Component/Image/Project/wrong.png" ></Image>
+                                    </Grid>
+                                </Grid>
+                            </StackPanel>
+                        </StackPanel>
+                    </DockPanel>
+                </ribbon:TaskTabItem>
+
+                <ribbon:TaskTabItem
+				MinWidth="200"
+				ScrollViewer.CanContentScroll="False">
+                    <HeaderedContentControl.Header>
+                        <DockPanel>
+                            <Image
+							Height="32"
+							Width="32"
+							Margin="15 0 0 0"
+							VerticalAlignment="Center"
+							Source="pack://application:,,,/RPA.Resources;Component/Image/SettingsPage/component.png" />
+                            <TextBlock
+							Text="组件"
+							VerticalAlignment="Center"
+							Margin="10 0 0 0"
+							FontWeight="Bold" />
+                        </DockPanel>
+                    </HeaderedContentControl.Header>
+                    <DockPanel>
+                        <ribbon:Separator
+						Label="组件"
+						Context="BackstageItem"
+						Style="{DynamicResource BackstageItemSeparatorStyle}"
+						DockPanel.Dock="Top" />
+                        <StackPanel>
+                            <StackPanel>
+                                <TextBlock Text="Python" FontWeight="Bold"  />
+                                <TextBlock Text="自定义Python路径（python.exe所在的目录，只支持Python3版本）" Margin="0,5,0,0"   />
+                                <Grid Height="30" Margin="0,5,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="30"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!--创建隐藏输入框用来初次接收焦点-->
+                                    <TextBox Height="0" Width="0" />
+                                    
+                                    <xctk:WatermarkTextBox Text="{Binding PythonCustomLocation,UpdateSourceTrigger=PropertyChanged}" Watermark="默认路径为安装目录下自带的Python目录"  Height="28" VerticalContentAlignment="Center"/>
+                                    <Button Grid.Column="1" Height="30" Content="浏览..." Margin="5,0,0,0" Command="{Binding SelectPythonCustomLocationCommand}"></Button>
+                                    <Grid Grid.Column="2">
+                                        <Image ToolTip="位置字段校验成功" Visibility="{Binding IsPythonCustomLocationCorrect,Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" Width="16" Source="pack://application:,,,/RPA.Resources;Component/Image/Project/correct.png" ></Image>
+                                        <Image ToolTip="{Binding PythonCustomLocationValidatedWrongTip}" Visibility="{Binding IsPythonCustomLocationCorrect,Mode=OneWay, Converter={StaticResource OppositeBooleanToVisibilityConverter}}" Width="16" Source="pack://application:,,,/RPA.Resources;Component/Image/Project/wrong.png" ></Image>
+                                    </Grid>
+                                </Grid>
+
+                            </StackPanel>
+                        </StackPanel>
+                    </DockPanel>
+                </ribbon:TaskTabItem>
+            </ribbon:TaskTabControl>
+        </shared:ZeroSizeContentControl>
+    </Grid>
+</UserControl>

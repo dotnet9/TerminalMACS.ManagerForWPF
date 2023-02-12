@@ -1,0 +1,75 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:productsRibbon="clr-namespace:ActiproSoftware.Products.Ribbon;assembly=ActiproSoftware.Ribbon.Wpf" xmlns:ribbonInput="clr-namespace:ActiproSoftware.Windows.Controls.Ribbon.Input;assembly=ActiproSoftware.Ribbon.Wpf" xmlns:ribbonUI="clr-namespace:ActiproSoftware.Windows.Controls.Ribbon.UI;assembly=ActiproSoftware.Ribbon.Wpf" xmlns:ribbonControls="clr-namespace:ActiproSoftware.Windows.Controls.Ribbon.Controls;assembly=ActiproSoftware.Ribbon.Wpf" xmlns:themes="http://schemas.actiprosoftware.com/winfx/xaml/themes" xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared">
+	<Style
+		TargetType="{x:Type ribbonControls:TaskTabControl}"
+		x:Key="{x:Type ribbonControls:TaskTabControl}">
+		<Setter
+			Property="BorderThickness"
+			Value="0" />
+		<Setter
+			Property="themes:ThemeProperties.CornerRadius"
+			Value="{DynamicResource themes:AssetResourceKeys.ButtonBorderNormalCornerRadiusKey}" />
+		<Setter
+			Property="Padding"
+			Value="20,0,20,0" />
+		<Setter
+			Property="TabControl.TabStripPlacement"
+			Value="Left" />
+		<Setter
+			Property="Template">
+			<Setter.Value>
+				<ControlTemplate
+					TargetType="{x:Type ribbonControls:TaskTabControl}">
+					<Border
+						Background="{TemplateBinding Background}"
+						BorderBrush="{TemplateBinding BorderBrush}"
+						BorderThickness="{TemplateBinding BorderThickness}">
+						<DockPanel
+							KeyboardNavigation.TabNavigation="Local">
+							<Border
+								DockPanel.Dock="Left"
+								KeyboardNavigation.TabIndex="1">
+								<Grid>
+									<Rectangle
+										Name="divider"
+										HorizontalAlignment="Right"
+										Style="{DynamicResource VerticalSeparatorRectangle}" />
+									<StackPanel
+										ZIndex="1"
+										IsItemsHost="true" />
+								</Grid>
+							</Border>
+							<Border
+								KeyboardNavigation.TabNavigation="Local"
+								KeyboardNavigation.TabIndex="2">
+								<ContentPresenter
+									Name="PART_SelectedContentHost"
+									SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+									Margin="{TemplateBinding Padding}"
+									ContentSource="SelectedContent" />
+							</Border>
+						</DockPanel>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style
+		TargetType="{x:Type ribbonControls:TaskTabItem}"
+		x:Key="{x:Type ribbonControls:TaskTabItem}">
+		<Style.Resources>
+			<ResourceDictionary>
+				<Thickness
+					x:Key="{x:Static themes:AssetResourceKeys.BackstageTaskTabItemMarginThicknessKey}">0,0,2,0</Thickness>
+				<SolidColorBrush
+					Color="{DynamicResource TabItemSelectedBackgroundBrush}"
+					x:Key="{x:Static themes:AssetResourceKeys.ToolBarButtonBorderCheckedNormalBrushKey}" />
+				<SolidColorBrush
+					Color="{DynamicResource TabItemSelectedBackgroundBrush}"
+					x:Key="{x:Static themes:AssetResourceKeys.ToolBarButtonLargeBackgroundCheckedNormalBrushKey}" />
+			</ResourceDictionary>
+		</Style.Resources>
+		<Setter
+			Property="FontSize"
+			Value="12" />
+	</Style>
+</ResourceDictionary>

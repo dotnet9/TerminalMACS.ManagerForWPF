@@ -1,0 +1,111 @@
+﻿<UserControl x:Class="RPAStudio.Views.DocksView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:docking="http://schemas.actiprosoftware.com/winfx/xaml/docking"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cmd="http://www.galasoft.ch/mvvmlight"
+             xmlns:local="clr-namespace:RPAStudio.Views"
+             xmlns:vm="clr-namespace:RPAStudio.ViewModel"
+             DataContext="{Binding Docks, Source={StaticResource Locator}}"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <cmd:EventToCommand Command="{Binding LoadedCommand}" PassEventArgsToCommand="True" ></cmd:EventToCommand>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <Style x:Key="DockingWindowStyle" TargetType="docking:DockingWindow">
+            <Setter Property="Description" Value="{Binding Path=Path, Mode=TwoWay}" />
+            <Setter Property="ImageSource" Value="{Binding Path=IconSource, Mode=TwoWay}" />
+            <Setter Property="IsActive" Value="{Binding Path=IsActive, Mode=TwoWay}" />
+            <Setter Property="IsFloating" Value="{Binding Path=IsFloating, Mode=TwoWay}" />
+            <Setter Property="IsOpen" Value="{Binding Path=IsOpen, Mode=TwoWay}" />
+            <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay}" />
+            <Setter Property="Title" >
+                <Setter.Value>
+                    <MultiBinding StringFormat="{}{0}{1}{2}">
+                        <Binding Path="Title" />
+                        <Binding Path="DirtyStar" />
+                        <Binding Path="ReadOnlyDescription" />
+                    </MultiBinding>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DocumentWindowStyle" TargetType="docking:DocumentWindow" BasedOn="{StaticResource DockingWindowStyle}">
+            <Setter Property="FileName" Value="{Binding Path=Path, Mode=TwoWay}" />
+            <Setter Property="IsReadOnly" Value="{Binding Path=IsReadOnly, Mode=TwoWay}" />
+        </Style>
+
+        <DataTemplate DataType="{x:Type vm:DesignerDocumentViewModel}">
+            <ContentControl Content="{Binding WorkflowDesignerView}"/>
+        </DataTemplate>
+
+    </UserControl.Resources>
+    <Grid>
+        <docking:DockSite DocumentItemContainerStyle="{StaticResource DocumentWindowStyle}"
+						  DocumentItemsSource="{Binding Documents}"
+                          ToolWindowsHaveTabImages="True"
+                          CanDocumentWindowsFloat="True"
+			              AreNewTabsInsertedBeforeExistingTabs="False"
+			              AutoHidePerContainer="False"
+			              AreDocumentWindowsDestroyedOnClose="True"
+			              UseHostedPopups="False"
+			              IsLiveSplittingEnabled="False"
+			              CanDocumentWindowsDragToLinkedDockSites="False"
+			              CanToolWindowsBecomeDocuments="False"
+                          
+                          Visibility="{Binding IsAppDomainViewsVisible,Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"
+						  >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="WindowsClosing">
+                    <cmd:EventToCommand Command="{Binding WindowsClosingCommand}" PassEventArgsToCommand="True" ></cmd:EventToCommand>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <docking:SplitContainer Orientation="Vertical">
+                <docking:SplitContainer Orientation="Horizontal">
+                    <docking:ToolWindowContainer>
+                        <docking:ToolWindow Title="项目" ContainerDockedSize="330, 800" 
+										ImageSource="pack://application:,,,/RPA.Resources;Component/Image/Dock/project.png" CanClose="False">
+                            <local:ProjectView />
+                        </docking:ToolWindow>
+                        <docking:ToolWindow Title="组件" ContainerDockedSize="330, 800" 
+										ImageSource="pack://application:,,,/RPA.Resources;Component/Image/Dock/activities.png" CanClose="False">
+                            <local:ActivitiesView />
+                        </docking:ToolWindow>
+                        <docking:ToolWindow Title="代码示例" ContainerDockedSize="330, 800" 
+										ImageSource="pack://application:,,,/RPA.Resources;Component/Image/Dock/snippets.png" CanClose="False">
+                            <local:SnippetsView />
+                        </docking:ToolWindow>
+                        <docking:ToolWindow x:Name="DebugToolWindow" Title="调试信息" ContainerDockedSize="330, 800"
+										ImageSource="pack://application:,,,/RPA.Resources;Component/Image/Dock/debug.png" CanClose="False">
+                            <local:DebugView />
+                        </docking:ToolWindow>
+                    </docking:ToolWindowContainer>
+                    <docking:Workspace>
+                        <docking:TabbedMdiHost HasTabImages="True"/>
+                    </docking:Workspace>
+                    <docking:ToolWindowContainer>
+                        <docking:ToolWindow Title="属性" ContainerDockedSize="430, 800" 
+										ImageSource="pack://application:,,,/RPA.Resources;Component/Image/Dock/property.png" CanClose="False">
+                            <local:PropertyView />
+                        </docking:ToolWindow>
+                        <docking:ToolWindow Title="大纲" ContainerDockedSize="430, 800" 
+										ImageSource="pack://application:,,,/RPA.Resources;Component/Image/Dock/outline.png" CanClose="False">
+                            <local:OutlineView />
+                        </docking:ToolWindow>
+                    </docking:ToolWindowContainer>
+                </docking:SplitContainer>
+                <docking:ToolWindowContainer>
+                    <docking:ToolWindow Title="输出" ContainerDockedSize="800, 230" 
+										ImageSource="pack://application:,,,/RPA.Resources;Component/Image/Dock/output.png" CanClose="False">
+                        <local:OutputView />
+                    </docking:ToolWindow>
+                </docking:ToolWindowContainer>
+            </docking:SplitContainer>
+        </docking:DockSite>
+    </Grid>
+</UserControl>

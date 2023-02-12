@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--活动配置信息-->
+<Activities>
+  <Group Name="教学示例活动">
+    <Group Name="Python"> 
+      <Activity Name="执行Python文件" Icon="Image/Python/InvokePythonFile.png"  TypeOf="RPA.Learn.Activities.Python.InvokePythonFileActivity,RPA.Learn.Activities" ToolTip="同步运行Python脚本文件，支持参数传入传出"/>
+    </Group>
+    <Group Name="工作流">
+      <Activity Name="执行工作流文件" Icon="Image/Workflow/InvokeWorkflowFile.png"  TypeOf="RPA.Learn.Activities.Workflow.InvokeWorkflowFileActivity,RPA.Learn.Activities" ToolTip="同步运行一个工作流文件，支持参数传入传出"/>
+    </Group>
+  </Group>
+</Activities>
