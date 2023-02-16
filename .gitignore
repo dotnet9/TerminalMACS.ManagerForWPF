@@ -197,3 +197,6 @@ src/Demo/WorkflowTest/RPAStudio/RPAStudio/bin/
 src/Demo/WorkflowTest/RPAStudio/RPAStudio/obj/
 src/Demo/WorkflowTest/RPAStudio/RPA.Learn.Activities/bin/
 src/Demo/WorkflowTest/RPAStudio/RPA.Learn.Activities/obj/
+src/Demo/HookDemos/HelloHook/obj/
+src/Demo/HookDemos/HookDemos.OwnerLibrary/obj/
+src/Demo/HookDemos/Publish/
