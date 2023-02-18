@@ -5,7 +5,9 @@ VisualStudioVersion = 17.5.33402.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloHook", "HelloHook\HelloHook.csproj", "{D9CA7E91-A729-40E4-B1B5-355828DBE1AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HookDemos.OwnerLibrary", "HookDemos.OwnerLibrary\HookDemos.OwnerLibrary.csproj", "{0D7B4BD1-9700-41D1-AFB7-5040A827D884}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HookDemos.OwnerLibrary", "HookDemos.OwnerLibrary\HookDemos.OwnerLibrary.csproj", "{0D7B4BD1-9700-41D1-AFB7-5040A827D884}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HookWpf", "HookWpf\HookWpf.csproj", "{AD1BA649-DEBC-4AF7-8090-98BE883BDFC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{0D7B4BD1-9700-41D1-AFB7-5040A827D884}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D7B4BD1-9700-41D1-AFB7-5040A827D884}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D7B4BD1-9700-41D1-AFB7-5040A827D884}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD1BA649-DEBC-4AF7-8090-98BE883BDFC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD1BA649-DEBC-4AF7-8090-98BE883BDFC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD1BA649-DEBC-4AF7-8090-98BE883BDFC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD1BA649-DEBC-4AF7-8090-98BE883BDFC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

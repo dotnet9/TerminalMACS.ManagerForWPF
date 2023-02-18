@@ -1,5 +1,4 @@
-﻿using System.Reflection.PortableExecutable;
-using HarmonyLib;
+﻿using HarmonyLib;
 using HookDemos.OwnerLibrary;
 
 namespace HelloHook;
