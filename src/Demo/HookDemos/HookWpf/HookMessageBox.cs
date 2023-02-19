@@ -25,7 +25,7 @@ public class HookAppShow
 {
     public static bool Prefix()
     {
-
+        MessageBox.Show("Hook自己的方法成功");
         return true;
     }
 }
