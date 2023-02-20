@@ -11,8 +11,4 @@
     <PackageReference Include="Lib.Harmony" Version="2.2.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HookDemos.OwnerLibrary\HookDemos.OwnerLibrary.csproj" />
-  </ItemGroup>
-
 </Project>

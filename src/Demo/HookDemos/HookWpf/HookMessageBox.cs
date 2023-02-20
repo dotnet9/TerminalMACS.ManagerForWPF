@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using HarmonyLib;
+﻿using HarmonyLib;
+using System.Windows;
 
 namespace HookWpf;
 
@@ -15,17 +15,6 @@ public class HookMessageBox
             messageBoxText = "这是一个不错的网站哟";
         }
 
-        return true;
-    }
-}
-
-[HarmonyPatch(typeof(App))]
-[HarmonyPatch(nameof(App.Show))]
-public class HookAppShow
-{
-    public static bool Prefix()
-    {
-        MessageBox.Show("Hook自己的方法成功");
         return true;
     }
 }
