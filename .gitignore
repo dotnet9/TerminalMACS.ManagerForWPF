@@ -202,3 +202,6 @@ src/Demo/HookDemos/HookDemos.OwnerLibrary/obj/
 src/Demo/HookDemos/Publish/
 src/Demo/HookDemos/HookWpf/obj/
 src/Demo/HookDemos/HookDotnetAPI/obj/
+src/Demo/CshaprWithJavascriptDemo/bin/
+src/Demo/CshaprWithJavascriptDemo/obj/
+src/Demo/WorkflowTest/RPAStudio/Activities/nupkgs/

@@ -1,17 +1,12 @@
-﻿using RPA.Interfaces.App;
-using RPA.Services.App;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using RPA.Interfaces.Service;
-using RPAStudio.Views;
+﻿using GalaSoft.MvvmLight.Threading;
 using NLog;
-using GalaSoft.MvvmLight.Threading;
-using RPAStudio.ViewModel;
+using RPA.Interfaces.Service;
+using RPA.Services.App;
 using RPA.Shared.Configs;
+using RPAStudio.ViewModel;
+using RPAStudio.Views;
+using System;
+using System.Windows;
 
 namespace RPAStudio.App
 {
