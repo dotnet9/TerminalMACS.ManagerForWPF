@@ -206,3 +206,4 @@ src/Demo/CshaprWithJavascriptDemo/bin/
 src/Demo/CshaprWithJavascriptDemo/obj/
 src/Demo/WorkflowTest/RPAStudio/Activities/nupkgs/
 src/Demo/CshaprWithJavascriptDemo/packages/
+src/Demo/TestDynamicLoadClassLibrary/obj/

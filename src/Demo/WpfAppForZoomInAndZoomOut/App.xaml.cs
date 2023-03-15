@@ -1,17 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 using System.Windows;
 
-namespace WpfAppForZoomInAndZoomOut
+namespace WpfAppForZoomInAndZoomOut;
+
+public partial class App : Application
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    public App()
     {
+        TestLoadLibrary();
+    }
+
+    private void TestLoadLibrary()
+    {
+        var assembly = Assembly.LoadFrom("TestDynamicLoadClassLibrary.dll");
+        //var type = assembly.GetType("TestDynamicLoadClassLibrary.Test");
+        var type = Type.GetType("TestDynamicLoadClassLibrary.Test, TestDynamicLoadClassLibrary, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null");
+        Console.WriteLine(type.FullName);
     }
 }

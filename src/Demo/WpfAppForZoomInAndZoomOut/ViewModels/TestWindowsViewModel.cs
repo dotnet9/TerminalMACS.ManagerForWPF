@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Prism.Commands;
+using Prism.Mvvm;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
-using Prism.Commands;
-using Prism.Mvvm;
 
 namespace WpfAppForZoomInAndZoomOut.ViewModels;
 
