@@ -207,3 +207,8 @@ src/Demo/CshaprWithJavascriptDemo/obj/
 src/Demo/WorkflowTest/RPAStudio/Activities/nupkgs/
 src/Demo/CshaprWithJavascriptDemo/packages/
 src/Demo/TestDynamicLoadClassLibrary/obj/
+src/Demo/TestLoadChildAssebmly/ChildAssembly/obj/
+src/Demo/TestLoadChildAssebmly/ChildAssembly/bin/
+src/Demo/TestLoadChildAssebmly/TestLoadChildAssebmly/obj/
+src/Demo/TestLoadChildAssebmly/TestLoadChildAssebmly/bin/
+src/Demo/TestLoadChildAssebmly/TestLoadChildAssebmly/Publish/
