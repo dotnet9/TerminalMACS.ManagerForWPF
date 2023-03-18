@@ -212,3 +212,5 @@ src/Demo/TestLoadChildAssebmly/ChildAssembly/bin/
 src/Demo/TestLoadChildAssebmly/TestLoadChildAssebmly/obj/
 src/Demo/TestLoadChildAssebmly/TestLoadChildAssebmly/bin/
 src/Demo/TestLoadChildAssebmly/TestLoadChildAssebmly/Publish/
+src/Demo/NodeNetworkTest/obj/
+src/Demo/NodeNetworkTest/Publish/
