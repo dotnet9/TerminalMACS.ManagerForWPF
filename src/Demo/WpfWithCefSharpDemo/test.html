@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CefSharp测试</title>
+    <script>
+        function callCSharpMethod() {
+            window.cefSharpExample.testMethod("来自JS的调用");
+        }
+
+        function displayMessage(message) {
+            alert(message);
+        }
+    </script>
+</head>
+<body>
+    <h1>CefSharp测试</h1>
+<button onclick="callCSharpMethod()">调用C#方法</button>
+</body>
+</html>
