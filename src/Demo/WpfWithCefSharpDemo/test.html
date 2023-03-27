@@ -4,17 +4,35 @@
     <meta charset="UTF-8">
     <title>CefSharp测试</title>
     <script>
+        // 测试在Web中调用C#的方法
         function callCSharpMethod() {
             window.cefSharpExample.testMethod("来自JS的调用");
         }
 
+        // 测试C#调用JS的方法，只传递一个普通的字符串
         function displayMessage(message) {
             alert(message);
         }
+
+        // 接收C#传递过来的JSON对象，并以表格形式展示在页面上
+        function displayJson(json) {
+            var obj = JSON.parse(json);
+            var html = "<table border='1'>";
+            for (var prop in obj) {
+                html += "<tr>";
+                html += "<td>" + prop + "</td>"
+                html += "<td>" + obj[prop] + "</td>"
+                html += "</tr>"
+            }
+            html += "</table>";
+            document.getElementById("jsonTable").innerHTML = html;
+        }
+    
     </script>
 </head>
 <body>
-    <h1>CefSharp测试</h1>
+<h1>CefSharp测试</h1>
 <button onclick="callCSharpMethod()">调用C#方法</button>
+<div id="jsonTable"></div>
 </body>
 </html>

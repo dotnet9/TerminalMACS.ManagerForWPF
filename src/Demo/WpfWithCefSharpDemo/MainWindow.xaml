@@ -5,9 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="WPF加载CefSharp测试" Height="450" Width="800">
     <Grid>
-        <wpf:ChromiumWebBrowser x:Name="Browser" Loaded="Browser_Loaded">
-        </wpf:ChromiumWebBrowser>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="下面显示的是网页内容"></TextBlock>
+        <Border Grid.Row="1" BorderBrush="DarkOrange" BorderThickness="2">
+            <wpf:ChromiumWebBrowser x:Name="Browser" Loaded="Browser_OnLoaded">
+            </wpf:ChromiumWebBrowser>
+
+        </Border>
+        <Border Margin="3 5" Grid.Row="2" BorderBrush="Blue" BorderThickness="2" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Height="35">
+                <TextBlock Text="右侧按钮是WPF按钮" VerticalAlignment="Center" Margin="5 3"></TextBlock>
+                <Button Content="调用JS方法" Click="CallJSFunc_Click" Height="30" Padding="10 2"></Button>
+                <Button Content="C#传递Json对象到网页" Click="SendJsonToWeb_Click" Height="30" Padding="10 2"></Button>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
