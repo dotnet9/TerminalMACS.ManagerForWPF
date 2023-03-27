@@ -215,3 +215,7 @@ src/Demo/TestLoadChildAssebmly/TestLoadChildAssebmly/Publish/
 src/Demo/WpfWithCefSharpDemo/bin/
 src/Demo/WpfWithCefSharpDemo/obj/
 src/Demo/WpfWithCefSharpDemo/packages/
+src/Demo/NodeNetworkTest/obj/
+src/Demo/NodeNetworkTest/Publish/
+src/Demo/DataGridDemo/obj/
+src/Demo/DataGridDemo/Publish/
