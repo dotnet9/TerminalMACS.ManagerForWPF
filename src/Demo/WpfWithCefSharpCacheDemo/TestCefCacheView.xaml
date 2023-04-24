@@ -1,0 +1,30 @@
+﻿<Window x:Class="WpfWithCefSharpCacheDemo.TestCefCacheView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        mc:Ignorable="d" Padding="10"
+        Title="TestCefCacheView" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <GroupBox Header="不同域名">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="加载百度" Click="LoadBaidu_Click" Padding="10 5" Margin="10 0 0 0" />
+                    <Button Content="加载百度翻译" Click="LoadBaiduFanyi_Click" Padding="10 5" Margin="10 0 0 0" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="同域名">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="加载首页" Click="LoadDotnet9Home_Click" Padding="10 5" Margin="10 0 0 0" />
+                    <Button Content="加载关于" Click="LoadDotnet9About_Click" Padding="10 5" Margin="10 0 0 0" />
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+        <cef:ChromiumWebBrowser Grid.Row="1" x:Name="CefBrowser" />
+    </Grid>
+</Window>

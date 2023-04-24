@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33513.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfWithCefSharpDemo", "WpfWithCefSharpDemo.csproj", "{E55CFC05-3843-434D-9261-963439F03674}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfWithCefSharpCacheDemo", "..\WpfWithCefSharpCacheDemo\WpfWithCefSharpCacheDemo.csproj", "{4A9E33E0-CE38-4FEF-8B94-4B7F67F2CFEF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{E55CFC05-3843-434D-9261-963439F03674}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E55CFC05-3843-434D-9261-963439F03674}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E55CFC05-3843-434D-9261-963439F03674}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A9E33E0-CE38-4FEF-8B94-4B7F67F2CFEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A9E33E0-CE38-4FEF-8B94-4B7F67F2CFEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A9E33E0-CE38-4FEF-8B94-4B7F67F2CFEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A9E33E0-CE38-4FEF-8B94-4B7F67F2CFEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

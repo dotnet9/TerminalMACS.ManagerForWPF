@@ -219,3 +219,5 @@ src/Demo/NodeNetworkTest/obj/
 src/Demo/NodeNetworkTest/Publish/
 src/Demo/DataGridDemo/obj/
 src/Demo/DataGridDemo/Publish/
+src/Demo/WpfWithCefSharpCacheDemo/bin/
+src/Demo/WpfWithCefSharpCacheDemo/obj/

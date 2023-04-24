@@ -1,0 +1,26 @@
+﻿<Window x:Class="WpfWithCefSharpCacheDemo.TestListScrollCommandView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:vm="clr-namespace:WpfWithCefSharpCacheDemo.TestListBoxScrollCommand"
+        mc:Ignorable="d"
+        d:DesignSource="{vm:TestListScrollCommandViewModel}"
+        Title="TestListScrollCommandView" Height="450" Width="800">
+    <Grid>
+        <ListBox ItemsSource="{Binding MyItems}"
+                 SelectedItem="{Binding SelectedItem}"
+                 Width="200">
+            <i:Interaction.Behaviors>
+                <vm:ListBoxScrollBehavior ScrollCommand="{Binding ScrollCommand}" />
+            </i:Interaction.Behaviors>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </Grid>
+</Window>

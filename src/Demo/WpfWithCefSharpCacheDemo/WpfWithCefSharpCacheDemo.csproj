@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\WpfWithCefSharpDemo\packages\CefSharp.Common.89.0.170\build\CefSharp.Common.props" Condition="Exists('..\WpfWithCefSharpDemo\packages\CefSharp.Common.89.0.170\build\CefSharp.Common.props')" />
+  <Import Project="..\WpfWithCefSharpDemo\packages\cef.redist.x86.89.0.17\build\cef.redist.x86.props" Condition="Exists('..\WpfWithCefSharpDemo\packages\cef.redist.x86.89.0.17\build\cef.redist.x86.props')" />
+  <Import Project="..\WpfWithCefSharpDemo\packages\cef.redist.x64.89.0.17\build\cef.redist.x64.props" Condition="Exists('..\WpfWithCefSharpDemo\packages\cef.redist.x64.89.0.17\build\cef.redist.x64.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4A9E33E0-CE38-4FEF-8B94-4B7F67F2CFEF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>WpfWithCefSharpCacheDemo</RootNamespace>
+    <AssemblyName>WpfWithCefSharpCacheDemo</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CefSharp, Version=89.0.170.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>..\WpfWithCefSharpDemo\packages\CefSharp.Common.89.0.170\lib\net452\CefSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Core, Version=89.0.170.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>..\WpfWithCefSharpDemo\packages\CefSharp.Common.89.0.170\lib\net452\CefSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Wpf, Version=89.0.170.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>..\WpfWithCefSharpDemo\packages\CefSharp.Wpf.89.0.170\lib\net452\CefSharp.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\WpfWithCefSharpDemo\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Caches\CacheFileHelper.cs" />
+    <Compile Include="Caches\CefResourceHandler.cs" />
+    <Compile Include="TestListBoxScrollCommand\RelayCommand.cs" />
+    <Compile Include="TestListScrollCommandView.xaml.cs">
+      <DependentUpon>TestListScrollCommandView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestListBoxScrollCommand\TestListScrollCommandViewModel.cs" />
+    <Page Include="TestCefCacheView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Caches\CefResourceRequestHandler.cs" />
+    <Compile Include="Caches\CefRequestHandlerc.cs" />
+    <Compile Include="Caches\CefResponseFilter.cs" />
+    <Compile Include="TestListBoxScrollCommand\ListBoxScrollBehavior.cs" />
+    <Compile Include="TestCefCacheView.xaml.cs">
+      <DependentUpon>TestCefCacheView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="TestListScrollCommandView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\WpfWithCefSharpDemo\packages\cef.redist.x64.89.0.17\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\WpfWithCefSharpDemo\packages\cef.redist.x64.89.0.17\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\WpfWithCefSharpDemo\packages\cef.redist.x86.89.0.17\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\WpfWithCefSharpDemo\packages\cef.redist.x86.89.0.17\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\WpfWithCefSharpDemo\packages\CefSharp.Common.89.0.170\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\WpfWithCefSharpDemo\packages\CefSharp.Common.89.0.170\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\WpfWithCefSharpDemo\packages\CefSharp.Common.89.0.170\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\WpfWithCefSharpDemo\packages\CefSharp.Common.89.0.170\build\CefSharp.Common.targets'))" />
+  </Target>
+  <Import Project="..\WpfWithCefSharpDemo\packages\CefSharp.Common.89.0.170\build\CefSharp.Common.targets" Condition="Exists('..\WpfWithCefSharpDemo\packages\CefSharp.Common.89.0.170\build\CefSharp.Common.targets')" />
+</Project>
