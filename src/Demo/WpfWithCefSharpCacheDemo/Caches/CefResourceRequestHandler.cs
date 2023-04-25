@@ -1,4 +1,5 @@
-﻿using CefSharp;
+﻿using System.Collections.Specialized;
+using CefSharp;
 using CefSharp.Handler;
 
 namespace WpfWithCefSharpCacheDemo.Caches;
@@ -44,6 +45,9 @@ internal class CefResourceRequestHandler : ResourceRequestHandler
         IFrame frame, IRequest request,
         IRequestCallback callback)
     {
+        var headers = new NameValueCollection(request.Headers);
+        headers["Authorization"] = "Bearer xxxxxx.xxxxx.xxx";
+        request.Headers = headers;
         return CefReturnValue.Continue;
     }
 }
