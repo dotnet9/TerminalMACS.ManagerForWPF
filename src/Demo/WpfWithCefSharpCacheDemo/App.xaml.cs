@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CefSharp;
+using CefSharp.Wpf;
+using System;
 using System.Windows;
 
-namespace WpfWithCefSharpCacheDemo
+namespace WpfWithCefSharpCacheDemo;
+
+public partial class App : Application
 {
-    /// <summary>
-    /// App.xaml 的交互逻辑
-    /// </summary>
-    public partial class App : Application
+    protected override void OnStartup(StartupEventArgs e)
     {
+        base.OnStartup(e);
+
+        // 默认缓存
+        //var settings = new CefSettings
+        //{
+        //    CachePath = $"{AppDomain.CurrentDomain.BaseDirectory}DefaultCaches"
+        //};
+        //Cef.Initialize(settings);
     }
 }
