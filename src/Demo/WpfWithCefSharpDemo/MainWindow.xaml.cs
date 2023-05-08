@@ -18,7 +18,8 @@ namespace WpfWithCefSharpDemo
             CefSharpSettings.WcfEnabled = true;
 
             // 注册C#的对象到JS中的代码必须在Cef的Browser加载之前调用
-            Browser.JavascriptObjectRepository.Register("cefSharpExample", new CefSharpExample(), false,
+            ICefSharp cefSharpExample = new CefSharpExample();
+            Browser.JavascriptObjectRepository.Register("cefSharpExample", cefSharpExample, false,
                 options: BindingOptions.DefaultBinder);
         }
 
@@ -72,7 +73,12 @@ namespace WpfWithCefSharpDemo
         }
     }
 
-    public class CefSharpExample
+    public interface ICefSharp
+    {
+        void TestMethod(string message);
+    }
+
+    public class CefSharpExample: ICefSharp
     {
         public void TestMethod(string message)
         {
