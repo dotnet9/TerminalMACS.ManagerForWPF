@@ -23,6 +23,9 @@
                 <TextBlock Text="右侧按钮是WPF按钮" VerticalAlignment="Center" Margin="5 3"></TextBlock>
                 <Button Content="调用JS方法" Click="CallJSFunc_Click" Height="30" Padding="10 2"></Button>
                 <Button Content="C#传递Json对象到网页" Click="SendJsonToWeb_Click" Height="30" Padding="10 2"></Button>
+                <TextBlock>
+                    <TextBlock.Inlines />
+                </TextBlock>
             </StackPanel>
         </Border>
     </Grid>

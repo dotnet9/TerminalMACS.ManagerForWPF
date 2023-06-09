@@ -1,9 +1,14 @@
 ﻿using CefSharp;
 using Newtonsoft.Json;
 using System;
+using System.ComponentModel;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using static System.Net.Mime.MediaTypeNames;
+using Application = System.Windows.Application;
 
 namespace WpfWithCefSharpDemo
 {
@@ -38,6 +43,26 @@ namespace WpfWithCefSharpDemo
 
             var htmlContent = File.ReadAllText(htmlFile, Encoding.UTF8);
             Browser.LoadHtml(htmlContent);
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    var isLoaded = false;
+                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        if (Browser.IsBrowserInitialized)
+                        {
+                            Browser.ShowDevTools();
+                            isLoaded = true;
+                        }
+                    });
+                    if (isLoaded)
+                    {
+                        break;
+                    }
+                    Task.Delay(TimeSpan.FromMilliseconds(50));
+                }
+            });
         }
 
         /// <summary>
@@ -63,7 +88,7 @@ namespace WpfWithCefSharpDemo
                 Id = 1,
                 Name = "沙漠尽头的狼",
                 Age = 25,
-                WebSite="https://dotnet9.com"
+                WebSite = "https://dotnet9.com"
             };
             var jsonStr = JsonConvert.SerializeObject(jsonContent);
 
@@ -80,9 +105,17 @@ namespace WpfWithCefSharpDemo
 
     public class CefSharpExample: ICefSharp
     {
-        public void TestMethod(string message)
+        public void TestMethod(dynamic message)
         {
-            Application.Current.Dispatcher.Invoke(() => { MessageBox.Show("JS里的调用"); });
+            Application.Current.Dispatcher.Invoke(() => { MessageBox.Show(message.Name); });
         }
+    }
+
+    [Serializable]
+    public class TransData
+    {
+        [DataMember(Name = "age")] public int Age { get; set; }
+
+        [DataMember(Name = "name")] public string Name { get; set; }
     }
 }
