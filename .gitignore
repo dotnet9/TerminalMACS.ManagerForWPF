@@ -221,3 +221,5 @@ src/Demo/DataGridDemo/obj/
 src/Demo/DataGridDemo/Publish/
 src/Demo/WpfWithCefSharpCacheDemo/bin/
 src/Demo/WpfWithCefSharpCacheDemo/obj/
+src/Demo/MultiVersionLibrary/Publish/
+src/Demo/MultiVersionLibrary/TestDll/obj/
