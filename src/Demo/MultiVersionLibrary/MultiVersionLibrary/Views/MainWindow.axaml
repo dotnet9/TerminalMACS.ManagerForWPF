@@ -1,20 +1,38 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:MultiVersionLibrary.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" Width="400" Height="350"
-        x:Class="MultiVersionLibrary.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="MultiVersionLibrary" Padding="10">
+<Window
+    x:Class="MultiVersionLibrary.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:MultiVersionLibrary.ViewModels"
+    Title="MultiVersionLibrary"
+    Width="400"
+    Height="350"
+    Padding="10"
+    Icon="/Assets/avalonia-logo.ico"
+    mc:Ignorable="d">
 
     <Design.DataContext>
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-        <TextBox Width="100" Text="{Binding Number,Mode=OneWayToSource}"></TextBox>
-        <TextBlock Text="{Binding Message, Mode=TwoWay}" VerticalAlignment="Center"></TextBlock>
-    </StackPanel>
+    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,*">
+        <TextBlock Text="右侧输入数字，下方显示数字魅力：" />
+        <TextBox
+            Grid.Row="0"
+            Grid.Column="1"
+            Width="100"
+            Text="{Binding Number, Mode=OneWayToSource}" />
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Center"
+            FontSize="20"
+            FontWeight="ExtraBold"
+            Foreground="DarkOrange"
+            Text="{Binding Message, Mode=TwoWay}"
+            TextWrapping="Wrap" />
+    </Grid>
 
 </Window>

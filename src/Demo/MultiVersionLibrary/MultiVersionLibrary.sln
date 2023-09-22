@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34112.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiVersionLibrary", "MultiVersionLibrary\MultiVersionLibrary.csproj", "{DFE2104A-BC9A-46FC-99FB-AC3CDC112AA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDll", "TestDll\TestDll.csproj", "{B4CAB526-7495-49A6-8FF2-437F6A12906C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestDll", "TestDll\TestDll.csproj", "{B4CAB526-7495-49A6-8FF2-437F6A12906C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

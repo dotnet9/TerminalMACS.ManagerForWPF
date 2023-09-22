@@ -1,5 +1,6 @@
 ﻿using ReactiveUI;
 using TestDll;
+using static System.Int32;
 
 namespace MultiVersionLibrary.ViewModels;
 
@@ -7,15 +8,16 @@ public class MainWindowViewModel : ViewModelBase
 {
     private readonly TestTool _testTool = new();
 
-    private int _number = DateTime.Now.Microsecond;
+    private string? _number;
 
-    public int Number
+    public string? Number
     {
         get { return _number; }
         set
         {
             _number = value;
-            Message = _testTool.TellMeOddEven(_number);
+            TryParse(_number, out var factNumber);
+            Message = _testTool.GetNumberSentence(factNumber);
         }
     }
 
