@@ -17,7 +17,7 @@ public class MainWindowViewModel : ViewModelBase
         {
             _number = value;
             TryParse(_number, out var factNumber);
-            Message = _testTool.GetNumberSentence(factNumber);
+            Message = _testTool.GetNumberSentence2(factNumber);
         }
     }
 

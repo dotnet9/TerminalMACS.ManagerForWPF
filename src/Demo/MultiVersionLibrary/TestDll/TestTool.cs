@@ -19,6 +19,29 @@ public class TestTool
         "十，是圆满的数字，十全十美的象征， 它们让诗歌的结尾更加完美。"
     };
 
+
+    /// <summary>
+    /// 取对应数字的段落
+    /// </summary>
+    /// <param name="number"></param>
+    /// <returns></returns>
+    public string GetNumberSentence2(int number)
+    {
+        var mo = number % _sentences.Count;
+
+        // 个位为0，取最后一
+        if (mo == 0)
+        {
+            mo = 10;
+        }
+
+        // 新增数字验证方法
+        mo = new CalNumber().GetValidNumber(mo);
+
+        var sentencesIndex = mo - 1;
+        return _sentences[sentencesIndex];
+    }
+
     /// <summary>
     /// 取对应数字的段落
     /// </summary>
@@ -41,5 +64,19 @@ public class TestTool
 
         var sentencesIndex = mo - 1;
         return _sentences[sentencesIndex];
+    }
+}
+
+internal class CalNumber
+{
+    internal int GetValidNumber(int number)
+    {
+        // 这里可以加一些复杂的算法代码
+        if (number == 6)
+        {
+            number = 1;
+        }
+
+        return number;
     }
 }
