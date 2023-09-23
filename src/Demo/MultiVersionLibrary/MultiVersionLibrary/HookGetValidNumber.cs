@@ -32,23 +32,16 @@ internal class HookGetValidNumber
     /// <returns></returns>
     public static bool Prefix(ref object __instance, int number, ref int __result)
     {
-        try
+        //将原方法逻辑全部复制，然后做部分修改
+
+        // 这里可以加一些复杂的算法代码
+        if (number == 6)
         {
-            //将原方法逻辑全部复制，然后做部分修改
-
-            // 这里可以加一些复杂的算法代码
-            if (number == 6)
-            {
-                number = 8;
-            }
-
-            __result = number;
-
-            return false;
+            number = 8;
         }
-        catch (Exception ex)
-        {
-            return true;
-        }
+
+        __result = number;
+
+        return false;
     }
 }
