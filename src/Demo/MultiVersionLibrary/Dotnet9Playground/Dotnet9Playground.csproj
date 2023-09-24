@@ -38,6 +38,9 @@
     <Reference Include="0Harmony, Version=1.2.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Lib.Harmony.1.2.0.1\lib\net45\0Harmony.dll</HintPath>
     </Reference>
+    <Reference Include="Dotnet9Games, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dotnet9Games.1.0.3\lib\net461\Dotnet9Games.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -66,8 +69,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Extensions\PropertyHelper.cs" />
-    <Compile Include="Hooks\HookGameBomb.cs" />
+    <Compile Include="Hooks\HookBallGameStartGame.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -101,11 +103,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Dotnet9Games\Dotnet9Games.csproj">
-      <Project>{ad5a98dc-6e12-4b94-8ffa-9bfc532c67c7}</Project>
-      <Name>Dotnet9Games</Name>
+    <Resource Include="Resources\favicon.ico" />
+    <Resource Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dotnet9HookHigh\Dotnet9HookHigh.csproj">
+      <Project>{c57e92de-df04-4e21-a2e9-65e0e10ff76b}</Project>
+      <Name>Dotnet9HookHigh</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

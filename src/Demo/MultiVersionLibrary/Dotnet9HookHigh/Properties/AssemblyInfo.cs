@@ -3,23 +3,18 @@ using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Markup;
 
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Dotnet9Games")]
-[assembly: AssemblyDescription("Dotnet9游戏，这是假游戏，只用于拦截测试")]
+[assembly: AssemblyTitle("Dotnet9HookHigh")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("https://dotnet9.com")]
-[assembly: AssemblyProduct("Dotnet9Games")]
-[assembly: AssemblyCopyright("Copyright © Dotnet9 2023")]
+[assembly: AssemblyCompany("China")]
+[assembly: AssemblyProduct("Dotnet9HookHigh")]
+[assembly: AssemblyCopyright("Copyright © China 2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: XmlnsPrefix("https://dotnet9.com", "dotnet9")]
-[assembly: XmlnsDefinition("https://dotnet9.com", "Dotnet9Games")]
-[assembly: XmlnsDefinition("https://dotnet9.com", "Dotnet9Games.Views")]
-[assembly: XmlnsDefinition("https://dotnet9.com", "Dotnet9Games.Models")]
 
 // 将 ComVisible 设置为 false 会使此程序集中的类型
 //对 COM 组件不可见。如果需要从 COM 访问此程序集中的类型
@@ -36,13 +31,13 @@ using System.Windows.Markup;
 //[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.Satellite)]
 
 
-[assembly: ThemeInfo(
+[assembly:ThemeInfo(
     ResourceDictionaryLocation.None, //主题特定资源词典所处位置
-    //(未在页面中找到资源时使用，
-    //或应用程序资源字典中找到时使用)
+                             //(未在页面中找到资源时使用，
+                             //或应用程序资源字典中找到时使用)
     ResourceDictionaryLocation.SourceAssembly //常规资源词典所处位置
-    //(未在页面中找到资源时使用，
-    //、应用程序或任何主题专用资源字典中找到时使用)
+                                      //(未在页面中找到资源时使用，
+                                      //、应用程序或任何主题专用资源字典中找到时使用)
 )]
 
 
@@ -56,5 +51,5 @@ using System.Windows.Markup;
 //可以指定所有这些值，也可以使用“生成号”和“修订号”的默认值
 //通过使用 "*"，如下所示:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.3.0")]
-[assembly: AssemblyFileVersion("1.0.3.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

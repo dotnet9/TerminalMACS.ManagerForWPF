@@ -5,9 +5,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dotnet9="https://dotnet9.com"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="MainWindow"
+    Title="综合小案例:模拟.NET应用场景，综合应用反编译、第三方库调试、拦截、一库多版本兼容"
     Width="800"
     Height="450"
+    Background="Bisque"
+    Icon="Resources/favicon.ico"
     mc:Ignorable="d">
     <Border Padding="10">
         <Grid>
@@ -19,24 +21,37 @@
                 Grid.Row="0"
                 VerticalAlignment="Center"
                 Orientation="Horizontal">
-                <TextBlock VerticalAlignment="Center" Text="生成" />
+                <TextBlock
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="Blue"
+                    Text="生成" />
                 <TextBox
                     x:Name="TextBoxBallCount"
-                    Width="30"
+                    Width="50"
+                    Height="25"
                     Margin="10,0"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center"
+                    FontSize="20"
+                    Foreground="Red"
                     Text="{Binding ElementName=MyBallGame, Path=BallCount, Mode=TwoWay}" />
                 <TextBlock
                     Margin="0,0,10,0"
                     VerticalAlignment="Center"
+                    FontSize="20"
+                    Foreground="Blue"
                     Text="个气球，点击" />
                 <Button
-                    Padding="15,5"
+                    Padding="15,2"
                     Background="White"
                     BorderBrush="DarkGreen"
                     BorderThickness="2"
                     Click="StartGame_OnClick"
-                    Content="开始游戏" />
+                    Content="开始游戏"
+                    FontSize="20"
+                    Foreground="DarkOrange" />
             </StackPanel>
             <dotnet9:BallGame
                 x:Name="MyBallGame"

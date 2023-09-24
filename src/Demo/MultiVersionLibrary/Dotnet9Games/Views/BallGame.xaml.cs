@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
@@ -46,7 +45,7 @@ public partial class BallGame : UserControl
         if (BallCount > 9)
         {
             // 播放爆炸动画效果
-            PlayExplosionAnimation();
+            PlayBrokenHeartAnimation();
         }
         else
         {
@@ -56,9 +55,9 @@ public partial class BallGame : UserControl
     }
 
     /// <summary>
-    ///     播放爆炸动画效果
+    ///     播放心碎动画效果
     /// </summary>
-    private void PlayExplosionAnimation()
+    private void PlayBrokenHeartAnimation()
     {
         ClearBalloonAndBomb();
 
@@ -124,18 +123,21 @@ public partial class BallGame : UserControl
             {
                 new GradientStop(
                     Color.FromArgb(255, (byte)_random.Next(256), (byte)_random.Next(256), (byte)_random.Next(256)),
-                    0.9),
+                    0),
                 new GradientStop(
-                    Color.FromArgb(0, (byte)_random.Next(256), (byte)_random.Next(256), (byte)_random.Next(256)), 0.9)
+                    Color.FromArgb(255, (byte)_random.Next(256), (byte)_random.Next(256), (byte)_random.Next(256)),
+                    0.66),
+                new GradientStop(
+                    Color.FromArgb(0, (byte)_random.Next(256), (byte)_random.Next(256), (byte)_random.Next(256)), 1)
             };
 
             // 设置气球的填充为渐变色
             var fillBrush = new RadialGradientBrush(gradientStops)
             {
-                RadiusX = 0.9,
-                RadiusY = 0.9,
-                GradientOrigin = new Point(0.4, 0.2),
-                Center = new Point(0.4, 0.2)
+                RadiusX = 0.75,
+                RadiusY = 0.75,
+                GradientOrigin = new Point(0.2, 0.8),
+                Center = new Point(0.5, 0.5)
             };
             balloonShape.Fill = fillBrush;
 
@@ -202,13 +204,13 @@ public partial class BallGame : UserControl
         var lastChild = _balloons.LastOrDefault();
         if (lastChild != null)
         {
-            var remainningWidth = ActualWidth;
-            foreach (var ballon in _balloons)
+            var remainWidth = ActualWidth;
+            foreach (var balloon in _balloons)
             {
-                remainningWidth = remainningWidth - ballon.Shape.Width;
+                remainWidth -= balloon.Shape.Width;
             }
 
-            lastChild.Shape.Measure(new Size(remainningWidth, lastChild.Shape.Height));
+            lastChild.Shape.Measure(new Size(remainWidth, lastChild.Shape.Height));
         }
 
         return base.MeasureOverride(constraint);

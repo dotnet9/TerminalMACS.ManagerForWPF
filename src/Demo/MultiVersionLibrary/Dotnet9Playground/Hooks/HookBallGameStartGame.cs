@@ -1,21 +1,21 @@
 ﻿using Dotnet9Games.Views;
-using Dotnet9Playground.Extensions;
 using Harmony;
 using System.Reflection;
 
 namespace Dotnet9Playground.Hooks;
 
-internal class HookGameBomb
+internal class HookBallGameStartGame
 {
     /// <summary>
     /// 拦截游戏的开始方法StartGame
     /// </summary>
     public static void StartHook()
     {
-        var harmony = HarmonyInstance.Create("https://dotnet9.com");
+        var harmony = HarmonyInstance.Create("https://dotnet9.com/HookBallGameStartGame");
         var hookClassType = typeof(BallGame);
-        var hookMethod = hookClassType!.GetMethod("StartGame", BindingFlags.Public | BindingFlags.Instance);
-        var replaceMethod = typeof(HookGameBomb).GetMethod(nameof(HookStartGame));
+        var hookMethod =
+            hookClassType!.GetMethod(nameof(BallGame.StartGame), BindingFlags.Public | BindingFlags.Instance);
+        var replaceMethod = typeof(HookBallGameStartGame).GetMethod(nameof(HookStartGame));
         var replaceHarmonyMethod = new HarmonyMethod(replaceMethod);
         harmony.Patch(hookMethod, replaceHarmonyMethod);
     }
