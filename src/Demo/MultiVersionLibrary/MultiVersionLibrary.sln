@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiVersionLibrary", "Mult
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestDll", "TestDll\TestDll.csproj", "{B4CAB526-7495-49A6-8FF2-437F6A12906C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet9Games", "Dotnet9Games\Dotnet9Games.csproj", "{AD5A98DC-6E12-4B94-8FFA-9BFC532C67C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet9Playground", "Dotnet9Playground\Dotnet9Playground.csproj", "{00AFEE87-562E-42EF-A064-88790993C235}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{B4CAB526-7495-49A6-8FF2-437F6A12906C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4CAB526-7495-49A6-8FF2-437F6A12906C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4CAB526-7495-49A6-8FF2-437F6A12906C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD5A98DC-6E12-4B94-8FFA-9BFC532C67C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD5A98DC-6E12-4B94-8FFA-9BFC532C67C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD5A98DC-6E12-4B94-8FFA-9BFC532C67C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD5A98DC-6E12-4B94-8FFA-9BFC532C67C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00AFEE87-562E-42EF-A064-88790993C235}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00AFEE87-562E-42EF-A064-88790993C235}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00AFEE87-562E-42EF-A064-88790993C235}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00AFEE87-562E-42EF-A064-88790993C235}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
