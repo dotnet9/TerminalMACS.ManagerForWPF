@@ -223,3 +223,8 @@ src/Demo/WpfWithCefSharpCacheDemo/bin/
 src/Demo/WpfWithCefSharpCacheDemo/obj/
 src/Demo/MultiVersionLibrary/Publish/
 src/Demo/MultiVersionLibrary/TestDll/obj/
+src/Demo/MultiVersionLibrary/Dotnet9Games/bin/
+src/Demo/MultiVersionLibrary/Dotnet9Games/obj/
+src/Demo/MultiVersionLibrary/Dotnet9Playground/bin/
+src/Demo/MultiVersionLibrary/Dotnet9Playground/obj/
+src/Demo/MultiVersionLibrary/packages/
