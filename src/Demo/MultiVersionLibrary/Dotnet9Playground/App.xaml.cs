@@ -1,4 +1,5 @@
-﻿using Dotnet9HookHigh;
+﻿using System;
+using Dotnet9HookHigh;
 using Dotnet9Playground.Hooks;
 using System.Windows;
 
