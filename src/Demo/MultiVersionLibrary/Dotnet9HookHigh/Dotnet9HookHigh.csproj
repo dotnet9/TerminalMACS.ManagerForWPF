@@ -99,16 +99,19 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Lib\Lib.Harmony\2.3.0-prerelease.2\0Harmony.ref" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Lib\Lib.Harmony\2.3.0-prerelease.2\0Harmony.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>ren "$(ProjectDir)Lib\Lib.Harmony\2.3.0-prerelease.2\0Harmony.ref" "$(ProjectDir)Lib\Lib.Harmony\2.3.0-prerelease.2\0Harmony.dll"</PreBuildEvent>
+    <PreBuildEvent>copy "$(ProjectDir)Lib\Lib.Harmony\2.3.0-prerelease.2\0Harmony.ref" "$(ProjectDir)Lib\Lib.Harmony\2.3.0-prerelease.2\0Harmony.dll"</PreBuildEvent>
   </PropertyGroup>
 </Project>

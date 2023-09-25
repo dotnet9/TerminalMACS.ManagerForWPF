@@ -230,3 +230,4 @@ src/Demo/MultiVersionLibrary/Dotnet9Playground/obj/
 src/Demo/MultiVersionLibrary/packages/
 src/Demo/MultiVersionLibrary/Dotnet9HookHigh/bin/
 src/Demo/MultiVersionLibrary/Dotnet9HookHigh/obj/
+src/Demo/MultiVersionLibrary/Dotnet9HookHigh/Lib/Lib.Harmony/2.3.0-prerelease.2/0Harmony.dll
