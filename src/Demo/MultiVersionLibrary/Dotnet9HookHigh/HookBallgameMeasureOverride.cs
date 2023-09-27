@@ -6,7 +6,6 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Shapes;
 
 namespace Dotnet9HookHigh;
 
@@ -79,7 +78,7 @@ public class HookBallgameMeasureOverride
         // 这段代码可能没什么意义，可按实际开发修改
         if (remainWidth > 0)
         {
-            var lashShape = GetBalloonShape(lastChild);
+            var lashShape = GetBalloonBall(lastChild);
             lashShape.Measure(new Size(remainWidth, lashShape.Height));
         }
 
@@ -88,16 +87,16 @@ public class HookBallgameMeasureOverride
         return false;
     }
 
-    private static Ellipse GetBalloonShape(object balloon)
+    private static Ball GetBalloonBall(object balloon)
     {
-        var shapeProperty = balloon.GetType().GetProperty("Shape");
-        var shape = (Ellipse)shapeProperty!.GetValue(balloon);
+        var shapeProperty = balloon.GetType().GetProperty("Ball");
+        var shape = (Ball)shapeProperty!.GetValue(balloon);
         return shape;
     }
 
     private static Size GetBalloonSize(object balloon)
     {
-        var shape = GetBalloonShape(balloon);
+        var shape = GetBalloonBall(balloon);
         return new Size(shape.Width, shape.Height);
     }
 }
