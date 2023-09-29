@@ -1,17 +1,16 @@
 ﻿using Dotnet9Games.Models;
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using Dotnet9Games.Helpers;
+using System.Speech.Synthesis;
 
 namespace Dotnet9Games.Views;
 
@@ -28,10 +27,16 @@ public partial class BallGame : UserControl
     private readonly Random _random = new(DateTime.Now.Millisecond);
     private int _allScore;
 
+    private readonly Stopwatch _stopwatch = new();
+    private readonly SpeechSynthesizer _speechSynthesizer;
+
 
     public BallGame()
     {
         InitializeComponent();
+
+        _speechSynthesizer = new SpeechSynthesizer();
+        _speechSynthesizer.SetOutputToDefaultAudioDevice();
     }
 
     /// <summary>
@@ -140,6 +145,7 @@ public partial class BallGame : UserControl
 
         // 使用CompositionTarget.Rendering事件来更新气球的位置
         CompositionTarget.Rendering += CompositionTargetBalloon_Rendering;
+        StartCountTime();
     }
 
     /// <summary>
@@ -155,31 +161,45 @@ public partial class BallGame : UserControl
             return;
         }
 
-        PlaySound();
+        PlayBallSound(ball.Score);
+        PlayWordSound($"{ball.Score}分");
+
         var ballInfo = (BallInfo)ball.Tag;
         _allScore += ball.Score;
         CanvasPlayground.Children.Remove(ball);
         _balloons.Remove(ballInfo!);
-        RunAllScore.Text = $"{_balloons.Count}/{BallCount}, {_allScore}";
+
+        CountBallInfo();
     }
 
-    private void PlaySound()
+    /// <summary>
+    /// 播放气球爆破的声音
+    /// </summary>
+    /// <param name="score"></param>
+    private void PlayBallSound(int score)
     {
         Task.Run(async () =>
         {
-            var player = new MediaPlayer();
-
-            var file = Guid.NewGuid().ToString() + ".mp3";
-            using (FileStream fs = new FileStream(file, FileMode.Create))
+            const string file = "气球爆裂声.mp3";
+            if (!File.Exists(file))
             {
-                fs.Write(Resource.气球爆裂声, 0, Resource.气球爆裂声.Length);
+                using FileStream fs = new(file, FileMode.Create);
+                await fs.WriteAsync(Resource.气球爆裂声, 0, Resource.气球爆裂声.Length);
             }
 
+            MediaPlayer player = new();
             player.Open(new Uri(file, UriKind.Relative));
             player.Play();
-            await Task.Delay(TimeSpan.FromMilliseconds(3000));
-            File.Delete(file);
         });
+    }
+
+    /// <summary>
+    /// 播放文字语音
+    /// </summary>
+    /// <param name="word"></param>
+    private void PlayWordSound(string word)
+    {
+        Task.Run(() => { _speechSynthesizer.Speak(word); });
     }
 
     private void CompositionTargetBalloon_Rendering(object sender, EventArgs e)
@@ -207,12 +227,52 @@ public partial class BallGame : UserControl
         }
     }
 
+    /// <summary>
+    /// 开启计时
+    /// </summary>
+    private void StartCountTime()
+    {
+        _stopwatch.Start();
+        Task.Run(async () =>
+        {
+            while (_stopwatch.IsRunning)
+            {
+                await this.Dispatcher.InvokeAsync(() =>
+                {
+                    RunTimeCount.Text = TimeHelper.FormatSeconds(_stopwatch.Elapsed.TotalSeconds);
+                });
+
+                await Task.Delay(TimeSpan.FromSeconds(1));
+            }
+        });
+    }
+
+    /// <summary>
+    /// 统计气球信息
+    /// </summary>
+    private void CountBallInfo()
+    {
+        RunBallCount.Text = $"{_balloons.Count}/{BallCount}";
+        RunScoreCount.Text = $"{_allScore}";
+
+        if (_balloons.Count <= 0)
+        {
+            _stopwatch.Stop();
+            PlayWordSound("恭喜，气球已被全部点破！");
+        }
+    }
+
+    /// <summary>
+    /// 清空统计信息
+    /// </summary>
     private void ClearBalloonAndBomb()
     {
         CanvasPlayground.Children.Clear();
         _balloons.Clear();
         _allScore = 0;
-        RunAllScore.Text = $"{_allScore}";
+        RunTimeCount.Text = "0";
+        RunBallCount.Text = "0/0";
+        RunScoreCount.Text = "0";
     }
 
     /// <summary>

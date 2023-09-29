@@ -37,8 +37,21 @@
                 Margin="0,5,20,0"
                 HorizontalAlignment="Right"
                 FontSize="18">
+                <Run Foreground="Black" Text="用时：" />
                 <Run
-                    x:Name="RunAllScore"
+                    x:Name="RunTimeCount"
+                    FontSize="20"
+                    Foreground="DarkOrange"
+                    Text="0" />
+                <Run Foreground="Black" Text="，剩余气球：" />
+                <Run
+                    x:Name="RunBallCount"
+                    FontSize="20"
+                    Foreground="DarkOrange"
+                    Text="0" />
+                <Run Foreground="Black" Text="，得分：" />
+                <Run
+                    x:Name="RunScoreCount"
                     FontSize="20"
                     Foreground="DarkOrange"
                     Text="0" />
