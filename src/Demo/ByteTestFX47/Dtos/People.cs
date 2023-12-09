@@ -1,7 +1,7 @@
 ﻿using MessagePack;
 using ProtoBuf;
 
-namespace ByteTest.Dtos;
+namespace ByteTestFX47.Dtos;
 
 [MessagePackObject]
 [ProtoContract]

@@ -1,6 +1,7 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
-namespace ByteTest.SerializeHelpers;
+namespace ByteTestFX47.Helpers;
 
 public static class ByteHelper
 {
@@ -17,17 +18,18 @@ public static class ByteHelper
         {
             return BitConverter.GetBytes(0);
         }
+
         var strValueBuffer = DefaultEncoding.GetBytes(str);
         var strValueLen = strValueBuffer.Length;
         var strValueLenBuffer = BitConverter.GetBytes(strValueLen);
-        
+
         var strBufferLen = sizeof(int) + strValueLen;
         var strBuffer = new byte[strBufferLen];
-        
+
         var index = 0;
         Array.Copy(strValueLenBuffer, 0, strBuffer, index, sizeof(int));
         index += sizeof(int);
-        
+
         Array.Copy(strValueBuffer, 0, strBuffer, index, strValueLen);
 
         return strBuffer;

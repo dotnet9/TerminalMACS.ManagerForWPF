@@ -234,3 +234,6 @@ src/Demo/MultiVersionLibrary/Dotnet9HookHigh/Lib/Lib.Harmony/2.3.0-prerelease.2/
 src/Demo/MultiVersionLibrary/Dotnet9HookHigh/Lib/Lib.Harmony/2.2.2/0Harmony.dll
 src/Demo/ByteTest/obj/
 src/Demo/ByteTest/Publish/
+src/Demo/ByteTest/packages/
+src/Demo/ByteTestFX47/bin/
+src/Demo/ByteTestFX47/obj/

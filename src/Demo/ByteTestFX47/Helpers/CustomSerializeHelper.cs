@@ -1,8 +1,9 @@
-﻿using ByteTest.Dtos;
-using ByteTest.SerialHelpers;
+﻿using ByteTestFX47.Dtos;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace ByteTest.SerializeHelpers;
-
+namespace ByteTestFX47.Helpers;
 public class CustomSerializeHelper : ISerializeHelper
 {
     public string Name()

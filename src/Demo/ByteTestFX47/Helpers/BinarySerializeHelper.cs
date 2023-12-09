@@ -1,8 +1,8 @@
-﻿using ByteTest.Dtos;
-using ByteTest.SerialHelpers;
+﻿using ByteTestFX47.Dtos;
+using System.Collections.Generic;
+using System.IO;
 
-namespace ByteTest.SerializeHelpers;
-
+namespace ByteTestFX47.Helpers;
 public class BinarySerializeHelper : ISerializeHelper
 {
     public string Name()

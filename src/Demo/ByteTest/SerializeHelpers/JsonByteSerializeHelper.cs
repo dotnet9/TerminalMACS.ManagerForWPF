@@ -1,22 +1,21 @@
-﻿using ByteTest.Dtos;
+﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Jobs;
+using ByteTest.Dtos;
 using ByteTest.SerialHelpers;
-using System.Text;
 using System.Text.Json;
 
 namespace ByteTest.SerializeHelpers;
 
-internal class JsonSerializeHelper : ISerializeHelper
+public class JsonByteSerializeHelper : ISerializeHelper
 {
     public string Name()
     {
-        return "JSON序列化";
+        return "Json";
     }
 
     public byte[] Serialize(Organization data)
     {
-        var jsonStr = JsonSerializer.Serialize(data);
-        var buffer = Encoding.UTF8.GetBytes(jsonStr);
-        return buffer;
+        return JsonSerializer.SerializeToUtf8Bytes(data);
     }
 
     public Organization? Deserialize(byte[] buffer)
