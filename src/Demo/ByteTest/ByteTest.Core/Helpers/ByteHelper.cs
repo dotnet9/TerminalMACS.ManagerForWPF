@@ -1,7 +1,6 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 
-namespace ByteTestFX47.Helpers;
+namespace ByteTest.Core.Helpers;
 
 public static class ByteHelper
 {

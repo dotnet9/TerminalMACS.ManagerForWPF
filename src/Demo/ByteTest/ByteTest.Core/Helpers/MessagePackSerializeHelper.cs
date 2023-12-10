@@ -1,7 +1,7 @@
-﻿using ByteTestFX47.Dtos;
+﻿using ByteTest.Core.Models;
 using MessagePack;
 
-namespace ByteTestFX47.Helpers;
+namespace ByteTest.Core.Helpers;
 
 public class MessagePackSerializeHelper : ISerializeHelper
 {

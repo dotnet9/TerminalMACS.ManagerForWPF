@@ -1,7 +1,7 @@
-﻿using System.Text.Json;
-using ByteTestFX47.Dtos;
+﻿using ByteTest.Core.Models;
+using System.Text.Json;
 
-namespace ByteTestFX47.Helpers;
+namespace ByteTest.Core.Helpers;
 
 public class JsonByteSerializeHelper : ISerializeHelper
 {

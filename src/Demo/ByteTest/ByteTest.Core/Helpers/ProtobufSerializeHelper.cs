@@ -1,8 +1,7 @@
-﻿using ByteTestFX47.Dtos;
+﻿using ByteTest.Core.Models;
 using ProtoBuf;
-using System.IO;
 
-namespace ByteTestFX47.Helpers;
+namespace ByteTest.Core.Helpers;
 
 public class ProtoBufSerializeHelper : ISerializeHelper
 {

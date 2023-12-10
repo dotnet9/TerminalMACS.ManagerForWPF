@@ -1,7 +1,6 @@
-﻿using ByteTest.Dtos;
-using ByteTest.SerialHelpers;
+﻿using ByteTest.Core.Models;
 
-namespace ByteTest.SerializeHelpers;
+namespace ByteTest.Core.Helpers;
 
 public class CustomSerializeHelper : ISerializeHelper
 {
@@ -62,7 +61,7 @@ public class CustomSerializeHelper : ISerializeHelper
     /// </summary>
     /// <param name="data"></param>
     /// <returns></returns>
-    private byte[] GetBytes(List<People>? data)
+    private byte[] GetBytes(List<Member>? data)
     {
         var dataCount = data?.Count ?? 0;
         var dataCountBuffer = BitConverter.GetBytes(dataCount);
@@ -124,7 +123,7 @@ public class CustomSerializeHelper : ISerializeHelper
         return data;
     }
 
-    private List<People>? GetMembers(byte[] buffer, ref int index)
+    private List<Member>? GetMembers(byte[] buffer, ref int index)
     {
         var count = BitConverter.ToInt32(buffer, index);
         index += sizeof(int);
@@ -134,10 +133,10 @@ public class CustomSerializeHelper : ISerializeHelper
             return default;
         }
 
-        var data = new List<People>();
+        var data = new List<Member>();
         for (var i = 0; i < count; i++)
         {
-            var people = new People();
+            var people = new Member();
 
             people.Id = BitConverter.ToInt32(buffer, index);
             index += sizeof(int);

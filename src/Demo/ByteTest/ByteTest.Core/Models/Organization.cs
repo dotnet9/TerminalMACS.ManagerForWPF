@@ -1,8 +1,7 @@
 ﻿using MessagePack;
 using ProtoBuf;
-using System.Collections.Generic;
 
-namespace ByteTestFX47.Dtos;
+namespace ByteTest.Core.Models;
 
 [MessagePackObject]
 [ProtoContract]
@@ -12,5 +11,5 @@ public class Organization
 
     [Key(1)] [ProtoMember(2)] public string[]? Tags { get; set; }
 
-    [Key(2)] [ProtoMember(3)] public List<People>? Members { get; set; }
+    [Key(2)] [ProtoMember(3)] public List<Member>? Members { get; set; }
 }

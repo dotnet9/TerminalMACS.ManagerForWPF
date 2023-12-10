@@ -1,12 +1,9 @@
 ﻿using BenchmarkDotNet.Attributes;
-using ByteTestFX47.Dtos;
-using ByteTestFX47.Helpers;
-using System;
-using System.Collections.Generic;
+using ByteTest.Core.Helpers;
+using ByteTest.Core.Models;
 using System.Diagnostics;
-using System.Linq;
 
-namespace ByteTestFX47.Benchmark;
+namespace ByteTest.Core.Test;
 
 [MemoryDiagnoser, RankColumn]
 public class BenchmarkTest
@@ -25,7 +22,7 @@ public class BenchmarkTest
     {
         Id = 1,
         Tags = Enumerable.Range(0, 5).Select(index => $"测试标签{index}").ToArray(),
-        Members = Enumerable.Range(0, DataCount).Select(index => new People()
+        Members = Enumerable.Range(0, DataCount).Select(index => new Member()
         {
             Id = index,
             Name = $"测试名字{index}",

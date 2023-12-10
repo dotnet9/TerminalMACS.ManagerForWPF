@@ -1,11 +1,11 @@
 ﻿using MessagePack;
 using ProtoBuf;
 
-namespace ByteTestFX47.Dtos;
+namespace ByteTest.Core.Models;
 
 [MessagePackObject]
 [ProtoContract]
-public class People
+public class Member
 {
     [Key(0)] [ProtoMember(1)] public int Id { get; set; }
 

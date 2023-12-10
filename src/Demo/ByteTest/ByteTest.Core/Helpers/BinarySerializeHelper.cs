@@ -1,7 +1,6 @@
-﻿using ByteTest.Dtos;
-using ByteTest.SerialHelpers;
+﻿using ByteTest.Core.Models;
 
-namespace ByteTest.SerializeHelpers;
+namespace ByteTest.Core.Helpers;
 
 public class BinarySerializeHelper : ISerializeHelper
 {
@@ -48,7 +47,7 @@ public class BinarySerializeHelper : ISerializeHelper
         }
     }
 
-    private static void Write(BinaryWriter writer, List<People>? data)
+    private static void Write(BinaryWriter writer, List<Member>? data)
     {
         var count = data?.Count ?? 0;
         writer.Write(count);
@@ -83,7 +82,7 @@ public class BinarySerializeHelper : ISerializeHelper
         return values;
     }
 
-    private static List<People>? ReadPeopleList(BinaryReader reader)
+    private static List<Member>? ReadPeopleList(BinaryReader reader)
     {
         var count = reader.ReadInt32();
         if (count <= 0)
@@ -91,10 +90,10 @@ public class BinarySerializeHelper : ISerializeHelper
             return default;
         }
 
-        var values = new List<People>();
+        var values = new List<Member>();
         for (int i = 0; i < count; i++)
         {
-            var item = new People();
+            var item = new Member();
             item.Id = reader.ReadInt32();
             item.Name = reader.ReadString();
             item.Description = reader.ReadString();

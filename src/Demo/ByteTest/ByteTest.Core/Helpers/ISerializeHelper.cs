@@ -1,6 +1,6 @@
-﻿using ByteTestFX47.Dtos;
+﻿using ByteTest.Core.Models;
 
-namespace ByteTestFX47.Helpers;
+namespace ByteTest.Core.Helpers;
 
 public interface ISerializeHelper
 {
