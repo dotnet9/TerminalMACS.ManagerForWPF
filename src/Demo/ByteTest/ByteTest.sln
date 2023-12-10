@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34321.82
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ByteTest", "ByteTest\ByteTest.csproj", "{ED0BF083-5487-4170-B796-FEB6F0C8E05E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ByteTest.Core", "ByteTest.Core\ByteTest.Core.csproj", "{641AA724-52AA-4EC7-A095-3B965878BA84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ByteTest.Core", "ByteTest.Core\ByteTest.Core.csproj", "{641AA724-52AA-4EC7-A095-3B965878BA84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

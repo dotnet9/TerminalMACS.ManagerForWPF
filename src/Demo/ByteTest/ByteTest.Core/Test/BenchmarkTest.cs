@@ -11,7 +11,7 @@ public class BenchmarkTest
     /// <summary>
     /// 测试数据量
     /// </summary>
-    private const int DataCount = 900000;
+    private const int DataCount = 1000000;
 
     private static readonly Random RandomShared = new(DateTime.Now.Millisecond);
 
@@ -66,7 +66,7 @@ public class BenchmarkTest
     /// <summary>
     /// 简单测试
     /// </summary>
-    public static void Test()
+    public static void Test(List<ISerializeHelper>? moreHelpers = null)
     {
         var serializeHelpers = new List<ISerializeHelper>
         {
@@ -76,6 +76,11 @@ public class BenchmarkTest
             new MessagePackSerializeHelper(),
             new ProtoBufSerializeHelper()
         };
+        if (moreHelpers?.Count() > 0)
+        {
+            serializeHelpers.AddRange(moreHelpers);
+        }
+
         serializeHelpers.ForEach(RunSerialize);
     }
 
@@ -87,7 +92,7 @@ public class BenchmarkTest
         var buffer = helper.Serialize(TestData);
 
         sw.Stop();
-        Log($"{helper.Name()} Serialize：{sw.ElapsedMilliseconds}ms，{buffer.Length}byte");
+        Log($"{helper.Name()} Serialize {sw.ElapsedMilliseconds}ms {buffer.Length}byte");
 
         sw.Restart();
 
@@ -95,11 +100,11 @@ public class BenchmarkTest
 
         sw.Stop();
 
-        Log($"{helper.Name()} Deserialize：{sw.ElapsedMilliseconds}ms，{data?.Members?.Count}项");
+        Log($"{helper.Name()} Deserialize {sw.ElapsedMilliseconds}ms {data?.Members?.Count}项");
     }
 
     private static void Log(string log)
     {
-        Console.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss fff}：{log}");
+        Console.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss fff}: {log}");
     }
 }
