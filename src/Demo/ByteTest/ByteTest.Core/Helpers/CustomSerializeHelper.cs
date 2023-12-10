@@ -4,11 +4,6 @@ namespace ByteTest.Core.Helpers;
 
 public class CustomSerializeHelper : ISerializeHelper
 {
-    public string Name()
-    {
-        return "Custom";
-    }
-
     public byte[] Serialize(Organization data)
     {
         // 1、计算Id

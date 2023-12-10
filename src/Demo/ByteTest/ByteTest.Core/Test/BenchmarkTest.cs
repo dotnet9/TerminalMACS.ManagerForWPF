@@ -48,7 +48,7 @@ public class BenchmarkTest
     [Benchmark]
     public void JsonByteSerialize()
     {
-        RunSerialize(new JsonByteSerializeHelper());
+        RunSerialize(new JsonSerializeHelper());
     }
 
     [Benchmark]
@@ -70,11 +70,11 @@ public class BenchmarkTest
     {
         var serializeHelpers = new List<ISerializeHelper>
         {
-            new BinarySerializeHelper(),
+            new JsonSerializeHelper(),
             new CustomSerializeHelper(),
-            new JsonByteSerializeHelper(),
+            new BinarySerializeHelper(),
             new MessagePackSerializeHelper(),
-            new ProtoBufSerializeHelper()
+            new ProtoBufSerializeHelper(),
         };
         if (moreHelpers?.Count() > 0)
         {
@@ -92,7 +92,7 @@ public class BenchmarkTest
         var buffer = helper.Serialize(TestData);
 
         sw.Stop();
-        Log($"{helper.Name()} Serialize {sw.ElapsedMilliseconds}ms {buffer.Length}byte");
+        Log($"{helper.GetType().Name} Serialize {sw.ElapsedMilliseconds}ms {buffer.Length}byte");
 
         sw.Restart();
 
@@ -100,7 +100,7 @@ public class BenchmarkTest
 
         sw.Stop();
 
-        Log($"{helper.Name()} Deserialize {sw.ElapsedMilliseconds}ms {data?.Members?.Count}项");
+        Log($"{helper.GetType().Name} Deserialize {sw.ElapsedMilliseconds}ms {data?.Members?.Count}项");
     }
 
     private static void Log(string log)

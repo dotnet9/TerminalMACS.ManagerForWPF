@@ -4,11 +4,6 @@ namespace ByteTest.Core.Helpers;
 
 public class BinarySerializeHelper : ISerializeHelper
 {
-    public string Name()
-    {
-        return "Binary Reader|Writer";
-    }
-
     public byte[] Serialize(Organization data)
     {
         using var stream = new MemoryStream();

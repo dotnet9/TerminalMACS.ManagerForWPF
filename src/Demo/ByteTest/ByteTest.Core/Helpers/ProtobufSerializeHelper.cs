@@ -1,15 +1,11 @@
-﻿using ByteTest.Core.Models;
+﻿using System.IO.Compression;
+using ByteTest.Core.Models;
 using ProtoBuf;
 
 namespace ByteTest.Core.Helpers;
 
 public class ProtoBufSerializeHelper : ISerializeHelper
 {
-    public string Name()
-    {
-        return "ProtoBuf";
-    }
-
     public byte[] Serialize(Organization data)
     {
         using var stream = new MemoryStream();

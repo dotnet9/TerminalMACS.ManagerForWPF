@@ -3,13 +3,8 @@ using System.Text.Json;
 
 namespace ByteTest.Core.Helpers;
 
-public class JsonByteSerializeHelper : ISerializeHelper
+public class JsonSerializeHelper : ISerializeHelper
 {
-    public string Name()
-    {
-        return "Json";
-    }
-
     public byte[] Serialize(Organization data)
     {
         return JsonSerializer.SerializeToUtf8Bytes(data);
