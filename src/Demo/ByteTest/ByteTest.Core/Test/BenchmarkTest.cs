@@ -1,6 +1,7 @@
 ﻿using BenchmarkDotNet.Attributes;
 using ByteTest.Core.Helpers;
 using ByteTest.Core.Models;
+using MessagePack;
 using System.Diagnostics;
 
 namespace ByteTest.Core.Test;
@@ -32,6 +33,7 @@ public class BenchmarkTest
             UpdateTime = ((DateTimeOffset)DateTime.Now).ToUnixTimeMilliseconds()
         }).ToList()
     };
+
 
     [Benchmark]
     public void BinarySerialize()
@@ -68,13 +70,14 @@ public class BenchmarkTest
     /// </summary>
     public static void Test(List<ISerializeHelper>? moreHelpers = null)
     {
+        MessagePackSerializer.DefaultOptions = MessagePack.Resolvers.ContractlessStandardResolver.Options;
         var serializeHelpers = new List<ISerializeHelper>
         {
-            new JsonSerializeHelper(),
             new CustomSerializeHelper(),
             new BinarySerializeHelper(),
             new MessagePackSerializeHelper(),
             new ProtoBufSerializeHelper(),
+            new JsonSerializeHelper()
         };
         if (moreHelpers?.Count() > 0)
         {
