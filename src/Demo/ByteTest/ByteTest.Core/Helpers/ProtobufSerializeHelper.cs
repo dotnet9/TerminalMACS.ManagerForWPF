@@ -1,5 +1,4 @@
-﻿using System.IO.Compression;
-using ByteTest.Core.Models;
+﻿using ByteTest.Core.Models;
 using ProtoBuf;
 
 namespace ByteTest.Core.Helpers;

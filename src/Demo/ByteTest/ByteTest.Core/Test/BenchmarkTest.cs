@@ -35,11 +35,11 @@ public class BenchmarkTest
     };
 
 
-    [Benchmark]
-    public void BinarySerialize()
-    {
-        RunSerialize(new BinarySerializeHelper());
-    }
+    //[Benchmark]
+    //public void JsonByteSerialize()
+    //{
+    //    RunSerialize(new JsonSerializeHelper());
+    //}
 
     [Benchmark]
     public void CustomSerialize()
@@ -48,9 +48,15 @@ public class BenchmarkTest
     }
 
     [Benchmark]
-    public void JsonByteSerialize()
+    public void BinarySerialize()
     {
-        RunSerialize(new JsonSerializeHelper());
+        RunSerialize(new BinarySerializeHelper());
+    }
+
+    [Benchmark]
+    public void ProtoBufPackSerialize()
+    {
+        RunSerialize(new ProtoBufSerializeHelper());
     }
 
     [Benchmark]
@@ -59,11 +65,6 @@ public class BenchmarkTest
         RunSerialize(new MessagePackSerializeHelper());
     }
 
-    [Benchmark]
-    public void ProtoBufPackSerialize()
-    {
-        RunSerialize(new ProtoBufSerializeHelper());
-    }
 
     /// <summary>
     /// 简单测试
@@ -73,11 +74,11 @@ public class BenchmarkTest
         MessagePackSerializer.DefaultOptions = MessagePack.Resolvers.ContractlessStandardResolver.Options;
         var serializeHelpers = new List<ISerializeHelper>
         {
+            //new JsonSerializeHelper(),
             new CustomSerializeHelper(),
             new BinarySerializeHelper(),
-            new MessagePackSerializeHelper(),
             new ProtoBufSerializeHelper(),
-            new JsonSerializeHelper()
+            new MessagePackSerializeHelper(),
         };
         if (moreHelpers?.Count() > 0)
         {
