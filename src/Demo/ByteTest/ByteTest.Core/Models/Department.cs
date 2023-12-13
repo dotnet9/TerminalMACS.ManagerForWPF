@@ -4,11 +4,11 @@ using ProtoBuf;
 namespace ByteTest.Core.Models;
 
 /// <summary>
-/// 组织
+/// 部门
 /// </summary>
 [ProtoContract]
 [MessagePackObject]
-public class Organization
+public class Department
 {
     /// <summary>
     /// Id
@@ -18,51 +18,58 @@ public class Organization
     public int Id { get; set; }
 
     /// <summary>
-    /// 名称
+    /// 部门编码
     /// </summary>
     [ProtoMember(2)]
     [Key(1)]
-    public string? Name { get; set; }
+    public string? Code { get; set; }
 
     /// <summary>
-    /// 标签
+    /// 名称
     /// </summary>
     [ProtoMember(3)]
     [Key(2)]
-    public string[]? Tags { get; set; }
+    public string? Name { get; set; }
 
     /// <summary>
-    /// 地址
+    /// 描述
     /// </summary>
     [ProtoMember(4)]
     [Key(3)]
-    public string? Address { get; set; }
+    public string? Description { get; set; }
 
     /// <summary>
-    /// 员工总数
+    /// 位置
     /// </summary>
     [ProtoMember(5)]
     [Key(4)]
-    public int EmployeeCount { get; set; }
+    public string? Location { get; set; }
 
     /// <summary>
-    /// 部门列表
+    /// 员工数量
     /// </summary>
     [ProtoMember(6)]
     [Key(5)]
-    public List<Department>? Departments { get; set; }
+    public int EmployeeCount { get; set; }
 
     /// <summary>
-    /// 年度预算
+    /// 预算
     /// </summary>
     [ProtoMember(7)]
     [Key(6)]
-    public decimal AnnualBudget { get; set; }
+    public decimal Budget { get; set; }
 
     /// <summary>
-    /// 成立日期，时间戳，单位ms
+    /// 未知
     /// </summary>
     [ProtoMember(8)]
     [Key(7)]
-    public long FoundationDate { get; set; }
+    public double Value { get; set; }
+
+    /// <summary>
+    /// 创建时间
+    /// </summary>
+    [ProtoMember(9)]
+    [Key(8)]
+    public long CreateTime { get; set; }
 }

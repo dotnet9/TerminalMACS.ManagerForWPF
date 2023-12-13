@@ -1,171 +1,269 @@
-﻿using ByteTest.Core.Models;
+﻿using System.Reflection;
 
 namespace ByteTest.Core.Helpers;
 
 public class CustomSerializeHelper : ISerializeHelper
 {
-    public byte[] Serialize(Organization data)
+    private static readonly Dictionary<string, List<PropertyInfo>> ObjectPropertyInfos = new();
+    private static readonly List<string> ComplexTypeNames;
+
+    static CustomSerializeHelper()
     {
-        // 1、计算Id
-        var idBuffer = BitConverter.GetBytes(data.Id);
-
-        // 2、计算Tag数组
-        var tagBuffer = GetBytes(data.Tags);
-
-        // 3、计算Members
-        var membersBuffer = GetBytes(data.Members);
-
-        return GetBytes(new[] { idBuffer, tagBuffer, membersBuffer });
+        ComplexTypeNames = new List<string>
+        {
+            typeof(List<>).Name,
+            typeof(Dictionary<,>).Name
+        };
     }
 
-    public Organization? Deserialize(byte[] buffer)
+    public byte[] Serialize<T>(T data)
     {
-        var data = new Organization();
-        var index = 0;
+        using var stream = new MemoryStream();
+        using var writer = new BinaryWriter(stream, SerializeConst.DefaultEncoding);
 
-        data.Id = BitConverter.ToInt32(buffer, index);
-        index += sizeof(int);
+        writer.Write(typeof(T).Name);
+        Serialize(writer, data);
 
-        data.Tags = GetTags(buffer, ref index);
-        data.Members = GetMembers(buffer, ref index);
-        return data;
+        return stream.ToArray();
     }
 
-    /// <summary>
-    /// 获取字符串列表byte[]
-    /// </summary>
-    /// <param name="data"></param>
-    /// <returns></returns>
-    private byte[] GetBytes(string[]? data)
+    public T? Deserialize<T>(byte[] buffer)
     {
-        var dataCount = data?.Length ?? 0;
-        var dataCountBuffer = BitConverter.GetBytes(dataCount);
+        using var stream = new MemoryStream(buffer);
+        using var reader = new BinaryReader(stream);
 
-        if (dataCount <= 0)
-        {
-            return dataCountBuffer;
-        }
-
-        var dataValueBuffers = data!.Select(item => ByteHelper.GetBytes(item)!).ToArray();
-        var dataValueBuffer = GetBytes(dataValueBuffers);
-        return GetBytes(new[] { dataCountBuffer, dataValueBuffer });
-    }
-
-    /// <summary>
-    /// 获取成功列表byte[]
-    /// </summary>
-    /// <param name="data"></param>
-    /// <returns></returns>
-    private byte[] GetBytes(List<Member>? data)
-    {
-        var dataCount = data?.Count ?? 0;
-        var dataCountBuffer = BitConverter.GetBytes(dataCount);
-
-        if (dataCount <= 0)
-        {
-            return dataCountBuffer;
-        }
-
-        var dataValueBuffers = data!.Select(item =>
-        {
-            var idBuffer = BitConverter.GetBytes(item.Id);
-            var nameBuffer = ByteHelper.GetBytes(item.Name);
-            var descriptionBuffer = ByteHelper.GetBytes(item.Description);
-            var addressBuffer = ByteHelper.GetBytes(item.Address);
-            var valueBuffer = BitConverter.GetBytes(item.Value);
-            var updateTimeBuffer = BitConverter.GetBytes(item.UpdateTime);
-
-            var buffer = GetBytes(new byte[][]
-                { idBuffer, nameBuffer, descriptionBuffer, addressBuffer, valueBuffer, updateTimeBuffer });
-            return buffer;
-        }).ToArray();
-        var dataValueBuffer = GetBytes(dataValueBuffers);
-        return GetBytes(new[] { dataCountBuffer, dataValueBuffer });
-    }
-
-    private byte[] GetBytes(byte[][] data)
-    {
-        var dataBufferLen = data.Sum(itemBuffer => itemBuffer.Length);
-        var dataBuffer = new byte[dataBufferLen];
-        var dataIndex = 0;
-        for (var i = 0; i < data.Length; i++)
-        {
-            var itemBuffer = data[i];
-            Array.Copy(itemBuffer, 0, dataBuffer, dataIndex, itemBuffer.Length);
-
-            dataIndex += itemBuffer.Length;
-        }
-
-        return dataBuffer;
-    }
-
-    private string[]? GetTags(byte[] buffer, ref int index)
-    {
-        var count = BitConverter.ToInt32(buffer, index);
-        index += sizeof(int);
-
-        if (count <= 0)
-        {
-            return default;
-        }
-
-        var data = new string[count];
-        for (var i = 0; i < count; i++)
-        {
-            data[i] = GetString(buffer, ref index);
-        }
+        var data = Activator.CreateInstance<T>();
+        var name = reader.ReadString();
+        Deserialize(reader, data);
 
         return data;
     }
 
-    private List<Member>? GetMembers(byte[] buffer, ref int index)
+    #region 序列化操作
+
+    private static void Serialize<T>(BinaryWriter writer, T data)
     {
-        var count = BitConverter.ToInt32(buffer, index);
-        index += sizeof(int);
-
-        if (count <= 0)
+        var properties = GetProperties<T>();
+        foreach (var property in properties)
         {
-            return default;
+            Serialize(writer, data, property);
+        }
+    }
+
+    private static void Serialize<T>(BinaryWriter writer, T data, PropertyInfo property)
+    {
+        var propertyType = property.PropertyType;
+        var propertyValue = property.GetValue(data, null);
+        Serialize(writer, propertyValue, propertyType);
+    }
+
+    private static void Serialize(BinaryWriter writer, object value, Type valueType)
+    {
+        var propertyName = valueType.Name;
+        if (valueType.IsPrimitive
+            || valueType == typeof(string)
+            || valueType == typeof(byte[]))
+        {
+            SerializeBase(writer, value, valueType);
+        }
+        else if (ComplexTypeNames.Contains(propertyName))
+        {
+            SerializeComplex(writer, value, valueType);
+        }
+        else
+        {
+            SerializeClass(writer, value, valueType);
+        }
+    }
+
+
+    private static void SerializeBase(BinaryWriter writer, object value, Type valueType)
+    {
+        if (valueType == typeof(int))
+        {
+            writer.Write(value == null ? default : byte.Parse(value.ToString()));
+        }
+        else if (valueType == typeof(short))
+        {
+            writer.Write(value == null ? default : short.Parse(value.ToString()));
+        }
+        else if (valueType == typeof(int))
+        {
+            writer.Write(value == null ? default : int.Parse(value.ToString()));
+        }
+        else if (valueType == typeof(long))
+        {
+            writer.Write(value == null ? default : long.Parse(value.ToString()));
+        }
+        else if (valueType == typeof(double))
+        {
+            writer.Write(value == null ? default : double.Parse(value.ToString()));
+        }
+        else if (valueType == typeof(decimal))
+        {
+            writer.Write(value == null ? default : decimal.Parse(value.ToString()));
+        }
+        else if (valueType == typeof(string))
+        {
+            writer.Write(value == null ? default : value.ToString());
+        }
+    }
+
+    private static void SerializeComplex(BinaryWriter writer, object value, Type valueType)
+    {
+        var propertyName = valueType.Name;
+        int count = 0;
+        if (value == null)
+        {
+            writer.Write(count);
+            return;
         }
 
-        var data = new List<Member>();
-        for (var i = 0; i < count; i++)
+        var genericArguments = valueType.GetGenericArguments();
+        dynamic dynamicValue = value;
+        count = dynamicValue.Count;
+        writer.Write(count);
+        if (propertyName.Equals(typeof(List<>).Name))
         {
-            var people = new Member();
+            foreach (var item in dynamicValue)
+            {
+                Serialize(writer, item, genericArguments[0]);
+            }
+        }
+        else
+        {
+            foreach (var item in dynamicValue)
+            {
+                Serialize(writer, item.Key, genericArguments[0]);
+                Serialize(writer, item.Value, genericArguments[1]);
+            }
+        }
+    }
 
-            people.Id = BitConverter.ToInt32(buffer, index);
-            index += sizeof(int);
+    private static void SerializeClass(BinaryWriter writer, object value, Type valueType)
+    {
+        Serialize(writer, value);
+    }
 
-            people.Name = GetString(buffer, ref index);
+    #endregion
 
-            people.Description = GetString(buffer, ref index);
+    #region 反序列化操作
 
-            people.Address = GetString(buffer, ref index);
+    private static void Deserialize<T>(BinaryReader reader, T data)
+    {
+        var properties = GetProperties<T>();
+        foreach (var property in properties)
+        {
+            object value = DeserializeByType(reader, property.PropertyType);
+            property.SetValue(data, value);
+        }
+    }
 
-            people.Value = BitConverter.ToDouble(buffer, index);
-            index += sizeof(double);
-
-            people.UpdateTime = BitConverter.ToInt64(buffer, index);
-            index += sizeof(long);
-
-            data.Add(people);
+    private static object DeserializeByType(BinaryReader reader, Type propertyType)
+    {
+        var propertyName = propertyType.Name;
+        object value;
+        if (propertyType.IsPrimitive
+            || propertyType == typeof(string)
+            || propertyType == typeof(byte[]))
+        {
+            value = DeserializeBase(reader, propertyType);
+        }
+        else if (ComplexTypeNames.Contains(propertyName))
+        {
+            value = DeserializeComplex(reader, propertyType);
+        }
+        else
+        {
+            value = DeserializeClass(reader, propertyType);
         }
 
+        return value;
+    }
+
+    private static object DeserializeBase(BinaryReader reader, Type propertyType)
+    {
+        object value;
+        if (propertyType == typeof(int))
+        {
+            value = reader.ReadInt32();
+        }
+        else if (propertyType == typeof(short))
+        {
+            value = reader.ReadInt16();
+        }
+        else if (propertyType == typeof(int))
+        {
+            value = reader.ReadInt32();
+        }
+        else if (propertyType == typeof(long))
+        {
+            value = reader.ReadInt64();
+        }
+        else if (propertyType == typeof(double))
+        {
+            value = reader.ReadDouble();
+        }
+        else if (propertyType == typeof(decimal))
+        {
+            value = reader.ReadDecimal();
+        }
+        else if (propertyType == typeof(string))
+        {
+            value = reader.ReadString();
+        }
+        else
+        {
+            throw new Exception($"暂时未支持数据类型：{propertyType.Name}");
+        }
+
+        return value;
+    }
+
+    private static object DeserializeComplex(BinaryReader reader, Type propertyType)
+    {
+        var complextObj = Activator.CreateInstance(propertyType);
+        var count = reader.ReadInt32();
+        var addMethod = propertyType.GetMethod("Add")!;
+        var genericArguments = propertyType.GetGenericArguments();
+        for (int i = 0; i < count; i++)
+        {
+            var key = DeserializeByType(reader, genericArguments[0]);
+            if (genericArguments.Length == 1)
+            {
+                addMethod.Invoke(complextObj, new object[] { key });
+            }
+            else if (genericArguments.Length == 2)
+            {
+                var value = DeserializeByType(reader, genericArguments[1]);
+                addMethod.Invoke(complextObj, new object[] { key, value });
+            }
+        }
+
+        return complextObj;
+    }
+
+    private static object DeserializeClass(BinaryReader reader, Type type)
+    {
+        var data = Activator.CreateInstance(type);
+        Deserialize(reader, data);
         return data;
     }
 
-    private string GetString(byte[] buffer, ref int index)
-    {
-        var count = BitConverter.ToInt32(buffer, index);
-        index += sizeof(int);
+    #endregion
 
-        if (count <= 0)
+
+    private static List<PropertyInfo> GetProperties<T>()
+    {
+        var objectType = typeof(T);
+        var objectName = objectType.Name;
+        if (ObjectPropertyInfos.TryGetValue(objectName, out List<PropertyInfo>? propertyInfos))
         {
-            return string.Empty;
+            return propertyInfos;
         }
 
-        var data = ByteHelper.DefaultEncoding.GetString(buffer, index, count);
-        index += count;
-        return data;
+        propertyInfos = objectType.GetProperties().ToList();
+        ObjectPropertyInfos[objectName] = propertyInfos;
+        return propertyInfos;
     }
 }

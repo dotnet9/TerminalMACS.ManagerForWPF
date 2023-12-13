@@ -1,10 +1,8 @@
-﻿using ByteTest.Core.Models;
-
-namespace ByteTest.Core.Helpers;
+﻿namespace ByteTest.Core.Helpers;
 
 public interface ISerializeHelper
 {
-    byte[] Serialize(Organization data);
+    byte[] Serialize<T>(T data);
 
-    Organization? Deserialize(byte[] buffer);
+    T? Deserialize<T>(byte[] buffer);
 }

@@ -6,6 +6,7 @@
 	<ItemGroup>
 		<PackageReference Include="BenchmarkDotNet" Version="0.13.11" />
 		<PackageReference Include="MessagePack" Version="2.6.100-alpha" />
+		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 		<PackageReference Include="protobuf-net" Version="3.2.30" />
 		<PackageReference Include="System.Text.Json" Version="8.0.0" />
 	</ItemGroup>

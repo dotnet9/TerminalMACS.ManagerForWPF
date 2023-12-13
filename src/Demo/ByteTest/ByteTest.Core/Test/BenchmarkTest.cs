@@ -12,27 +12,22 @@ public class BenchmarkTest
     /// <summary>
     /// 测试数据量
     /// </summary>
-    private const int DataCount = 1000000;
+    private const int MockCount = 1000000;
 
     private static readonly Random RandomShared = new(DateTime.Now.Millisecond);
 
     /// <summary>
     /// 测试数据
     /// </summary>
-    private static readonly Organization TestData = new()
+    private static ResponseOrganizations MockData { get; }
+
+    static BenchmarkTest()
     {
-        Id = 1,
-        Tags = Enumerable.Range(0, 5).Select(index => $"测试标签{index}").ToArray(),
-        Members = Enumerable.Range(0, DataCount).Select(index => new Member()
+        MockData = new ResponseOrganizations()
         {
-            Id = index,
-            Name = $"测试名字{index}",
-            Description = $"测试描述{RandomShared.Next(1, int.MaxValue)}",
-            Address = $"测试地址{RandomShared.Next(1, int.MaxValue)}",
-            Value = RandomShared.Next(1, int.MaxValue),
-            UpdateTime = ((DateTimeOffset)DateTime.Now).ToUnixTimeMilliseconds()
-        }).ToList()
-    };
+            Organizations = Enumerable.Range(0, MockCount).Select(index => new Organization()).ToList()
+        };
+    }
 
 
     //[Benchmark]
@@ -48,13 +43,7 @@ public class BenchmarkTest
     }
 
     [Benchmark]
-    public void BinarySerialize()
-    {
-        RunSerialize(new BinarySerializeHelper());
-    }
-
-    [Benchmark]
-    public void ProtoBufPackSerialize()
+    public void ProtoBufSerialize()
     {
         RunSerialize(new ProtoBufSerializeHelper());
     }
@@ -74,9 +63,7 @@ public class BenchmarkTest
         MessagePackSerializer.DefaultOptions = MessagePack.Resolvers.ContractlessStandardResolver.Options;
         var serializeHelpers = new List<ISerializeHelper>
         {
-            //new JsonSerializeHelper(),
             new CustomSerializeHelper(),
-            new BinarySerializeHelper(),
             new ProtoBufSerializeHelper(),
             new MessagePackSerializeHelper(),
         };
@@ -93,18 +80,18 @@ public class BenchmarkTest
     {
         Stopwatch sw = Stopwatch.StartNew();
 
-        var buffer = helper.Serialize(TestData);
+        var buffer = helper.Serialize(MockData);
 
         sw.Stop();
         Log($"{helper.GetType().Name} Serialize {sw.ElapsedMilliseconds}ms {buffer.Length}byte");
 
         sw.Restart();
 
-        var data = helper.Deserialize(buffer);
+        var data = helper.Deserialize<ResponseOrganizations>(buffer);
 
         sw.Stop();
 
-        Log($"{helper.GetType().Name} Deserialize {sw.ElapsedMilliseconds}ms {data?.Members?.Count}项");
+        Log($"{helper.GetType().Name} Deserialize {sw.ElapsedMilliseconds}ms {data?.Organizations?.Count}项");
     }
 
     private static void Log(string log)
