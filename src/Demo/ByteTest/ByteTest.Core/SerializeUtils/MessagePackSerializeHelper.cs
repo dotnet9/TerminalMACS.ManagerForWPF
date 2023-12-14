@@ -1,6 +1,6 @@
 ﻿using MessagePack;
 
-namespace ByteTest.Core.Helpers;
+namespace ByteTest.Core.SerializeUtils;
 
 public class MessagePackSerializeHelper : ISerializeHelper
 {

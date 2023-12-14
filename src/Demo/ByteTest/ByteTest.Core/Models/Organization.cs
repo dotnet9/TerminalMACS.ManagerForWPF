@@ -29,7 +29,7 @@ public class Organization
     /// </summary>
     [ProtoMember(3)]
     [Key(2)]
-    public string[]? Tags { get; set; }
+    public List<string>? Tags { get; set; }
 
     /// <summary>
     /// 地址

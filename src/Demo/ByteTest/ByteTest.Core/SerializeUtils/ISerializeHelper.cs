@@ -1,4 +1,4 @@
-﻿namespace ByteTest.Core.Helpers;
+﻿namespace ByteTest.Core.SerializeUtils;
 
 public interface ISerializeHelper
 {

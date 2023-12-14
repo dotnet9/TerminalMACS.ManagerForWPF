@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace ByteTest.Core.Helpers;
+namespace ByteTest.Core.SerializeUtils;
 
 public static class SerializeConst
 {

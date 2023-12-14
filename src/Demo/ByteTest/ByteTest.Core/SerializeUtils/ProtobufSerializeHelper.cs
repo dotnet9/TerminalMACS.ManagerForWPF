@@ -1,6 +1,6 @@
 ﻿using ProtoBuf;
 
-namespace ByteTest.Core.Helpers;
+namespace ByteTest.Core.SerializeUtils;
 
 public class ProtoBufSerializeHelper : ISerializeHelper
 {

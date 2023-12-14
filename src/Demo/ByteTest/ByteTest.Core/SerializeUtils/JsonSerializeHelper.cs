@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace ByteTest.Core.Helpers;
+namespace ByteTest.Core.SerializeUtils;
 
 public class JsonSerializeHelper : ISerializeHelper
 {

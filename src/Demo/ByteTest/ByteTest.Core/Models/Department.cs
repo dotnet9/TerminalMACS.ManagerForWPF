@@ -53,23 +53,30 @@ public class Department
     public int EmployeeCount { get; set; }
 
     /// <summary>
-    /// 预算
+    /// 员工列表
     /// </summary>
     [ProtoMember(7)]
     [Key(6)]
+    public List<Employee>? Employees { get; set; }
+
+    /// <summary>
+    /// 预算
+    /// </summary>
+    [ProtoMember(8)]
+    [Key(7)]
     public decimal Budget { get; set; }
 
     /// <summary>
     /// 未知
     /// </summary>
-    [ProtoMember(8)]
-    [Key(7)]
+    [ProtoMember(9)]
+    [Key(8)]
     public double Value { get; set; }
 
     /// <summary>
     /// 创建时间
     /// </summary>
-    [ProtoMember(9)]
-    [Key(8)]
+    [ProtoMember(10)]
+    [Key(9)]
     public long CreateTime { get; set; }
 }

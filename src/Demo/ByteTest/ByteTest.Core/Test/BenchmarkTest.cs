@@ -3,6 +3,7 @@ using ByteTest.Core.Helpers;
 using ByteTest.Core.Models;
 using MessagePack;
 using System.Diagnostics;
+using ByteTest.Core.SerializeUtils;
 
 namespace ByteTest.Core.Test;
 
@@ -12,7 +13,7 @@ public class BenchmarkTest
     /// <summary>
     /// 测试数据量
     /// </summary>
-    private const int MockCount = 1000000;
+    private const int MockCount = 100;
 
     private static readonly Random RandomShared = new(DateTime.Now.Millisecond);
 
@@ -25,7 +26,52 @@ public class BenchmarkTest
     {
         MockData = new ResponseOrganizations()
         {
-            Organizations = Enumerable.Range(0, MockCount).Select(index => new Organization()).ToList()
+            Organizations = Enumerable.Range(0, MockCount).Select(orgIndex => new Organization()
+            {
+                Id = orgIndex,
+                Name = $"Name{orgIndex}",
+                Tags = Enumerable.Range(RandomShared.Next(0, 5), RandomShared.Next(10, 15))
+                    .Select(tagIndex => $"标签{tagIndex}")
+                    .ToList(),
+                Address = $"地址{orgIndex}",
+                EmployeeCount = RandomShared.Next(10, 1000),
+                Departments = Enumerable.Range(2, 10).Select(i => new Department()
+                {
+                    Id = i,
+                    Code = $"D{i}",
+                    Name = $"部门{i}",
+                    Description = $"描述{i}",
+                    Location = $"位置{i}",
+                    EmployeeCount = RandomShared.Next(5, 100),
+                    Employees = Enumerable.Range(10, 100).Select(empIndex => new Employee()
+                    {
+                        Id = empIndex,
+                        Code = $"E{empIndex}",
+                        FirstName = $"名{empIndex}",
+                        LastName = $"姓{empIndex}",
+                        NickName = $"昵称{empIndex}",
+                        BirthDate = TimestampHelper.GetTimestamp(
+                            DateTime.Now.AddMilliseconds(-1 * RandomShared.Next(500000, 500000000))),
+                        Description = $"描述{empIndex}",
+                        Address = $"地址{empIndex}",
+                        Email = $"邮件{empIndex}@dotnet9.com",
+                        PhoneNumber = RandomShared.Next(1000000, 999999999).ToString(),
+                        Salary = RandomShared.Next(2000, 100000),
+                        DepartmentId = i,
+                        EntryTime = TimestampHelper.GetTimestamp(
+                            DateTime.Now.AddMilliseconds(-1 * RandomShared.Next(500000, 500000000)))
+                    }).ToList(),
+                    Budget = RandomShared.Next(2000, 100000) + (decimal)RandomShared.NextDouble(),
+                    Value = RandomShared.NextDouble(),
+                    CreateTime =
+                        TimestampHelper.GetTimestamp(
+                            DateTime.Now.AddMilliseconds(-1 * RandomShared.Next(500000, 500000000)))
+                }).ToList(),
+                AnnualBudget = RandomShared.Next(20000, 1000000) + (decimal)RandomShared.NextDouble(),
+                FoundationDate =
+                    TimestampHelper.GetTimestamp(
+                        DateTime.Now.AddMilliseconds(-1 * RandomShared.Next(500000, 500000000)))
+            }).ToList()
         };
     }
 

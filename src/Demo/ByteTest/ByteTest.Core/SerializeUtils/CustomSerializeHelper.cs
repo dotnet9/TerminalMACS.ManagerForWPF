@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace ByteTest.Core.Helpers;
+namespace ByteTest.Core.SerializeUtils;
 
 public class CustomSerializeHelper : ISerializeHelper
 {
@@ -21,7 +21,8 @@ public class CustomSerializeHelper : ISerializeHelper
         using var stream = new MemoryStream();
         using var writer = new BinaryWriter(stream, SerializeConst.DefaultEncoding);
 
-        writer.Write(typeof(T).Name);
+        var type = typeof(T);
+        writer.Write(type.Name);
         Serialize(writer, data);
 
         return stream.ToArray();
@@ -43,7 +44,7 @@ public class CustomSerializeHelper : ISerializeHelper
 
     private static void Serialize<T>(BinaryWriter writer, T data)
     {
-        var properties = GetProperties<T>();
+        var properties = GetProperties(data!.GetType());
         foreach (var property in properties)
         {
             Serialize(writer, data, property);
@@ -61,6 +62,7 @@ public class CustomSerializeHelper : ISerializeHelper
     {
         var propertyName = valueType.Name;
         if (valueType.IsPrimitive
+            || valueType.BaseType == typeof(ValueType)
             || valueType == typeof(string)
             || valueType == typeof(byte[]))
         {
@@ -72,14 +74,14 @@ public class CustomSerializeHelper : ISerializeHelper
         }
         else
         {
-            SerializeClass(writer, value, valueType);
+            Serialize(writer, value);
         }
     }
 
 
     private static void SerializeBase(BinaryWriter writer, object value, Type valueType)
     {
-        if (valueType == typeof(int))
+        if (valueType == typeof(byte))
         {
             writer.Write(value == null ? default : byte.Parse(value.ToString()));
         }
@@ -105,7 +107,7 @@ public class CustomSerializeHelper : ISerializeHelper
         }
         else if (valueType == typeof(string))
         {
-            writer.Write(value == null ? default : value.ToString());
+            writer.Write(value == null ? string.Empty : value.ToString());
         }
     }
 
@@ -140,18 +142,13 @@ public class CustomSerializeHelper : ISerializeHelper
         }
     }
 
-    private static void SerializeClass(BinaryWriter writer, object value, Type valueType)
-    {
-        Serialize(writer, value);
-    }
-
     #endregion
 
     #region 反序列化操作
 
     private static void Deserialize<T>(BinaryReader reader, T data)
     {
-        var properties = GetProperties<T>();
+        var properties = GetProperties(data!.GetType());
         foreach (var property in properties)
         {
             object value = DeserializeByType(reader, property.PropertyType);
@@ -164,6 +161,7 @@ public class CustomSerializeHelper : ISerializeHelper
         var propertyName = propertyType.Name;
         object value;
         if (propertyType.IsPrimitive
+            || propertyType.BaseType == typeof(ValueType)
             || propertyType == typeof(string)
             || propertyType == typeof(byte[]))
         {
@@ -184,9 +182,9 @@ public class CustomSerializeHelper : ISerializeHelper
     private static object DeserializeBase(BinaryReader reader, Type propertyType)
     {
         object value;
-        if (propertyType == typeof(int))
+        if (propertyType == typeof(byte))
         {
-            value = reader.ReadInt32();
+            value = reader.ReadByte();
         }
         else if (propertyType == typeof(short))
         {
@@ -253,16 +251,15 @@ public class CustomSerializeHelper : ISerializeHelper
     #endregion
 
 
-    private static List<PropertyInfo> GetProperties<T>()
+    private static List<PropertyInfo> GetProperties(Type type)
     {
-        var objectType = typeof(T);
-        var objectName = objectType.Name;
+        var objectName = type.Name;
         if (ObjectPropertyInfos.TryGetValue(objectName, out List<PropertyInfo>? propertyInfos))
         {
             return propertyInfos;
         }
 
-        propertyInfos = objectType.GetProperties().ToList();
+        propertyInfos = type.GetProperties().ToList();
         ObjectPropertyInfos[objectName] = propertyInfos;
         return propertyInfos;
     }
