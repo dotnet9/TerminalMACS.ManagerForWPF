@@ -238,3 +238,7 @@ src/Demo/ByteTest/ByteTest/bin/
 src/Demo/ByteTest/ByteTest/obj/
 src/Demo/ByteTest/Publish/
 src/Demo/ByteTest/ByteTest.Core/Publish/
+src/Demo/ByteTest/SocketClient/obj/
+src/Demo/ByteTest/SocketCore/obj/
+src/Demo/ByteTest/SocketDto/obj/
+src/Demo/ByteTest/SocketServer/obj/
