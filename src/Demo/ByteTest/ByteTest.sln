@@ -11,13 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SerializeTest", "SerializeT
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SocketTest", "SocketTest", "{E5C7FD9E-D6A0-40BC-9049-5051B10C039A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketServer", "SocketServer\SocketServer.csproj", "{508F3EFD-597F-4AF8-A10B-19E230089DE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocketServer", "SocketServer\SocketServer.csproj", "{508F3EFD-597F-4AF8-A10B-19E230089DE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketClient", "SocketClient\SocketClient.csproj", "{D5B9C6CB-7714-452C-89B2-42E8152BCFE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocketClient", "SocketClient\SocketClient.csproj", "{D5B9C6CB-7714-452C-89B2-42E8152BCFE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketDto", "SocketDto\SocketDto.csproj", "{F7BC5315-BCC6-472F-9173-65D5D9227598}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocketDto", "SocketDto\SocketDto.csproj", "{F7BC5315-BCC6-472F-9173-65D5D9227598}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketCore", "SocketCore\SocketCore.csproj", "{7ACC64C4-43C1-45A7-BE8E-EE992EEDEC21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocketCore", "SocketCore\SocketCore.csproj", "{7ACC64C4-43C1-45A7-BE8E-EE992EEDEC21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
