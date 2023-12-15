@@ -1,12 +1,16 @@
-﻿using System.Configuration;
-using System.Data;
+﻿using Prism.DryIoc;
 using System.Windows;
 
 namespace SocketServer;
-/// <summary>
-/// Interaction logic for App.xaml
-/// </summary>
-public partial class App : Application
-{
-}
 
+public partial class App : PrismApplication
+{
+    protected override void RegisterTypes(IContainerRegistry containerRegistry)
+    {
+    }
+
+    protected override Window CreateShell()
+    {
+        return Container.Resolve<MainView>();
+    }
+}

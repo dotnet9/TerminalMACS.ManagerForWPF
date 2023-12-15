@@ -9,11 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
+    <PackageReference Include="Prism.DryIoc" Version="9.0.271-pre" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SocketCore\SocketCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SockeHeper\" />
   </ItemGroup>
 
 </Project>
