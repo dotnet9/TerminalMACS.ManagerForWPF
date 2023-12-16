@@ -91,11 +91,11 @@
 | PID             | int      | 进程ID           |
 | ProcessName     | string?  | 进程名称         |
 | Type            | byte     | 进程类型         |
-| Responding      | byte     | 进程状态         |
+| Status          | byte     | 进程状态         |
 | Publisher       | string?  | 发布者           |
 | CommandLine     | string?  | 命令行           |
 | CPUUsage        | double   | CPU使用率        |
-| MemoryUsage     | double   | 磁盘使用大小     |
+| MemoryUsage     | double   | 内存使用大小     |
 | DiskUsage       | double   | 磁盘使用大小     |
 | NetworkUsage    | double   | 网络使用值       |
 | GPU             | double   | GPU              |
