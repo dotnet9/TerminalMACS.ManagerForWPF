@@ -6,18 +6,22 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Assets\Images\favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Prism.DryIoc" Version="9.0.271-pre" />
+    <PackageReference Include="WpfExtensions.Xaml" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SocketCore\SocketCore.csproj" />
+    <ProjectReference Include="..\SocketDto\SocketDto.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="SockeHeper\" />
+    <Resource Include="Assets\Images\favicon.ico" />
+    <Resource Include="Assets\Images\logo.png" />
   </ItemGroup>
 
 </Project>

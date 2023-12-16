@@ -3,7 +3,8 @@
 /// <summary>
 /// 请求基本信息
 /// </summary>
-public class RequestBaseInfo
+[NetObjectHead(1, 1)]
+public class RequestBaseInfo : INetObject
 {
     /// <summary>
     /// 任务Id

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using SocketCore.Logs.Models;
 
 namespace SocketCore.Logs;
 

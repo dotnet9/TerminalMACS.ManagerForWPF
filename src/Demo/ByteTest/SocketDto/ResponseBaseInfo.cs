@@ -3,7 +3,8 @@
 /// <summary>
 /// 响应基本信息
 /// </summary>
-public class ResponseBaseInfo
+[NetObjectHead(2, 1)]
+public class ResponseBaseInfo : INetObject
 {
     /// <summary>
     /// 任务Id

@@ -1,4 +1,4 @@
-﻿namespace SocketCore.Logs;
+﻿namespace SocketCore.Logs.Models;
 
 internal enum LogType
 {

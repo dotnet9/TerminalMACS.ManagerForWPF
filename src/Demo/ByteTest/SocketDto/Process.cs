@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SocketDto;
+﻿namespace SocketDto;
 
 /// <summary>
 /// 操作系统进程信息
 /// </summary>
-public class Process
+public record Process
 {
     /// <summary>
     /// 进程ID
@@ -19,27 +13,27 @@ public class Process
     /// <summary>
     /// 进程名称
     /// </summary>
-    public string ProcessName { get; set; }
+    public string? ProcessName { get; set; }
 
     /// <summary>
     /// 进程类型
     /// </summary>
-    public string Type { get; set; }
+    public byte Type { get; set; }
 
     /// <summary>
     /// 进程状态
     /// </summary>
-    public string Status { get; set; }
+    public byte Status { get; set; }
 
     /// <summary>
     /// 发布者
     /// </summary>
-    public string Publisher { get; set; }
+    public string? Publisher { get; set; }
 
     /// <summary>
     /// 命令行
     /// </summary>
-    public string CommandLine { get; set; }
+    public string? CommandLine { get; set; }
 
     /// <summary>
     /// CPU使用率
@@ -69,7 +63,7 @@ public class Process
     /// <summary>
     /// GPU引擎
     /// </summary>
-    public string GPUEngine { get; set; }
+    public string? GPUEngine { get; set; }
 
     /// <summary>
     /// 电源使用情况

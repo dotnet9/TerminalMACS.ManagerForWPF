@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SocketDto;
+﻿namespace SocketDto;
 
 /// <summary>
 /// 操作系统进程信息
 /// </summary>
 public class ActiveProcess
 {
+    public const int ObjectSize = 46;
+
     /// <summary>
     /// 进程ID
     /// </summary>

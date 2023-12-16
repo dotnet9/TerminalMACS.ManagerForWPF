@@ -3,7 +3,8 @@
 /// <summary>
 /// 更新进程信息
 /// </summary>
-public class UpdateProcess
+[NetObjectHead(5, 1)]
+public class UpdateProcess : INetObject
 {
     /// <summary>
     /// 进程列表

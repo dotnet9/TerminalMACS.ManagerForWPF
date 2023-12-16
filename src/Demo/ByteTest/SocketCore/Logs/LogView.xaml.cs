@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using SocketCore.Logs.Models;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 
@@ -7,7 +8,7 @@ namespace SocketCore.Logs;
 public partial class LogView : UserControl
 {
     private const int MaxCount = 1000;
-    private static InlineCollection _inlines;
+    private static InlineCollection? _inlines;
 
     private static readonly Dictionary<LogType, Brush> LogTypeBrushes = new Dictionary<LogType, Brush>()
     {
@@ -43,9 +44,9 @@ public partial class LogView : UserControl
                         {
                             LogRichTextBox.BeginChange();
 
-                            _inlines.Add(new Run($"{log.Time:yyyy-MM-dd HH:mm:ss fff} {log.Content}\r\n")
+                            _inlines?.Add(new Run($"{log.Time:yyyy-MM-dd HH:mm:ss fff} {log.Content}\r\n")
                                 { Foreground = LogTypeBrushes[log.Type] });
-                            if (_inlines.Count > MaxCount)
+                            if (_inlines?.Count > MaxCount)
                             {
                                 _inlines.Remove(_inlines.FirstInline);
                             }

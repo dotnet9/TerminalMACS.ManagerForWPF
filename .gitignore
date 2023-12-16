@@ -242,3 +242,4 @@ src/Demo/ByteTest/SocketClient/obj/
 src/Demo/ByteTest/SocketCore/obj/
 src/Demo/ByteTest/SocketDto/obj/
 src/Demo/ByteTest/SocketServer/obj/
+src/Demo/ByteTest/SocketNetObject/obj/

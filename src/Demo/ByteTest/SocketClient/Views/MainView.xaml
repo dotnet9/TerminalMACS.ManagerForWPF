@@ -1,0 +1,175 @@
+﻿<Window
+    x:Class="SocketClient.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:logs="clr-namespace:SocketCore.Logs;assembly=SocketCore"
+    xmlns:markup="clr-namespace:WpfExtensions.Xaml.Markup;assembly=WpfExtensions.Xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:viewmodel="clr-namespace:SocketClient.ViewModels"
+    Title="Socket Client"
+    Width="1200"
+    Height="600"
+    d:DataContext="{d:DesignInstance viewmodel:MainViewModel}"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    Icon="/Assets/Images/favicon.ico"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Height" Value="23" />
+        </Style>
+        <Style TargetType="{x:Type GroupBox}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Padding" Value="15,2" />
+            <Setter Property="Margin" Value="10,0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </Window.Resources>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="3" />
+            <RowDefinition Height="200" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <GroupBox Header="Tcp服务配置">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0,0,5,0" Text="IP：" />
+                    <TextBox Width="150" Text="{Binding TcpIp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBlock Margin="10,0,5,0" Text="端口：" />
+                    <TextBox Width="50" Text="{Binding TcpPort, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Margin="15,0" Header="Udp组播配置">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0,0,5,0" Text="IP：" />
+                    <TextBox Width="150" Text="{Binding UdpMulticastIp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <TextBlock Margin="10,0,5,0" Text="端口：" />
+                    <TextBox Width="50" Text="{Binding UdpMulticastPort, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
+            </GroupBox>
+            <Button
+                Command="{Binding RunCommand}"
+                Content="{markup:If {Binding IsRunning},
+                                    断开服务,
+                                    连接服务}"
+                Foreground="{markup:If {Binding IsRunning},
+                                       {x:Static Brushes.Red},
+                                       {x:Static Brushes.Green}}" />
+            <Button Command="{Binding RefreshCommand}" Content="刷新" />
+        </StackPanel>
+        <DataGrid
+            x:Name="ProcessDataGrid"
+            Grid.Row="1"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            EnableColumnVirtualization="True"
+            EnableRowVirtualization="True"
+            ItemsSource="{Binding DisplayProcesses, IsAsync=True, Mode=OneWay}"
+            ScrollViewer.CanContentScroll="True"
+            SelectionMode="Extended"
+            SelectionUnit="FullRow"
+            VirtualizingPanel.IsContainerVirtualizable="True"
+            VirtualizingPanel.IsVirtualizing="True"
+            VirtualizingPanel.VirtualizationMode="Recycling">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Width="150"
+                    Binding="{Binding PID}"
+                    Header="PId" />
+                <DataGridTextColumn
+                    Width="60"
+                    Binding="{Binding ProcessName}"
+                    Header="进程名称" />
+                <DataGridTextColumn
+                    Width="80"
+                    Binding="{Binding Type}"
+                    Header="进程类型" />
+                <DataGridTextColumn
+                    Width="100"
+                    Binding="{Binding Status}"
+                    Header="进程状态" />
+                <DataGridTextColumn
+                    Width="100"
+                    Binding="{Binding Publisher}"
+                    Header="发布者" />
+                <DataGridTextColumn
+                    Width="160"
+                    Binding="{Binding CommandLine}"
+                    Header="命令行" />
+                <DataGridTextColumn
+                    Width="160"
+                    Binding="{Binding CPUUsage}"
+                    Header="CPU使用率" />
+                <DataGridTextColumn
+                    Width="80"
+                    Binding="{Binding MemoryUsage}"
+                    Header="内存使用大小" />
+                <DataGridTextColumn
+                    Width="100"
+                    Binding="{Binding DiskUsage}"
+                    Header="磁盘使用大小" />
+                <DataGridTextColumn
+                    Width="50"
+                    Binding="{Binding NetworkUsage}"
+                    Header="网络使用值" />
+                <DataGridTextColumn
+                    Width="170"
+                    Binding="{Binding GPU}"
+                    Header="GPU" />
+                <DataGridTextColumn
+                    Width="160"
+                    Binding="{Binding GPUEngine}"
+                    Header="GPU引擎" />
+                <DataGridTextColumn
+                    Width="160"
+                    Binding="{Binding PowerUsage}"
+                    Header="电源使用情况" />
+                <DataGridTextColumn
+                    Width="80"
+                    Binding="{Binding PowerUsageTrend}"
+                    Header="电源使用情况趋势" />
+            </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Status}" Value="True">
+                            <Setter Property="Foreground" Value="Red" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>
+        <GridSplitter
+            Grid.Row="2"
+            Height="3" HorizontalAlignment="Stretch"
+            ResizeDirection="Rows" />
+        <logs:LogView Grid.Row="3" Margin="3" />
+        <StackPanel Grid.Row="4" VerticalAlignment="Center">
+            <TextBlock>
+                <Run Text="TCP服务：" />
+                <Run Foreground="{markup:If {Binding IsRunning}, {x:Static Brushes.Green}, {x:Static Brushes.Red}}" Text="{markup:If {Binding IsRunning}, 已连接, 断开}" />
+                <Run Text="    客户端：" />
+                <Run Foreground="Green" Text="3" />
+                <Run Text="(个）   发送时间：" />
+                <Run Foreground="Green" Text="2023-12-16 11:27" />
+                <Run Text="               UDP：" />
+                <Run Foreground="{markup:If {Binding IsRunning}, {x:Static Brushes.Green}, {x:Static Brushes.Red}}" Text="{markup:If {Binding IsRunning}, 已连接, 断开}" />
+                <Run Text="     组播时间：" />
+                <Run Foreground="Green" Text="2023-12-16 11:27" />
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</Window>
