@@ -3,6 +3,7 @@
 /// <summary>
 /// 操作系统进程信息
 /// </summary>
+[MessagePackObject]
 public class ActiveProcess
 {
     public const int ObjectSize = 46;

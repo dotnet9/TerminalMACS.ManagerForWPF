@@ -231,7 +231,11 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
                             continue;
                         }
 
-                        _receivedResponse.Add(SerializeHelper.Deserialize<UpdateActiveProcess>(buffer));
+                        var updateActiveProcess = netObjectInfo.IsNetObject<UpdateActiveProcess>()
+                            ? CustomSerializeHelper.Deserialize<UpdateActiveProcess>(buffer)!
+                            : SerializeHelper.Deserialize<UpdateActiveProcess>(buffer);
+
+                        _receivedResponse.Add(updateActiveProcess);
                     }
                     catch (Exception ex)
                     {
@@ -240,7 +244,7 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
                     finally
                     {
                         sw.Stop();
-                        Logger.Info($"解析UDP包用时：{sw.ElapsedMilliseconds}ms");
+                        Console.Write($"解析UDP包用时：{sw.ElapsedMilliseconds}ms");
                     }
                 }
 

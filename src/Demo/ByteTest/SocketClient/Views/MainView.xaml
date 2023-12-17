@@ -175,6 +175,8 @@
                 <Run
                     Foreground="{markup:If {Binding TcpHelper.IsRunning}, {x:Static Brushes.Green}, {x:Static Brushes.Red}}"
                     Text="{markup:If {Binding TcpHelper.IsRunning}, 已连接, 未连接}" />
+                <Run Text="    心跳时间：" />
+                <Run Foreground="Green" Text="{Binding HeartbeatTime,StringFormat=yyyy-MM-dd HH:mm:ss fff}" />
                 <Run Text="    发送时间：" />
                 <Run Foreground="Green" Text="{Binding TcpHelper.SendTime,StringFormat=yyyy-MM-dd HH:mm:ss fff}" />
                 <Run Text="    接收时间：" />

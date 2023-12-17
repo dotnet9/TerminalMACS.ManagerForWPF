@@ -186,4 +186,18 @@ public class ProcessItem : BindableBase
         PowerUsageTrend = ((ProcessPowerUsage)Enum.Parse(typeof(ProcessPowerUsage), process.PowerUsageTrend.ToString()))
             .Description();
     }
+
+    public void Update(ActiveProcess process)
+    {
+        PID = process.PID;
+        CPUUsage = process.CPUUsage.ToString("P1");
+        MemoryUsage = process.MemoryUsage.ToString("P1");
+        DiskUsage = $"{process.DiskUsage:P1} MB/秒";
+        NetworkUsage = $"{process.DiskUsage:P1} Mbps";
+        GPU = process.GPU.ToString("P1");
+        PowerUsage = ((ProcessPowerUsage)Enum.Parse(typeof(ProcessPowerUsage), process.PowerUsage.ToString()))
+            .Description();
+        PowerUsageTrend = ((ProcessPowerUsage)Enum.Parse(typeof(ProcessPowerUsage), process.PowerUsageTrend.ToString()))
+            .Description();
+    }
 }

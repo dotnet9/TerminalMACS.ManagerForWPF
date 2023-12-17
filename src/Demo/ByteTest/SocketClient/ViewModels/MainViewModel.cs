@@ -22,6 +22,14 @@ public class MainViewModel : BindableBase
         set => SetProperty(ref _searchKey, value);
     }
 
+    private DateTime _heartbeatTime;
+
+    public DateTime HeartbeatTime
+    {
+        get => _heartbeatTime;
+        set => SetProperty(ref _heartbeatTime, value);
+    }
+
     private string? _baseInfo;
 
     /// <summary>
@@ -164,8 +172,8 @@ public class MainViewModel : BindableBase
             case ResponseProcess responseProcess:
                 ReadResponse(responseProcess);
                 break;
-            case UpdateProcess responseProcess:
-                ReadResponse(responseProcess);
+            case UpdateProcess updateProcess:
+                ReadResponse(updateProcess);
                 break;
             case Heartbeat responseHeartbeat:
                 ReadResponse(responseHeartbeat);
@@ -240,6 +248,11 @@ public class MainViewModel : BindableBase
     {
         Task.Run(() =>
         {
+            while (!UdpHelper.IsRunning)
+            {
+                Thread.Sleep(TimeSpan.FromMilliseconds(10));
+            }
+
             while (UdpHelper.IsRunning)
             {
                 if (UdpHelper.TryGetResponse(out var response) && response is UpdateActiveProcess updateActiveProcess)
@@ -259,8 +272,20 @@ public class MainViewModel : BindableBase
         });
     }
 
-    private void DillUpdateActivePoints(UpdateActiveProcess updateActiveProcess)
+    private void DillUpdateActivePoints(UpdateActiveProcess response)
     {
+        response.Processes?.ForEach(updateProcess =>
+        {
+            if (_processIdAndItems != null && _processIdAndItems.TryGetValue(updateProcess.PID, out var point))
+            {
+                point.Update(updateProcess);
+            }
+            else
+            {
+                Console.WriteLine($"【实时】收到更新数据包，遇到本地缓存不存在的进程：{updateProcess.PID}");
+            }
+        });
+        Console.WriteLine($"【实时】更新数据{response.Processes?.Count}条");
     }
 
     #endregion
@@ -272,6 +297,7 @@ public class MainViewModel : BindableBase
             while (TcpHelper.IsRunning)
             {
                 UdpHelper.SendCommand(new Heartbeat());
+                HeartbeatTime = DateTime.Now;
                 Logger.Info("向服务端发送心跳");
 
                 Thread.Sleep(TimeSpan.FromSeconds(5));

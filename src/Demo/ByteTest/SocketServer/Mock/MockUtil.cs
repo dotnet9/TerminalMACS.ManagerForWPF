@@ -1,13 +1,15 @@
 ﻿using SocketCore.SysProcess.Models;
 using SocketCore.Utils;
+using System.ComponentModel.DataAnnotations;
 using Process = SocketDto.Process;
 
 namespace SocketServer.Mock;
 
 public static class MockUtil
 {
-    public const int MockCount = 10000;
+    public const int MockCount = 1000000;
     public const int MockPageSize = 5000;
+    public const int UdpPacketSize = 65507;
 
     public static ResponseBaseInfo MockBase(int taskId = default)
     {
@@ -70,6 +72,14 @@ public static class MockUtil
     public static int GetPageCount(int totalCount, int pageSize)
     {
         return (totalCount + pageSize - 1) / pageSize;
+    }
+
+    public static void MockUpdateActiveProcessPageCount(out int pageSize, out int pageCount)
+    {
+        // sizeof(int)为Processes长度点位4个字节
+        pageSize = (UdpPacketSize - SerializeHelper.PacketHeadLen - sizeof(int)) /
+                   ActiveProcess.ObjectSize;
+        pageCount = GetPageCount(MockCount, pageSize);
     }
 
     public static int GetDataCount(int pageIndex, int totalCount,

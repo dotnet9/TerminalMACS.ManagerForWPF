@@ -35,7 +35,7 @@
 
 数据包数据部分
 
-使用MessagePack对对象进行二进制压缩，数据包会比常规二进制序列化小，数据部分由4个字节(int)表示对象byte[]大小，n个字节的byte[]表示对象二进制数据，以下是目前使用到的对象列表：
+使用MessagePack对对象进行二进制压缩，数据包会比常规二进制序列化小，以下是目前使用到的对象列表：
 
 | 对象名              | 对象Id | 对象版本 | 说明               |
 | ------------------- | ------ | -------- | ------------------ |
@@ -81,10 +81,14 @@
 
 ##### ResponseProcess
 
-| 字段名    | 数据类型         | 说明     |
-| --------- | ---------------- | -------- |
-| TaskId    | int              | 任务Id   |
-| Processes | `List<Process>?` | 进程列表 |
+| 字段名    | 数据类型         | 说明       |
+| --------- | ---------------- | ---------- |
+| TaskId    | int              | 任务Id     |
+| TotalSize | int              | 总数据大小 |
+| PageSize  | int              | 分页大小   |
+| PageCount | int              | 总页数     |
+| PageIndex | int              | 页索引     |
+| Processes | `List<Process>?` | 进程列表   |
 
 ##### Process
 
@@ -97,7 +101,7 @@
 | Publisher       | string?  | 发布者           |
 | CommandLine     | string?  | 命令行           |
 | CPUUsage        | double   | CPU使用率        |
-| MemoryUsage     | double   | 内存使用大小     |
+| MemoryUsage     | double   | 内存使用率       |
 | DiskUsage       | double   | 磁盘使用大小     |
 | NetworkUsage    | double   | 网络使用值       |
 | GPU             | double   | GPU              |
@@ -123,8 +127,8 @@
 | --------------- | -------- | ---------------- |
 | PID             | int      | 进程ID           |
 | CPUUsage        | double   | CPU使用率        |
-| MemoryUsage     | double   | 磁盘使用大小     |
-| DiskUsage       | double   | 磁盘使用大小     |
+| MemoryUsage     | double   | 内存使用率       |
+| DiskUsage       | double   | 磁盘             |
 | NetworkUsage    | double   | 网络使用值       |
 | GPU             | double   | GPU              |
 | PowerUsage      | byte     | 电源使用情况     |

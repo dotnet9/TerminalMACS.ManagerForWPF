@@ -105,6 +105,14 @@ public class TcpHelper : BindableBase, ISocketBase
         }
     }
 
+    private DateTime _heartbeatTime;
+
+    public DateTime HeartbeatTime
+    {
+        get => _heartbeatTime;
+        set => SetProperty(ref _heartbeatTime, value);
+    }
+
     public void Start()
     {
         if (IsStarted)
@@ -233,6 +241,7 @@ public class TcpHelper : BindableBase, ISocketBase
                     // 1、接收数据包
                     var buffer = new byte[500 * 1024];
                     var bytesReadLen = tcpClient.Receive(buffer);
+                    ReceiveTime = DateTime.Now;
                     if (bytesReadLen <= 0)
                     {
                         continue;
@@ -469,6 +478,7 @@ public class TcpHelper : BindableBase, ISocketBase
     private void DillReceivedCommand(Socket tcpClient)
     {
         tcpClient.Send(new Heartbeat().Serialize(SystemId));
+        HeartbeatTime = DateTime.Now;
     }
 
     private void SendCommands()
@@ -484,6 +494,7 @@ public class TcpHelper : BindableBase, ISocketBase
                         foreach (var client in _clients)
                         {
                             client.Value.Send(command.Serialize(SystemId));
+                            SendTime = DateTime.Now;
                         }
                     }
                     catch (Exception ex)

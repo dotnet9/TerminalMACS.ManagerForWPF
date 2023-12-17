@@ -83,10 +83,14 @@
                 <Run Text="{markup:If {Binding TcpHelper.IsRunning},正常运行,未运行}"
                      Foreground="{markup:If {Binding TcpHelper.IsRunning},{x:Static Brushes.Green}, {x:Static Brushes.Red}}">
                 </Run>
+                <Run Text="    心跳时间：" />
+                <Run Foreground="Green" Text="{Binding TcpHelper.HeartbeatTime,StringFormat=yyyy-MM-dd HH:mm:ss fff}" />
                 <Run Text="    客户端：" />
                 <Run Text="3" Foreground="Green" />
-                <Run Text="(个）   发送时间：" />
-                <Run Text="2023-12-16 11:27" Foreground="Green" />
+                <Run Text="    发送时间：" />
+                <Run Foreground="Green" Text="{Binding TcpHelper.SendTime,StringFormat=yyyy-MM-dd HH:mm:ss fff}" />
+                <Run Text="    接收时间：" />
+                <Run Foreground="Green" Text="{Binding TcpHelper.ReceiveTime, StringFormat=yyyy-MM-dd HH:mm:ss fff}" />
                 <Run Text="               UDP：" />
                 <Run Text="{markup:If {Binding UdpHelper.IsRunning},正常运行,未运行}"
                      Foreground="{markup:If {Binding UdpHelper.IsRunning},{x:Static Brushes.Green}, {x:Static Brushes.Red}}">

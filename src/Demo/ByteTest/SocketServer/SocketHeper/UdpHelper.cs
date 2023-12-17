@@ -1,4 +1,12 @@
-﻿namespace SocketServer.SocketHeper;
+﻿using Microsoft.Xaml.Behaviors.Layout;
+using SocketServer.Mock;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Eventing.Reader;
+using System.Net.Http;
+using System.Net.Sockets;
+using SocketCore.SysProcess.Models;
+
+namespace SocketServer.SocketHeper;
 
 public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
 {
@@ -119,6 +127,7 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
                     IsRunning = true;
 
                     SendCommands();
+                    MockSendData();
 
                     Logger.Info($"Udp启动成功");
                     break;
@@ -185,7 +194,10 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
                 {
                     try
                     {
-                        var buffer = command.Serialize(_tcpHelper.SystemId);
+                        var buffer = command.GetType() == typeof(UpdateActiveProcess)
+                            ? CustomSerializeHelper.Serialize(command, _tcpHelper.SystemId)
+                            : command.Serialize(_tcpHelper.SystemId);
+
                         _client.Send(buffer, buffer.Length, _udpIpEndPoint);
                     }
                     catch (Exception ex)
@@ -196,6 +208,41 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
                 }
 
                 Thread.Sleep(TimeSpan.FromMilliseconds(1));
+            }
+        });
+    }
+
+    private void MockSendData()
+    {
+        Task.Run(() =>
+        {
+            while (IsRunning)
+            {
+                MockUtil.MockUpdateActiveProcessPageCount(out var pageSize, out var pageCount);
+                for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
+                {
+                    var response = new UpdateActiveProcess
+                    {
+                        Processes = Enumerable
+                            .Range(pageIndex * pageSize, MockUtil.GetDataCount(pageIndex, MockUtil.MockCount, pageSize))
+                            .Select(index => new ActiveProcess()
+                            {
+                                PID = index + 1,
+                                CPUUsage = Random.Shared.NextDouble(),
+                                MemoryUsage = Random.Shared.NextDouble(),
+                                DiskUsage = Random.Shared.NextDouble(),
+                                NetworkUsage = Random.Shared.NextDouble(),
+                                GPU = Random.Shared.NextDouble(),
+                                PowerUsage =
+                                    (byte)(Random.Shared.Next(0, Enum.GetNames(typeof(ProcessPowerUsage)).Length)),
+                                PowerUsageTrend =
+                                    (byte)(Random.Shared.Next(0, Enum.GetNames(typeof(ProcessPowerUsage)).Length))
+                            }).ToList()
+                    };
+                    SendCommand(response);
+                }
+
+                Thread.Sleep(TimeSpan.FromMilliseconds(500));
             }
         });
     }

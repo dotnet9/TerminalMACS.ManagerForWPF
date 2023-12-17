@@ -27,12 +27,10 @@ public static class SerializeHelper
         var bodyBuffer = MessagePackSerializer.Serialize(tempObject, Options);
         using var stream = new MemoryStream();
         using var writer = new BinaryWriter(stream, DefaultEncoding);
-        writer.Write(PacketHeadLen + sizeof(int) + bodyBuffer.Length);
+        writer.Write(PacketHeadLen + bodyBuffer.Length);
         writer.Write(systemId);
         writer.Write(netObjectInfo.Id);
         writer.Write(netObjectInfo.Version);
-
-        writer.Write(bodyBuffer.Length);
         writer.Write(bodyBuffer);
 
         return stream.ToArray();
@@ -40,9 +38,9 @@ public static class SerializeHelper
 
     public static T Deserialize<T>(byte[] buffer)
     {
-        using var stream = new MemoryStream(buffer, PacketHeadLen, buffer.Length - PacketHeadLen);
+        var bodyBufferLen = buffer.Length - PacketHeadLen;
+        using var stream = new MemoryStream(buffer, PacketHeadLen, bodyBufferLen);
         using var reader = new BinaryReader(stream);
-        var bodyBufferLen = reader.ReadInt32();
         var bodyBuffer = reader.ReadBytes(bodyBufferLen);
         return MessagePackSerializer.Deserialize<T>(bodyBuffer, Options);
     }
