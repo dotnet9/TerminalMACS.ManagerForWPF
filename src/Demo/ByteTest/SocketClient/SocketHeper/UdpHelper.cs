@@ -1,57 +1,140 @@
 ﻿namespace SocketClient.SocketHeper;
 
-internal class UdpHelper : ISocketBase
+public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
 {
-    private static readonly UdpClient Client = new();
-    private static bool _isRunSuccess;
+    private TcpHelper? _tcpHelper = tcpHelper;
+    private IPEndPoint _remoteEp = new(IPAddress.Any, 0);
+    private UdpClient? _client;
 
-    private static readonly BlockingCollection<byte[]>
-        ReceivedBuffers = new(new ConcurrentQueue<byte[]>());
+    private readonly BlockingCollection<byte[]>
+        _receivedBuffers = new(new ConcurrentQueue<byte[]>());
 
-    private static readonly BlockingCollection<UpdateActiveProcess> ReceivedResponse = new();
+    private readonly BlockingCollection<UpdateActiveProcess> _receivedResponse = new();
 
-    public void Start(string ip, int port)
+    #region 公开接口
+
+    private string _ip = "224.0.0.0";
+
+    /// <summary>
+    /// UDP组播IP
+    /// </summary>
+    public string Ip
     {
+        get => _ip;
+        set => SetProperty(ref _ip, value);
+    }
+
+    private int _port = 9540;
+
+    /// <summary>
+    /// UDP组播端口
+    /// </summary>
+    public int Port
+    {
+        get => _port;
+        set => SetProperty(ref _port, value);
+    }
+
+    private bool _isStarted;
+
+    public bool IsStarted
+    {
+        get => _isStarted;
+        set
+        {
+            if (value != _isStarted)
+            {
+                SetProperty(ref _isStarted, value);
+            }
+        }
+    }
+
+    private bool _isRunning;
+
+    /// <summary>
+    /// 是否正在运行udp组播订阅
+    /// </summary>
+    public bool IsRunning
+    {
+        get => _isRunning;
+        set
+        {
+            if (value != _isRunning)
+            {
+                SetProperty(ref _isRunning, value);
+            }
+        }
+    }
+
+    private DateTime _sendTime;
+
+    /// <summary>
+    /// 命令发送时间
+    /// </summary>
+    public DateTime SendTime
+    {
+        get => _sendTime;
+        set
+        {
+            if (value != _sendTime)
+            {
+                SetProperty(ref _sendTime, value);
+            }
+        }
+    }
+
+    private DateTime _receiveTime;
+
+    /// <summary>
+    /// 响应接收时间
+    /// </summary>
+    public DateTime ReceiveTime
+    {
+        get => _receiveTime;
+        set
+        {
+            if (value != _receiveTime)
+            {
+                SetProperty(ref _receiveTime, value);
+            }
+        }
+    }
+
+    public void Start()
+    {
+        if (IsStarted)
+        {
+            Logger.Warning("Udp订阅已经开启");
+            return;
+        }
+
+        IsStarted = true;
+
         Task.Run(() =>
         {
-            while (true)
+            while (IsStarted)
             {
                 try
                 {
-                    Client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, 1);
-                    Client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
+                    _client = new UdpClient();
+                    _client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, 1);
+                    _client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);
 
                     // 任意IP+广播端口，0是任意端口
-                    Client.Client.Bind(new IPEndPoint(IPAddress.Any, port));
+                    _client.Client.Bind(new IPEndPoint(IPAddress.Any, Port));
 
                     // 加入组播
-                    Client.JoinMulticastGroup(IPAddress.Parse(ip));
-                    _isRunSuccess = true;
+                    _client.JoinMulticastGroup(IPAddress.Parse(Ip));
+                    Logger.Info("Udp组播订阅成功");
+                    IsRunning = true;
+
+                    ReceiveData();
                     AnalyzeData();
-
-                    var remoteEp = new IPEndPoint(IPAddress.Any, 0);
-                    while (true)
-                    {
-                        if (Client.Client == null || Client.Available < 0 || !_isRunSuccess)
-                        {
-                            Thread.Sleep(TimeSpan.FromMilliseconds(10));
-                            continue;
-                        }
-
-                        if (!_isRunSuccess)
-                        {
-                            Thread.Sleep(TimeSpan.FromMilliseconds(10));
-                            continue;
-                        }
-
-                        var data = Client.Receive(ref remoteEp);
-                        ReceivedBuffers.Add(data);
-                        Thread.Sleep(TimeSpan.FromMilliseconds(1));
-                    }
+                    break;
                 }
                 catch (Exception ex)
                 {
-                    _isRunSuccess = false;
+                    IsRunning = false;
                     Logger.Warning($"运行Udp异常，1秒后将重新运行：{ex.Message}");
                     Thread.Sleep(1);
                 }
@@ -61,16 +144,26 @@ internal class UdpHelper : ISocketBase
 
     public void Stop()
     {
-        _isRunSuccess = false;
+        if (!IsStarted)
+        {
+            Logger.Warning("Udp订阅已经关闭");
+            return;
+        }
+
+        IsStarted = false;
+
         try
         {
-            Client.Close();
+            _client?.Close();
+            _client = null;
             Logger.Info($"停止Udp");
         }
         catch (Exception ex)
         {
             Logger.Warning($"停止Udp异常：{ex.Message}");
         }
+
+        IsRunning = false;
     }
 
     public void SendCommand(INetObject command)
@@ -79,18 +172,54 @@ internal class UdpHelper : ISocketBase
 
     public bool TryGetResponse(out INetObject? response)
     {
-        bool result = ReceivedResponse.TryTake(out var updateActiveProcess);
+        bool result = _receivedResponse.TryTake(out var updateActiveProcess);
         response = updateActiveProcess;
         return result;
     }
 
-    private static void AnalyzeData()
+    #endregion
+
+    private void ReceiveData()
     {
         Task.Run(() =>
         {
-            while (_isRunSuccess)
+            while (IsRunning)
             {
-                if (ReceivedBuffers.TryTake(out var buffer))
+                try
+                {
+                    if (_client?.Client == null || _client.Available < 0)
+                    {
+                        Thread.Sleep(TimeSpan.FromMilliseconds(10));
+                        continue;
+                    }
+
+                    var data = _client.Receive(ref _remoteEp);
+
+                    _receivedBuffers.Add(data);
+                }
+                catch (SocketException ex)
+                {
+                    Logger.Error(ex.SocketErrorCode == SocketError.Interrupted
+                        ? $"Udp中断，停止接收数据！"
+                        : $"接收Udp数据异常：{ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error($"接收Udp数据异常：{ex.Message}");
+                }
+
+                Thread.Sleep(TimeSpan.FromMilliseconds(1));
+            }
+        });
+    }
+
+    private void AnalyzeData()
+    {
+        Task.Run(() =>
+        {
+            while (IsRunning)
+            {
+                if (_receivedBuffers.TryTake(out var buffer))
                 {
                     var sw = Stopwatch.StartNew();
                     var readIndex = 0;
@@ -102,7 +231,7 @@ internal class UdpHelper : ISocketBase
                             continue;
                         }
 
-                        ReceivedResponse.Add(SerializeHelper.Deserialize<UpdateActiveProcess>(buffer));
+                        _receivedResponse.Add(SerializeHelper.Deserialize<UpdateActiveProcess>(buffer));
                     }
                     catch (Exception ex)
                     {

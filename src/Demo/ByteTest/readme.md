@@ -35,6 +35,8 @@
 
 数据包数据部分
 
+使用MessagePack对对象进行二进制压缩，数据包会比常规二进制序列化小，数据部分由4个字节(int)表示对象byte[]大小，n个字节的byte[]表示对象二进制数据，以下是目前使用到的对象列表：
+
 | 对象名              | 对象Id | 对象版本 | 说明               |
 | ------------------- | ------ | -------- | ------------------ |
 | RequestBaseInfo     | 1      | 1        | 请求服务基本信息   |
@@ -65,7 +67,7 @@
 | ProcessorCount      | int      | 处理器个数             |
 | TotalDiskSpace      | int      | 硬盘总容量（单位GB）   |
 | NetworkBandwidth    | int      | 网络带宽（单位Mbps）   |
-| IPAddress           | string?  | 服务器IP地址           |
+| IpAddress           | string?  | 服务器IP地址           |
 | ServerName          | string?  | 服务器名称             |
 | DataCenterLocation  | string?  | 数据中心位置           |
 | IsRunning           | bool     | 运行状态               |
@@ -89,7 +91,7 @@
 | 字段名          | 数据类型 | 说明             |
 | --------------- | -------- | ---------------- |
 | PID             | int      | 进程ID           |
-| ProcessName     | string?  | 进程名称         |
+| Name            | string?  | 进程名称         |
 | Type            | byte     | 进程类型         |
 | Status          | byte     | 进程状态         |
 | Publisher       | string?  | 发布者           |

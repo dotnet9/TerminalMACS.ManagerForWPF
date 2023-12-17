@@ -10,7 +10,7 @@ public static class ProcessReader
         return Enumerable.Range(start, count).Select(index => new ProcessInfo()
         {
             PID = index,
-            ProcessName = Lorem.Words(1, 3),
+            Name = Lorem.Words(1, 3),
             Type = (ProcessType)Enum.Parse(typeof(ProcessType),
                 Random.Shared.Next(0, Enum.GetNames(typeof(ProcessType)).Length).ToString()),
             Status = (ProcessStatus)Enum.Parse(typeof(ProcessStatus),

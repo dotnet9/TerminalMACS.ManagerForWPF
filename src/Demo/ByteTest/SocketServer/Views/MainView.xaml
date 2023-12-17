@@ -34,7 +34,7 @@
     </Window.Resources>
     <Grid Margin="5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="30" />
         </Grid.RowDefinitions>
@@ -42,42 +42,53 @@
             <GroupBox Header="Tcp服务配置">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="0,0,5,0" Text="IP：" />
-                    <TextBox Width="150" Text="{Binding TcpIp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox Width="150"
+                             Text="{Binding TcpHelper.Ip, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                     <TextBlock Margin="10,0,5,0" Text="端口：" />
-                    <TextBox Width="50" Text="{Binding TcpPort, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox Width="50"
+                             Text="{Binding TcpHelper.Port, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button
+                        Command="{Binding RunTcpCommand}"
+                        Content="{markup:If {Binding TcpHelper.IsStarted}, 停止服务, 开启服务}"
+                        Foreground="{markup:If {Binding TcpHelper.IsStarted},
+                   {x:Static Brushes.Red},
+                   {x:Static Brushes.Green}}" />
                 </StackPanel>
             </GroupBox>
             <GroupBox Margin="15,0" Header="Udp组播配置">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="0,0,5,0" Text="IP：" />
                     <TextBox Width="150"
-                             Text="{Binding UdpMulticastIp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                             Text="{Binding UdpHelper.Ip, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                     <TextBlock Margin="10,0,5,0" Text="端口：" />
                     <TextBox Width="50"
-                             Text="{Binding UdpMulticastPort, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                             Text="{Binding TcpHelper.Port, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button
+                        Command="{Binding RunUdpMulticastCommand}"
+                        Content="{markup:If {Binding TcpHelper.IsStarted}, 开启组播, 关闭组播}"
+                        Foreground="{markup:If {Binding UdpHelper.IsStarted},
+                                       {x:Static Brushes.Red},
+                                       {x:Static Brushes.Green}}" />
                 </StackPanel>
             </GroupBox>
-            <Button Content="{markup:If {Binding IsRunning},暂停服务,运行服务}"
-                    Foreground="{markup:If {Binding IsRunning},{x:Static Brushes.Red}, {x:Static Brushes.Green}}"
-                    Command="{Binding RunCommand}" />
-            <Button Content="主动推送" Command="{Binding SendCommand}" />
+            <Button Content="刷新" Command="{Binding RefreshCommand}" />
         </StackPanel>
         <logs:LogView Grid.Row="1" Margin="2" />
         <StackPanel Grid.Row="2" VerticalAlignment="Center">
             <TextBlock>
                 <Run Text="TCP服务：" />
-                <Run Text="{markup:If {Binding IsRunning},正常运行,未运行}"
-                     Foreground="{markup:If {Binding IsRunning},{x:Static Brushes.Green}, {x:Static Brushes.Red}}">
+                <Run Text="{markup:If {Binding TcpHelper.IsRunning},正常运行,未运行}"
+                     Foreground="{markup:If {Binding TcpHelper.IsRunning},{x:Static Brushes.Green}, {x:Static Brushes.Red}}">
                 </Run>
                 <Run Text="    客户端：" />
                 <Run Text="3" Foreground="Green" />
                 <Run Text="(个）   发送时间：" />
                 <Run Text="2023-12-16 11:27" Foreground="Green" />
                 <Run Text="               UDP：" />
-                <Run Text="{markup:If {Binding IsRunning},正常运行,未运行}"
-                     Foreground="{markup:If {Binding IsRunning},{x:Static Brushes.Green}, {x:Static Brushes.Red}}">
+                <Run Text="{markup:If {Binding UdpHelper.IsRunning},正常运行,未运行}"
+                     Foreground="{markup:If {Binding UdpHelper.IsRunning},{x:Static Brushes.Green}, {x:Static Brushes.Red}}">
                 </Run>
                 <Run Text="     组播时间：" />
                 <Run Text="2023-12-16 11:27" Foreground="Green" />

@@ -23,13 +23,15 @@ public static class SerializeHelper
         }
 
         var netObjectInfo = GetNetObjectHeadAttribute(data.GetType());
-        var bodyBuffer = MessagePackSerializer.Serialize(data, Options);
+        dynamic tempObject = data; // TODO，这里需要用dynamic接一个待序列化对象，不然MessagePack会报错
+        var bodyBuffer = MessagePackSerializer.Serialize(tempObject, Options);
         using var stream = new MemoryStream();
         using var writer = new BinaryWriter(stream, DefaultEncoding);
-        writer.Write(PacketHeadLen + bodyBuffer.Length);
+        writer.Write(PacketHeadLen + sizeof(int) + bodyBuffer.Length);
         writer.Write(systemId);
         writer.Write(netObjectInfo.Id);
         writer.Write(netObjectInfo.Version);
+
         writer.Write(bodyBuffer.Length);
         writer.Write(bodyBuffer);
 

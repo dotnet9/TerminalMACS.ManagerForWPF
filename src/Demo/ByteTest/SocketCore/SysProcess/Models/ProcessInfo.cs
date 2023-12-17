@@ -10,7 +10,7 @@ public record ProcessInfo
     /// <summary>
     /// 进程名称
     /// </summary>
-    public string? ProcessName { get; set; }
+    public string? Name { get; set; }
 
     /// <summary>
     /// 进程类型

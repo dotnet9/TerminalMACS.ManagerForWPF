@@ -1,114 +1,93 @@
-﻿using SocketClient.Mock;
-using SocketClient.Models;
+﻿using SocketClient.Models;
 using SocketClient.WPF;
+using System.Windows;
+using SocketCore.Utils;
 
 namespace SocketClient.ViewModels;
 
 public class MainViewModel : BindableBase
 {
-    private readonly TcpHelper _tcpHelper = new();
-    private readonly UdpHelper _udpHelper = new();
-    private string _tcpIp = "127.0.0.1";
-
-    /// <summary>
-    /// TCP服务IP
-    /// </summary>
-    public string TcpIp
-    {
-        get => _tcpIp;
-        set => SetProperty(ref _tcpIp, value);
-    }
-
-    /// <summary>
-    /// TCP服务端口
-    /// </summary>
-    private int _tcpPort = 5000;
-
-    public int TcpPort
-    {
-        get => _tcpPort;
-        set => SetProperty(ref _tcpPort, value);
-    }
-
-    private string _udpMulticastIp = "224.0.0.0";
-
-    /// <summary>
-    /// UDP组播放IP
-    /// </summary>
-    public string UdpMulticastIp
-    {
-        get => _udpMulticastIp;
-        set => SetProperty(ref _udpMulticastIp, value);
-    }
-
-    private int _udpMulticastPort = 9540;
-
-    /// <summary>
-    /// UDP组播端口
-    /// </summary>
-    public int UdpMulticastPort
-    {
-        get => _udpMulticastPort;
-        set => SetProperty(ref _udpMulticastPort, value);
-    }
-
-    private bool _isRunning;
-
-    /// <summary>
-    /// 是否正在运行服务
-    /// </summary>
-    public bool IsRunning
-    {
-        get => _isRunning;
-        set
-        {
-            if (value != _isRunning)
-            {
-                SetProperty(ref _isRunning, value);
-            }
-        }
-    }
-
     private readonly List<ProcessItem> _receivedProcesses = new();
 
     private Dictionary<int, ProcessItem>? _processIdAndItems;
 
     public RangObservableCollection<ProcessItem> DisplayProcesses { get; } = new();
 
-    private IAsyncCommand? _runCommand;
+    public TcpHelper TcpHelper { get; set; }
+    public UdpHelper UdpHelper { get; set; }
+
+    private string? _baseInfo;
 
     /// <summary>
-    /// 运行服务
+    /// 基本信息
     /// </summary>
-    public IAsyncCommand RunCommand => _runCommand ??= new AsyncDelegateCommand(HandleRunCommandAsync,
-        () => true);
+    public string? BaseInfo
+    {
+        get => _baseInfo;
+        set => SetProperty(ref _baseInfo, value);
+    }
+
+    private IAsyncCommand? _connectTcpCommand;
+
+    /// <summary>
+    /// 连接Tcp服务
+    /// </summary>
+    public IAsyncCommand ConnectTcpCommand =>
+        _connectTcpCommand ??= new AsyncDelegateCommand(HandleConnectTcpCommandAsync);
+
+    private IAsyncCommand? _subscribeUdpMulticastCommand;
+
+    /// <summary>
+    /// 订阅Udp组播
+    /// </summary>
+    public IAsyncCommand SubscribeUdpMulticastCommand =>
+        _subscribeUdpMulticastCommand ??= new AsyncDelegateCommand(HandleSubscribeUdpMulticastCommand);
 
     private IAsyncCommand? _refreshCommand;
 
     /// <summary>
-    /// 运行服务
+    /// 刷新数据
     /// </summary>
     public IAsyncCommand RefreshCommand => _refreshCommand ??= new AsyncDelegateCommand(
         HandleRefreshCommand,
-        () => IsRunning).ObservesProperty(() => IsRunning);
+        () => TcpHelper.IsRunning).ObservesProperty(() => TcpHelper.IsRunning);
 
-    private Task HandleRunCommandAsync()
+    public MainViewModel()
     {
-        IsRunning = !IsRunning;
-        if (IsRunning)
+        TcpHelper = new TcpHelper();
+        UdpHelper = new UdpHelper(TcpHelper);
+
+        UpdateCount();
+    }
+
+    private Task HandleConnectTcpCommandAsync()
+    {
+        if (!TcpHelper.IsStarted)
         {
-            _tcpHelper.Start(TcpIp, TcpPort);
-            _udpHelper.Start(UdpMulticastIp, UdpMulticastPort);
+            TcpHelper.Start();
 
             ReceiveTcpData();
-            ReceiveUdpData();
             SendHeartbeat();
-            UpdateCount();
         }
         else
         {
-            _tcpHelper.Stop();
-            _udpHelper.Stop();
+            TcpHelper.Stop();
+        }
+
+        return Task.CompletedTask;
+    }
+
+    private Task HandleSubscribeUdpMulticastCommand()
+    {
+        if (!UdpHelper.IsStarted)
+        {
+            UdpHelper.Start();
+
+            ReceiveUdpData();
+        }
+        else
+        {
+            UdpHelper.Stop();
         }
 
         return Task.CompletedTask;
@@ -116,31 +95,8 @@ public class MainViewModel : BindableBase
 
     private Task HandleRefreshCommand()
     {
-        SendUpdateProcess();
+        TcpHelper.SendCommand(new RequestBaseInfo { TaskId = TcpHelper.GetNewTaskId() });
         return Task.CompletedTask;
-    }
-
-    private void SendUpdateProcess()
-    {
-        Task.Run(() =>
-        {
-            Try("推送进程信息", () =>
-            {
-                var sw = Stopwatch.StartNew();
-                var pageCount = MockUtil.GetPageCount(MockUtil.MockCount, MockUtil.MockPageSize);
-                for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
-                {
-                    var command = new ResponseProcess()
-                    {
-                        Processes = MockUtil.MockProcesses(pageIndex)
-                    };
-                    _tcpHelper.SendCommand(command);
-                }
-
-                sw.Stop();
-                Logger.Info($"已将{pageCount}个更新命令压入队列，用时{sw.ElapsedMilliseconds}ms");
-            });
-        });
     }
 
 
@@ -151,14 +107,14 @@ public class MainViewModel : BindableBase
         // 开启线程接收数据
         Task.Run(() =>
         {
-            while (!IsRunning)
+            while (!TcpHelper.IsRunning)
             {
-                Thread.Sleep(TimeSpan.FromMilliseconds(1));
+                Thread.Sleep(TimeSpan.FromMilliseconds(10));
             }
 
             HandleRefreshCommand();
 
-            while (true)
+            while (TcpHelper.IsRunning)
             {
                 Try("读取TCP数据", ReadTcpData, ex => Logger.Error($"循环处理数据异常：{ex.Message}"));
 
@@ -169,7 +125,7 @@ public class MainViewModel : BindableBase
 
     private void ReadTcpData()
     {
-        if (!_tcpHelper.TryGetResponse(out var command))
+        if (!TcpHelper.TryGetResponse(out var command))
         {
             return;
         }
@@ -195,6 +151,8 @@ public class MainViewModel : BindableBase
 
     private void ReadResponse(ResponseBaseInfo response)
     {
+        BaseInfo =
+            $"更新时间【{response.LastUpdateTime.ToDateTime():yyyy:MM:dd HH:mm:ss fff}】：数据中心【{response.DataCenterLocation}】-操作系统【{response.OperatingSystemType}】-内存【{ByteSizeConverter.FormatMB(response.MemorySize)}】-处理器个数【{response.ProcessorCount}】-硬盘【{ByteSizeConverter.FormatGB(response.TotalDiskSpace)}】-带宽【{response.NetworkBandwidth}Mbps】";
     }
 
     private void ReadResponse(ResponseProcess response)
@@ -217,9 +175,9 @@ public class MainViewModel : BindableBase
     {
         Task.Run(() =>
         {
-            while (true)
+            while (UdpHelper.IsRunning)
             {
-                if (_udpHelper.TryGetResponse(out var response) && response is UpdateActiveProcess updateActiveProcess)
+                if (UdpHelper.TryGetResponse(out var response) && response is UpdateActiveProcess updateActiveProcess)
                 {
                     try
                     {
@@ -246,13 +204,10 @@ public class MainViewModel : BindableBase
     {
         Task.Run(() =>
         {
-            while (true)
+            while (TcpHelper.IsRunning)
             {
-                if (TcpHelper.IsRunning)
-                {
-                    _tcpHelper.SendCommand(new Heartbeat());
-                    Logger.Info("向服务端发送心跳");
-                }
+                UdpHelper.SendCommand(new Heartbeat());
+                Logger.Info("向服务端发送心跳");
 
                 Thread.Sleep(TimeSpan.FromSeconds(5));
             }
@@ -263,15 +218,14 @@ public class MainViewModel : BindableBase
     {
         Task.Run(() =>
         {
-            while (true)
+            while (UdpHelper.IsRunning)
             {
                 Thread.Sleep(TimeSpan.FromMilliseconds(30));
             }
         });
     }
 
-    private void Try(string actionName, Action action, Action<Exception>? exceptionAction = null
-    )
+    private void Try(string actionName, Action action, Action<Exception>? exceptionAction = null)
     {
         try
         {
@@ -288,5 +242,10 @@ public class MainViewModel : BindableBase
                 exceptionAction.Invoke(ex);
             }
         }
+    }
+
+    private void Invoke(Action action)
+    {
+        Application.Current.MainWindow?.Dispatcher.Invoke(action);
     }
 }

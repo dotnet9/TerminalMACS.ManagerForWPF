@@ -10,7 +10,7 @@ public partial class LogView : UserControl
     private const int MaxCount = 1000;
     private static InlineCollection? _inlines;
 
-    private static readonly Dictionary<LogType, Brush> LogTypeBrushes = new Dictionary<LogType, Brush>()
+    private static readonly Dictionary<LogType, Brush> LogTypeBrushes = new()
     {
         { LogType.Debug, Brushes.LightSeaGreen },
         { LogType.Info, Brushes.Green },
@@ -61,7 +61,7 @@ public partial class LogView : UserControl
                     Console.WriteLine($"日志读取失败，糟了：{ex.Message}");
                 }
 
-                Thread.Sleep(TimeSpan.FromMilliseconds(10));
+                Thread.Sleep(TimeSpan.FromMilliseconds(20));
             }
         });
     }

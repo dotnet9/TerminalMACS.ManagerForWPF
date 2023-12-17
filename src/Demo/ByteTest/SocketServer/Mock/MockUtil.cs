@@ -13,7 +13,7 @@ public static class MockUtil
         return ProcessReader.MockProcesses(pageIndex * MockPageSize, currentDataCount).Select(process => new Process()
         {
             PID = process.PID,
-            ProcessName = process.ProcessName,
+            Name = process.Name,
             Type = (byte)process.Type,
             Status = (byte)process.Status,
             Publisher = process.Publisher,
