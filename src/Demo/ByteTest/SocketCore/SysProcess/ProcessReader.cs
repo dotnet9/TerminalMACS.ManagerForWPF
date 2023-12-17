@@ -7,9 +7,19 @@ public static class ProcessReader
 {
     public static List<ProcessInfo> MockProcesses(int start, int count)
     {
-        return Enumerable.Range(start, count).Select(index => new ProcessInfo()
+        return Enumerable.Range(start, count).Select(MockProcess).ToList();
+    }
+
+    public static List<ProcessInfo> MockProcesses(IEnumerable<int> ids)
+    {
+        return ids.Select(MockProcess).ToList();
+    }
+
+    private static ProcessInfo MockProcess(int id)
+    {
+        return new ProcessInfo()
         {
-            PID = index,
+            PID = id + 1,
             Name = Lorem.Words(1, 3),
             Type = (ProcessType)Enum.Parse(typeof(ProcessType),
                 Random.Shared.Next(0, Enum.GetNames(typeof(ProcessType)).Length).ToString()),
@@ -27,6 +37,6 @@ public static class ProcessReader
                 Random.Shared.Next(0, Enum.GetNames(typeof(ProcessPowerUsage)).Length).ToString()),
             PowerUsageTrend = (ProcessPowerUsage)Enum.Parse(typeof(ProcessPowerUsage),
                 Random.Shared.Next(0, Enum.GetNames(typeof(ProcessPowerUsage)).Length).ToString())
-        }).ToList();
+        };
     }
 }

@@ -74,6 +74,7 @@
                 </StackPanel>
             </GroupBox>
             <Button Content="刷新" Command="{Binding RefreshCommand}" />
+            <Button Content="更新" Command="{Binding UpdateCommand}" />
         </StackPanel>
         <logs:LogView Grid.Row="1" Margin="2" />
         <StackPanel Grid.Row="2" VerticalAlignment="Center">

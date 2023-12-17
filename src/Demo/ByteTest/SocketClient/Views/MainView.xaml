@@ -95,23 +95,23 @@
             VirtualizingPanel.VirtualizationMode="Recycling">
             <DataGrid.Columns>
                 <DataGridTextColumn
-                    Width="150"
+                    Width="80"
                     Binding="{Binding PID}"
                     Header="PId" />
                 <DataGridTextColumn
-                    Width="60"
-                    Binding="{Binding ProcessName}"
+                    Width="160"
+                    Binding="{Binding Name}"
                     Header="进程名称" />
                 <DataGridTextColumn
                     Width="80"
                     Binding="{Binding Type}"
                     Header="进程类型" />
                 <DataGridTextColumn
-                    Width="100"
+                    Width="80"
                     Binding="{Binding Status}"
                     Header="进程状态" />
                 <DataGridTextColumn
-                    Width="100"
+                    Width="160"
                     Binding="{Binding Publisher}"
                     Header="发布者" />
                 <DataGridTextColumn
@@ -119,23 +119,23 @@
                     Binding="{Binding CommandLine}"
                     Header="命令行" />
                 <DataGridTextColumn
-                    Width="160"
+                    Width="80"
                     Binding="{Binding CPUUsage}"
                     Header="CPU使用率" />
                 <DataGridTextColumn
                     Width="80"
                     Binding="{Binding MemoryUsage}"
-                    Header="内存使用大小" />
+                    Header="内存使用率" />
                 <DataGridTextColumn
                     Width="100"
                     Binding="{Binding DiskUsage}"
-                    Header="磁盘使用大小" />
+                    Header="磁盘" />
                 <DataGridTextColumn
-                    Width="50"
+                    Width="100"
                     Binding="{Binding NetworkUsage}"
-                    Header="网络使用值" />
+                    Header="网络" />
                 <DataGridTextColumn
-                    Width="170"
+                    Width="60"
                     Binding="{Binding GPU}"
                     Header="GPU" />
                 <DataGridTextColumn
@@ -143,11 +143,11 @@
                     Binding="{Binding GPUEngine}"
                     Header="GPU引擎" />
                 <DataGridTextColumn
-                    Width="160"
+                    Width="90"
                     Binding="{Binding PowerUsage}"
                     Header="电源使用情况" />
                 <DataGridTextColumn
-                    Width="80"
+                    Width="120"
                     Binding="{Binding PowerUsageTrend}"
                     Header="电源使用情况趋势" />
             </DataGrid.Columns>
@@ -175,10 +175,10 @@
                 <Run
                     Foreground="{markup:If {Binding TcpHelper.IsRunning}, {x:Static Brushes.Green}, {x:Static Brushes.Red}}"
                     Text="{markup:If {Binding TcpHelper.IsRunning}, 已连接, 未连接}" />
-                <Run Text="    客户端：" />
-                <Run Foreground="Green" Text="3" />
-                <Run Text="(个）   发送时间：" />
-                <Run Foreground="Green" Text="2023-12-16 11:27" />
+                <Run Text="    发送时间：" />
+                <Run Foreground="Green" Text="{Binding TcpHelper.SendTime,StringFormat=yyyy-MM-dd HH:mm:ss fff}" />
+                <Run Text="    接收时间：" />
+                <Run Foreground="Green" Text="{Binding TcpHelper.ReceiveTime, StringFormat=yyyy-MM-dd HH:mm:ss fff}" />
                 <Run Text="               UDP：" />
                 <Run
                     Foreground="{markup:If {Binding UdpHelper.IsRunning}, {x:Static Brushes.Green}, {x:Static Brushes.Red}}"

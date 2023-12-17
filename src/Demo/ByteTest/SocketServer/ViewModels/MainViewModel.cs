@@ -32,6 +32,15 @@ public class MainViewModel : BindableBase
         HandleRefreshCommandAsync,
         () => TcpHelper.IsRunning).ObservesProperty(() => TcpHelper.IsRunning);
 
+    private IAsyncCommand? _udpateCommand;
+
+    /// <summary>
+    /// 更新数据
+    /// </summary>
+    public IAsyncCommand UpdateCommand => _udpateCommand ??= new AsyncDelegateCommand(
+        HandleUpdateCommandAsync,
+        () => TcpHelper.IsRunning).ObservesProperty(() => TcpHelper.IsRunning);
+
     public MainViewModel()
     {
         TcpHelper = new TcpHelper();
@@ -68,38 +77,28 @@ public class MainViewModel : BindableBase
 
     private Task HandleRefreshCommandAsync()
     {
-        return Task.CompletedTask;
-    }
-
-    private Task HandleSendCommand()
-    {
         if (!TcpHelper.IsRunning)
         {
-            Logger.Error("Tcp服务未运行，无法发送命令");
+            Logger.Error("未运行Tcp服务，无法发送命令");
             return Task.CompletedTask;
         }
 
-        Task.Run(() =>
-        {
-            Try("推送进程信息", () =>
-            {
-                var sw = Stopwatch.StartNew();
-                var pageCount = MockUtil.GetPageCount(MockUtil.MockCount, MockUtil.MockPageSize);
-                for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
-                {
-                    var command = new ResponseProcess()
-                    {
-                        Processes = MockUtil.MockProcesses(pageIndex)
-                    };
-                    TcpHelper.SendCommand(command);
-                }
-
-                sw.Stop();
-                Logger.Info($"已将{pageCount}个更新命令压入队列，用时{sw.ElapsedMilliseconds}ms");
-            });
-        });
+        TcpHelper.SendCommand(MockUtil.MockBase());
         return Task.CompletedTask;
     }
+
+    private Task HandleUpdateCommandAsync()
+    {
+        if (!TcpHelper.IsRunning)
+        {
+            Logger.Error("未运行Tcp服务，无法发送命令");
+            return Task.CompletedTask;
+        }
+
+        TcpHelper.UpdateData();
+        return Task.CompletedTask;
+    }
+
 
     private void Try(string actionName, Action action, Action<Exception>? exceptionAction = null
     )

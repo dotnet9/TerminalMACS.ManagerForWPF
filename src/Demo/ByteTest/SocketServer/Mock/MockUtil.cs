@@ -1,16 +1,53 @@
-﻿using Process = SocketDto.Process;
+﻿using SocketCore.SysProcess.Models;
+using SocketCore.Utils;
+using Process = SocketDto.Process;
 
 namespace SocketServer.Mock;
 
 public static class MockUtil
 {
-    public const int MockCount = 1000000;
+    public const int MockCount = 10000;
     public const int MockPageSize = 5000;
+
+    public static ResponseBaseInfo MockBase(int taskId = default)
+    {
+        return new ResponseBaseInfo()
+        {
+            TaskId = taskId,
+            OperatingSystemType = "Windows 11",
+            MemorySize = 48 * 1024,
+            ProcessorCount = 8,
+            TotalDiskSpace = 1024 + 256,
+            NetworkBandwidth = 1024,
+            IpAddress = "192.32.35.23",
+            ServerName = "Windows server 2021",
+            DataCenterLocation = "成都",
+            IsRunning = true,
+            LastUpdateTime = TimestampHelper.GetTimestamp()
+        };
+    }
 
     public static List<Process> MockProcesses(int pageIndex)
     {
         var currentDataCount = GetDataCount(pageIndex, MockCount, MockPageSize);
-        return ProcessReader.MockProcesses(pageIndex * MockPageSize, currentDataCount).Select(process => new Process()
+        return ProcessReader.MockProcesses(pageIndex * MockPageSize, currentDataCount).Select(Convert).ToList();
+    }
+
+    public static List<Process> MockProcesses()
+    {
+        var uniquePointIndex = new HashSet<int>();
+        while (uniquePointIndex.Count < MockPageSize)
+        {
+            var randomNumber = Random.Shared.Next(1, MockCount);
+            uniquePointIndex.Add(randomNumber);
+        }
+
+        return ProcessReader.MockProcesses(uniquePointIndex).Select(Convert).ToList();
+    }
+
+    private static Process Convert(ProcessInfo process)
+    {
+        return new Process()
         {
             PID = process.PID,
             Name = process.Name,
@@ -26,7 +63,7 @@ public static class MockUtil
             GPUEngine = process.GPUEngine,
             PowerUsage = (byte)process.PowerUsage,
             PowerUsageTrend = (byte)process.PowerUsageTrend
-        }).ToList();
+        };
     }
 
 

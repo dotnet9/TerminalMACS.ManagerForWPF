@@ -13,7 +13,7 @@ public partial class MainView : Window
 
     public MainView()
     {
-        ViewModel = new MainViewModel();
+        ViewModel = new MainViewModel { Owner = this };
         InitializeComponent();
     }
 }

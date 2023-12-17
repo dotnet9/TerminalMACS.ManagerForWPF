@@ -130,6 +130,7 @@ public class TcpHelper : BindableBase, ISocketBase
                     ReceiveCommand();
                     StartDillReceivedCommand();
                     SendCommands();
+                    MockUpdate();
 
                     Logger.Info($"Tcp服务启动成功：{ipEndPoint}，等待客户端连接");
                     break;
@@ -176,6 +177,7 @@ public class TcpHelper : BindableBase, ISocketBase
         }
 
         NeedSendCommands.Enqueue(command);
+        Logger.Info($"已将命令{command.GetType()}压入队列，请等待命令发送");
     }
 
     public bool TryGetResponse(out INetObject? response)
@@ -434,20 +436,7 @@ public class TcpHelper : BindableBase, ISocketBase
 
     private void DillReceivedCommand(Socket tcpClient, RequestBaseInfo command)
     {
-        var response = new ResponseBaseInfo()
-        {
-            TaskId = command.TaskId,
-            OperatingSystemType = "Windows 11",
-            MemorySize = 48 * 1024,
-            ProcessorCount = 8,
-            TotalDiskSpace = 1024 + 256,
-            NetworkBandwidth = 1024,
-            IpAddress = "192.32.35.23",
-            ServerName = "Windows server 2021",
-            DataCenterLocation = "成都",
-            IsRunning = true,
-            LastUpdateTime = TimestampHelper.GetTimestamp()
-        };
+        var response = MockUtil.MockBase(command.TaskId);
         tcpClient.Send(response.Serialize(SystemId));
         Logger.Info($"发送{response.GetType()}响应");
     }
@@ -455,13 +444,24 @@ public class TcpHelper : BindableBase, ISocketBase
     private void DillReceivedCommand(Socket tcpClient, RequestProcess command)
     {
         var pageCount = MockUtil.GetPageCount(MockUtil.MockCount, MockUtil.MockPageSize);
+        var sendCount = 0;
         for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
         {
             var response = new ResponseProcess()
             {
+                TaskId = command.TaskId,
+                TotalSize = MockUtil.MockCount,
+                PageSize = MockUtil.MockPageSize,
+                PageCount = pageCount,
+                PageIndex = pageIndex,
                 Processes = MockUtil.MockProcesses(pageIndex)
             };
+            sendCount += response.Processes.Count;
             tcpClient.Send(response.Serialize(SystemId));
+
+            var msg = response.TaskId == default ? $"推送" : "响应请求";
+            Logger.Info(
+                $"{msg}【{response.PageIndex + 1}/{response.PageCount}】进程{response.Processes.Count}条({sendCount}/{response.TotalSize})");
             Thread.Sleep(TimeSpan.FromMilliseconds(1));
         }
     }
@@ -496,6 +496,31 @@ public class TcpHelper : BindableBase, ISocketBase
                 Thread.Sleep(TimeSpan.FromMilliseconds(5));
             }
         });
+    }
+
+    private void MockUpdate()
+    {
+        Task.Run(() =>
+        {
+            while (IsRunning)
+            {
+                if (_clients?.Count > 0)
+                {
+                    UpdateData();
+                }
+
+                Thread.Sleep(TimeSpan.FromMinutes(2));
+            }
+        });
+    }
+
+    public void UpdateData()
+    {
+        var updatePoints = new UpdateProcess()
+        {
+            Processes = MockUtil.MockProcesses()
+        };
+        SendCommand(updatePoints);
     }
 
     #endregion

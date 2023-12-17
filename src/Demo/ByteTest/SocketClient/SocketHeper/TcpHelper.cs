@@ -206,7 +206,8 @@ public class TcpHelper : BindableBase, ISocketBase
                 {
                     // 1、接收数据包
                     var buffer = new byte[500 * 1024];
-                    var bytesReadLen = _client.Receive(buffer);
+                    var bytesReadLen = _client!.Receive(buffer);
+                    ReceiveTime = DateTime.Now;
                     if (bytesReadLen <= 0)
                     {
                         continue;
@@ -343,6 +344,7 @@ public class TcpHelper : BindableBase, ISocketBase
                     try
                     {
                         _client?.Send(command.Serialize(SystemId));
+                        SendTime = DateTime.Now;
                         Logger.Info($"已将命令{command.GetType()}发送");
                     }
                     catch (Exception ex)

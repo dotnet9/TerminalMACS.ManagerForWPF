@@ -2,19 +2,25 @@
 using SocketClient.WPF;
 using System.Windows;
 using SocketCore.Utils;
+using SocketDto;
 
 namespace SocketClient.ViewModels;
 
 public class MainViewModel : BindableBase
 {
+    public Window? Owner { get; set; }
     private readonly List<ProcessItem> _receivedProcesses = new();
-
     private Dictionary<int, ProcessItem>? _processIdAndItems;
-
     public RangObservableCollection<ProcessItem> DisplayProcesses { get; } = new();
-
     public TcpHelper TcpHelper { get; set; }
     public UdpHelper UdpHelper { get; set; }
+    private string? _searchKey;
+
+    public string? SearchKey
+    {
+        get => _searchKey;
+        set => SetProperty(ref _searchKey, value);
+    }
 
     private string? _baseInfo;
 
@@ -95,8 +101,28 @@ public class MainViewModel : BindableBase
 
     private Task HandleRefreshCommand()
     {
+        if (!TcpHelper.IsRunning)
+        {
+            Logger.Error("未连接Tcp服务，无法发送命令");
+            return Task.CompletedTask;
+        }
+
         TcpHelper.SendCommand(new RequestBaseInfo { TaskId = TcpHelper.GetNewTaskId() });
+        ClearData();
         return Task.CompletedTask;
+    }
+
+    private IEnumerable<ProcessItem> FilterData(IEnumerable<ProcessItem> processes)
+    {
+        return string.IsNullOrWhiteSpace(SearchKey)
+            ? processes
+            : processes.Where(process => !string.IsNullOrWhiteSpace(process.Name) && process.Name.Contains(SearchKey));
+    }
+
+    private void ClearData()
+    {
+        _receivedProcesses.Clear();
+        Invoke(() => DisplayProcesses.Clear());
     }
 
 
@@ -151,16 +177,55 @@ public class MainViewModel : BindableBase
 
     private void ReadResponse(ResponseBaseInfo response)
     {
+        var oldBaseInfo = BaseInfo;
         BaseInfo =
             $"更新时间【{response.LastUpdateTime.ToDateTime():yyyy:MM:dd HH:mm:ss fff}】：数据中心【{response.DataCenterLocation}】-操作系统【{response.OperatingSystemType}】-内存【{ByteSizeConverter.FormatMB(response.MemorySize)}】-处理器个数【{response.ProcessorCount}】-硬盘【{ByteSizeConverter.FormatGB(response.TotalDiskSpace)}】-带宽【{response.NetworkBandwidth}Mbps】";
+
+        Logger.Info(response.TaskId == default ? $"收到服务端推送的基本信息" : "收到请求基本信息响应");
+        Logger.Info($"【旧】{oldBaseInfo}");
+        Logger.Info($"【新】{BaseInfo}");
+
+        TcpHelper.SendCommand(new RequestProcess() { TaskId = TcpHelper.GetNewTaskId() });
+        ClearData();
     }
 
     private void ReadResponse(ResponseProcess response)
     {
+        var processes = response.Processes?.ConvertAll(process => new ProcessItem(process));
+        if (processes?.Count > 0)
+        {
+            _receivedProcesses.AddRange(processes);
+            if (_receivedProcesses.Count == response.TotalSize)
+            {
+                _processIdAndItems = _receivedProcesses.ToDictionary(process => process.PID);
+            }
+
+            Invoke(() => DisplayProcesses.AddRange(FilterData(processes)));
+
+            var msg = response.TaskId == default ? $"收到推送" : "收到请求响应";
+            Logger.Info(
+                $"{msg}【{response.PageIndex + 1}/{response.PageCount}】进程{processes.Count}条({_receivedProcesses.Count}/{response.TotalSize})");
+            if (response.PageIndex < (response.PageCount - 1))
+            {
+                Thread.Sleep(TimeSpan.FromMicroseconds(500));
+            }
+        }
     }
 
     private void ReadResponse(UpdateProcess response)
     {
+        response.Processes?.ForEach(updateProcess =>
+        {
+            if (_processIdAndItems != null && _processIdAndItems.TryGetValue(updateProcess.PID, out var point))
+            {
+                point.Update(updateProcess);
+            }
+            else
+            {
+                throw new Exception($"收到更新数据包，遇到本地缓存不存在的进程：{updateProcess.Name}");
+            }
+        });
+        Logger.Info($"更新数据{response.Processes?.Count}条");
     }
 
     private void ReadResponse(Heartbeat response)
@@ -246,6 +311,6 @@ public class MainViewModel : BindableBase
 
     private void Invoke(Action action)
     {
-        Application.Current.MainWindow?.Dispatcher.Invoke(action);
+        Owner?.Dispatcher.Invoke(action);
     }
 }
