@@ -1,8 +1,7 @@
 ﻿namespace SocketClient.SocketHeper;
 
-public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
+public class UdpHelper : BindableBase, ISocketBase
 {
-    private TcpHelper? _tcpHelper = tcpHelper;
     private IPEndPoint _remoteEp = new(IPAddress.Any, 0);
     private UdpClient? _client;
 
@@ -172,7 +171,7 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
 
     public bool TryGetResponse(out INetObject? response)
     {
-        bool result = _receivedResponse.TryTake(out var updateActiveProcess);
+        var result = _receivedResponse.TryTake(out var updateActiveProcess);
         response = updateActiveProcess;
         return result;
     }
@@ -231,9 +230,7 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
                             continue;
                         }
 
-                        var updateActiveProcess = netObjectInfo.IsNetObject<UpdateActiveProcess>()
-                            ? SerializeHelper.Deserialize<UpdateActiveProcess>(buffer)!
-                            : SerializeHelper.Deserialize<UpdateActiveProcess>(buffer);
+                        var updateActiveProcess = buffer.Deserialize<UpdateActiveProcess>();
 
                         _receivedResponse.Add(updateActiveProcess);
                     }

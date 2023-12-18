@@ -13,7 +13,7 @@ public class TcpHelper : BindableBase, ISocketBase
     /// <summary>
     /// 需要发送的命令
     /// </summary>
-    private ConcurrentQueue<INetObject> NeedSendCommands { get; } = new();
+    private readonly ConcurrentQueue<INetObject> _needSendCommands  = new();
 
     #region 公开接口
 
@@ -175,7 +175,7 @@ public class TcpHelper : BindableBase, ISocketBase
             return;
         }
 
-        NeedSendCommands.Enqueue(command);
+        _needSendCommands.Enqueue(command);
         Logger.Info($"已将命令{command.GetType()}压入队列，请等待命令发送");
     }
 
@@ -302,23 +302,23 @@ public class TcpHelper : BindableBase, ISocketBase
 
         if (netObjectHeadInfo.IsNetObject<ResponseBaseInfo>())
         {
-            command = SerializeHelper.Deserialize<ResponseBaseInfo>(buffer);
+            command = buffer.Deserialize<ResponseBaseInfo>();
         }
         else if (netObjectHeadInfo.IsNetObject<ResponseProcess>())
         {
-            command = SerializeHelper.Deserialize<ResponseProcess>(buffer);
+            command = buffer.Deserialize<ResponseProcess>();
         }
         else if (netObjectHeadInfo.IsNetObject<UpdateProcess>())
         {
-            command = SerializeHelper.Deserialize<UpdateProcess>(buffer);
+            command = buffer.Deserialize<UpdateProcess>();
         }
         else if (netObjectHeadInfo.IsNetObject<UpdateActiveProcess>())
         {
-            command = SerializeHelper.Deserialize<UpdateActiveProcess>(buffer);
+            command = buffer.Deserialize<UpdateActiveProcess>();
         }
         else if (netObjectHeadInfo.IsNetObject<Heartbeat>())
         {
-            command = SerializeHelper.Deserialize<Heartbeat>(buffer);
+            command = buffer.Deserialize<Heartbeat>();
         }
         else
         {
@@ -339,7 +339,7 @@ public class TcpHelper : BindableBase, ISocketBase
         {
             while (IsRunning)
             {
-                if (NeedSendCommands.TryDequeue(out var command))
+                if (_needSendCommands.TryDequeue(out var command))
                 {
                     try
                     {
@@ -349,7 +349,7 @@ public class TcpHelper : BindableBase, ISocketBase
                     }
                     catch (Exception ex)
                     {
-                        NeedSendCommands.Enqueue(command);
+                        _needSendCommands.Enqueue(command);
                         Logger.Error($"发送命令{command.GetType().Name}失败，将排队重新发送: {ex.Message}");
                     }
                 }

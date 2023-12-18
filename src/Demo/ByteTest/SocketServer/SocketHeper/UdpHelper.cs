@@ -1,17 +1,11 @@
-﻿using Microsoft.Xaml.Behaviors.Layout;
+﻿using SocketCore.SysProcess.Models;
 using SocketServer.Mock;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.Eventing.Reader;
-using System.Net.Http;
-using System.Net.Sockets;
-using SocketCore.SysProcess.Models;
 
 namespace SocketServer.SocketHeper;
 
 public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
 {
-    private TcpHelper _tcpHelper = tcpHelper;
-    private readonly UdpClient _client = new();
+    private UdpClient? _client;
     private IPEndPoint? _udpIpEndPoint;
 
     private BlockingCollection<INetObject> NeedSendCommands { get; } = new();
@@ -134,6 +128,7 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
                 {
                     var ipAddress = IPAddress.Parse(Ip);
                     _udpIpEndPoint = new IPEndPoint(ipAddress, Port);
+                    _client = new UdpClient();
                     _client.JoinMulticastGroup(ipAddress);
                     IsRunning = true;
 
@@ -165,7 +160,8 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
 
         try
         {
-            _client.Close();
+            _client?.Close();
+            _client = null;
             Logger.Info($"停止Udp");
         }
         catch (Exception ex)
@@ -180,7 +176,7 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
     {
         if (!IsRunning)
         {
-            Logger.Error("Ucp组播未运行，无法发送命令");
+            Logger.Error("Udp组播未运行，无法发送命令");
             return;
         }
 
@@ -205,11 +201,8 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
                 {
                     try
                     {
-                        var buffer = command.GetType() == typeof(UpdateActiveProcess)
-                            ? SerializeHelper.Serialize(command, _tcpHelper.SystemId)
-                            : command.Serialize(_tcpHelper.SystemId);
-
-                        _client.Send(buffer, buffer.Length, _udpIpEndPoint);
+                        var buffer = command.Serialize(tcpHelper.SystemId);
+                        _client?.Send(buffer, buffer.Length, _udpIpEndPoint);
                     }
                     catch (Exception ex)
                     {
@@ -233,6 +226,11 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
                     out var pageCount);
                 for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
                 {
+                    if (!IsRunning)
+                    {
+                        break;
+                    }
+
                     var response = new UpdateActiveProcess
                     {
                         Processes = Enumerable

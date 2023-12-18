@@ -69,7 +69,7 @@ public class MainViewModel : BindableBase
     public MainViewModel()
     {
         TcpHelper = new TcpHelper();
-        UdpHelper = new UdpHelper(TcpHelper);
+        UdpHelper = new UdpHelper();
 
         UpdateCount();
     }
@@ -295,9 +295,14 @@ public class MainViewModel : BindableBase
     {
         Task.Run(() =>
         {
+            while (!TcpHelper.IsRunning)
+            {
+                Thread.Sleep(TimeSpan.FromMilliseconds(10));
+            }
+
             while (TcpHelper.IsRunning)
             {
-                UdpHelper.SendCommand(new Heartbeat());
+                TcpHelper.SendCommand(new Heartbeat());
                 HeartbeatTime = DateTime.Now;
                 Logger.Info("向服务端发送心跳");
 

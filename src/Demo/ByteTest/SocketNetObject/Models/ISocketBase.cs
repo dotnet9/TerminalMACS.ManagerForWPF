@@ -1,4 +1,4 @@
-﻿namespace SocketClient.SocketHelper;
+﻿namespace SocketNetObject.Models;
 
 /// <summary>
 /// 套接字接口

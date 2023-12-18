@@ -1,5 +1,4 @@
-﻿using SocketCore.Utils;
-using SocketServer.Mock;
+﻿using SocketServer.Mock;
 
 namespace SocketServer.SocketHeper;
 
@@ -187,7 +186,8 @@ public class TcpHelper : BindableBase, ISocketBase
 
         try
         {
-            _server.Close(0);
+            _server?.Close(0);
+            _server = null;
             Logger.Info($"停止Tcp服务");
         }
         catch (Exception ex)
@@ -234,7 +234,7 @@ public class TcpHelper : BindableBase, ISocketBase
             {
                 try
                 {
-                    var socketClient = _server.Accept();
+                    var socketClient = _server!.Accept();
 
                     var socketClientKey = $"{socketClient.RemoteEndPoint}";
                     _clients[socketClientKey] = socketClient;
@@ -359,15 +359,15 @@ public class TcpHelper : BindableBase, ISocketBase
 
         if (netObjectHeadInfo.IsNetObject<RequestBaseInfo>())
         {
-            command = SerializeHelper.Deserialize<RequestBaseInfo>(buffer);
+            command = buffer.Deserialize<RequestBaseInfo>();
         }
         else if (netObjectHeadInfo.IsNetObject<RequestProcess>())
         {
-            command = SerializeHelper.Deserialize<RequestProcess>(buffer);
+            command = buffer.Deserialize<RequestProcess>();
         }
         else if (netObjectHeadInfo.IsNetObject<Heartbeat>())
         {
-            command = SerializeHelper.Deserialize<Heartbeat>(buffer);
+            command = buffer.Deserialize<Heartbeat>();
         }
         else
         {

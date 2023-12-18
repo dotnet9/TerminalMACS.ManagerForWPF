@@ -80,7 +80,7 @@ public static class SerializeHelper
         }
     }
 
-    private static void SerializeBaseValue(BinaryWriter writer, object value, Type valueType)
+    private static void SerializeBaseValue(BinaryWriter writer, object? value, Type valueType)
     {
         if (valueType == typeof(byte))
         {
