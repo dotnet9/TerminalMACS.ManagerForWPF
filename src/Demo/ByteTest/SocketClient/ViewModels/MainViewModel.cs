@@ -213,10 +213,6 @@ public class MainViewModel : BindableBase
             var msg = response.TaskId == default ? $"收到推送" : "收到请求响应";
             Logger.Info(
                 $"{msg}【{response.PageIndex + 1}/{response.PageCount}】进程{processes.Count}条({_receivedProcesses.Count}/{response.TotalSize})");
-            if (response.PageIndex < (response.PageCount - 1))
-            {
-                Thread.Sleep(TimeSpan.FromMicroseconds(500));
-            }
         }
     }
 
@@ -256,16 +252,19 @@ public class MainViewModel : BindableBase
 
             while (UdpHelper.IsRunning)
             {
-                if (UdpHelper.TryGetResponse(out var response) && response is UpdateActiveProcess updateActiveProcess)
+                if (!UdpHelper.TryGetResponse(out var response) ||
+                    response is not UpdateActiveProcess updateActiveProcess)
                 {
-                    try
-                    {
-                        ReceiveUdpData(updateActiveProcess);
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Error($"更新点实时数据异常：{ex.Message}");
-                    }
+                    continue;
+                }
+
+                try
+                {
+                    ReceiveUdpData(updateActiveProcess);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error($"更新点实时数据异常：{ex.Message}");
                 }
             }
         });

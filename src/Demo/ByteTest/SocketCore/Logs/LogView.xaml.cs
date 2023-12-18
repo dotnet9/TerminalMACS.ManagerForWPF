@@ -38,7 +38,7 @@ public partial class LogView : UserControl
             {
                 try
                 {
-                    if (Logger.Logs.TryDequeue(out var log))
+                    if (Logger.Logs.TryTake(out var log, TimeSpan.FromMilliseconds(10)))
                     {
                         LogRichTextBox.Dispatcher.BeginInvoke(() =>
                         {
@@ -60,8 +60,6 @@ public partial class LogView : UserControl
                 {
                     Console.WriteLine($"日志读取失败，糟了：{ex.Message}");
                 }
-
-                Thread.Sleep(TimeSpan.FromMilliseconds(20));
             }
         });
     }

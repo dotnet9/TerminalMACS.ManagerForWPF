@@ -175,7 +175,7 @@ public class UdpHelper : BindableBase, ISocketBase
 
     public bool TryGetResponse(out INetObject? response)
     {
-        var result = _receivedResponse.TryTake(out var updateActiveProcess);
+        var result = _receivedResponse.TryTake(out var updateActiveProcess, TimeSpan.FromMilliseconds(1));
         response = updateActiveProcess;
         return result;
     }

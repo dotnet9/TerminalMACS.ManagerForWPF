@@ -186,7 +186,7 @@ public class TcpHelper : BindableBase, ISocketBase
 
     public bool TryGetResponse(out INetObject? response)
     {
-        return _receivedCommands.TryTake(out response, TimeSpan.FromMilliseconds(1));
+        return _receivedCommands.TryTake(out response, TimeSpan.FromMilliseconds(10));
     }
 
     private static int _taskId = 0;
