@@ -10,7 +10,7 @@ public class TcpHelper : BindableBase, ISocketBase
     private Socket? _server;
     private readonly ConcurrentDictionary<string, Socket> _clients = new();
     private readonly ConcurrentDictionary<string, ConcurrentQueue<INetObject>> _receivedCommands = new();
-    private ConcurrentQueue<INetObject> NeedSendCommands { get; } = new();
+    private BlockingCollection<INetObject> NeedSendCommands { get; } = new();
 
     #region 公开接口
 
@@ -206,8 +206,13 @@ public class TcpHelper : BindableBase, ISocketBase
             return;
         }
 
-        NeedSendCommands.Enqueue(command);
+        NeedSendCommands.Add(command);
         Logger.Info($"已将命令{command.GetType()}压入队列，请等待命令发送");
+    }
+
+    public void SendCommandBuffer(byte[] buffer)
+    {
+        throw new NotImplementedException();
     }
 
     public bool TryGetResponse(out INetObject? response)
@@ -509,24 +514,24 @@ public class TcpHelper : BindableBase, ISocketBase
         {
             while (IsRunning)
             {
-                if (NeedSendCommands.TryDequeue(out var command) && IsRunning)
+                if (!NeedSendCommands.TryTake(out var command, TimeSpan.FromMilliseconds(1)) || !IsRunning)
                 {
-                    try
-                    {
-                        foreach (var client in _clients)
-                        {
-                            client.Value.Send(command.Serialize(SystemId));
-                            SendTime = DateTime.Now;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        NeedSendCommands.Enqueue(command);
-                        Logger.Error($"发送命令{command.GetType().Name}失败，将排队重新发送: {ex.Message}");
-                    }
+                    continue;
                 }
 
-                Thread.Sleep(TimeSpan.FromMilliseconds(5));
+                try
+                {
+                    foreach (var client in _clients)
+                    {
+                        client.Value.Send(command.Serialize(SystemId));
+                        SendTime = DateTime.Now;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    NeedSendCommands.Add(command);
+                    Logger.Error($"发送命令{command.GetType().Name}失败，将排队重新发送: {ex.Message}");
+                }
             }
         });
     }

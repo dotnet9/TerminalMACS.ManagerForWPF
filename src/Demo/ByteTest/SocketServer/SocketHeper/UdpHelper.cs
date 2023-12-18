@@ -183,6 +183,11 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
         NeedSendCommands.Add(command);
     }
 
+    public void SendCommandBuffer(byte[] buffer)
+    {
+        throw new NotImplementedException();
+    }
+
     public bool TryGetResponse(out INetObject? response)
     {
         response = null;
@@ -197,21 +202,21 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
         {
             while (IsRunning)
             {
-                if (NeedSendCommands.TryTake(out var command))
+                if (!NeedSendCommands.TryTake(out var command, TimeSpan.FromMilliseconds(1)))
                 {
-                    try
-                    {
-                        var buffer = command.Serialize(tcpHelper.SystemId);
-                        _client?.Send(buffer, buffer.Length, _udpIpEndPoint);
-                    }
-                    catch (Exception ex)
-                    {
-                        NeedSendCommands.Add(command);
-                        Logger.Error($"发送命令{command.GetType().Name}失败，将排队重新发送: {ex.Message}");
-                    }
+                    continue;
                 }
 
-                Thread.Sleep(TimeSpan.FromMilliseconds(1));
+                try
+                {
+                    var buffer = command.Serialize(tcpHelper.SystemId);
+                    _client?.Send(buffer, buffer.Length, _udpIpEndPoint);
+                }
+                catch (Exception ex)
+                {
+                    NeedSendCommands.Add(command);
+                    Logger.Error($"发送命令{command.GetType().Name}失败，将排队重新发送: {ex.Message}");
+                }
             }
         });
     }

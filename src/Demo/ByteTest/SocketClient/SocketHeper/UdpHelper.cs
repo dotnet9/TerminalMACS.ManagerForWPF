@@ -5,8 +5,7 @@ public class UdpHelper : BindableBase, ISocketBase
     private IPEndPoint _remoteEp = new(IPAddress.Any, 0);
     private UdpClient? _client;
 
-    private readonly BlockingCollection<byte[]>
-        _receivedBuffers = new(new ConcurrentQueue<byte[]>());
+    private readonly BlockingCollection<byte[]> _receivedBuffers = new(new ConcurrentQueue<byte[]>());
 
     private readonly BlockingCollection<UpdateActiveProcess> _receivedResponse = new();
 
@@ -169,6 +168,11 @@ public class UdpHelper : BindableBase, ISocketBase
     {
     }
 
+    public void SendCommandBuffer(byte[] buffer)
+    {
+        throw new NotImplementedException();
+    }
+
     public bool TryGetResponse(out INetObject? response)
     {
         var result = _receivedResponse.TryTake(out var updateActiveProcess);
@@ -218,34 +222,34 @@ public class UdpHelper : BindableBase, ISocketBase
         {
             while (IsRunning)
             {
-                if (_receivedBuffers.TryTake(out var buffer))
+                if (!_receivedBuffers.TryTake(out var buffer, TimeSpan.FromMilliseconds(1)))
                 {
-                    var sw = Stopwatch.StartNew();
-                    var readIndex = 0;
-                    try
-                    {
-                        if (!SerializeHelper.ReadHead(buffer, ref readIndex, out var netObjectInfo)
-                            || buffer.Length != netObjectInfo!.BufferLen)
-                        {
-                            continue;
-                        }
-
-                        var updateActiveProcess = buffer.Deserialize<UpdateActiveProcess>();
-
-                        _receivedResponse.Add(updateActiveProcess);
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Error($"解析实时数据异常，将放弃处理该包：{ex.Message}");
-                    }
-                    finally
-                    {
-                        sw.Stop();
-                        Console.Write($"解析UDP包用时：{sw.ElapsedMilliseconds}ms");
-                    }
+                    continue;
                 }
 
-                Thread.Sleep(TimeSpan.FromMilliseconds(1));
+                var sw = Stopwatch.StartNew();
+                var readIndex = 0;
+                try
+                {
+                    if (!SerializeHelper.ReadHead(buffer, ref readIndex, out var netObjectInfo)
+                        || buffer.Length != netObjectInfo!.BufferLen)
+                    {
+                        continue;
+                    }
+
+                    var updateActiveProcess = buffer.Deserialize<UpdateActiveProcess>();
+
+                    _receivedResponse.Add(updateActiveProcess);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error($"解析实时数据异常，将放弃处理该包：{ex.Message}");
+                }
+                finally
+                {
+                    sw.Stop();
+                    Console.Write($"解析UDP包用时：{sw.ElapsedMilliseconds}ms");
+                }
             }
         });
     }

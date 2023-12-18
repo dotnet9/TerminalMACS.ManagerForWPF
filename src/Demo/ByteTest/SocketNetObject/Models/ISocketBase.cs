@@ -52,6 +52,12 @@ public interface ISocketBase
     void SendCommand(INetObject command);
 
     /// <summary>
+    /// 直接发送命令
+    /// </summary>
+    /// <param name="buffer"></param>
+    void SendCommandBuffer(byte[] buffer);
+
+    /// <summary>
     /// 获取响应数据
     /// </summary>
     /// <param name="response"></param>

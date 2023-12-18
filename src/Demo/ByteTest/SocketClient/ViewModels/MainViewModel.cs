@@ -260,20 +260,18 @@ public class MainViewModel : BindableBase
                 {
                     try
                     {
-                        DillUpdateActivePoints(updateActiveProcess);
+                        ReceiveUdpData(updateActiveProcess);
                     }
                     catch (Exception ex)
                     {
                         Logger.Error($"更新点实时数据异常：{ex.Message}");
                     }
                 }
-
-                Thread.Sleep(TimeSpan.FromMilliseconds(1));
             }
         });
     }
 
-    private void DillUpdateActivePoints(UpdateActiveProcess response)
+    private void ReceiveUdpData(UpdateActiveProcess response)
     {
         response.Processes?.ForEach(updateProcess =>
         {
