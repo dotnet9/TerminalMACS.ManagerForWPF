@@ -1,4 +1,5 @@
 ﻿using SocketServer.Mock;
+using System.Net.Sockets;
 
 namespace SocketServer.SocketHeper;
 
@@ -402,6 +403,13 @@ public class TcpHelper : BindableBase, ISocketBase
         Logger.Warning($"已清除客户端信息{key}");
     }
 
+    private void RemoveClient(string key)
+    {
+        _clients.TryRemove(key, out _);
+        _receivedCommands.TryRemove(key, out _);
+        Logger.Warning($"已清除客户端信息{key}");
+    }
+
     private void StartDillReceivedCommand()
     {
         Task.Run(() =>
@@ -442,7 +450,7 @@ public class TcpHelper : BindableBase, ISocketBase
 
         if (needRemoveKeys.Count > 0)
         {
-            needRemoveKeys.ForEach(key => _receivedCommands.TryRemove(key, out _));
+            needRemoveKeys.ForEach(RemoveClient);
         }
     }
 
@@ -498,6 +506,7 @@ public class TcpHelper : BindableBase, ISocketBase
             var msg = response.TaskId == default ? $"推送" : "响应请求";
             Logger.Info(
                 $"{msg}【{response.PageIndex + 1}/{response.PageCount}】进程{response.Processes.Count}条({sendCount}/{response.TotalSize})");
+
             Thread.Sleep(TimeSpan.FromMilliseconds(1));
         }
     }
@@ -519,10 +528,18 @@ public class TcpHelper : BindableBase, ISocketBase
                     continue;
                 }
 
+                var needRemoveKeys = new List<string>();
                 try
                 {
                     foreach (var client in _clients)
                     {
+                        var isDisconnected = client.Value.Poll(1, SelectMode.SelectRead);
+                        if (isDisconnected)
+                        {
+                            needRemoveKeys.Add(client.Key);
+                            continue;
+                        }
+
                         client.Value.Send(command.Serialize(SystemId));
                         SendTime = DateTime.Now;
                     }
@@ -531,6 +548,11 @@ public class TcpHelper : BindableBase, ISocketBase
                 {
                     NeedSendCommands.Add(command);
                     Logger.Error($"发送命令{command.GetType().Name}失败，将排队重新发送: {ex.Message}");
+                }
+
+                if (needRemoveKeys.Count > 0)
+                {
+                    needRemoveKeys.ForEach(RemoveClient);
                 }
             }
         });
