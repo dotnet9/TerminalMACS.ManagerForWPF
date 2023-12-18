@@ -105,6 +105,17 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
         }
     }
 
+    private int _packetMaxSize = 65507;
+
+    /// <summary>
+    /// Udp单包大小上限
+    /// </summary>
+    public int PacketMaxSize
+    {
+        get => _packetMaxSize;
+        set => SetProperty(ref _packetMaxSize, value);
+    }
+
     public void Start()
     {
         if (IsStarted)
@@ -195,7 +206,7 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
                     try
                     {
                         var buffer = command.GetType() == typeof(UpdateActiveProcess)
-                            ? CustomSerializeHelper.Serialize(command, _tcpHelper.SystemId)
+                            ? SerializeHelper.Serialize(command, _tcpHelper.SystemId)
                             : command.Serialize(_tcpHelper.SystemId);
 
                         _client.Send(buffer, buffer.Length, _udpIpEndPoint);
@@ -218,13 +229,15 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
         {
             while (IsRunning)
             {
-                MockUtil.MockUpdateActiveProcessPageCount(out var pageSize, out var pageCount);
+                MockUtil.MockUpdateActiveProcessPageCount(tcpHelper.MockCount, tcpHelper.MockPageSize, out var pageSize,
+                    out var pageCount);
                 for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
                 {
                     var response = new UpdateActiveProcess
                     {
                         Processes = Enumerable
-                            .Range(pageIndex * pageSize, MockUtil.GetDataCount(pageIndex, MockUtil.MockCount, pageSize))
+                            .Range(pageIndex * pageSize,
+                                MockUtil.GetDataCount(tcpHelper.MockCount, pageSize, pageIndex))
                             .Select(index => new ActiveProcess()
                             {
                                 PID = index + 1,

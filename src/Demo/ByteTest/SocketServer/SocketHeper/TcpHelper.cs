@@ -113,6 +113,28 @@ public class TcpHelper : BindableBase, ISocketBase
         set => SetProperty(ref _heartbeatTime, value);
     }
 
+    private int _mockCount = 1000000;
+
+    /// <summary>
+    /// 模拟数据总量
+    /// </summary>
+    public int MockCount
+    {
+        get => _mockCount;
+        set => SetProperty(ref _mockCount, value);
+    }
+
+    private int _mockPageSize = 5000;
+
+    /// <summary>
+    /// 模拟分包数据量
+    /// </summary>
+    public int MockPageSize
+    {
+        get => _mockPageSize;
+        set => SetProperty(ref _mockPageSize, value);
+    }
+
     public void Start()
     {
         if (IsStarted)
@@ -452,18 +474,18 @@ public class TcpHelper : BindableBase, ISocketBase
 
     private void DillReceivedCommand(Socket tcpClient, RequestProcess command)
     {
-        var pageCount = MockUtil.GetPageCount(MockUtil.MockCount, MockUtil.MockPageSize);
+        var pageCount = MockUtil.GetPageCount(MockCount, MockPageSize);
         var sendCount = 0;
         for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
         {
             var response = new ResponseProcess()
             {
                 TaskId = command.TaskId,
-                TotalSize = MockUtil.MockCount,
-                PageSize = MockUtil.MockPageSize,
+                TotalSize = MockCount,
+                PageSize = MockPageSize,
                 PageCount = pageCount,
                 PageIndex = pageIndex,
-                Processes = MockUtil.MockProcesses(pageIndex)
+                Processes = MockUtil.MockProcesses(MockCount, MockPageSize, pageIndex)
             };
             sendCount += response.Processes.Count;
             tcpClient.Send(response.Serialize(SystemId));
@@ -487,7 +509,7 @@ public class TcpHelper : BindableBase, ISocketBase
         {
             while (IsRunning)
             {
-                if (NeedSendCommands.TryDequeue(out var command))
+                if (NeedSendCommands.TryDequeue(out var command) && IsRunning)
                 {
                     try
                     {
@@ -529,7 +551,7 @@ public class TcpHelper : BindableBase, ISocketBase
     {
         var updatePoints = new UpdateProcess()
         {
-            Processes = MockUtil.MockProcesses()
+            Processes = MockUtil.MockProcesses(MockCount, MockPageSize)
         };
         SendCommand(updatePoints);
     }

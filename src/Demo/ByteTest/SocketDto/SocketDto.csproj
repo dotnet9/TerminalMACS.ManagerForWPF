@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MessagePack" Version="2.6.100-alpha" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SocketNetObject\SocketNetObject.csproj" />
   </ItemGroup>
 

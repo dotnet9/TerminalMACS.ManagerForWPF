@@ -59,19 +59,19 @@
 
 ##### ResponseBaseInfo
 
-| 字段名              | 数据类型 | 说明                   |
-| ------------------- | -------- | ---------------------- |
-| TaskId              | int      | 任务Id                 |
-| OperatingSystemType | string?  | 服务器操作系统类型     |
-| MemorySize          | int      | 系统内存大小（单位MB） |
-| ProcessorCount      | int      | 处理器个数             |
-| TotalDiskSpace      | int      | 硬盘总容量（单位GB）   |
-| NetworkBandwidth    | int      | 网络带宽（单位Mbps）   |
-| IpAddress           | string?  | 服务器IP地址           |
-| ServerName          | string?  | 服务器名称             |
-| DataCenterLocation  | string?  | 数据中心位置           |
-| IsRunning           | bool     | 运行状态               |
-| LastUpdateTime      | long     | 最后更新时间           |
+| 字段名              | 数据类型 | 说明                           |
+| ------------------- | -------- | ------------------------------ |
+| TaskId              | int      | 任务Id                         |
+| OperatingSystemType | string?  | 服务器操作系统类型             |
+| MemorySize          | int      | 系统内存大小（单位MB）         |
+| ProcessorCount      | int      | 处理器个数                     |
+| TotalDiskSpace      | int      | 硬盘总容量（单位GB）           |
+| NetworkBandwidth    | int      | 网络带宽（单位Mbps）           |
+| IpAddress           | string?  | 服务器IP地址                   |
+| ServerName          | string?  | 服务器名称                     |
+| DataCenterLocation  | string?  | 数据中心位置                   |
+| IsRunning           | byte     | 运行状态，0：未运行，1：已运行 |
+| LastUpdateTime      | long     | 最后更新时间                   |
 
 ##### RequestProcess
 

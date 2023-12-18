@@ -232,7 +232,7 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
                         }
 
                         var updateActiveProcess = netObjectInfo.IsNetObject<UpdateActiveProcess>()
-                            ? CustomSerializeHelper.Deserialize<UpdateActiveProcess>(buffer)!
+                            ? SerializeHelper.Deserialize<UpdateActiveProcess>(buffer)!
                             : SerializeHelper.Deserialize<UpdateActiveProcess>(buffer);
 
                         _receivedResponse.Add(updateActiveProcess);

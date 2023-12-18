@@ -238,6 +238,7 @@ public class MainViewModel : BindableBase
 
     private void ReadResponse(Heartbeat response)
     {
+        Logger.Info("收到服务端心跳响应");
     }
 
     #endregion

@@ -1,16 +1,11 @@
 ﻿using SocketCore.SysProcess.Models;
 using SocketCore.Utils;
-using System.ComponentModel.DataAnnotations;
 using Process = SocketDto.Process;
 
 namespace SocketServer.Mock;
 
 public static class MockUtil
 {
-    public const int MockCount = 1000000;
-    public const int MockPageSize = 5000;
-    public const int UdpPacketSize = 65507;
-
     public static ResponseBaseInfo MockBase(int taskId = default)
     {
         return new ResponseBaseInfo()
@@ -24,23 +19,24 @@ public static class MockUtil
             IpAddress = "192.32.35.23",
             ServerName = "Windows server 2021",
             DataCenterLocation = "成都",
-            IsRunning = true,
+            IsRunning = (byte)((ProcessRunningStatus)Enum.Parse(typeof(ProcessRunningStatus),
+                Random.Shared.Next(0, Enum.GetNames(typeof(ProcessRunningStatus)).Length).ToString())),
             LastUpdateTime = TimestampHelper.GetTimestamp()
         };
     }
 
-    public static List<Process> MockProcesses(int pageIndex)
+    public static List<Process> MockProcesses(int totalCount, int pageSize, int pageIndex)
     {
-        var currentDataCount = GetDataCount(pageIndex, MockCount, MockPageSize);
-        return ProcessReader.MockProcesses(pageIndex * MockPageSize, currentDataCount).Select(Convert).ToList();
+        var currentDataCount = GetDataCount(totalCount, pageSize, pageIndex);
+        return ProcessReader.MockProcesses(pageIndex * pageSize, currentDataCount).Select(Convert).ToList();
     }
 
-    public static List<Process> MockProcesses()
+    public static List<Process> MockProcesses(int totalCount, int pageSize)
     {
         var uniquePointIndex = new HashSet<int>();
-        while (uniquePointIndex.Count < MockPageSize)
+        while (uniquePointIndex.Count < pageSize)
         {
-            var randomNumber = Random.Shared.Next(1, MockCount);
+            var randomNumber = Random.Shared.Next(1, totalCount);
             uniquePointIndex.Add(randomNumber);
         }
 
@@ -74,16 +70,16 @@ public static class MockUtil
         return (totalCount + pageSize - 1) / pageSize;
     }
 
-    public static void MockUpdateActiveProcessPageCount(out int pageSize, out int pageCount)
+    public static void MockUpdateActiveProcessPageCount(int totalCount, int packetSize, out int pageSize,
+        out int pageCount)
     {
         // sizeof(int)为Processes长度点位4个字节
-        pageSize = (UdpPacketSize - SerializeHelper.PacketHeadLen - sizeof(int)) /
+        pageSize = (packetSize - SerializeHelper.PacketHeadLen - sizeof(int)) /
                    ActiveProcess.ObjectSize;
-        pageCount = GetPageCount(MockCount, pageSize);
+        pageCount = GetPageCount(totalCount, pageSize);
     }
 
-    public static int GetDataCount(int pageIndex, int totalCount,
-        int pageSize)
+    public static int GetDataCount(int totalCount, int pageSize, int pageIndex)
     {
         var dataIndex = pageIndex * pageSize;
         var dataCount = totalCount - dataIndex;

@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <PackageReference Include="Lorem.Universal.Net" Version="4.0.80" />
-    <PackageReference Include="MessagePack" Version="2.6.100-alpha" />
   </ItemGroup>
 
 </Project>
