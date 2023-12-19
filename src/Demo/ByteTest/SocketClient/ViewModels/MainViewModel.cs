@@ -253,7 +253,7 @@ public class MainViewModel : BindableBase
                     Invoke(() => DisplayProcesses.AddRange(FilterData(allProcesses)));
                 }
 
-                Thread.Sleep(TimeSpan.FromMilliseconds(100));
+                Thread.Sleep(TimeSpan.FromMilliseconds(10));
             }
         });
     }

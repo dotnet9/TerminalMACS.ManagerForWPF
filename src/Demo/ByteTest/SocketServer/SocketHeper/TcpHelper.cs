@@ -157,7 +157,7 @@ public class TcpHelper : BindableBase, ISocketBase
                     _server.Listen(10);
                     IsRunning = true;
 
-                    ReceiveCommand();
+                    ListenForClients();
                     StartDillReceivedCommand();
                     SendCommands();
                     MockUpdate();
@@ -231,7 +231,7 @@ public class TcpHelper : BindableBase, ISocketBase
 
     #region 私有方法
 
-    private void ReceiveCommand()
+    private void ListenForClients()
     {
         Task.Run(() =>
         {
@@ -246,7 +246,7 @@ public class TcpHelper : BindableBase, ISocketBase
 
                     Logger.Info($"客户端({socketClientKey})连接上线");
 
-                    ReceiveCommand(socketClient);
+                    HandleClient(socketClient);
                 }
                 catch (Exception ex)
                 {
@@ -256,7 +256,7 @@ public class TcpHelper : BindableBase, ISocketBase
         });
     }
 
-    private void ReceiveCommand(Socket tcpClient)
+    private void HandleClient(Socket tcpClient)
     {
         Task.Run(() =>
         {

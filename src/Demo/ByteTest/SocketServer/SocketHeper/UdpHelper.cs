@@ -284,7 +284,7 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
                     size += buffer.Length;
                     //if (pageIndex % 2 == 0)
                     //{
-                        Thread.Sleep(TimeSpan.FromMicroseconds(900));
+                    Thread.Sleep(TimeSpan.FromMilliseconds(1));
                     //}
                 }
 
