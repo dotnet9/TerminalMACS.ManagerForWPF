@@ -3,12 +3,14 @@ using SocketClient.WPF;
 using System.Windows;
 using SocketCore.Utils;
 using SocketDto;
+using System.Diagnostics;
 
 namespace SocketClient.ViewModels;
 
 public class MainViewModel : BindableBase
 {
     public Window? Owner { get; set; }
+    private readonly BlockingCollection<ResponseProcess> _receivedResponseProcesses = new();
     private readonly List<ProcessItem> _receivedProcesses = new();
     private Dictionary<int, ProcessItem>? _processIdAndItems;
     public RangObservableCollection<ProcessItem> DisplayProcesses { get; } = new();
@@ -81,6 +83,7 @@ public class MainViewModel : BindableBase
             TcpHelper.Start();
 
             ReceiveTcpData();
+            SynchronizeData();
             SendHeartbeat();
         }
         else
@@ -199,21 +202,7 @@ public class MainViewModel : BindableBase
 
     private void ReadResponse(ResponseProcess response)
     {
-        var processes = response.Processes?.ConvertAll(process => new ProcessItem(process));
-        if (processes?.Count > 0)
-        {
-            _receivedProcesses.AddRange(processes);
-            if (_receivedProcesses.Count == response.TotalSize)
-            {
-                _processIdAndItems = _receivedProcesses.ToDictionary(process => process.PID);
-            }
-
-            Invoke(() => DisplayProcesses.AddRange(FilterData(processes)));
-
-            var msg = response.TaskId == default ? $"收到推送" : "收到请求响应";
-            Logger.Info(
-                $"{msg}【{response.PageIndex + 1}/{response.PageCount}】进程{processes.Count}条({_receivedProcesses.Count}/{response.TotalSize})");
-        }
+        _receivedResponseProcesses.Add(response);
     }
 
     private void ReadResponse(UpdateProcess response)
@@ -237,6 +226,54 @@ public class MainViewModel : BindableBase
         Logger.Info("收到服务端心跳响应");
     }
 
+    private void SynchronizeData()
+    {
+        Task.Run(() =>
+        {
+            while (!TcpHelper.IsRunning)
+            {
+                Thread.Sleep(TimeSpan.FromMilliseconds(10));
+            }
+
+            while (TcpHelper.IsRunning)
+            {
+                var allResponseProcesses = new List<ResponseProcess>();
+                while (_receivedResponseProcesses.TryTake(out var response))
+                {
+                    allResponseProcesses.Add(response);
+                }
+
+                if (allResponseProcesses.Count > 0)
+                {
+                    var allProcesses = new List<ProcessItem>();
+                    foreach (var response in allResponseProcesses)
+                    {
+                        var processes = response.Processes?.ConvertAll(process => new ProcessItem(process));
+                        if (!(processes?.Count > 0))
+                        {
+                            continue;
+                        }
+
+                        _receivedProcesses.AddRange(processes);
+                        allProcesses.AddRange(processes);
+                        if (_receivedProcesses.Count == response.TotalSize)
+                        {
+                            _processIdAndItems = _receivedProcesses.ToDictionary(process => process.PID);
+                        }
+
+                        var msg = response.TaskId == default ? $"收到推送" : "收到请求响应";
+                        Logger.Info(
+                            $"{msg}【{response.PageIndex + 1}/{response.PageCount}】进程{processes.Count}条({_receivedProcesses.Count}/{response.TotalSize})");
+                    }
+
+                    Invoke(() => DisplayProcesses.AddRange(FilterData(allProcesses)));
+                }
+
+                Thread.Sleep(TimeSpan.FromMilliseconds(100));
+            }
+        });
+    }
+
     #endregion
 
     #region 接收Udp数据
@@ -252,20 +289,29 @@ public class MainViewModel : BindableBase
 
             while (UdpHelper.IsRunning)
             {
-                if (!UdpHelper.TryGetResponse(out var response) ||
-                    response is not UpdateActiveProcess updateActiveProcess)
+                var allUpdateProcesses = new List<UpdateActiveProcess>();
+                while (UdpHelper.TryGetResponse(out var response) &&
+                       response is UpdateActiveProcess updateActiveProcess)
                 {
-                    continue;
+                    allUpdateProcesses.Add(updateActiveProcess);
                 }
 
-                try
+                if (allUpdateProcesses.Count > 0)
                 {
-                    ReceiveUdpData(updateActiveProcess);
+                    foreach (var item in allUpdateProcesses)
+                    {
+                        try
+                        {
+                            ReceiveUdpData(item);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.Error($"更新点实时数据异常：{ex.Message}");
+                        }
+                    }
                 }
-                catch (Exception ex)
-                {
-                    Logger.Error($"更新点实时数据异常：{ex.Message}");
-                }
+
+                Thread.Sleep(TimeSpan.FromMilliseconds(100));
             }
         });
     }

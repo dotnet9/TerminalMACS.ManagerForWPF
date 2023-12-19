@@ -74,4 +74,14 @@ public record Process
     /// 电源使用情况趋势
     /// </summary>
     public byte PowerUsageTrend { get; set; }
+
+    /// <summary>
+    /// 上次更新时间
+    /// </summary>
+    public long LastUpdateTime { get; set; }
+
+    /// <summary>
+    /// 更新时间
+    /// </summary>
+    public long UpdateTime { get; set; }
 }

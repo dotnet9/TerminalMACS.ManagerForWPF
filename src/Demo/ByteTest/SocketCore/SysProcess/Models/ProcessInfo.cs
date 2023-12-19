@@ -71,4 +71,14 @@ public record ProcessInfo
     /// 电源使用情况趋势
     /// </summary>
     public ProcessPowerUsage PowerUsageTrend { get; set; }
+
+    /// <summary>
+    /// 上次更新时间
+    /// </summary>
+    public DateTime LastUpdateTime { get; set; }
+
+    /// <summary>
+    /// 更新时间
+    /// </summary>
+    public DateTime UpdateTime { get; set; }
 }

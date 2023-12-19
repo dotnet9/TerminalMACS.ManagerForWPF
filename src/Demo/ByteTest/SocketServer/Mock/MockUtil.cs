@@ -60,7 +60,9 @@ public static class MockUtil
             GPU = process.GPU,
             GPUEngine = process.GPUEngine,
             PowerUsage = (byte)process.PowerUsage,
-            PowerUsageTrend = (byte)process.PowerUsageTrend
+            PowerUsageTrend = (byte)process.PowerUsageTrend,
+            LastUpdateTime = process.LastUpdateTime.ToTimestamp(),
+            UpdateTime = process.UpdateTime.ToTimestamp()
         };
     }
 

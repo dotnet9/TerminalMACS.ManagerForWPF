@@ -197,6 +197,7 @@ public class UdpHelper : BindableBase, ISocketBase
                     }
 
                     var data = _client.Receive(ref _remoteEp);
+                    ReceiveTime = DateTime.Now;
 
                     _receivedBuffers.Add(data);
                 }

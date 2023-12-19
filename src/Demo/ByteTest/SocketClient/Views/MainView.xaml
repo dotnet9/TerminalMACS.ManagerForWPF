@@ -96,60 +96,68 @@
             <DataGrid.Columns>
                 <DataGridTextColumn
                     Width="80"
-                    Binding="{Binding PID}"
+                    Binding="{Binding PID, Mode=OneWay}"
                     Header="PId" />
                 <DataGridTextColumn
                     Width="160"
-                    Binding="{Binding Name}"
+                    Binding="{Binding Name, Mode=OneWay}"
                     Header="进程名称" />
                 <DataGridTextColumn
                     Width="80"
-                    Binding="{Binding Type}"
+                    Binding="{Binding Type, Mode=OneWay}"
                     Header="进程类型" />
                 <DataGridTextColumn
                     Width="80"
-                    Binding="{Binding Status}"
+                    Binding="{Binding Status, Mode=OneWay}"
                     Header="进程状态" />
                 <DataGridTextColumn
                     Width="160"
-                    Binding="{Binding Publisher}"
+                    Binding="{Binding Publisher, Mode=OneWay}"
                     Header="发布者" />
                 <DataGridTextColumn
                     Width="160"
-                    Binding="{Binding CommandLine}"
+                    Binding="{Binding CommandLine, Mode=OneWay}"
                     Header="命令行" />
                 <DataGridTextColumn
                     Width="80"
-                    Binding="{Binding CPUUsage}"
+                    Binding="{Binding CPUUsage, Mode=OneWay}"
                     Header="CPU使用率" />
                 <DataGridTextColumn
                     Width="80"
-                    Binding="{Binding MemoryUsage}"
+                    Binding="{Binding MemoryUsage, Mode=OneWay}"
                     Header="内存使用率" />
                 <DataGridTextColumn
                     Width="100"
-                    Binding="{Binding DiskUsage}"
+                    Binding="{Binding DiskUsage, Mode=OneWay}"
                     Header="磁盘" />
                 <DataGridTextColumn
                     Width="100"
-                    Binding="{Binding NetworkUsage}"
+                    Binding="{Binding NetworkUsage, Mode=OneWay}"
                     Header="网络" />
                 <DataGridTextColumn
                     Width="60"
-                    Binding="{Binding GPU}"
+                    Binding="{Binding GPU, Mode=OneWay}"
                     Header="GPU" />
                 <DataGridTextColumn
                     Width="160"
-                    Binding="{Binding GPUEngine}"
+                    Binding="{Binding GPUEngine, Mode=OneWay}"
                     Header="GPU引擎" />
                 <DataGridTextColumn
                     Width="90"
-                    Binding="{Binding PowerUsage}"
+                    Binding="{Binding PowerUsage, Mode=OneWay}"
                     Header="电源使用情况" />
                 <DataGridTextColumn
                     Width="120"
-                    Binding="{Binding PowerUsageTrend}"
+                    Binding="{Binding PowerUsageTrend, Mode=OneWay}"
                     Header="电源使用情况趋势" />
+                <DataGridTextColumn
+                    Width="170"
+                    Binding="{Binding LastUpdateTime, Mode=OneWay}"
+                    Header="上次更新时间" />
+                <DataGridTextColumn
+                    Width="170"
+                    Binding="{Binding UpdateTime, Mode=OneWay}"
+                    Header="更新时间" />
             </DataGrid.Columns>
             <DataGrid.RowStyle>
                 <Style TargetType="{x:Type DataGridRow}">
@@ -171,22 +179,26 @@
         </StackPanel>
         <StackPanel Grid.Row="5" VerticalAlignment="Center">
             <TextBlock>
-                <Run Text="TCP服务：" />
+                <Run Text="TCP：" />
                 <Run
                     Foreground="{markup:If {Binding TcpHelper.IsRunning}, {x:Static Brushes.Green}, {x:Static Brushes.Red}}"
                     Text="{markup:If {Binding TcpHelper.IsRunning}, 已连接, 未连接}" />
-                <Run Text="    心跳时间：" />
-                <Run Foreground="Green" Text="{Binding HeartbeatTime,StringFormat=yyyy-MM-dd HH:mm:ss fff}" />
-                <Run Text="    发送时间：" />
+                <Run Text="心跳  发送 " />
+                <Run Foreground="Green"
+                     Text="{Binding TcpHelper.SendHeartbeatTime,StringFormat=yyyy-MM-dd HH:mm:ss fff}" />
+                <Run Text=" 响应 " />
+                <Run Foreground="Green"
+                     Text="{Binding TcpHelper.ResponseHeartbeatTime,StringFormat=yyyy-MM-dd HH:mm:ss fff}" />
+                <Run Text=" 数据包 发送 " />
                 <Run Foreground="Green" Text="{Binding TcpHelper.SendTime,StringFormat=yyyy-MM-dd HH:mm:ss fff}" />
-                <Run Text="    接收时间：" />
+                <Run Text=" 接收 " />
                 <Run Foreground="Green" Text="{Binding TcpHelper.ReceiveTime, StringFormat=yyyy-MM-dd HH:mm:ss fff}" />
-                <Run Text="               UDP：" />
+                <Run Text="  UDP：" />
                 <Run
                     Foreground="{markup:If {Binding UdpHelper.IsRunning}, {x:Static Brushes.Green}, {x:Static Brushes.Red}}"
                     Text="{markup:If {Binding UdpHelper.IsRunning}, 已订阅, 未订阅}" />
-                <Run Text="     组播时间：" />
-                <Run Foreground="Green" Text="2023-12-16 11:27" />
+                <Run Text=" 组播时间 " />
+                <Run Foreground="Green" Text="{Binding UdpHelper.ReceiveTime, StringFormat=yyyy-MM-dd HH:mm:ss fff}" />
             </TextBlock>
         </StackPanel>
     </Grid>

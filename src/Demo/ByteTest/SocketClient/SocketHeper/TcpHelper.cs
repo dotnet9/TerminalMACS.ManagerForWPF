@@ -107,6 +107,28 @@ public class TcpHelper : BindableBase, ISocketBase
         }
     }
 
+    private DateTime _sendHeartbeatTime;
+
+    /// <summary>
+    /// 心跳发送时间
+    /// </summary>
+    public DateTime SendHeartbeatTime
+    {
+        get => _sendHeartbeatTime;
+        set => SetProperty(ref _sendHeartbeatTime, value);
+    }
+
+    private DateTime _responseHeartbeatTime;
+
+    /// <summary>
+    /// 心跳响应时间
+    /// </summary>
+    public DateTime ResponseHeartbeatTime
+    {
+        get => _responseHeartbeatTime;
+        set => SetProperty(ref _responseHeartbeatTime, value);
+    }
+
     public void Start()
     {
         if (IsStarted)
@@ -324,6 +346,7 @@ public class TcpHelper : BindableBase, ISocketBase
         else if (netObjectHeadInfo.IsNetObject<Heartbeat>())
         {
             command = buffer.Deserialize<Heartbeat>();
+            ResponseHeartbeatTime = ReceiveTime;
         }
         else
         {
@@ -353,6 +376,11 @@ public class TcpHelper : BindableBase, ISocketBase
                 {
                     _client?.Send(command.Serialize(SystemId));
                     SendTime = DateTime.Now;
+                    if (command is Heartbeat)
+                    {
+                        SendHeartbeatTime = SendTime;
+                    }
+
                     Logger.Info($"已将命令{command.GetType()}发送");
                 }
                 catch (Exception ex)

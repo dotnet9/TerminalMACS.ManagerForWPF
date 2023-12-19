@@ -36,7 +36,9 @@ public static class ProcessReader
             PowerUsage = (ProcessPowerUsage)Enum.Parse(typeof(ProcessPowerUsage),
                 Random.Shared.Next(0, Enum.GetNames(typeof(ProcessPowerUsage)).Length).ToString()),
             PowerUsageTrend = (ProcessPowerUsage)Enum.Parse(typeof(ProcessPowerUsage),
-                Random.Shared.Next(0, Enum.GetNames(typeof(ProcessPowerUsage)).Length).ToString())
+                Random.Shared.Next(0, Enum.GetNames(typeof(ProcessPowerUsage)).Length).ToString()),
+            LastUpdateTime = DateTime.Now,
+            UpdateTime = DateTime.Now
         };
     }
 }

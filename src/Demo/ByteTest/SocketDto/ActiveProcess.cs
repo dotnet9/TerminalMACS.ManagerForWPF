@@ -5,7 +5,7 @@
 /// </summary>
 public class ActiveProcess
 {
-    public const int ObjectSize = 46;
+    public const int ObjectSize = 54;
 
     /// <summary>
     /// 进程ID
@@ -46,4 +46,9 @@ public class ActiveProcess
     /// 电源使用情况趋势
     /// </summary>
     public byte PowerUsageTrend { get; set; }
+
+    /// <summary>
+    /// 更新时间
+    /// </summary>
+    public long UpdateTime { get; set; }
 }

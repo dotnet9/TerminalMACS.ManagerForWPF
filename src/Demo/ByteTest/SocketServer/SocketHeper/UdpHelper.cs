@@ -1,4 +1,5 @@
 ﻿using SocketCore.SysProcess.Models;
+using SocketCore.Utils;
 using SocketServer.Mock;
 
 namespace SocketServer.SocketHeper;
@@ -252,7 +253,8 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
                                 PowerUsage =
                                     (byte)(Random.Shared.Next(0, Enum.GetNames(typeof(ProcessPowerUsage)).Length)),
                                 PowerUsageTrend =
-                                    (byte)(Random.Shared.Next(0, Enum.GetNames(typeof(ProcessPowerUsage)).Length))
+                                    (byte)(Random.Shared.Next(0, Enum.GetNames(typeof(ProcessPowerUsage)).Length)),
+                                UpdateTime = TimestampHelper.GetTimestamp()
                             }).ToList()
                     };
                     SendCommand(response);

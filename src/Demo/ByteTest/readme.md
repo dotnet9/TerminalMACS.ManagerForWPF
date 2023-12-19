@@ -108,6 +108,8 @@
 | GPUEngine       | string?  | GPU引擎          |
 | PowerUsage      | byte     | 电源使用情况     |
 | PowerUsageTrend | byte     | 电源使用情况趋势 |
+| LastUpdateTime  | long     | 上次更新时间     |
+| UpdateTime      | long     | 更新时间         |
 
 ##### UpdateProcess
 
@@ -133,3 +135,4 @@
 | GPU             | double   | GPU              |
 | PowerUsage      | byte     | 电源使用情况     |
 | PowerUsageTrend | byte     | 电源使用情况趋势 |
+| UpdateTime      | long     | 更新时间         |
