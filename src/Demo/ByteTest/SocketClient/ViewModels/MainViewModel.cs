@@ -1,9 +1,7 @@
 ﻿using SocketClient.Models;
 using SocketClient.WPF;
-using System.Windows;
 using SocketCore.Utils;
-using SocketDto;
-using System.Diagnostics;
+using System.Windows;
 
 namespace SocketClient.ViewModels;
 
@@ -14,22 +12,14 @@ public class MainViewModel : BindableBase
     private readonly List<ProcessItem> _receivedProcesses = new();
     private Dictionary<int, ProcessItem>? _processIdAndItems;
     public RangObservableCollection<ProcessItem> DisplayProcesses { get; } = new();
-    public TcpHelper TcpHelper { get; set; }
-    public UdpHelper UdpHelper { get; set; }
+    public TcpHelper TcpHelper { get; set; } = new();
+    public UdpHelper UdpHelper { get; set; } = new();
     private string? _searchKey;
 
     public string? SearchKey
     {
         get => _searchKey;
         set => SetProperty(ref _searchKey, value);
-    }
-
-    private DateTime _heartbeatTime;
-
-    public DateTime HeartbeatTime
-    {
-        get => _heartbeatTime;
-        set => SetProperty(ref _heartbeatTime, value);
     }
 
     private string? _baseInfo;
@@ -67,14 +57,6 @@ public class MainViewModel : BindableBase
     public IAsyncCommand RefreshCommand => _refreshCommand ??= new AsyncDelegateCommand(
         HandleRefreshCommand,
         () => TcpHelper.IsRunning).ObservesProperty(() => TcpHelper.IsRunning);
-
-    public MainViewModel()
-    {
-        TcpHelper = new TcpHelper();
-        UdpHelper = new UdpHelper();
-
-        UpdateCount();
-    }
 
     private Task HandleConnectTcpCommandAsync()
     {
@@ -119,6 +101,7 @@ public class MainViewModel : BindableBase
         }
 
         TcpHelper.SendCommand(new RequestBaseInfo { TaskId = TcpHelper.GetNewTaskId() });
+        Logger.Info("发送刷新命令");
         ClearData();
         return Task.CompletedTask;
     }
@@ -146,7 +129,7 @@ public class MainViewModel : BindableBase
         {
             while (!TcpHelper.IsRunning)
             {
-                Thread.Sleep(TimeSpan.FromMilliseconds(10));
+                Thread.Sleep(TimeSpan.FromMilliseconds(50));
             }
 
             HandleRefreshCommand();
@@ -155,7 +138,7 @@ public class MainViewModel : BindableBase
             {
                 Try("读取TCP数据", ReadTcpData, ex => Logger.Error($"循环处理数据异常：{ex.Message}"));
 
-                Thread.Sleep(TimeSpan.FromMilliseconds(1));
+                Thread.Sleep(TimeSpan.FromMilliseconds(10));
             }
         });
     }
@@ -197,6 +180,8 @@ public class MainViewModel : BindableBase
         Logger.Info($"【新】{BaseInfo}");
 
         TcpHelper.SendCommand(new RequestProcess() { TaskId = TcpHelper.GetNewTaskId() });
+        Logger.Info("发送请求进程信息命令");
+
         ClearData();
     }
 
@@ -223,7 +208,6 @@ public class MainViewModel : BindableBase
 
     private void ReadResponse(Heartbeat response)
     {
-        Logger.Info("收到服务端心跳响应");
     }
 
     private void SynchronizeData()
@@ -284,7 +268,7 @@ public class MainViewModel : BindableBase
         {
             while (!UdpHelper.IsRunning)
             {
-                Thread.Sleep(TimeSpan.FromMilliseconds(10));
+                Thread.Sleep(TimeSpan.FromMilliseconds(30));
             }
 
             while (UdpHelper.IsRunning)
@@ -294,6 +278,10 @@ public class MainViewModel : BindableBase
                        response is UpdateActiveProcess updateActiveProcess)
                 {
                     allUpdateProcesses.Add(updateActiveProcess);
+                    if (allUpdateProcesses.Count > 50)
+                    {
+                        break;
+                    }
                 }
 
                 if (allUpdateProcesses.Count > 0)
@@ -340,27 +328,13 @@ public class MainViewModel : BindableBase
         {
             while (!TcpHelper.IsRunning)
             {
-                Thread.Sleep(TimeSpan.FromMilliseconds(10));
+                Thread.Sleep(TimeSpan.FromMilliseconds(30));
             }
 
             while (TcpHelper.IsRunning)
             {
                 TcpHelper.SendCommand(new Heartbeat());
-                HeartbeatTime = DateTime.Now;
-                Logger.Info("向服务端发送心跳");
-
                 Thread.Sleep(TimeSpan.FromSeconds(5));
-            }
-        });
-    }
-
-    private void UpdateCount()
-    {
-        Task.Run(() =>
-        {
-            while (UdpHelper.IsRunning)
-            {
-                Thread.Sleep(TimeSpan.FromMilliseconds(30));
             }
         });
     }

@@ -198,7 +198,6 @@ public class TcpHelper : BindableBase, ISocketBase
         }
 
         _needSendCommands.Add(command);
-        Logger.Info($"已将命令{command.GetType()}压入队列，请等待命令发送");
     }
 
     public void SendCommandBuffer(byte[] buffer)
@@ -267,7 +266,7 @@ public class TcpHelper : BindableBase, ISocketBase
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex.Message);
+                    Logger.Error($"接收数据异常：{ex.Message}");
                 }
             }
         });
@@ -323,8 +322,6 @@ public class TcpHelper : BindableBase, ISocketBase
 
     private void ReceiveCommand(byte[] buffer, NetObjectHeadInfo netObjectHeadInfo)
     {
-        var sw = Stopwatch.StartNew();
-
         INetObject command;
 
         if (netObjectHeadInfo.IsNetObject<ResponseBaseInfo>())
@@ -354,11 +351,7 @@ public class TcpHelper : BindableBase, ISocketBase
                 $"非法数据包：{netObjectHeadInfo}");
         }
 
-        sw.Stop();
-
         _receivedCommands.Add(command);
-
-        Logger.Info($"解析数据包{command.GetType().Name}({netObjectHeadInfo.ObjectId})用时{sw.ElapsedMilliseconds} ms");
     }
 
     private void SendCommands()
@@ -367,8 +360,9 @@ public class TcpHelper : BindableBase, ISocketBase
         {
             while (IsRunning)
             {
-                if (!_needSendCommands.TryTake(out var command, TimeSpan.FromMilliseconds(1)))
+                if (!_needSendCommands.TryTake(out var command, TimeSpan.FromMilliseconds(100)))
                 {
+                    Thread.Sleep(TimeSpan.FromMilliseconds(50));
                     continue;
                 }
 
@@ -380,8 +374,6 @@ public class TcpHelper : BindableBase, ISocketBase
                     {
                         SendHeartbeatTime = SendTime;
                     }
-
-                    Logger.Info($"已将命令{command.GetType()}发送");
                 }
                 catch (Exception ex)
                 {

@@ -133,8 +133,8 @@ public class UdpHelper : BindableBase, ISocketBase
                 catch (Exception ex)
                 {
                     IsRunning = false;
-                    Logger.Warning($"运行Udp异常，1秒后将重新运行：{ex.Message}");
-                    Thread.Sleep(1);
+                    Logger.Warning($"运行Udp异常，3秒后将重新运行：{ex.Message}");
+                    Thread.Sleep(TimeSpan.FromSeconds(3));
                 }
             }
         });
@@ -175,7 +175,7 @@ public class UdpHelper : BindableBase, ISocketBase
 
     public bool TryGetResponse(out INetObject? response)
     {
-        var result = _receivedResponse.TryTake(out var updateActiveProcess, TimeSpan.FromMilliseconds(1));
+        var result = _receivedResponse.TryTake(out var updateActiveProcess, TimeSpan.FromMilliseconds(100));
         response = updateActiveProcess;
         return result;
     }
@@ -192,7 +192,7 @@ public class UdpHelper : BindableBase, ISocketBase
                 {
                     if (_client?.Client == null || _client.Available < 0)
                     {
-                        Thread.Sleep(TimeSpan.FromMilliseconds(10));
+                        Thread.Sleep(TimeSpan.FromMilliseconds(30));
                         continue;
                     }
 
@@ -223,8 +223,9 @@ public class UdpHelper : BindableBase, ISocketBase
         {
             while (IsRunning)
             {
-                if (!_receivedBuffers.TryTake(out var buffer, TimeSpan.FromMilliseconds(1)))
+                if (!_receivedBuffers.TryTake(out var buffer, TimeSpan.FromMilliseconds(100)))
                 {
+                    Thread.Sleep(TimeSpan.FromMilliseconds(50));
                     continue;
                 }
 

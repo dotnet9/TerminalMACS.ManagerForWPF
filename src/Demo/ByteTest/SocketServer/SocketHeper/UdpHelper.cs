@@ -142,8 +142,8 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
                 catch (Exception ex)
                 {
                     IsRunning = false;
-                    Logger.Warning($"运行Udp异常，1秒后将重新运行：{ex.Message}");
-                    Thread.Sleep(1);
+                    Logger.Warning($"运行Udp异常，3秒后将重新运行：{ex.Message}");
+                    Thread.Sleep(3);
                 }
             }
         });
@@ -201,10 +201,14 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
     {
         Task.Run(() =>
         {
+            var sw = Stopwatch.StartNew();
+            var sendCount = 0;
+            var sendSize = 0;
             while (IsRunning)
             {
-                if (!NeedSendCommands.TryTake(out var command, TimeSpan.FromMilliseconds(1)))
+                if (!NeedSendCommands.TryTake(out var command, TimeSpan.FromMilliseconds(100)))
                 {
+                    Thread.Sleep(TimeSpan.FromMilliseconds(50));
                     continue;
                 }
 
@@ -212,12 +216,25 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
                 {
                     var buffer = command.Serialize(tcpHelper.SystemId);
                     _client?.Send(buffer, buffer.Length, _udpIpEndPoint);
+                    sendSize += buffer.Length;
                 }
                 catch (Exception ex)
                 {
                     NeedSendCommands.Add(command);
                     Logger.Error($"发送命令{command.GetType().Name}失败，将排队重新发送: {ex.Message}");
                 }
+
+                sendCount++;
+                if (sendCount % 100 != 0)
+                {
+                    continue;
+                }
+
+                Logger.Info($"发送{sendCount}个包{sendSize}字节，用时{sw.ElapsedMilliseconds}ms");
+                sendCount = 0;
+                sendSize = 0;
+                sw.Reset();
+                Thread.Sleep(TimeSpan.FromMilliseconds(100));
             }
         });
     }
@@ -230,6 +247,7 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
             {
                 MockUtil.MockUpdateActiveProcessPageCount(tcpHelper.MockCount, tcpHelper.MockPageSize, out var pageSize,
                     out var pageCount);
+
                 for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
                 {
                     if (!IsRunning)
@@ -260,7 +278,7 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
                     SendCommand(response);
                 }
 
-                Thread.Sleep(TimeSpan.FromMilliseconds(500));
+                Thread.Sleep(TimeSpan.FromMilliseconds(50));
             }
         });
     }

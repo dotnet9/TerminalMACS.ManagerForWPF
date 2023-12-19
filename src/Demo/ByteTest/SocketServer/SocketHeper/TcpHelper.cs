@@ -208,7 +208,6 @@ public class TcpHelper : BindableBase, ISocketBase
         }
 
         NeedSendCommands.Add(command);
-        Logger.Info($"已将命令{command.GetType()}压入队列，请等待命令发送");
     }
 
     public void SendCommandBuffer(byte[] buffer)
@@ -303,7 +302,7 @@ public class TcpHelper : BindableBase, ISocketBase
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex.Message);
+                    Logger.Error($"接收数据异常：{ex.Message}");
                 }
             }
         });
@@ -359,8 +358,6 @@ public class TcpHelper : BindableBase, ISocketBase
 
     private void ReceiveCommand(Socket tcpClient, byte[] buffer, NetObjectHeadInfo netObjectHeadInfo)
     {
-        var sw = Stopwatch.StartNew();
-
         INetObject command;
 
         if (netObjectHeadInfo.IsNetObject<RequestBaseInfo>())
@@ -381,8 +378,6 @@ public class TcpHelper : BindableBase, ISocketBase
                 $"非法数据包：{netObjectHeadInfo}");
         }
 
-        sw.Stop();
-
         var tcpClientKey = tcpClient.RemoteEndPoint!.ToString()!;
         if (!_receivedCommands.TryGetValue(tcpClientKey, out ConcurrentQueue<INetObject>? value))
         {
@@ -391,16 +386,11 @@ public class TcpHelper : BindableBase, ISocketBase
         }
 
         value.Enqueue(command);
-
-        Logger.Info($"解析数据包{command.GetType().Name}({netObjectHeadInfo.ObjectId})用时{sw.ElapsedMilliseconds} ms");
     }
 
     private void RemoveClient(Socket tcpClient)
     {
-        var key = tcpClient.RemoteEndPoint!.ToString()!;
-        _clients.TryRemove(key, out _);
-        _receivedCommands.TryRemove(key, out _);
-        Logger.Warning($"已清除客户端信息{key}");
+        RemoveClient(tcpClient.RemoteEndPoint!.ToString()!);
     }
 
     private void RemoveClient(string key)
@@ -472,17 +462,12 @@ public class TcpHelper : BindableBase, ISocketBase
             default:
                 throw new Exception($"未处理命令{command.GetType().Name}");
         }
-
-        Thread.Sleep(TimeSpan.FromMilliseconds(1));
-
-        Logger.Info($"处理命令{command.GetType().Name}");
     }
 
     private void DillReceivedCommand(Socket tcpClient, RequestBaseInfo command)
     {
         var response = MockUtil.MockBase(command.TaskId);
         tcpClient.Send(response.Serialize(SystemId));
-        Logger.Info($"发送{response.GetType()}响应");
     }
 
     private void DillReceivedCommand(Socket tcpClient, RequestProcess command)
@@ -506,8 +491,10 @@ public class TcpHelper : BindableBase, ISocketBase
             var msg = response.TaskId == default ? $"推送" : "响应请求";
             Logger.Info(
                 $"{msg}【{response.PageIndex + 1}/{response.PageCount}】进程{response.Processes.Count}条({sendCount}/{response.TotalSize})");
-
-            Thread.Sleep(TimeSpan.FromMilliseconds(1));
+            if (pageIndex % 10 == 0)
+            {
+                Thread.Sleep(TimeSpan.FromMilliseconds(50));
+            }
         }
     }
 
@@ -523,8 +510,9 @@ public class TcpHelper : BindableBase, ISocketBase
         {
             while (IsRunning)
             {
-                if (!NeedSendCommands.TryTake(out var command, TimeSpan.FromMilliseconds(1)) || !IsRunning)
+                if (!NeedSendCommands.TryTake(out var command, TimeSpan.FromMilliseconds(100)) || !IsRunning)
                 {
+                    Thread.Sleep(TimeSpan.FromMilliseconds(50));
                     continue;
                 }
 
