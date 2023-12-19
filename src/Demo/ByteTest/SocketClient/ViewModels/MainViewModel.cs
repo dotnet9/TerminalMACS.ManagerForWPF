@@ -299,7 +299,7 @@ public class MainViewModel : BindableBase
                     }
                 }
 
-                Thread.Sleep(TimeSpan.FromMilliseconds(100));
+                Thread.Sleep(TimeSpan.FromMilliseconds(10));
             }
         });
     }

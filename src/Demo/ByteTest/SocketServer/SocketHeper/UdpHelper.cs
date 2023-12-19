@@ -133,7 +133,7 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
                     _client.JoinMulticastGroup(ipAddress);
                     IsRunning = true;
 
-                    SendCommands();
+                    //SendCommands();
                     MockSendData();
 
                     Logger.Info($"Udp启动成功");
@@ -197,57 +197,60 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
 
     #endregion
 
-    private void SendCommands()
-    {
-        Task.Run(() =>
-        {
-            var sw = Stopwatch.StartNew();
-            var sendCount = 0;
-            var sendSize = 0;
-            while (IsRunning)
-            {
-                if (!NeedSendCommands.TryTake(out var command, TimeSpan.FromMilliseconds(100)))
-                {
-                    Thread.Sleep(TimeSpan.FromMilliseconds(50));
-                    continue;
-                }
+    //private void SendCommands()
+    //{
+    //    Task.Run(() =>
+    //    {
+    //        var sw = Stopwatch.StartNew();
+    //        var sendCount = 0;
+    //        var sendSize = 0;
+    //        while (IsRunning)
+    //        {
+    //            if (!NeedSendCommands.TryTake(out var command, TimeSpan.FromMilliseconds(100)))
+    //            {
+    //                Thread.Sleep(TimeSpan.FromMilliseconds(50));
+    //                continue;
+    //            }
 
-                try
-                {
-                    var buffer = command.Serialize(tcpHelper.SystemId);
-                    _client?.Send(buffer, buffer.Length, _udpIpEndPoint);
-                    sendSize += buffer.Length;
-                }
-                catch (Exception ex)
-                {
-                    NeedSendCommands.Add(command);
-                    Logger.Error($"发送命令{command.GetType().Name}失败，将排队重新发送: {ex.Message}");
-                }
+    //            try
+    //            {
+    //                var buffer = command.Serialize(tcpHelper.SystemId);
+    //                _client?.Send(buffer, buffer.Length, _udpIpEndPoint);
+    //                sendSize += buffer.Length;
+    //            }
+    //            catch (Exception ex)
+    //            {
+    //                NeedSendCommands.Add(command);
+    //                Logger.Error($"发送命令{command.GetType().Name}失败，将排队重新发送: {ex.Message}");
+    //            }
 
-                sendCount++;
-                if (sendCount % 100 != 0)
-                {
-                    continue;
-                }
+    //            sendCount++;
+    //            //if (sendCount % 5 != 0)
+    //            //{
+    //            //    continue;
+    //            //}
 
-                Logger.Info($"发送{sendCount}个包{sendSize}字节，用时{sw.ElapsedMilliseconds}ms");
-                sendCount = 0;
-                sendSize = 0;
-                sw.Reset();
-                Thread.Sleep(TimeSpan.FromMilliseconds(100));
-            }
-        });
-    }
+    //            Logger.Info($"发送{sendCount}个包{sendSize}字节，用时{sw.ElapsedMilliseconds}ms");
+    //            sendCount = 0;
+    //            sendSize = 0;
+    //            sw.Reset();
+    //            Thread.Sleep(TimeSpan.FromMilliseconds(10));
+    //        }
+    //    });
+    //}
 
     private void MockSendData()
     {
         Task.Run(() =>
         {
+            var sw = Stopwatch.StartNew();
             while (IsRunning)
             {
                 MockUtil.MockUpdateActiveProcessPageCount(tcpHelper.MockCount, tcpHelper.MockPageSize, out var pageSize,
                     out var pageCount);
 
+                sw.Restart();
+                int size = 0;
                 for (int pageIndex = 0; pageIndex < pageCount; pageIndex++)
                 {
                     if (!IsRunning)
@@ -275,9 +278,17 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
                                 UpdateTime = TimestampHelper.GetTimestamp()
                             }).ToList()
                     };
-                    SendCommand(response);
+                    //SendCommand(response);
+                    var buffer = response.Serialize(tcpHelper.SystemId);
+                    _client?.Send(buffer, buffer.Length, _udpIpEndPoint);
+                    size += buffer.Length;
+                    //if (pageIndex % 2 == 0)
+                    //{
+                        Thread.Sleep(TimeSpan.FromMicroseconds(900));
+                    //}
                 }
 
+                Logger.Info($"推送实时进程{tcpHelper.MockCount}条，共{size}字节，{sw.ElapsedMilliseconds}ms");
                 Thread.Sleep(TimeSpan.FromMilliseconds(50));
             }
         });
