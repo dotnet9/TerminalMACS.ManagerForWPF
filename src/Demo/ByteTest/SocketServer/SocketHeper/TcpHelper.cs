@@ -1,4 +1,5 @@
-﻿using SocketServer.Mock;
+﻿using Microsoft.Xaml.Behaviors.Layout;
+using SocketServer.Mock;
 using System.Net.Sockets;
 
 namespace SocketServer.SocketHeper;
@@ -11,7 +12,6 @@ public class TcpHelper : BindableBase, ISocketBase
     private Socket? _server;
     private readonly ConcurrentDictionary<string, Socket> _clients = new();
     private readonly ConcurrentDictionary<string, ConcurrentQueue<INetObject>> _receivedCommands = new();
-    private BlockingCollection<INetObject> NeedSendCommands { get; } = new();
 
     #region 公开接口
 
@@ -159,7 +159,6 @@ public class TcpHelper : BindableBase, ISocketBase
 
                     ListenForClients();
                     StartDillReceivedCommand();
-                    SendCommands();
                     MockUpdate();
 
                     Logger.Info($"Tcp服务启动成功：{ipEndPoint}，等待客户端连接");
@@ -201,18 +200,28 @@ public class TcpHelper : BindableBase, ISocketBase
 
     public void SendCommand(INetObject command)
     {
-        if (!IsRunning)
+        if (_clients.IsEmpty)
         {
-            Logger.Error("Tcp服务未运行，无法发送命令");
+            Logger.Error("没有客户端上线，无发送目的地址，无法发送命令");
             return;
         }
 
-        NeedSendCommands.Add(command);
+        var buffer = command.Serialize(SystemId);
+        foreach (var client in _clients)
+        {
+            client.Value.Send(buffer);
+            Thread.Sleep(TimeSpan.FromMilliseconds(1));
+        }
+
+        Logger.Info($"发送命令{command.GetType()}");
     }
 
-    public void SendCommandBuffer(byte[] buffer)
+    public void SendCommand(Socket client, INetObject command)
     {
-        throw new NotImplementedException();
+        var buffer = command.Serialize(SystemId);
+        client.Send(buffer);
+
+        Logger.Info($"发送命令{command.GetType()}");
     }
 
     public bool TryGetResponse(out INetObject? response)
@@ -464,13 +473,12 @@ public class TcpHelper : BindableBase, ISocketBase
         }
     }
 
-    private void DillReceivedCommand(Socket tcpClient, RequestBaseInfo command)
+    private void DillReceivedCommand(Socket client, RequestBaseInfo command)
     {
-        var response = MockUtil.MockBase(command.TaskId);
-        tcpClient.Send(response.Serialize(SystemId));
+        SendCommand(client, MockUtil.MockBase(command.TaskId));
     }
 
-    private void DillReceivedCommand(Socket tcpClient, RequestProcess command)
+    private void DillReceivedCommand(Socket client, RequestProcess command)
     {
         var pageCount = MockUtil.GetPageCount(MockCount, MockPageSize);
         var sendCount = 0;
@@ -486,89 +494,53 @@ public class TcpHelper : BindableBase, ISocketBase
                 Processes = MockUtil.MockProcesses(MockCount, MockPageSize, pageIndex)
             };
             sendCount += response.Processes.Count;
-            tcpClient.Send(response.Serialize(SystemId));
+            SendCommand(client, response);
 
             var msg = response.TaskId == default ? $"推送" : "响应请求";
             Logger.Info(
                 $"{msg}【{response.PageIndex + 1}/{response.PageCount}】进程{response.Processes.Count}条({sendCount}/{response.TotalSize})");
             if (pageIndex % 10 == 0)
             {
-                Thread.Sleep(TimeSpan.FromMilliseconds(50));
+                Thread.Sleep(TimeSpan.FromMilliseconds(1));
             }
         }
     }
 
-    private void DillReceivedCommand(Socket tcpClient)
+    private void DillReceivedCommand(Socket client)
     {
-        tcpClient.Send(new Heartbeat().Serialize(SystemId));
+        SendCommand(client, new Heartbeat());
         HeartbeatTime = DateTime.Now;
-    }
-
-    private void SendCommands()
-    {
-        Task.Run(() =>
-        {
-            while (IsRunning)
-            {
-                if (!NeedSendCommands.TryTake(out var command, TimeSpan.FromMilliseconds(100)) || !IsRunning)
-                {
-                    Thread.Sleep(TimeSpan.FromMilliseconds(50));
-                    continue;
-                }
-
-                var needRemoveKeys = new List<string>();
-                try
-                {
-                    foreach (var client in _clients)
-                    {
-                        var isDisconnected = client.Value.Poll(1, SelectMode.SelectRead);
-                        if (isDisconnected)
-                        {
-                            needRemoveKeys.Add(client.Key);
-                            continue;
-                        }
-
-                        client.Value.Send(command.Serialize(SystemId));
-                        SendTime = DateTime.Now;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    NeedSendCommands.Add(command);
-                    Logger.Error($"发送命令{command.GetType().Name}失败，将排队重新发送: {ex.Message}");
-                }
-
-                if (needRemoveKeys.Count > 0)
-                {
-                    needRemoveKeys.ForEach(RemoveClient);
-                }
-            }
-        });
     }
 
     private void MockUpdate()
     {
         Task.Run(() =>
         {
+            var isUpdateAll = false;
             while (IsRunning)
             {
-                if (_clients?.Count > 0)
-                {
-                    UpdateData();
-                }
+                UpdateAllData(isUpdateAll);
+                isUpdateAll = !isUpdateAll;
 
-                Thread.Sleep(TimeSpan.FromMinutes(2));
+                Thread.Sleep(TimeSpan.FromMinutes(4));
             }
         });
     }
 
-    public void UpdateData()
+    public void UpdateAllData(bool isUpdateAll)
     {
-        var updatePoints = new UpdateProcess()
+        if (isUpdateAll)
+        {
+            SendCommand(new ChangeProcess());
+            Logger.Info("====TCP推送结构变化通知====");
+            return;
+        }
+
+        SendCommand(new UpdateProcess()
         {
             Processes = MockUtil.MockProcesses(MockCount, MockPageSize)
-        };
-        SendCommand(updatePoints);
+        });
+        Logger.Info("====TCP推送更新通知====");
     }
 
     #endregion

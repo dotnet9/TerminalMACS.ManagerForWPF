@@ -1,4 +1,6 @@
-﻿namespace SocketClient.SocketHeper;
+﻿using Microsoft.Xaml.Behaviors.Layout;
+
+namespace SocketClient.SocketHeper;
 
 public class TcpHelper : BindableBase, ISocketBase
 {
@@ -9,11 +11,6 @@ public class TcpHelper : BindableBase, ISocketBase
     /// 接收命令列表
     /// </summary>
     private readonly BlockingCollection<INetObject> _receivedCommands = new();
-
-    /// <summary>
-    /// 需要发送的命令
-    /// </summary>
-    private readonly BlockingCollection<INetObject> _needSendCommands = new();
 
     #region 公开接口
 
@@ -150,8 +147,7 @@ public class TcpHelper : BindableBase, ISocketBase
                     _client.Connect(ipEndPoint);
                     IsRunning = true;
 
-                    ReceiveCommand();
-                    SendCommands();
+                    ListenForServer();
 
                     Logger.Info($"连接Tcp服务成功");
                     break;
@@ -193,16 +189,18 @@ public class TcpHelper : BindableBase, ISocketBase
     {
         if (!IsRunning)
         {
-            Logger.Error("Tcp服务未运行，无法发送命令");
+            Logger.Error("Tcp服务未连接，无法发送命令");
             return;
         }
 
-        _needSendCommands.Add(command);
-    }
+        var buffer = command.Serialize(SystemId);
+        _client!.Send(buffer);
+        if (command is Heartbeat)
+        {
+            SendHeartbeatTime = DateTime.Now;
+        }
 
-    public void SendCommandBuffer(byte[] buffer)
-    {
-        throw new NotImplementedException();
+        Logger.Info($"发送命令{command.GetType()}");
     }
 
     public bool TryGetResponse(out INetObject? response)
@@ -221,7 +219,7 @@ public class TcpHelper : BindableBase, ISocketBase
 
     #region 私有方法
 
-    private void ReceiveCommand()
+    private void ListenForServer()
     {
         Task.Run(() =>
         {
@@ -336,6 +334,10 @@ public class TcpHelper : BindableBase, ISocketBase
         {
             command = buffer.Deserialize<UpdateProcess>();
         }
+        else if (netObjectHeadInfo.IsNetObject<ChangeProcess>())
+        {
+            command = buffer.Deserialize<ChangeProcess>();
+        }
         else if (netObjectHeadInfo.IsNetObject<UpdateActiveProcess>())
         {
             command = buffer.Deserialize<UpdateActiveProcess>();
@@ -352,36 +354,6 @@ public class TcpHelper : BindableBase, ISocketBase
         }
 
         _receivedCommands.Add(command);
-    }
-
-    private void SendCommands()
-    {
-        Task.Run(() =>
-        {
-            while (IsRunning)
-            {
-                if (!_needSendCommands.TryTake(out var command, TimeSpan.FromMilliseconds(100)))
-                {
-                    Thread.Sleep(TimeSpan.FromMilliseconds(50));
-                    continue;
-                }
-
-                try
-                {
-                    _client?.Send(command.Serialize(SystemId));
-                    SendTime = DateTime.Now;
-                    if (command is Heartbeat)
-                    {
-                        SendHeartbeatTime = SendTime;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _needSendCommands.Add(command);
-                    Logger.Error($"发送命令{command.GetType().Name}失败，将排队重新发送: {ex.Message}");
-                }
-            }
-        });
     }
 
     #endregion

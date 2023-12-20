@@ -32,12 +32,12 @@ public class MainViewModel : BindableBase
         HandleRefreshCommandAsync,
         () => TcpHelper.IsRunning).ObservesProperty(() => TcpHelper.IsRunning);
 
-    private IAsyncCommand? _udpateCommand;
+    private IAsyncCommand? _updateCommand;
 
     /// <summary>
     /// 更新数据
     /// </summary>
-    public IAsyncCommand UpdateCommand => _udpateCommand ??= new AsyncDelegateCommand(
+    public IAsyncCommand UpdateCommand => _updateCommand ??= new AsyncDelegateCommand(
         HandleUpdateCommandAsync,
         () => TcpHelper.IsRunning).ObservesProperty(() => TcpHelper.IsRunning);
 
@@ -83,7 +83,7 @@ public class MainViewModel : BindableBase
             return Task.CompletedTask;
         }
 
-        TcpHelper.SendCommand(MockUtil.MockBase());
+        TcpHelper.UpdateAllData(true);
         return Task.CompletedTask;
     }
 
@@ -95,7 +95,7 @@ public class MainViewModel : BindableBase
             return Task.CompletedTask;
         }
 
-        TcpHelper.UpdateData();
+        TcpHelper.UpdateAllData(false);
         return Task.CompletedTask;
     }
 

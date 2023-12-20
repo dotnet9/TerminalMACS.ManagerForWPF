@@ -168,11 +168,6 @@ public class UdpHelper : BindableBase, ISocketBase
     {
     }
 
-    public void SendCommandBuffer(byte[] buffer)
-    {
-        throw new NotImplementedException();
-    }
-
     public bool TryGetResponse(out INetObject? response)
     {
         var result = _receivedResponse.TryTake(out var updateActiveProcess, TimeSpan.FromMilliseconds(100));

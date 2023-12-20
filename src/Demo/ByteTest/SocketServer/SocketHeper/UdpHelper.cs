@@ -184,11 +184,6 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
         NeedSendCommands.Add(command);
     }
 
-    public void SendCommandBuffer(byte[] buffer)
-    {
-        throw new NotImplementedException();
-    }
-
     public bool TryGetResponse(out INetObject? response)
     {
         response = null;

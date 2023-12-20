@@ -100,9 +100,9 @@ public class MainViewModel : BindableBase
             return Task.CompletedTask;
         }
 
+        ClearData();
         TcpHelper.SendCommand(new RequestBaseInfo { TaskId = TcpHelper.GetNewTaskId() });
         Logger.Info("发送刷新命令");
-        ClearData();
         return Task.CompletedTask;
     }
 
@@ -116,7 +116,7 @@ public class MainViewModel : BindableBase
     private void ClearData()
     {
         _receivedProcesses.Clear();
-        Invoke(() => DisplayProcesses.Clear());
+        Invoke(DisplayProcesses.Clear);
     }
 
 
@@ -153,23 +153,26 @@ public class MainViewModel : BindableBase
         switch (command)
         {
             case ResponseBaseInfo responseBase:
-                ReadResponse(responseBase);
+                ReadTcpData(responseBase);
                 break;
             case ResponseProcess responseProcess:
-                ReadResponse(responseProcess);
+                ReadTcpData(responseProcess);
                 break;
             case UpdateProcess updateProcess:
-                ReadResponse(updateProcess);
+                ReadTcpData(updateProcess);
+                break;
+            case ChangeProcess _:
+                HandleRefreshCommand();
                 break;
             case Heartbeat responseHeartbeat:
-                ReadResponse(responseHeartbeat);
+                ReadTcpData(responseHeartbeat);
                 break;
             default:
                 throw new Exception($"视图未处理新的数据包{command!.GetType().Name}");
         }
     }
 
-    private void ReadResponse(ResponseBaseInfo response)
+    private void ReadTcpData(ResponseBaseInfo response)
     {
         var oldBaseInfo = BaseInfo;
         BaseInfo =
@@ -185,12 +188,12 @@ public class MainViewModel : BindableBase
         ClearData();
     }
 
-    private void ReadResponse(ResponseProcess response)
+    private void ReadTcpData(ResponseProcess response)
     {
         _receivedResponseProcesses.Add(response);
     }
 
-    private void ReadResponse(UpdateProcess response)
+    private void ReadTcpData(UpdateProcess response)
     {
         response.Processes?.ForEach(updateProcess =>
         {
@@ -206,7 +209,7 @@ public class MainViewModel : BindableBase
         Logger.Info($"更新数据{response.Processes?.Count}条");
     }
 
-    private void ReadResponse(Heartbeat response)
+    private void ReadTcpData(Heartbeat response)
     {
     }
 

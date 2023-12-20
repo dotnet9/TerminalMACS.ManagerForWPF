@@ -37,17 +37,17 @@
 
 使用MessagePack对对象进行二进制压缩，数据包会比常规二进制序列化小，以下是目前使用到的对象列表：
 
-| 对象名              | 对象Id | 对象版本 | 说明               |
-| ------------------- | ------ | -------- | ------------------ |
-| RequestBaseInfo     | 1      | 1        | 请求服务基本信息   |
-| ResponseBaseInfo    | 2      | 1        | 响应服务基本信息   |
-| RequestProcess      | 3      | 1        | 请求进程           |
-| ResponseProcess     | 4      | 1        | 响应进程           |
-| UpdateProcess       | 5      | 1        | 更新进程           |
-| UpdateActiveProcess | 6      | 1        | 更新进程常变化数据 |
-|                     |        |          |                    |
-|                     |        |          |                    |
-| Heartbeat           | 255    | 1        | TCP心跳包          |
+| 对象名              | 对象Id | 对象版本 | 说明                         |
+| ------------------- | ------ | -------- | ---------------------------- |
+| RequestBaseInfo     | 1      | 1        | 请求服务基本信息             |
+| ResponseBaseInfo    | 2      | 1        | 响应服务基本信息             |
+| RequestProcess      | 3      | 1        | 请求进程                     |
+| ResponseProcess     | 4      | 1        | 响应进程                     |
+| UpdateProcess       | 5      | 1        | 更新进程                     |
+| UpdateActiveProcess | 6      | 1        | 更新进程常变化数据           |
+| ChangeProcess       | 7      | 1        | 进程结构变化：增加、减少进程 |
+|                     |        |          |                              |
+| Heartbeat           | 255    | 1        | TCP心跳包                    |
 
 #### 2.1.2. 网络对象定义
 
@@ -136,3 +136,15 @@
 | PowerUsage      | byte     | 电源使用情况     |
 | PowerUsageTrend | byte     | 电源使用情况趋势 |
 | UpdateTime      | long     | 更新时间         |
+
+##### ChangeProcess
+
+| 字段名 | 数据类型 | 说明 |
+| ------ | -------- | ---- |
+|        |          |      |
+
+##### Heartbeat
+
+| 字段名 | 数据类型 | 说明 |
+| ------ | -------- | ---- |
+|        |          |      |
