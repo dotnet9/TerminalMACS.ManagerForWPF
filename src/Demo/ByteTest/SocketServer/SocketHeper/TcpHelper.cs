@@ -1,6 +1,4 @@
-﻿using Microsoft.Xaml.Behaviors.Layout;
-using SocketServer.Mock;
-using System.Net.Sockets;
+﻿using SocketServer.Mock;
 
 namespace SocketServer.SocketHeper;
 
@@ -8,12 +6,11 @@ public class TcpHelper : BindableBase, ISocketBase
 {
     public long SystemId { get; private set; } // 服务端标识，TCP数据接收时保存，用于UDP数据包识别
 
-
     private Socket? _server;
     private readonly ConcurrentDictionary<string, Socket> _clients = new();
-    private readonly ConcurrentDictionary<string, ConcurrentQueue<INetObject>> _receivedCommands = new();
+    private readonly ConcurrentDictionary<string, ConcurrentQueue<INetObject>> _requests = new();
 
-    #region 公开接口
+    #region 公开属性
 
     private string _ip = "127.0.0.1";
 
@@ -135,6 +132,10 @@ public class TcpHelper : BindableBase, ISocketBase
         set => SetProperty(ref _mockPageSize, value);
     }
 
+    #endregion
+
+    #region 公开接口方法
+
     public void Start()
     {
         if (IsStarted)
@@ -158,7 +159,7 @@ public class TcpHelper : BindableBase, ISocketBase
                     IsRunning = true;
 
                     ListenForClients();
-                    StartDillReceivedCommand();
+                    ProcessingRequests();
                     MockUpdate();
 
                     Logger.Info($"Tcp服务启动成功：{ipEndPoint}，等待客户端连接");
@@ -238,7 +239,19 @@ public class TcpHelper : BindableBase, ISocketBase
 
     #endregion
 
-    #region 私有方法
+    #region 接收客户端命令
+
+    private void RemoveClient(Socket tcpClient)
+    {
+        RemoveClient(tcpClient.RemoteEndPoint!.ToString()!);
+    }
+
+    private void RemoveClient(string key)
+    {
+        _clients.TryRemove(key, out _);
+        _requests.TryRemove(key, out _);
+        Logger.Warning($"已清除客户端信息{key}");
+    }
 
     private void ListenForClients()
     {
@@ -269,39 +282,14 @@ public class TcpHelper : BindableBase, ISocketBase
     {
         Task.Run(() =>
         {
-            byte[]? receivedBuffer = null;
             while (IsRunning)
             {
                 try
                 {
-                    // 1、接收数据包
-                    var buffer = new byte[500 * 1024];
-                    var bytesReadLen = tcpClient.Receive(buffer);
-                    ReceiveTime = DateTime.Now;
-                    if (bytesReadLen <= 0)
+                    while (tcpClient.ReadPacket(out var buffer, out var objectInfo))
                     {
-                        continue;
+                        ReadCommand(tcpClient, buffer, objectInfo);
                     }
-
-                    var newBufferLen = (receivedBuffer?.Length ?? 0) + bytesReadLen;
-                    var newAllBuffer = new byte[newBufferLen];
-                    var addBufferIndex = 0;
-                    if (receivedBuffer != null)
-                    {
-                        Buffer.BlockCopy(receivedBuffer, 0, newAllBuffer, 0, receivedBuffer.Length);
-                        addBufferIndex = receivedBuffer.Length;
-                    }
-
-                    Buffer.BlockCopy(buffer, 0, newAllBuffer, addBufferIndex, bytesReadLen);
-                    receivedBuffer = newAllBuffer;
-
-                    // 2、解析数据包
-                    if (receivedBuffer.Length >= SerializeHelper.PacketHeadLen)
-                    {
-                        receivedBuffer = ReceiveCommand(tcpClient, receivedBuffer);
-                    }
-
-                    Thread.Sleep(TimeSpan.FromMilliseconds(1));
                 }
                 catch (SocketException ex)
                 {
@@ -317,55 +305,7 @@ public class TcpHelper : BindableBase, ISocketBase
         });
     }
 
-    private byte[]? ReceiveCommand(Socket tcpClient, byte[] receivedBuffer)
-    {
-        while (IsRunning)
-        {
-            var readIndex = 0;
-            if (!SerializeHelper.ReadHead(receivedBuffer, ref readIndex, out var netObject))
-            {
-                return receivedBuffer;
-            }
-
-            SystemId = netObject!.SystemId;
-
-            // 读取到完整数据包后才解析数据
-            if (receivedBuffer.Length < netObject!.BufferLen)
-            {
-                return receivedBuffer;
-            }
-
-            byte[]? buffer;
-            if (receivedBuffer.Length == netObject.BufferLen)
-            {
-                buffer = receivedBuffer;
-            }
-            else
-            {
-                buffer = new byte[netObject.BufferLen];
-                Buffer.BlockCopy(receivedBuffer, 0, buffer, 0, netObject.BufferLen);
-            }
-
-            // 解析对象
-            ReceiveCommand(tcpClient, buffer, netObject);
-
-            // 除去已经解析的包
-            if (receivedBuffer.Length == netObject.BufferLen)
-            {
-                return default;
-            }
-
-            var newPaketLen = (int)(receivedBuffer.Length - netObject.BufferLen);
-            var newPacket = new byte[newPaketLen];
-
-            Buffer.BlockCopy(receivedBuffer, (int)netObject.BufferLen, newPacket, 0, newPaketLen);
-            return newPacket;
-        }
-
-        return default;
-    }
-
-    private void ReceiveCommand(Socket tcpClient, byte[] buffer, NetObjectHeadInfo netObjectHeadInfo)
+    private void ReadCommand(Socket tcpClient, byte[] buffer, NetObjectHeadInfo netObjectHeadInfo)
     {
         INetObject command;
 
@@ -388,97 +328,81 @@ public class TcpHelper : BindableBase, ISocketBase
         }
 
         var tcpClientKey = tcpClient.RemoteEndPoint!.ToString()!;
-        if (!_receivedCommands.TryGetValue(tcpClientKey, out ConcurrentQueue<INetObject>? value))
+        if (!_requests.TryGetValue(tcpClientKey, out ConcurrentQueue<INetObject>? value))
         {
             value = new ConcurrentQueue<INetObject>();
-            _receivedCommands[tcpClientKey] = value;
+            _requests[tcpClientKey] = value;
         }
 
         value.Enqueue(command);
     }
 
-    private void RemoveClient(Socket tcpClient)
-    {
-        RemoveClient(tcpClient.RemoteEndPoint!.ToString()!);
-    }
+    #endregion
 
-    private void RemoveClient(string key)
-    {
-        _clients.TryRemove(key, out _);
-        _receivedCommands.TryRemove(key, out _);
-        Logger.Warning($"已清除客户端信息{key}");
-    }
+    #region 处理客户端请求
 
-    private void StartDillReceivedCommand()
+    private void ProcessingRequests()
     {
         Task.Run(() =>
         {
             while (IsRunning)
             {
-                DillReceivedCommand();
-                Thread.Sleep(TimeSpan.FromMilliseconds(1));
+                var needRemoveKeys = new List<string>();
+                foreach (var request in _requests)
+                {
+                    var clientKey = request.Key;
+                    if (!_clients.TryGetValue(clientKey, out var client))
+                    {
+                        needRemoveKeys.Add(clientKey);
+                        continue;
+                    }
+
+                    if (client.Poll(1, SelectMode.SelectRead) && client.Available == 0)
+                    {
+                        needRemoveKeys.Add(clientKey);
+                        continue;
+                    }
+
+                    while (request.Value.TryDequeue(out var command))
+                    {
+                        ProcessingRequest(client, command);
+                    }
+                }
+
+                if (needRemoveKeys.Count > 0)
+                {
+                    needRemoveKeys.ForEach(RemoveClient);
+                }
+
+                Thread.Sleep(TimeSpan.FromMilliseconds(10));
             }
         });
     }
 
-    private void DillReceivedCommand()
+    private void ProcessingRequest(Socket tcpClient, INetObject request)
     {
-        var needRemoveKeys = new List<string>();
-        foreach (var clientCommands in _receivedCommands)
-        {
-            var clientKey = clientCommands.Key;
-            if (_clients.TryGetValue(clientKey, out var client))
-            {
-                var isDisconnected = client.Poll(1, SelectMode.SelectRead) && client.Available == 0;
-                if (isDisconnected)
-                {
-                    needRemoveKeys.Add(clientKey);
-                    continue;
-                }
-
-                while (clientCommands.Value.TryDequeue(out var command))
-                {
-                    DillReceivedCommand(client, command);
-                }
-            }
-            else
-            {
-                needRemoveKeys.Add(clientKey);
-            }
-        }
-
-        if (needRemoveKeys.Count > 0)
-        {
-            needRemoveKeys.ForEach(RemoveClient);
-        }
-    }
-
-    private void DillReceivedCommand(Socket tcpClient, INetObject command)
-    {
-        switch (command)
+        switch (request)
         {
             case RequestBaseInfo requestBaseInfo:
-                DillReceivedCommand(tcpClient, requestBaseInfo);
+                ProcessingRequest(tcpClient, requestBaseInfo);
                 break;
             case RequestProcess requestProcess:
-                DillReceivedCommand(tcpClient, requestProcess);
+                ProcessingRequest(tcpClient, requestProcess);
                 break;
             case Heartbeat _:
-            {
-                DillReceivedCommand(tcpClient);
+                ProcessingRequest(tcpClient);
                 break;
-            }
             default:
-                throw new Exception($"未处理命令{command.GetType().Name}");
+                throw new Exception($"未处理命令{request.GetType().Name}");
         }
     }
 
-    private void DillReceivedCommand(Socket client, RequestBaseInfo command)
+    private void ProcessingRequest(Socket client, RequestBaseInfo request)
     {
-        SendCommand(client, MockUtil.MockBase(command.TaskId));
+        SendCommand(client, MockUtil.MockBase(request.TaskId));
     }
 
-    private void DillReceivedCommand(Socket client, RequestProcess command)
+    private void ProcessingRequest(Socket client, RequestProcess request)
     {
         var pageCount = MockUtil.GetPageCount(MockCount, MockPageSize);
         var sendCount = 0;
@@ -486,7 +410,7 @@ public class TcpHelper : BindableBase, ISocketBase
         {
             var response = new ResponseProcess()
             {
-                TaskId = command.TaskId,
+                TaskId = request.TaskId,
                 TotalSize = MockCount,
                 PageSize = MockPageSize,
                 PageCount = pageCount,
@@ -499,18 +423,20 @@ public class TcpHelper : BindableBase, ISocketBase
             var msg = response.TaskId == default ? $"推送" : "响应请求";
             Logger.Info(
                 $"{msg}【{response.PageIndex + 1}/{response.PageCount}】进程{response.Processes.Count}条({sendCount}/{response.TotalSize})");
-            if (pageIndex % 10 == 0)
-            {
-                Thread.Sleep(TimeSpan.FromMilliseconds(1));
-            }
+
+            Thread.Sleep(TimeSpan.FromMilliseconds(1));
         }
     }
 
-    private void DillReceivedCommand(Socket client)
+    private void ProcessingRequest(Socket client)
     {
         SendCommand(client, new Heartbeat());
         HeartbeatTime = DateTime.Now;
     }
+
+    #endregion
+
+    #region 更新数据
 
     private void MockUpdate()
     {

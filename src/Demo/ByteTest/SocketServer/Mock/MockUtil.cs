@@ -6,6 +6,7 @@ namespace SocketServer.Mock;
 
 public static class MockUtil
 {
+    public const int UdpSendMilliseconds = 500;
     public static ResponseBaseInfo MockBase(int taskId = default)
     {
         return new ResponseBaseInfo()

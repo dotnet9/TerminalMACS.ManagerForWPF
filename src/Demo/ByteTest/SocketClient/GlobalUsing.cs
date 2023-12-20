@@ -1,4 +1,4 @@
-﻿global using SocketClient.SocketHeper;
+﻿global using SocketClient.SocketHelper;
 global using SocketCore.Logs;
 global using SocketDto;
 global using SocketNetObject;

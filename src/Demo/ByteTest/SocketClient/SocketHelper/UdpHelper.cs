@@ -1,4 +1,4 @@
-﻿namespace SocketClient.SocketHeper;
+﻿namespace SocketClient.SocketHelper;
 
 public class UdpHelper : BindableBase, ISocketBase
 {
@@ -9,7 +9,7 @@ public class UdpHelper : BindableBase, ISocketBase
 
     private readonly BlockingCollection<UpdateActiveProcess> _receivedResponse = new();
 
-    #region 公开接口
+    #region 公开属性
 
     private string _ip = "224.0.0.0";
 
@@ -98,6 +98,10 @@ public class UdpHelper : BindableBase, ISocketBase
         }
     }
 
+    #endregion
+
+    #region 公开接口
+
     public void Start()
     {
         if (IsStarted)
@@ -177,6 +181,8 @@ public class UdpHelper : BindableBase, ISocketBase
 
     #endregion
 
+    #region 接收处理数据
+
     private void ReceiveData()
     {
         Task.Run(() =>
@@ -206,8 +212,6 @@ public class UdpHelper : BindableBase, ISocketBase
                 {
                     Logger.Error($"接收Udp数据异常：{ex.Message}");
                 }
-
-                Thread.Sleep(TimeSpan.FromMilliseconds(1));
             }
         });
     }
@@ -218,7 +222,7 @@ public class UdpHelper : BindableBase, ISocketBase
         {
             while (IsRunning)
             {
-                if (!_receivedBuffers.TryTake(out var buffer, TimeSpan.FromMilliseconds(100)))
+                if (!_receivedBuffers.TryTake(out var buffer, TimeSpan.FromMilliseconds(10)))
                 {
                     Thread.Sleep(TimeSpan.FromMilliseconds(50));
                     continue;
@@ -250,4 +254,6 @@ public class UdpHelper : BindableBase, ISocketBase
             }
         });
     }
+
+    #endregion
 }

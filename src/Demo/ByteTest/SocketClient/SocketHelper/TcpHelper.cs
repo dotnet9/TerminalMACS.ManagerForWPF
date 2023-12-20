@@ -1,18 +1,12 @@
-﻿using Microsoft.Xaml.Behaviors.Layout;
-
-namespace SocketClient.SocketHeper;
+﻿namespace SocketClient.SocketHelper;
 
 public class TcpHelper : BindableBase, ISocketBase
 {
     public long SystemId { get; private set; } // 服务端标识，TCP数据接收时保存，用于UDP数据包识别
     private Socket? _client;
+    private readonly BlockingCollection<INetObject> _responses = new(); //接收命令列表
 
-    /// <summary>
-    /// 接收命令列表
-    /// </summary>
-    private readonly BlockingCollection<INetObject> _receivedCommands = new();
-
-    #region 公开接口
+    #region 公开属性
 
     private string _ip = "127.0.0.1";
 
@@ -126,6 +120,10 @@ public class TcpHelper : BindableBase, ISocketBase
         set => SetProperty(ref _responseHeartbeatTime, value);
     }
 
+    #endregion
+
+    #region 公开接口
+
     public void Start()
     {
         if (IsStarted)
@@ -205,7 +203,7 @@ public class TcpHelper : BindableBase, ISocketBase
 
     public bool TryGetResponse(out INetObject? response)
     {
-        return _receivedCommands.TryTake(out response, TimeSpan.FromMilliseconds(10));
+        return _responses.TryTake(out response, TimeSpan.FromMilliseconds(10));
     }
 
     private static int _taskId = 0;
@@ -217,7 +215,7 @@ public class TcpHelper : BindableBase, ISocketBase
 
     #endregion
 
-    #region 私有方法
+    #region 连接TCP、接收数据
 
     private void ListenForServer()
     {
@@ -228,34 +226,11 @@ public class TcpHelper : BindableBase, ISocketBase
             {
                 try
                 {
-                    // 1、接收数据包
-                    var buffer = new byte[500 * 1024];
-                    var bytesReadLen = _client!.Receive(buffer);
-                    ReceiveTime = DateTime.Now;
-                    if (bytesReadLen <= 0)
+                    while (_client!.ReadPacket(out var buffer, out var objectInfo))
                     {
-                        continue;
+                        ReceiveTime = DateTime.Now;
+                        ReceiveResponse(buffer, objectInfo);
                     }
-
-                    var newBufferLen = (receivedBuffer?.Length ?? 0) + bytesReadLen;
-                    var newAllBuffer = new byte[newBufferLen];
-                    var addBufferIndex = 0;
-                    if (receivedBuffer != null)
-                    {
-                        Buffer.BlockCopy(receivedBuffer, 0, newAllBuffer, 0, receivedBuffer.Length);
-                        addBufferIndex = receivedBuffer.Length;
-                    }
-
-                    Buffer.BlockCopy(buffer, 0, newAllBuffer, addBufferIndex, bytesReadLen);
-                    receivedBuffer = newAllBuffer;
-
-                    // 2、解析数据包
-                    if (receivedBuffer.Length >= SerializeHelper.PacketHeadLen)
-                    {
-                        receivedBuffer = ReceiveCommand(receivedBuffer);
-                    }
-
-                    Thread.Sleep(TimeSpan.FromMilliseconds(1));
                 }
                 catch (SocketException ex)
                 {
@@ -270,55 +245,7 @@ public class TcpHelper : BindableBase, ISocketBase
         });
     }
 
-    private byte[]? ReceiveCommand(byte[] receivedBuffer)
-    {
-        while (IsRunning)
-        {
-            var readIndex = 0;
-            if (!SerializeHelper.ReadHead(receivedBuffer, ref readIndex, out var netObject))
-            {
-                return receivedBuffer;
-            }
-
-            SystemId = netObject!.SystemId;
-
-            // 读取到完整数据包后才解析数据
-            if (receivedBuffer.Length < netObject!.BufferLen)
-            {
-                return receivedBuffer;
-            }
-
-            byte[]? buffer;
-            if (receivedBuffer.Length == netObject.BufferLen)
-            {
-                buffer = receivedBuffer;
-            }
-            else
-            {
-                buffer = new byte[netObject.BufferLen];
-                Buffer.BlockCopy(receivedBuffer, 0, buffer, 0, netObject.BufferLen);
-            }
-
-            // 解析对象
-            ReceiveCommand(buffer, netObject);
-
-            // 除去已经解析的包
-            if (receivedBuffer.Length == netObject.BufferLen)
-            {
-                return default;
-            }
-
-            var newPaketLen = (int)(receivedBuffer.Length - netObject.BufferLen);
-            var newPacket = new byte[newPaketLen];
-
-            Buffer.BlockCopy(receivedBuffer, (int)netObject.BufferLen, newPacket, 0, newPaketLen);
-            return newPacket;
-        }
-
-        return default;
-    }
-
-    private void ReceiveCommand(byte[] buffer, NetObjectHeadInfo netObjectHeadInfo)
+    private void ReceiveResponse(byte[] buffer, NetObjectHeadInfo netObjectHeadInfo)
     {
         INetObject command;
 
@@ -353,7 +280,7 @@ public class TcpHelper : BindableBase, ISocketBase
                 $"非法数据包：{netObjectHeadInfo}");
         }
 
-        _receivedCommands.Add(command);
+        _responses.Add(command);
     }
 
     #endregion
