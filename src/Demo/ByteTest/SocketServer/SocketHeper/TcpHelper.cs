@@ -357,7 +357,7 @@ public class TcpHelper : BindableBase, ISocketBase
                         continue;
                     }
 
-                    if (client.Poll(1, SelectMode.SelectRead) && client.Available == 0)
+                    if (client.Poll(1, SelectMode.SelectRead))
                     {
                         needRemoveKeys.Add(clientKey);
                         continue;

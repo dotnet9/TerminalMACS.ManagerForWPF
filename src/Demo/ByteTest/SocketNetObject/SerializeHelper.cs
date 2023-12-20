@@ -1,4 +1,5 @@
 ﻿using SocketNetObject.Models;
+using System.Collections.Concurrent;
 using System.Reflection;
 using System.Text;
 
@@ -6,7 +7,7 @@ namespace SocketNetObject;
 
 public static class SerializeHelper
 {
-    private static readonly Dictionary<string, List<PropertyInfo>> ObjectPropertyInfos = new();
+    private static readonly ConcurrentDictionary<string, List<PropertyInfo>> ObjectPropertyInfos = new();
 
     private static readonly List<string> ComplexTypeNames =
     [

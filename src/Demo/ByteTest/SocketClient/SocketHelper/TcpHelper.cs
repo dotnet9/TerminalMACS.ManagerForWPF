@@ -221,7 +221,6 @@ public class TcpHelper : BindableBase, ISocketBase
     {
         Task.Run(() =>
         {
-            byte[]? receivedBuffer = null;
             while (IsRunning)
             {
                 try

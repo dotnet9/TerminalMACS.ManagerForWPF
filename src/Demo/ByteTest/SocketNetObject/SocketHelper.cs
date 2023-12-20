@@ -8,15 +8,15 @@ public static class SocketHelper
     public static bool ReadPacket(this Socket socket, out byte[] buffer, out NetObjectHeadInfo netObject)
     {
         // 1、接收数据包
-        var bufferLenBuffer = ReceiveBuffer(socket, 4);
-        var bufferLen = BitConverter.ToInt32(bufferLenBuffer, 0);
+        var lenBuffer = ReceiveBuffer(socket, 4);
+        var bufferLen = BitConverter.ToInt32(lenBuffer, 0);
 
-        var bufferExceptBufferLen = ReceiveBuffer(socket, bufferLen - 4);
+        var exceptLenBuffer = ReceiveBuffer(socket, bufferLen - 4);
 
         buffer = new byte[bufferLen];
 
-        Array.Copy(bufferLenBuffer, buffer, 4);
-        Buffer.BlockCopy(bufferExceptBufferLen, 0, buffer, 4, bufferLen - 4);
+        Array.Copy(lenBuffer, buffer, 4);
+        Buffer.BlockCopy(exceptLenBuffer, 0, buffer, 4, bufferLen - 4);
 
         // 2、解析数据包
         var readIndex = 0;

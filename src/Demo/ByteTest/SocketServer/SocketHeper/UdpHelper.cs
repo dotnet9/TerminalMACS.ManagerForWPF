@@ -202,7 +202,7 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
     {
         var sw = Stopwatch.StartNew();
 
-        MockUtil.MockUpdateActiveProcessPageCount(tcpHelper.MockCount, tcpHelper.MockPageSize, out var pageSize,
+        MockUtil.MockUpdateActiveProcessPageCount(tcpHelper.MockCount, PacketMaxSize, out var pageSize,
             out var pageCount);
 
         int size = 0;
@@ -240,7 +240,7 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
             Thread.Sleep(TimeSpan.FromMilliseconds(0.5));
         }
 
-        Logger.Info($"推送实时数据{tcpHelper.MockCount}条，分{pageCount}包，成功发送{size}字节，{sw.ElapsedMilliseconds}ms");
+        Logger.Info($"推送实时数据{tcpHelper.MockCount}条，单包{pageSize}条分{pageCount}包，成功发送{size}字节，{sw.ElapsedMilliseconds}ms");
     }
 
     #endregion
