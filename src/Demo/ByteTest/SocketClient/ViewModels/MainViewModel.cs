@@ -250,7 +250,8 @@ public class MainViewModel : BindableBase
                             $"{msg}【{response.PageIndex + 1}/{response.PageCount}】进程{processes.Count}条({_receivedProcesses.Count}/{response.TotalSize})");
                     }
 
-                    Invoke(() => DisplayProcesses.AddRange(FilterData(allProcesses)));
+                    var filterData = FilterData(allProcesses);
+                    Invoke(() => DisplayProcesses.AddRange(filterData));
                 }
 
                 Thread.Sleep(TimeSpan.FromMilliseconds(10));
