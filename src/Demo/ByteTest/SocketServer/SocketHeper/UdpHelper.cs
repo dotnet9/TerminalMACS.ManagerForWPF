@@ -200,6 +200,11 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
 
     private void MockSendData(object sender, System.Timers.ElapsedEventArgs e)
     {
+        if (!IsRunning)
+        {
+            return;
+        }
+
         var sw = Stopwatch.StartNew();
 
         MockUtil.MockUpdateActiveProcessPageCount(tcpHelper.MockCount, PacketMaxSize, out var pageSize,
@@ -234,7 +239,7 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
                     }).ToList()
             };
 
-            var buffer = response.Serialize(tcpHelper.SystemId);
+            var buffer = response.SerializeByNative(tcpHelper.SystemId);
             size += _client!.Send(buffer, buffer.Length, _udpIpEndPoint);
 
             Thread.Sleep(TimeSpan.FromMilliseconds(0.5));

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace ByteTest.Core.SerializeUtils;
+namespace ByteTest.Core.SerializeUtils.Helpers;
 
 public class CustomSerializeHelper : ISerializeHelper
 {

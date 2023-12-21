@@ -8,7 +8,6 @@ namespace SocketClient.ViewModels;
 public class MainViewModel : BindableBase
 {
     public Window? Owner { get; set; }
-    private readonly BlockingCollection<ResponseProcess> _receivedResponseProcesses = new();
     private readonly List<ProcessItem> _receivedProcesses = new();
     private Dictionary<int, ProcessItem>? _processIdAndItems;
     public RangObservableCollection<ProcessItem> DisplayProcesses { get; } = new();
@@ -65,7 +64,6 @@ public class MainViewModel : BindableBase
             TcpHelper.Start();
 
             ReceiveTcpData();
-            SynchronizeData();
             SendHeartbeat();
         }
         else
@@ -190,14 +188,35 @@ public class MainViewModel : BindableBase
 
     private void ReadTcpData(ResponseProcess response)
     {
-        _receivedResponseProcesses.Add(response);
+        var processes = response.Processes?.ConvertAll(process => new ProcessItem(process));
+        if (!(processes?.Count > 0))
+        {
+            return;
+        }
+
+        _receivedProcesses.AddRange(processes);
+        var filterData = FilterData(processes);
+        Invoke(() => DisplayProcesses.AddRange(filterData));
+        if (_receivedProcesses.Count == response.TotalSize)
+        {
+            _processIdAndItems = _receivedProcesses.ToDictionary(process => process.PID);
+        }
+
+        var msg = response.TaskId == default ? $"收到推送" : "收到请求响应";
+        Logger.Info(
+            $"{msg}【{response.PageIndex + 1}/{response.PageCount}】进程{processes.Count}条({_receivedProcesses.Count}/{response.TotalSize})");
     }
 
     private void ReadTcpData(UpdateProcess response)
     {
+        if (_processIdAndItems == null)
+        {
+            return;
+        }
+
         response.Processes?.ForEach(updateProcess =>
         {
-            if (_processIdAndItems != null && _processIdAndItems.TryGetValue(updateProcess.PID, out var point))
+            if (_processIdAndItems.TryGetValue(updateProcess.PID, out var point))
             {
                 point.Update(updateProcess);
             }
@@ -211,55 +230,6 @@ public class MainViewModel : BindableBase
 
     private void ReadTcpData(Heartbeat response)
     {
-    }
-
-    private void SynchronizeData()
-    {
-        Task.Run(() =>
-        {
-            while (!TcpHelper.IsRunning)
-            {
-                Thread.Sleep(TimeSpan.FromMilliseconds(10));
-            }
-
-            while (TcpHelper.IsRunning)
-            {
-                var allResponseProcesses = new List<ResponseProcess>();
-                while (_receivedResponseProcesses.TryTake(out var response))
-                {
-                    allResponseProcesses.Add(response);
-                }
-
-                if (allResponseProcesses.Count > 0)
-                {
-                    var allProcesses = new List<ProcessItem>();
-                    foreach (var response in allResponseProcesses)
-                    {
-                        var processes = response.Processes?.ConvertAll(process => new ProcessItem(process));
-                        if (!(processes?.Count > 0))
-                        {
-                            continue;
-                        }
-
-                        _receivedProcesses.AddRange(processes);
-                        allProcesses.AddRange(processes);
-                        if (_receivedProcesses.Count == response.TotalSize)
-                        {
-                            _processIdAndItems = _receivedProcesses.ToDictionary(process => process.PID);
-                        }
-
-                        var msg = response.TaskId == default ? $"收到推送" : "收到请求响应";
-                        Logger.Info(
-                            $"{msg}【{response.PageIndex + 1}/{response.PageCount}】进程{processes.Count}条({_receivedProcesses.Count}/{response.TotalSize})");
-                    }
-
-                    var filterData = FilterData(allProcesses);
-                    Invoke(() => DisplayProcesses.AddRange(filterData));
-                }
-
-                Thread.Sleep(TimeSpan.FromMilliseconds(10));
-            }
-        });
     }
 
     #endregion

@@ -197,8 +197,10 @@ public class TcpHelper : BindableBase, ISocketBase
         {
             SendHeartbeatTime = DateTime.Now;
         }
-
-        Logger.Info($"发送命令{command.GetType()}");
+        else
+        {
+            Logger.Info($"发送命令{command.GetType()}");
+        }
     }
 
     public bool TryGetResponse(out INetObject? response)

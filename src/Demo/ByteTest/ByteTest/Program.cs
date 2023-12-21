@@ -1,4 +1,5 @@
-﻿using ByteTest.Core.Test;
+﻿using BenchmarkDotNet.Running;
+using ByteTest.Core.Test;
 
 // 运行基准测试
 //BenchmarkRunner.Run<BenchmarkTest>();

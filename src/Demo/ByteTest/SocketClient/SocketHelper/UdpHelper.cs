@@ -238,7 +238,7 @@ public class UdpHelper : BindableBase, ISocketBase
                         continue;
                     }
 
-                    var updateActiveProcess = buffer.Deserialize<UpdateActiveProcess>();
+                    var updateActiveProcess = buffer.DeserializeByNative<UpdateActiveProcess>();
 
                     _receivedResponse.Add(updateActiveProcess);
                 }

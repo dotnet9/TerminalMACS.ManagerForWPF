@@ -1,4 +1,5 @@
-﻿using SocketServer.Mock;
+﻿using Microsoft.Xaml.Behaviors.Layout;
+using SocketServer.Mock;
 
 namespace SocketServer.SocketHeper;
 
@@ -219,10 +220,14 @@ public class TcpHelper : BindableBase, ISocketBase
 
     public void SendCommand(Socket client, INetObject command)
     {
+        var sw = Stopwatch.StartNew();
         var buffer = command.Serialize(SystemId);
         client.Send(buffer);
 
-        Logger.Info($"发送命令{command.GetType()}");
+        if (command is not Heartbeat)
+        {
+            Logger.Info($"发送命令{command.GetType()}，{buffer.Length},{sw.ElapsedMilliseconds}ms");
+        }
     }
 
     public bool TryGetResponse(out INetObject? response)
@@ -352,12 +357,6 @@ public class TcpHelper : BindableBase, ISocketBase
                 {
                     var clientKey = request.Key;
                     if (!_clients.TryGetValue(clientKey, out var client))
-                    {
-                        needRemoveKeys.Add(clientKey);
-                        continue;
-                    }
-
-                    if (client.Poll(1, SelectMode.SelectRead))
                     {
                         needRemoveKeys.Add(clientKey);
                         continue;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SocketNetObject;
 
-public static class SerializeHelper
+public static partial class SerializeHelper
 {
     private static readonly ConcurrentDictionary<string, List<PropertyInfo>> ObjectPropertyInfos = new();
 
@@ -20,7 +20,7 @@ public static class SerializeHelper
 
     #region 序列化操作
 
-    public static byte[] Serialize<T>(this T data, long systemId) where T : INetObject
+    public static byte[] SerializeByNative<T>(this T data, long systemId) where T : INetObject
     {
         if (data == null)
         {
@@ -160,7 +160,7 @@ public static class SerializeHelper
 
     #region 反序列化操作
 
-    public static T Deserialize<T>(this byte[] buffer) where T : new()
+    public static T DeserializeByNative<T>(this byte[] buffer) where T : new()
     {
         var bodyBufferLen = buffer.Length - PacketHeadLen;
         using var stream = new MemoryStream(buffer, PacketHeadLen, bodyBufferLen);

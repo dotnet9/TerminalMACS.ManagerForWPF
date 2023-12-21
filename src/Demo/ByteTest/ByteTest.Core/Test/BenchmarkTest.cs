@@ -1,9 +1,11 @@
 ﻿using BenchmarkDotNet.Attributes;
 using ByteTest.Core.Helpers;
 using ByteTest.Core.Models;
+using ByteTest.Core.SerializeUtils;
+using ByteTest.Core.SerializeUtils.Helpers;
+using LoremNET;
 using MessagePack;
 using System.Diagnostics;
-using ByteTest.Core.SerializeUtils;
 
 namespace ByteTest.Core.Test;
 
@@ -22,6 +24,11 @@ public class BenchmarkTest
     /// </summary>
     private static ResponseOrganizations MockData { get; }
 
+    /// <summary>
+    /// 测试数据
+    /// </summary>
+    private static Department MockDpartment { get; }
+
     static BenchmarkTest()
     {
         MockData = new ResponseOrganizations()
@@ -38,23 +45,23 @@ public class BenchmarkTest
                 Departments = Enumerable.Range(2, 10).Select(i => new Department()
                 {
                     Id = i,
-                    Code = $"D{i}",
-                    Name = $"部门{i}",
-                    Description = $"描述{i}",
-                    Location = $"位置{i}",
+                    Code = $"D{Lorem.Words(1, 3)}",
+                    Name = $"部门{Lorem.Words(1, 3)}",
+                    Description = $"描述{Lorem.Words(1, 3)}",
+                    Location = $"位置{Lorem.Words(1, 3)}",
                     EmployeeCount = RandomShared.Next(5, 100),
                     Employees = Enumerable.Range(10, 100).Select(empIndex => new Employee()
                     {
                         Id = empIndex,
-                        Code = $"E{empIndex}",
-                        FirstName = $"名{empIndex}",
-                        LastName = $"姓{empIndex}",
-                        NickName = $"昵称{empIndex}",
+                        Code = $"E{Lorem.Words(1, 3)}",
+                        FirstName = $"名{Lorem.Words(1, 3)}",
+                        LastName = $"姓{Lorem.Words(1, 3)}",
+                        NickName = $"昵称{Lorem.Words(1, 3)}",
                         BirthDate = TimestampHelper.GetTimestamp(
                             DateTime.Now.AddMilliseconds(-1 * RandomShared.Next(500000, 500000000))),
-                        Description = $"描述{empIndex}",
-                        Address = $"地址{empIndex}",
-                        Email = $"邮件{empIndex}@dotnet9.com",
+                        Description = $"描述{Lorem.Words(1, 3)}",
+                        Address = $"地址{Lorem.Words(1, 3)}",
+                        Email = $"邮件{Lorem.Words(1, 3)}@dotnet9.com",
                         PhoneNumber = RandomShared.Next(1000000, 999999999).ToString(),
                         Salary = RandomShared.Next(2000, 100000),
                         DepartmentId = i,
@@ -72,6 +79,39 @@ public class BenchmarkTest
                     TimestampHelper.GetTimestamp(
                         DateTime.Now.AddMilliseconds(-1 * RandomShared.Next(500000, 500000000)))
             }).ToList()
+        };
+
+        MockDpartment = new Department()
+        {
+            Id = DateTime.Now.Millisecond,
+            Code = $"D{Lorem.Words(1, 3)}",
+            Name = $"部门{Lorem.Words(1, 3)}",
+            Description = $"描述{Lorem.Words(1, 3)}",
+            Location = $"位置{Lorem.Words(1, 3)}",
+            EmployeeCount = RandomShared.Next(5, 100),
+            Employees = Enumerable.Range(0, 10000).Select(empIndex => new Employee()
+            {
+                Id = empIndex,
+                Code = $"E{Lorem.Words(1, 3)}",
+                FirstName = $"名{Lorem.Words(1, 3)}",
+                LastName = $"姓{Lorem.Words(1, 3)}",
+                NickName = $"昵称{Lorem.Words(1, 3)}",
+                BirthDate = TimestampHelper.GetTimestamp(
+                    DateTime.Now.AddMilliseconds(-1 * RandomShared.Next(500000, 500000000))),
+                Description = $"描述{Lorem.Words(1, 3)}",
+                Address = $"地址{Lorem.Words(1, 3)}",
+                Email = $"邮件{Lorem.Words(1, 3)}@dotnet9.com",
+                PhoneNumber = RandomShared.Next(1000000, 999999999).ToString(),
+                Salary = RandomShared.Next(2000, 100000),
+                DepartmentId = 3,
+                EntryTime = TimestampHelper.GetTimestamp(
+                    DateTime.Now.AddMilliseconds(-1 * RandomShared.Next(500000, 500000000)))
+            }).ToList(),
+            Budget = RandomShared.Next(2000, 100000) + (decimal)RandomShared.NextDouble(),
+            Value = RandomShared.NextDouble(),
+            CreateTime =
+                TimestampHelper.GetTimestamp(
+                    DateTime.Now.AddMilliseconds(-1 * RandomShared.Next(500000, 500000000)))
         };
     }
 
@@ -95,9 +135,27 @@ public class BenchmarkTest
     }
 
     [Benchmark]
-    public void MessagePackSerialize()
+    public void MessagePackStandardWithCompressionSerializeHelper()
     {
-        RunSerialize(new MessagePackSerializeHelper());
+        RunSerialize(new MessagePackStandardWithCompressionSerializeHelper());
+    }
+
+    [Benchmark]
+    public void MessagePackStandardWithOutCompressionSerializeHelper()
+    {
+        RunSerialize(new MessagePackStandardWithOutCompressionSerializeHelper());
+    }
+
+    [Benchmark]
+    public void MessagePackContractlessStandardResolverWithCompressionSerializeHelper()
+    {
+        RunSerialize(new MessagePackContractlessStandardResolverWithCompressionSerializeHelper());
+    }
+
+    [Benchmark]
+    public void MessagePackContractlessStandardResolverWithOutCompressionSerializeHelper()
+    {
+        RunSerialize(new MessagePackContractlessStandardResolverWithOutCompressionSerializeHelper());
     }
 
 
@@ -111,7 +169,10 @@ public class BenchmarkTest
         {
             new CustomSerializeHelper(),
             new ProtoBufSerializeHelper(),
-            new MessagePackSerializeHelper(),
+            new MessagePackStandardWithCompressionSerializeHelper(),
+            new MessagePackStandardWithOutCompressionSerializeHelper(),
+            new MessagePackContractlessStandardResolverWithCompressionSerializeHelper(),
+            new MessagePackContractlessStandardResolverWithOutCompressionSerializeHelper(),
         };
         if (moreHelpers?.Count() > 0)
         {
@@ -126,18 +187,18 @@ public class BenchmarkTest
     {
         Stopwatch sw = Stopwatch.StartNew();
 
-        var buffer = helper.Serialize(MockData);
+        var buffer = helper.Serialize(MockDpartment);
 
         sw.Stop();
         Log($"{helper.GetType().Name} Serialize {sw.ElapsedMilliseconds}ms {buffer.Length}byte");
 
         sw.Restart();
 
-        var data = helper.Deserialize<ResponseOrganizations>(buffer);
+        var data = helper.Deserialize<Department>(buffer);
 
         sw.Stop();
 
-        Log($"{helper.GetType().Name} Deserialize {sw.ElapsedMilliseconds}ms {data?.Organizations?.Count}项");
+        Log($"{helper.GetType().Name} Deserialize {sw.ElapsedMilliseconds}ms {data?.Employees?.Count}项");
     }
 
     private static void Log(string log)
