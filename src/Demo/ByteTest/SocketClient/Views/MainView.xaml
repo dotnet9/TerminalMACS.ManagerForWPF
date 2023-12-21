@@ -152,12 +152,16 @@
                     Header="电源使用情况趋势" />
                 <DataGridTextColumn
                     Width="170"
-                    Binding="{Binding LastUpdateTime, Mode=OneWay}"
+                    Binding="{Binding LastUpdateTime,StringFormat=yyyy-MM-dd HH:mm:ss fff, Mode=OneWay}"
                     Header="上次更新时间" />
                 <DataGridTextColumn
                     Width="170"
-                    Binding="{Binding UpdateTime, Mode=OneWay}"
+                    Binding="{Binding UpdateTime,StringFormat=yyyy-MM-dd HH:mm:ss fff, Mode=OneWay}"
                     Header="更新时间" />
+                <DataGridTextColumn Header="上次视图更新时间" Width="170"
+                                    Binding="{Binding LastViewUpdateTime,StringFormat=yyyy-MM-dd HH:mm:ss fff, Mode=OneWay}" />
+                <DataGridTextColumn Header="视图更新时间" Width="170"
+                                    Binding="{Binding ViewUpdateTime,StringFormat=yyyy-MM-dd HH:mm:ss fff, Mode=OneWay}" />
             </DataGrid.Columns>
             <DataGrid.RowStyle>
                 <Style TargetType="{x:Type DataGridRow}">

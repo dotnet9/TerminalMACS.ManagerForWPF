@@ -158,26 +158,61 @@ public class ProcessItem : BindableBase
         set => SetProperty(ref _powerUsageTrend, value);
     }
 
-    private string? _lastUpdateTime;
+    private DateTime _lastUpdateTime;
 
     /// <summary>
     /// 上次更新时间
     /// </summary>
-    public string? LastUpdateTime
+    public DateTime LastUpdateTime
     {
         get => _lastUpdateTime;
         set => SetProperty(ref _lastUpdateTime, value);
     }
 
-    private string? _updateTime;
+    private DateTime _updateTime;
 
     /// <summary>
     /// 更新时间
     /// </summary>
-    public string? UpdateTime
+    public DateTime UpdateTime
     {
         get => _updateTime;
         set => SetProperty(ref _updateTime, value);
+    }
+
+
+    private DateTime _lastViewUpdateTime;
+
+    /// <summary>
+    /// 上次视图更新时间
+    /// </summary>
+    public DateTime LastViewUpdateTime
+    {
+        get => _lastViewUpdateTime;
+        set
+        {
+            if (value != _lastViewUpdateTime)
+            {
+                SetProperty(ref _lastViewUpdateTime, value);
+            }
+        }
+    }
+
+    private DateTime _viewUpdateTime;
+
+    /// <summary>
+    /// 视图更新时间
+    /// </summary>
+    public DateTime ViewUpdateTime
+    {
+        get => _viewUpdateTime;
+        set
+        {
+            if (value != _viewUpdateTime)
+            {
+                SetProperty(ref _viewUpdateTime, value);
+            }
+        }
     }
 
     public ProcessItem()
@@ -209,8 +244,8 @@ public class ProcessItem : BindableBase
             .Description();
         PowerUsageTrend = ((ProcessPowerUsage)Enum.Parse(typeof(ProcessPowerUsage), process.PowerUsageTrend.ToString()))
             .Description();
-        LastUpdateTime = process.LastUpdateTime.ToDateTime().ToString("yyyy-MM-dd HH:mm:ss fff");
-        UpdateTime = process.UpdateTime.ToDateTime().ToString("yyyy-MM-dd HH:mm:ss fff");
+        LastUpdateTime = process.LastUpdateTime.ToDateTime();
+        UpdateTime = process.UpdateTime.ToDateTime();
     }
 
     public void Update(ActiveProcess process)
@@ -227,6 +262,10 @@ public class ProcessItem : BindableBase
         PowerUsageTrend = ((ProcessPowerUsage)Enum.Parse(typeof(ProcessPowerUsage), process.PowerUsageTrend.ToString()))
             .Description();
         LastUpdateTime = UpdateTime;
-        UpdateTime = process.UpdateTime.ToDateTime().ToString("yyyy-MM-dd HH:mm:ss fff");
+        UpdateTime = process.UpdateTime.ToDateTime();
+
+
+        LastViewUpdateTime = ViewUpdateTime;
+        ViewUpdateTime = DateTime.Now;
     }
 }

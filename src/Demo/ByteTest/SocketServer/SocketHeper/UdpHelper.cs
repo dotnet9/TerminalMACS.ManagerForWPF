@@ -192,6 +192,20 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
 
     private void MockSendData()
     {
+        Task.Run(() =>
+        {
+            while (IsRunning)
+            {
+                var sw = Stopwatch.StartNew();
+
+                MockUtil.MockUpdateProcess(tcpHelper.MockCount);
+                sw.Stop();
+
+                Logger.Info($"更新模拟实时数据{sw.ElapsedMilliseconds}ms");
+                Thread.Sleep(TimeSpan.FromMilliseconds(MockUtil.UdpUpdateMilliseconds));
+            }
+        });
+
         _sendDataTimer = new System.Timers.Timer();
         _sendDataTimer.Interval = MockUtil.UdpSendMilliseconds;
         _sendDataTimer.Elapsed += MockSendData;
@@ -220,23 +234,7 @@ public class UdpHelper(TcpHelper tcpHelper) : BindableBase, ISocketBase
 
             var response = new UpdateActiveProcess
             {
-                Processes = Enumerable
-                    .Range(pageIndex * pageSize,
-                        MockUtil.GetDataCount(tcpHelper.MockCount, pageSize, pageIndex))
-                    .Select(index => new ActiveProcess()
-                    {
-                        PID = index + 1,
-                        CPUUsage = Random.Shared.NextDouble(),
-                        MemoryUsage = Random.Shared.NextDouble(),
-                        DiskUsage = Random.Shared.NextDouble(),
-                        NetworkUsage = Random.Shared.NextDouble(),
-                        GPU = Random.Shared.NextDouble(),
-                        PowerUsage =
-                            (byte)(Random.Shared.Next(0, Enum.GetNames(typeof(ProcessPowerUsage)).Length)),
-                        PowerUsageTrend =
-                            (byte)(Random.Shared.Next(0, Enum.GetNames(typeof(ProcessPowerUsage)).Length)),
-                        UpdateTime = TimestampHelper.GetTimestamp()
-                    }).ToList()
+                Processes = MockUtil.MockUpdateProcess(tcpHelper.MockCount, pageSize, pageIndex)
             };
 
             var buffer = response.SerializeByNative(tcpHelper.SystemId);

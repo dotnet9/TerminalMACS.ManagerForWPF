@@ -61,6 +61,12 @@
                     Foreground="{markup:If {Binding TcpHelper.IsStarted},
                    {x:Static Brushes.Red},
                    {x:Static Brushes.Green}}" />
+                <Button
+                    Command="{Binding MockDataCommand}"
+                    Content="生成模拟数据"
+                    Foreground="{markup:If {Binding TcpHelper.IsStarted},
+   {x:Static Brushes.Red},
+   {x:Static Brushes.Green}}" />
             </StackPanel>
         </GroupBox>
         <GroupBox Header="Udp组播配置" Grid.Row="1">

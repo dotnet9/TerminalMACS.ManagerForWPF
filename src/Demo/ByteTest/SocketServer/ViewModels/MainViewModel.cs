@@ -15,6 +15,15 @@ public class MainViewModel : BindableBase
     public IAsyncCommand RunTcpCommand =>
         _runTcpCommand ??= new AsyncDelegateCommand(HandleRunTcpCommandCommandAsync);
 
+
+    private IAsyncCommand? _mockDataCommand;
+
+    /// <summary>
+    /// 生成模拟数据
+    /// </summary>
+    public IAsyncCommand MockDataCommand =>
+        _mockDataCommand ??= new AsyncDelegateCommand(HandleMockDataCommandAsync);
+
     private IAsyncCommand? _runUdpMulticastCommand;
 
     /// <summary>
@@ -59,6 +68,11 @@ public class MainViewModel : BindableBase
         }
 
         return Task.CompletedTask;
+    }
+
+    private Task HandleMockDataCommandAsync()
+    {
+        return MockUtil.MockAllProcess(TcpHelper.MockCount);
     }
 
     private Task HandleRunUdpMulticastCommandAsync()
