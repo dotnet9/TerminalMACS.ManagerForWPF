@@ -243,3 +243,6 @@ src/Demo/ByteTest/SocketCore/obj/
 src/Demo/ByteTest/SocketDto/obj/
 src/Demo/ByteTest/SocketServer/obj/
 src/Demo/ByteTest/SocketNetObject/obj/
+src/Demo/DynamicEvents/Publish/
+src/Demo/DynamicEvents/RegisterThirdLibraryEvent/obj/
+src/Demo/DynamicEvents/ThirdLibrary/obj/
