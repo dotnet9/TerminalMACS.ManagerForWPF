@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dotnet9WPFControls" Version="0.1.0-preview.2" />
-    <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
+    <PackageReference Include="Dotnet9WPFControls" Version="0.1.0-preview.3" />
+    <PackageReference Include="Prism.DryIoc" Version="9.0.401-pre" />
   </ItemGroup>
 
 </Project>

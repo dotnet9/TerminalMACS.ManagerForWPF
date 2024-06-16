@@ -132,10 +132,10 @@
   <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="2.1.0-ci358" />
     <PackageReference Include="MaterialDesignThemes" Version="4.7.0-ci358" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2-beta2" />
-    <PackageReference Include="NPOI" Version="2.6.0-rc-3" />
-    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.122" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NPOI" Version="2.7.0" />
+    <PackageReference Include="Prism.Wpf" Version="9.0.401-pre" />
   </ItemGroup>
   <ItemGroup>
     <None Include="I18nResources\Language.cs">

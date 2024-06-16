@@ -1,11 +1,7 @@
-﻿using Prism.Ioc;
-using Prism.Modularity;
-using Prism.Regions;
-using TerminalMACS.Infrastructure.UI;
+﻿using TerminalMACS.Infrastructure.UI;
 using TerminalMACS.Infrastructure.UI.Modularity;
 using TerminalMACS.TestDemo.I18nResources;
 using TerminalMACS.TestDemo.Views;
-using Unity;
 using WpfExtensions.Xaml;
 
 namespace TerminalMACS.TestDemo;

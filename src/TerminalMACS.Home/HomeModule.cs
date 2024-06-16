@@ -1,11 +1,7 @@
-﻿using Prism.Ioc;
-using Prism.Modularity;
-using Prism.Regions;
-using TerminalMACS.Home.I18nResources;
+﻿using TerminalMACS.Home.I18nResources;
 using TerminalMACS.Home.Views;
 using TerminalMACS.Infrastructure.UI;
 using TerminalMACS.Infrastructure.UI.Modularity;
-using Unity;
 using WpfExtensions.Xaml;
 
 namespace TerminalMACS.Home;

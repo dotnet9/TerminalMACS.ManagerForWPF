@@ -1,11 +1,7 @@
-﻿using Prism.Ioc;
-using Prism.Modularity;
-using Prism.Regions;
-using TerminalMACS.Infrastructure.UI;
+﻿using TerminalMACS.Infrastructure.UI;
 using TerminalMACS.Infrastructure.UI.Modularity;
 using TerminalMACS.Server.I18nResources;
 using TerminalMACS.Server.Views;
-using Unity;
 using WpfExtensions.Xaml;
 
 namespace TerminalMACS.Server;

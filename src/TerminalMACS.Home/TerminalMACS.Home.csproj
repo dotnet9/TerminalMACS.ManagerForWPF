@@ -14,11 +14,11 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AduSkin" Version="1.1.1.9" />
-    <PackageReference Include="HandyControl" Version="3.3.0" />
+    <PackageReference Include="HandyControl" Version="3.5.1" />
     <PackageReference Include="MaterialDesignColors" Version="2.1.0-ci358" />
     <PackageReference Include="MaterialDesignThemes" Version="4.7.0-ci358" />
     <PackageReference Include="Panuon.UI.Silver" Version="2.2.20" />
-    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+    <PackageReference Include="Prism.Wpf" Version="9.0.401-pre" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />

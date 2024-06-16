@@ -15,7 +15,7 @@
   <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="2.1.0-ci358" />
     <PackageReference Include="MaterialDesignThemes" Version="4.7.0-ci358" />
-    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+    <PackageReference Include="Prism.Wpf" Version="9.0.401-pre" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
