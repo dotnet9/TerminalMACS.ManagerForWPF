@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:markup="clr-namespace:WpfExtensions.Xaml.Markup;assembly=WpfExtensions.Xaml"
-        xmlns:i18NResources="clr-namespace:TerminalMACS.TestDemo.I18nResources"
+        xmlns:markup="https://codewf.com"
+        xmlns:language="clr-namespace:Localization"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -14,7 +14,7 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="{markup:I18n {x:Static i18NResources:Language.MainTabItem_FoodBtnContent}}" Height="550" Width="800"
+        Title="{markup:I18n {x:Static language:Test.FoodBtnContent}}" Height="550" Width="800"
         AllowsTransparency="True" WindowStyle="None"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         MouseLeftButtonDown="DragWindow_MouseLeftButtonDown">
@@ -43,7 +43,7 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <TextBlock Text="{markup:I18n {x:Static i18NResources:Language.FoodAppLoginView_IsLogining}}"
+                <TextBlock Text="{markup:I18n {x:Static language:FoodAppLoginView.IsLogining}}"
                            Grid.Row="0" Margin="10"
                            HorizontalAlignment="Center" VerticalAlignment="Center" />
                 <ProgressBar IsIndeterminate="True" Grid.Row="1" Margin="10"
@@ -51,7 +51,7 @@
                 <Button Style="{StaticResource MaterialDesignRaisedButton}"
                         Command="materialDesign:DialogHost.CloseDialogCommand"
                         Grid.Row="2" Margin="0,10,0,0"
-                        Content="{markup:I18n {x:Static i18NResources:Language.FoodAppLoginView_Cancel}}" />
+                        Content="{markup:I18n {x:Static language:FoodAppLoginView.Cancel}}" />
             </Grid>
         </materialDesign:DialogHost.DialogContent>
         <!--#endregion-->
@@ -111,7 +111,7 @@
                     </materialDesign:TransitioningContent.OpeningEffects>
                     <materialDesign:Card>
                         <TextBlock Padding="8" Style="{StaticResource MaterialDesignTextBlock}"
-                                   Text="{markup:I18n {x:Static i18NResources:Language.FoodAppLoginView_MyFoodApp}}" />
+                                   Text="{markup:I18n {x:Static language:FoodAppLoginView.MyFoodApp}}" />
                     </materialDesign:Card>
                 </materialDesign:TransitioningContent>
                 <!--#endregion-->
@@ -177,7 +177,7 @@
                                                  Margin="0,5,10,0"
                                                  Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" />
                         <TextBox x:Name="NameTextBox" Width="140"
-                                 materialDesign:HintAssist.Hint="{markup:I18n {x:Static i18NResources:Language.FoodAppLoginView_UserName}}"
+                                 materialDesign:HintAssist.Hint="{markup:I18n {x:Static language:FoodAppLoginView.UserName}}"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     </StackPanel>
                 </materialDesign:TransitioningContent>
@@ -192,7 +192,7 @@
                         <materialDesign:PackIcon Kind="Key" Width="16" Height="16" Margin="0,5,10,0"
                                                  Foreground="{Binding ElementName=passwordBox,Path=BorderBrush}" />
                         <PasswordBox x:Name="passwordBox"
-                                     materialDesign:HintAssist.Hint="{markup:I18n {x:Static i18NResources:Language.FoodAppLoginView_Password}}"
+                                     materialDesign:HintAssist.Hint="{markup:I18n {x:Static language:FoodAppLoginView.Password}}"
                                      materialDesign:HintAssist.Foreground="Green"
                                      materialDesign:TextFieldAssist.UnderlineBrush="Green"
                                      Width="140"
@@ -208,12 +208,12 @@
                     </materialDesign:TransitioningContent.OpeningEffects>
                     <StackPanel Style="{StaticResource setVisibilityBasedLogin}" Orientation="Horizontal"
                                 HorizontalAlignment="Center">
-                        <CheckBox Content="{markup:I18n {x:Static i18NResources:Language.FoodAppLoginView_RememberMe}}" />
+                        <CheckBox Content="{markup:I18n {x:Static language:FoodAppLoginView.RememberMe}}" />
                         <Button Style="{StaticResource MaterialDesignRaisedButton}"
                                 Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                                 materialDesign:ButtonAssist.CornerRadius="20"
                                 Width="80" Height="40" Margin="120,0,0,0"
-                                Content="{markup:I18n {x:Static i18NResources:Language.FoodAppLoginView_Login}}" />
+                                Content="{markup:I18n {x:Static language:FoodAppLoginView.Login}}" />
                     </StackPanel>
                 </materialDesign:TransitioningContent>
                 <!--#endregion-->

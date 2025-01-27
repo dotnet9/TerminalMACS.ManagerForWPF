@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Localization language="Japanese" description="日語" cultureName="ja-JP">
+	<Test>
+		<Title>テストケース</Title>
+		<AnimatedMenuBtnContent>メニューアニメーション</AnimatedMenuBtnContent>
+		<AppUsageDashboardBtnContent>モバイルアプリダッシュボード</AppUsageDashboardBtnContent>
+		<Dashboard2BtnContent>ダッシュボード2</Dashboard2BtnContent>
+		<DrawerMenuBtnContent>ドロワーメニュー</DrawerMenuBtnContent>
+		<FoodBtnContent>フードアプリログイン</FoodBtnContent>
+		<InstagramRedesignBtnContent>Instagramの再設計</InstagramRedesignBtnContent>
+		<LoginView1BtnContent>シンプルなログインフォーム1</LoginView1BtnContent>
+		<LoginView2BtnContent>シンプルなログインフォーム2</LoginView2BtnContent>
+		<LoLGoalBtnContent>LoL goal</LoLGoalBtnContent>
+		<MenuChangeBtnContent>メニュー切り替え</MenuChangeBtnContent>
+		<MusicPlayer1BtnContent>シンプルな音楽プレーヤー1</MusicPlayer1BtnContent>
+	</Test>
+	<FoodAppLoginView>
+		<Cancel>キャンセル</Cancel>
+		<Fail>ログインに失敗しました。もう一度ログインしてください！</Fail>
+		<IsLogining>ログイン中...</IsLogining>
+		<Login>ログイン</Login>
+		<MyFoodApp>私のフードアプリ</MyFoodApp>
+		<UserName>ユーザー名</UserName>
+		<Password>パスワード</Password>
+		<RememberMe>私を記憶する</RememberMe>
+		<Success>ログイン成功</Success>
+	</FoodAppLoginView>
+</Localization>

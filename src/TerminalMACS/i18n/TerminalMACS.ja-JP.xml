@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Localization language="Japanese" description="日語" cultureName="ja-JP">
+	<CusSplashScreen>
+		<Title>起動画面</Title>
+	</CusSplashScreen>
+	<Login>
+		<Title>ログイン</Title>
+		<DoYouHaveAccount>アカウントを持っていませんか。</DoYouHaveAccount>
+		<CreateAccount>アカウントを作成します。</CreateAccount>
+		<Account>アカウント</Account>
+		<Password>パスワード</Password>
+		<NotLie>嘘をつく必要はありません。</NotLie>
+		<RememberMe>私を覚えておいてください。</RememberMe>
+		<ForgotPassword>パスワードを忘れました。</ForgotPassword>
+		<ThirdLogin>第三者によるログイン</ThirdLogin>
+		<Welcome>ようこそ戻ってきてください。</Welcome>
+		<Slogon>不可能を可能にし、可能を簡単でエレガントにします。</Slogon>
+	</Login>
+	<MainWindow>
+		<Title>多端末リソース管理と検出システム</Title>
+		<Exit>終了</Exit>
+		<About>アバウト</About>
+		<CNBlogs>CNBlogs</CNBlogs>
+		<Contact>連絡先</Contact>
+		<Email>メールアドレス</Email>
+		<Language>言語</Language>
+		<QQGroup>QQグループ</QQGroup>
+		<Setting>設定</Setting>
+		<SourceCode>ソースコード</SourceCode>
+		<SponsorshipAndSupport>スポンサーシップとサポート</SponsorshipAndSupport>
+		<TechSupport>技術サポート</TechSupport>
+		<ThemeColor>テーマカラー</ThemeColor>
+		<TouTiao>今日のヘッドライン</TouTiao>
+		<PushMainWindow2Top>メインウィンドウを開く</PushMainWindow2Top>
+	</MainWindow>
+	<About>
+		<Title>アバウト</Title>
+		<AddAuthorWeChat>QRコードをスキャンして、作者のWeChat IDまたはWeChatグループを追加します。</AddAuthorWeChat>
+		<AddWeChatOfficialAccount>QRコードをスキャンして、WeChat公式アカウント「Dotnet9」をフォローします。</AddWeChatOfficialAccount>
+		<BrowseOpenSourceFramework>オープンソースフレームワークを閲覧する</BrowseOpenSourceFramework>
+		<ContactAuthor>作者に連絡する</ContactAuthor>
+		<JoinQQGroup>クリックしてグループチャットに参加する</JoinQQGroup>
+		<TechExchange>技術交流</TechExchange>
+		<Thanks>オープンソースフレームワークに感謝します。</Thanks>
+	</About>
+</Localization>

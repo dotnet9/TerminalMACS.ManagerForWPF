@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Localization language="Chinese (Traditional)" description="中文繁體" cultureName="zh-Hant">
+	<Client>
+		<Title>客戶端</Title>
+	</Client>
+</Localization>

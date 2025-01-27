@@ -1,8 +1,6 @@
 ﻿using TerminalMACS.Infrastructure.UI;
 using TerminalMACS.Infrastructure.UI.Modularity;
-using TerminalMACS.Server.I18nResources;
 using TerminalMACS.Server.Views;
-using WpfExtensions.Xaml;
 
 namespace TerminalMACS.Server;
 
@@ -14,7 +12,6 @@ public class ServerModule : ModuleBase
 
     public ServerModule(IUnityContainer container, IRegionManager regionManager) : base(container)
     {
-        I18nManager.Instance.Add(UiResource.ResourceManager);
         _regionManager = regionManager;
     }
 

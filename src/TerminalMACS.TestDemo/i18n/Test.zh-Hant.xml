@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Localization language="Chinese (Traditional)" description="中文繁體" cultureName="zh-Hant">
+	<Test>
+		<Title>測試案例</Title>
+		<AnimatedMenuBtnContent>菜單動畫</AnimatedMenuBtnContent>
+		<AppUsageDashboardBtnContent>移動應用儀表盤</AppUsageDashboardBtnContent>
+		<Dashboard2BtnContent>儀表盤2</Dashboard2BtnContent>
+		<DrawerMenuBtnContent>抽屜式菜單</DrawerMenuBtnContent>
+		<FoodBtnContent>美食應用登錄</FoodBtnContent>
+		<InstagramRedesignBtnContent>Instagram重新設計</InstagramRedesignBtnContent>
+		<LoginView1BtnContent>簡單登錄窗體1</LoginView1BtnContent>
+		<LoginView2BtnContent>簡單登錄窗體2</LoginView2BtnContent>
+		<LoLGoalBtnContent>LoL goal</LoLGoalBtnContent>
+		<MenuChangeBtnContent>菜單切換</MenuChangeBtnContent>
+		<MusicPlayer1BtnContent>簡易音樂播放器1</MusicPlayer1BtnContent>
+	</Test>
+	<FoodAppLoginView>
+		<Cancel>取消</Cancel>
+		<Fail>登錄失敗，請重新登錄！</Fail>
+		<IsLogining>正在登錄中...</IsLogining>
+		<Login>登錄</Login>
+		<MyFoodApp>我的美食應用</MyFoodApp>
+		<UserName>用戶名</UserName>
+		<Password>密碼</Password>
+		<RememberMe>記住我</RememberMe>
+		<Success>登錄成功</Success>
+	</FoodAppLoginView>
+</Localization>

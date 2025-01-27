@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Localization language="English" description="English" cultureName="en-US">
+	<CusSplashScreen>
+		<Title>Splash Screen</Title>
+	</CusSplashScreen>
+	<Login>
+		<Title>Login</Title>
+		<DoYouHaveAccount>Don't you have an account?</DoYouHaveAccount>
+		<CreateAccount>Create an account,</CreateAccount>
+		<Account>Account</Account>
+		<Password>Password</Password>
+		<NotLie>There's no need to lie.</NotLie>
+		<RememberMe>Remember me</RememberMe>
+		<ForgotPassword>I forgot my password</ForgotPassword>
+		<ThirdLogin>Third-party login</ThirdLogin>
+		<Welcome>Welcome back</Welcome>
+		<Slogon>Make the impossible possible, and the possible simple and elegant.</Slogon>
+	</Login>
+	<MainWindow>
+		<Title>Multi-terminal Resource Management and Detection System</Title>
+		<Exit>Exit</Exit>
+		<About>About</About>
+		<CNBlogs>CNBlogs</CNBlogs>
+		<Contact>Contact</Contact>
+		<Email>Email</Email>
+		<Language>Language</Language>
+		<QQGroup>QQ Group</QQGroup>
+		<Setting>Settings</Setting>
+		<SourceCode>Source Code</SourceCode>
+		<SponsorshipAndSupport>Sponsorship and Support</SponsorshipAndSupport>
+		<TechSupport>Technical Support</TechSupport>
+		<ThemeColor>Theme Color</ThemeColor>
+		<TouTiao>Today's Headlines</TouTiao>
+		<PushMainWindow2Top>Open the main window</PushMainWindow2Top>
+	</MainWindow>
+	<About>
+		<Title>About</Title>
+		<AddAuthorWeChat>Scan the QR code to add the author's WeChat ID or WeChat group.</AddAuthorWeChat>
+		<AddWeChatOfficialAccount>Scan the QR code to follow the WeChat official account: Dotnet9</AddWeChatOfficialAccount>
+		<BrowseOpenSourceFramework>Browse open source frameworks</BrowseOpenSourceFramework>
+		<ContactAuthor>Contact the author</ContactAuthor>
+		<JoinQQGroup>Click to join the group chat</JoinQQGroup>
+		<TechExchange>Technical exchange</TechExchange>
+		<Thanks>Thanks to the open source frameworks</Thanks>
+	</About>
+</Localization>

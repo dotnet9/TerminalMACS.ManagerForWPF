@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Localization language="Chinese (Traditional)" description="中文繁體" cultureName="zh-Hant">
+	<Home>
+		<Title>首頁</Title>
+		<TimeLine>時間軸</TimeLine>
+		<TestDemoDisplay>優秀界面展示</TestDemoDisplay>
+	</Home>
+	<TimeLine>
+		<AddAbpVNextSeverProject>前期知識準備，添加Abp vNext基礎服務工程</AddAbpVNextSeverProject>
+		<AddEmptyClientApp>添加空移動端客戶端工程</AddEmptyClientApp>
+		<AddNotifyIcon>添加托盤圖標</AddNotifyIcon>
+		<AddWPFManagerProject>確定服務端採用Abp vNext搭建，添加WPF工程</AddWPFManagerProject>
+		<ClientAppBaseInfo>移動客戶端基本信息獲取</ClientAppBaseInfo>
+		<ClientAppCompleteContactRead>移動客戶端完成通訊錄數據讀取</ClientAppCompleteContactRead>
+		<ClientAppVersion1>移動客戶端第一版告一段落，開發其他進程模塊</ClientAppVersion1>
+		<InitializeProject>初始化項目</InitializeProject>
+		<WPFManagerStructureOver>搭建WPF管理端初版，實現動態更改主題色、國際化、本地化、Prism模塊化</WPFManagerStructureOver>
+	</TimeLine>
+</Localization>

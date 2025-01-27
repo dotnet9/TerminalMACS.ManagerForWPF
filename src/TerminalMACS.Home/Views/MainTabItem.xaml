@@ -5,8 +5,8 @@
          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
          xmlns:Metro="clr-namespace:AduSkin.Controls.Metro;assembly=AduSkin"
-         xmlns:markup="clr-namespace:WpfExtensions.Xaml.Markup;assembly=WpfExtensions.Xaml"
-         xmlns:i18NResources="clr-namespace:TerminalMACS.Home.I18nResources"
+         xmlns:markup="https://codewf.com"
+         xmlns:language="clr-namespace:Localization"
          xmlns:child="clr-namespace:TerminalMACS.Home.Views.ChildTabItem"
          mc:Ignorable="d">
     <TabItem.Header>
@@ -19,7 +19,7 @@
             <materialDesign:PackIcon Kind="Home"
                                      Foreground="{StaticResource LightGreyBackgroundBrush}"
                                      HorizontalAlignment="Center" Height="22" Width="22" />
-            <TextBlock Grid.Row="2" Text="{markup:I18n {x:Static i18NResources:Language.MainTabItm_Header}}"
+            <TextBlock Grid.Row="2" Text="{markup:I18n {x:Static language:Home.Title}}"
                        HorizontalAlignment="Center"
                        Foreground="{StaticResource LightGreyBackgroundBrush}" FontSize="10" />
         </Grid>
@@ -31,10 +31,10 @@
                     <Setter Property="HorizontalAlignment" Value="Center" />
                 </Style>
             </Metro:AduTabControl.Resources>
-            <Metro:AduTabItem Header="{markup:I18n {x:Static i18NResources:Language.MainTabItem_TestDemoDisplay}}">
+            <Metro:AduTabItem Header="{markup:I18n {x:Static language:Home.TestDemoDisplay}}">
                 <child:TestDemoDisplay />
             </Metro:AduTabItem>
-            <Metro:AduTabItem Header="{markup:I18n {x:Static i18NResources:Language.MainTabItem_Timeline}}">
+            <Metro:AduTabItem Header="{markup:I18n {x:Static language:Home.TimeLine}}">
                 <child:TerminalMACSTimeLine />
             </Metro:AduTabItem>
         </Metro:AduTabControl>

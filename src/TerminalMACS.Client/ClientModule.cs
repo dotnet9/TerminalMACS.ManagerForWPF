@@ -1,8 +1,6 @@
-﻿using TerminalMACS.Client.I18nResources;
-using TerminalMACS.Client.Views;
+﻿using TerminalMACS.Client.Views;
 using TerminalMACS.Infrastructure.UI;
 using TerminalMACS.Infrastructure.UI.Modularity;
-using WpfExtensions.Xaml;
 
 namespace TerminalMACS.Client;
 
@@ -15,7 +13,6 @@ public class ClientModule : ModuleBase
 
     public ClientModule(IUnityContainer container, IRegionManager regionManager) : base(container)
     {
-        I18nManager.Instance.Add(UiResource.ResourceManager);
         _regionManager = regionManager;
     }
 

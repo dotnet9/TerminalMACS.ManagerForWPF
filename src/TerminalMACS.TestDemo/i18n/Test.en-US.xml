@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Localization language="English" description="English" cultureName="en-US">
+	<Test>
+		<Title>Test Case</Title>
+		<AnimatedMenuBtnContent>Menu Animation</AnimatedMenuBtnContent>
+		<AppUsageDashboardBtnContent>Mobile App Dashboard</AppUsageDashboardBtnContent>
+		<Dashboard2BtnContent>Dashboard 2</Dashboard2BtnContent>
+		<DrawerMenuBtnContent>Drawer Menu</DrawerMenuBtnContent>
+		<FoodBtnContent>Food App Login</FoodBtnContent>
+		<InstagramRedesignBtnContent>Instagram Redesign</InstagramRedesignBtnContent>
+		<LoginView1BtnContent>Simple Login Form 1</LoginView1BtnContent>
+		<LoginView2BtnContent>Simple Login Form 2</LoginView2BtnContent>
+		<LoLGoalBtnContent>LoL goal</LoLGoalBtnContent>
+		<MenuChangeBtnContent>Menu Switch</MenuChangeBtnContent>
+		<MusicPlayer1BtnContent>Simple Music Player 1</MusicPlayer1BtnContent>
+	</Test>
+	<FoodAppLoginView>
+		<Cancel>Cancel</Cancel>
+		<Fail>Login failed. Please log in again!</Fail>
+		<IsLogining>Logging in...</IsLogining>
+		<Login>Login</Login>
+		<MyFoodApp>My Food App</MyFoodApp>
+		<UserName>Username</UserName>
+		<Password>Password</Password>
+		<RememberMe>Remember me</RememberMe>
+		<Success>Login successful</Success>
+	</FoodAppLoginView>
+</Localization>

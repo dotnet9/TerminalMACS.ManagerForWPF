@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Localization language="Japanese" description="日語" cultureName="ja-JP">
+	<Server>
+		<Title>サーバー端</Title>
+	</Server>
+	<ChatTest>
+		<MockSortCount>シミュレーションされたソート番号の数：</MockSortCount>
+		<ExchangeSleepTime>交換スリープ（ミリ秒）：</ExchangeSleepTime>
+		<Init>初期化</Init>
+		<Start>開始</Start>
+	</ChatTest>
+</Localization>

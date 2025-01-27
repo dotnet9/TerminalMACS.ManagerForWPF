@@ -4,8 +4,8 @@
          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-         xmlns:markup="clr-namespace:WpfExtensions.Xaml.Markup;assembly=WpfExtensions.Xaml"
-         xmlns:i18NResources="clr-namespace:TerminalMACS.TestDemo.I18nResources"
+         xmlns:markup="https://codewf.com"
+         xmlns:language="clr-namespace:Localization"
          mc:Ignorable="d">
     <TabItem.Header>
         <Grid>
@@ -17,7 +17,7 @@
             <materialDesign:PackIcon Kind="Server"
                                      Foreground="{StaticResource LightGreyBackgroundBrush}"
                                      HorizontalAlignment="Center" Height="22" Width="22" />
-            <TextBlock Grid.Row="2" Text="{markup:I18n {x:Static i18NResources:Language.MainTabItem_Header}}"
+            <TextBlock Grid.Row="2" Text="{markup:I18n {x:Static language:Test.Title}}"
                        HorizontalAlignment="Center"
                        Foreground="{StaticResource LightGreyBackgroundBrush}" FontSize="10" />
         </Grid>
@@ -44,11 +44,11 @@
                             <Setter Property="materialDesign:ButtonProgressAssist.IsIndeterminate" Value="True" />
                         </Style>
                     </StackPanel.Resources>
-                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_FoodBtnContent}}"
+                    <Button Content="{markup:I18n {x:Static language:Test.FoodBtnContent}}"
                             Click="ShowFoodLoginUI_Click" />
-                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_LoginView1BtnContent}}"
+                    <Button Content="{markup:I18n {x:Static language:Test.LoginView1BtnContent}}"
                             Click="ShowLoginView1_Click" />
-                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_LoginView2BtnContent}}"
+                    <Button Content="{markup:I18n {x:Static language:Test.LoginView2BtnContent}}"
                             Click="ShowLoginView2_Click" />
                     <Button Content="登录窗体3" Click="ShowLoginView3_Click" />
                     <Button Content="登录窗体4" Click="ShowModernLogin_Click" />
@@ -68,15 +68,15 @@
                         </Style>
                     </StackPanel.Resources>
                     <Button
-                        Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_MusicPlayer1BtnContent}}"
+                        Content="{markup:I18n {x:Static language:Test.MusicPlayer1BtnContent}}"
                         Click="ShowMusicPalyer1_Click" />
                     <Button
-                        Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_InstagramRedesignBtnContent}}"
+                        Content="{markup:I18n {x:Static language:Test.InstagramRedesignBtnContent}}"
                         Click="ShowInstagramRedesign_Click" />
                     <Button
                         Content="重新设计Instagram界面"
                         Click="ShowInstagramRedesign2_Click" />
-                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_LoLGoalBtnContent}}"
+                    <Button Content="{markup:I18n {x:Static language:Test.LoLGoalBtnContent}}"
                             Click="ShowLoLGoal_Click" />
                 </StackPanel>
             </materialDesign:Card>
@@ -93,9 +93,9 @@
                         </Style>
                     </StackPanel.Resources>
                     <Button
-                        Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_AppUsageDashboardBtnContent}}"
+                        Content="{markup:I18n {x:Static language:Test.AppUsageDashboardBtnContent}}"
                         Click="ShowAppUseageDashboard_Click" />
-                    <Button Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_Dashboard2BtnContent}}"
+                    <Button Content="{markup:I18n {x:Static language:Test.Dashboard2BtnContent}}"
                             Click="ShowDashboard2_Click" />
                     <Button Content="仪表盘3"
                             Click="ShowDashboard3_Click" />
@@ -120,7 +120,7 @@
                     <materialDesign:Badged Badge="1">
                         <Grid>
                             <Button
-                                Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_DrawerMenuBtnContent}}"
+                                Content="{markup:I18n {x:Static language:Test.DrawerMenuBtnContent}}"
                                 Click="ShowDrawerMenu_Click" />
                         </Grid>
                     </materialDesign:Badged>
@@ -137,14 +137,14 @@
                     <materialDesign:Badged Badge="2">
                         <Grid>
                             <Button
-                                Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_MenuChangeBtnContent}}"
+                                Content="{markup:I18n {x:Static language:Test.MenuChangeBtnContent}}"
                                 Click="ShowMenuChange_Click" />
                         </Grid>
                     </materialDesign:Badged>
                     <materialDesign:Badged Badge="3">
                         <Grid>
                             <Button
-                                Content="{markup:I18n {x:Static i18NResources:Language.MainTabItem_AnimatedMenuBtnContent}}"
+                                Content="{markup:I18n {x:Static language:Test.AnimatedMenuBtnContent}}"
                                 Click="ShowAnimatedMenu_Click" />
                         </Grid>
                     </materialDesign:Badged>

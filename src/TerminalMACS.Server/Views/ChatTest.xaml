@@ -2,6 +2,8 @@
     x:Class="TerminalMACS.Server.Views.ChatTest"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:markup="https://codewf.com"
+    xmlns:language="clr-namespace:Localization"
     xmlns:cusControls="clr-namespace:TerminalMACS.Controls.Controls;assembly=TerminalMACS.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -17,13 +19,13 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Orientation="Horizontal">
-            <TextBlock Text="模拟排序数字个数：" />
+            <TextBlock Text="{markup:I18n {x:Static language:ChatTest.MockSortCount}}" />
             <TextBox
                 x:Name="tbTestNumberCount"
                 Width="50"
                 Margin="0,0,20,0"
                 Text="20" />
-            <TextBlock Text="交换休眠(毫秒）：" />
+            <TextBlock Text="{markup:I18n {x:Static language:ChatTest.ExchangeSleepTime}}" />
             <TextBox
                 x:Name="tbSleepMs"
                 Width="50"
@@ -32,12 +34,12 @@
             <Button
                 x:Name="btnInitNumber"
                 Click="InitNumber_Click"
-                Content="初始化" />
+                Content="{markup:I18n {x:Static language:ChatTest.Init}}" />
             <Button
                 x:Name="btnBeginSort"
                 Margin="20,0"
                 Click="Begin_Click"
-                Content="开始" />
+                Content="{markup:I18n {x:Static language:ChatTest.Start}}" />
         </StackPanel>
         <Grid Grid.Row="1" Margin="0,0,20,0">
             <Grid.RowDefinitions>

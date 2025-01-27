@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Localization language="Chinese (Simplified)" description="中文简体" cultureName="zh-CN">
+	<Server>
+		<Title>服务端</Title>
+	</Server>
+	<ChatTest>
+		<MockSortCount>模拟排序数字个数：</MockSortCount>
+		<ExchangeSleepTime>交换休眠(毫秒）：</ExchangeSleepTime>
+		<Init>初始化</Init>
+		<Start>开始</Start>
+	</ChatTest>
+</Localization>

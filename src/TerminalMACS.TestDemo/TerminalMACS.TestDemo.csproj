@@ -138,13 +138,6 @@
     <PackageReference Include="Prism.Wpf" Version="9.0.401-pre" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="I18nResources\Language.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Language.tt</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\TerminalMACS.Infrastructure.UI\TerminalMACS.Infrastructure.UI.csproj" />
     <ProjectReference Include="..\TerminalMACS.Infrastructure\TerminalMACS.Infrastructure.csproj" />
     <ProjectReference Include="..\WPFDesignDemos\Dashboard3\Dashboard3.csproj" />
@@ -328,27 +321,28 @@
     <Resource Include="Views\Tree\Images\sidebar-3.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="I18nResources\Language.cs">
+    <Compile Update="i18n\Language.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Language.tt</DependentUpon>
     </Compile>
-    <Compile Update="I18nResources\UiResource.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>UiResource.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="I18nResources\UiResource.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>UiResource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="I18nResources\Language.tt">
+    <None Update="i18n\Language.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Language.cs</LastGenOutput>
+    </None>
+    <None Update="i18n\Test.en-US.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="i18n\Test.ja-JP.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="i18n\Test.zh-CN.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="i18n\Test.zh-Hant.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>

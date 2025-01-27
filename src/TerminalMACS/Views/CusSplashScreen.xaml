@@ -1,7 +1,9 @@
 ﻿<Window x:Class="TerminalMACS.Views.CusSplashScreen"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="启动页" Height="320" Width="500"
+        xmlns:markup="https://codewf.com"
+        xmlns:language="clr-namespace:Localization"
+        Title="{markup:I18n {x:Static language:CusSplashScreen.Title}}" Height="320" Width="500"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         Background="#00FFFFFF" WindowStyle="None"
         TextOptions.TextFormattingMode="Display" UseLayoutRounding="True"
@@ -16,10 +18,7 @@
         <Rectangle x:Name="freeRect" Fill="{StaticResource freeMachineImageBrush}"
                    Height="48" Width="128" Canvas.Left="186" Canvas.Top="20" />
         <TextBlock x:Name="tbMsg" FontSize="20" Canvas.Left="10" />
-        <TextBlock x:Name="tb1" Text="关注微信公众号：Dotnet9" FontSize="20" Canvas.Left="200" Canvas.Top="120" Width="1262" />
-        <TextBlock x:Name="tb2" Text="联系微信号：d9tools" FontSize="20" Canvas.Left="800" Canvas.Top="80" Width="1262" />
-        <TextBlock x:Name="tb3" Text="关注微信公众号：快乐玩转技术"
-                   FontSize="20" Canvas.Left="450" Canvas.Top="160" Width="1262" />
-        <!-- Canvas.Left="122"-->
+        <TextBlock x:Name="tb1" Text="{markup:I18n {x:Static language:About.AddWeChatOfficialAccount}}" FontSize="20" Canvas.Left="200" Canvas.Top="120" Width="1262" />
+        <TextBlock x:Name="tb2" Text="{markup:I18n {x:Static language:About.AddAuthorWeChat}}" FontSize="20" Canvas.Left="800" Canvas.Top="80" Width="1262" />
     </Canvas>
 </Window>

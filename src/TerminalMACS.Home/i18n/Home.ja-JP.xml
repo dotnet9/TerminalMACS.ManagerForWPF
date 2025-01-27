@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Localization language="Japanese" description="日語" cultureName="ja-JP">
+	<Home>
+		<Title>ホームページ</Title>
+		<TimeLine>タイムライン</TimeLine>
+		<TestDemoDisplay>優れたインターフェース展示</TestDemoDisplay>
+	</Home>
+	<TimeLine>
+		<AddAbpVNextSeverProject>事前知識の準備、Abp vNext基本サービスプロジェクトの追加</AddAbpVNextSeverProject>
+		<AddEmptyClientApp>空のモバイルクライアントプロジェクトを追加</AddEmptyClientApp>
+		<AddNotifyIcon>トレイアイコンを追加</AddNotifyIcon>
+		<AddWPFManagerProject>サーバー側がAbp vNextを使用して構築されることを確認し、WPFプロジェクトを追加</AddWPFManagerProject>
+		<ClientAppBaseInfo>モバイルクライアントの基本情報を取得</ClientAppBaseInfo>
+		<ClientAppCompleteContactRead>モバイルクライアントがアドレス帳データの読み取りを完了しました</ClientAppCompleteContactRead>
+		<ClientAppVersion1>モバイルクライアントの第1版が一段落し、他のプロセスモジュールを開発します</ClientAppVersion1>
+		<InitializeProject>プロジェクトを初期化</InitializeProject>
+		<WPFManagerStructureOver>WPF管理端の初版を構築し、動的なテーマカラーの変更、国際化、ローカライズ、Prismのモジュール化を実現</WPFManagerStructureOver>
+	</TimeLine>
+</Localization>

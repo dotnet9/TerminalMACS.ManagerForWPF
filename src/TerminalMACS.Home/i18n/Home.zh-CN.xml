@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Localization language="Chinese (Simplified)" description="中文简体" cultureName="zh-CN">
+	<Home>
+		<Title>首页</Title>
+		<TimeLine>时间轴</TimeLine>
+		<TestDemoDisplay>优秀界面展示</TestDemoDisplay>
+	</Home>
+	<TimeLine>
+		<AddAbpVNextSeverProject>前期知识准备，添加Abp vNext基础服务工程</AddAbpVNextSeverProject>
+		<AddEmptyClientApp>添加空移动端客户端工程</AddEmptyClientApp>
+		<AddNotifyIcon>添加托盘图标</AddNotifyIcon>
+		<AddWPFManagerProject>确定服务端采用Abp vNext搭建，添加WPF工程</AddWPFManagerProject>
+		<ClientAppBaseInfo>移动客户端基本信息获取</ClientAppBaseInfo>
+		<ClientAppCompleteContactRead>移动客户端完成通讯录数据读取</ClientAppCompleteContactRead>
+		<ClientAppVersion1>移动客户端第一版告一段落，开发其他进程模块</ClientAppVersion1>
+		<InitializeProject>初始化项目</InitializeProject>
+		<WPFManagerStructureOver>搭建WPF管理端初版，实现动态更改主题色、国际化、本地化、Prism模块化</WPFManagerStructureOver>
+	</TimeLine>
+</Localization>

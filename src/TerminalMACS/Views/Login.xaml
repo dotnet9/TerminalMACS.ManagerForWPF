@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:prism="http://prismlibrary.com/"
+        xmlns:markup="https://codewf.com"
+        xmlns:language="clr-namespace:Localization"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
-        Title="Login" Height="400" Width="600" ResizeMode="NoResize" WindowStyle="None"
+        Title="{markup:I18n {x:Static language:Login.Title}}" Height="400" Width="600" ResizeMode="NoResize" WindowStyle="None"
         AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterScreen"
         MouseLeftButtonDown="MoveWindow_MouseLeftButtonDown">
     <Grid>
@@ -22,37 +24,37 @@
             </Rectangle.Fill>
         </Rectangle>
         <StackPanel Margin="20,10,290,10">
-            <Label Content="登录" FontFamily="Segoe UI Black" FontSize="24" Margin="0,10" VerticalAlignment="Top"
+            <Label Content="{markup:I18n {x:Static language:Login.Title}}" FontFamily="Segoe UI Black" FontSize="24" Margin="0,10" VerticalAlignment="Top"
                    HorizontalAlignment="Left" />
             <StackPanel Orientation="Horizontal">
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Foreground="#707070">
-                    <Run Text="你没有帐户吗？" />
+                    <Run Text="{markup:I18n {x:Static language:Login.DoYouHaveAccount}}" />
                 </TextBlock>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap"
                            Foreground="#FF2468AC">
-                    <Run Text="创建一个帐户，" />
+                    <Run Text="{markup:I18n {x:Static language:Login.CreateAccount}}" />
                 </TextBlock>
             </StackPanel>
             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Foreground="#707070">
-                <Run Text="那不需要撒谎。" />
+                <Run Text="{markup:I18n {x:Static language:Login.NotLie}}" />
             </TextBlock>
             <StackPanel Margin="0,15" Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center" Foreground="#707070" />
-                <TextBox materialDesign:HintAssist.Hint="账号" Width="250" Margin="5" />
+                <TextBox materialDesign:HintAssist.Hint="{markup:I18n {x:Static language:Login.Account}}" Width="250" Margin="5" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Key" VerticalAlignment="Center" Foreground="#707070" />
-                <PasswordBox materialDesign:HintAssist.Hint="密码" Width="250" Margin="5" />
+                <PasswordBox materialDesign:HintAssist.Hint="{markup:I18n {x:Static language:Login.Password}}" Width="250" Margin="5" />
             </StackPanel>
             <Grid>
-                <CheckBox Content="记住我" Margin="5,10" Foreground="#707070" />
-                <Label Content="我忘了密码" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"
+                <CheckBox Content="{markup:I18n {x:Static language:Login.RememberMe}}" Margin="5,10" Foreground="#707070" />
+                <Label Content="{markup:I18n {x:Static language:Login.ForgotPassword}}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"
                        Foreground="#707070" />
             </Grid>
-            <Button HorizontalAlignment="Center" Content="登录" FontFamily="Impact" FontSize="18" Width="100"
+            <Button HorizontalAlignment="Center" Content="{markup:I18n {x:Static language:Login.Title}}" FontFamily="Impact" FontSize="18" Width="100"
                     Background="#FF307CD6" BorderBrush="#FF307CD6" Click="Button_Click" />
             <StackPanel Orientation="Horizontal" Margin="10,35">
-                <Label Content="第三方登录" Foreground="#707070" VerticalAlignment="Center" />
+                <Label Content="{markup:I18n {x:Static language:Login.ThirdLogin}}" Foreground="#707070" VerticalAlignment="Center" />
                 <Button HorizontalAlignment="Center" FontFamily="Impact" FontSize="18" Background="#FF3D56AC"
                         BorderBrush="#FF3D56AC" Margin="5,0"
                         Click="LoginWithTerminal_Click">
@@ -77,9 +79,9 @@
             <materialDesign:PackIcon Kind="Close" />
         </Button>
         <StackPanel Margin="310,50,0,50">
-            <TextBlock Text="欢迎回来" Foreground="White" HorizontalAlignment="Center" FontSize="48" FontFamily="Champagne"
+            <TextBlock Text="{markup:I18n {x:Static language:Login.Welcome}}" Foreground="White" HorizontalAlignment="Center" FontSize="48" FontFamily="Champagne"
                        FontWeight="Bold" />
-            <TextBlock Text="使不可能成为可能，使可能变得简单而优雅" Foreground="White" HorizontalAlignment="Center" Width="280"
+            <TextBlock Text="{markup:I18n {x:Static language:Login.Slogon}}" Foreground="White" HorizontalAlignment="Center" Width="280"
                        FontSize="24" FontFamily="Champagne" TextWrapping="Wrap" TextAlignment="Center"
                        Margin="0,50,0,0" />
             <TextBlock Text="https://dotnet9.com" Foreground="White" FontSize="18" FontFamily="Champagne"

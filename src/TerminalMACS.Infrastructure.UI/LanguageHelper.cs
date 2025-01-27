@@ -1,5 +1,5 @@
 ﻿using System.Globalization;
-using WpfExtensions.Xaml;
+using WPFXmlTranslator;
 
 namespace TerminalMACS.Infrastructure.UI;
 
@@ -20,6 +20,6 @@ public class LanguageHelper
         _lastLanguage = language;
 
         var culture = new CultureInfo(language);
-        I18nManager.Instance.CurrentUICulture = culture;
+        I18nManager.Instance.Culture = culture;
     }
 }

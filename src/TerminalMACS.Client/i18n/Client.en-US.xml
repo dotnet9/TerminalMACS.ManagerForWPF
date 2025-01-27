@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Localization language="English" description="English" cultureName="en-US">
+	<Client>
+		<Title>Client</Title>
+	</Client>
+</Localization>

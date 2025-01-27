@@ -1,8 +1,6 @@
-﻿using TerminalMACS.Home.I18nResources;
-using TerminalMACS.Home.Views;
+﻿using TerminalMACS.Home.Views;
 using TerminalMACS.Infrastructure.UI;
 using TerminalMACS.Infrastructure.UI.Modularity;
-using WpfExtensions.Xaml;
 
 namespace TerminalMACS.Home;
 
@@ -13,7 +11,6 @@ public class HomeModule : ModuleBase
 
     public HomeModule(IUnityContainer container, IRegionManager regionManager) : base(container)
     {
-        I18nManager.Instance.Add(UiResource.ResourceManager);
         _regionManager = regionManager;
     }
 

@@ -1,8 +1,6 @@
 ﻿using TerminalMACS.Infrastructure.UI;
 using TerminalMACS.Infrastructure.UI.Modularity;
-using TerminalMACS.TestDemo.I18nResources;
 using TerminalMACS.TestDemo.Views;
-using WpfExtensions.Xaml;
 
 namespace TerminalMACS.TestDemo;
 
@@ -14,7 +12,6 @@ public class TestDemoModule : ModuleBase
 
     public TestDemoModule(IUnityContainer container, IRegionManager regionManager) : base(container)
     {
-        I18nManager.Instance.Add(UiResource.ResourceManager);
         _regionManager = regionManager;
     }
 

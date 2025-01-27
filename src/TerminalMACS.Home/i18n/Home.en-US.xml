@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Localization language="English" description="English" cultureName="en-US">
+	<Home>
+		<Title>Home Page</Title>
+		<TimeLine>Timeline</TimeLine>
+		<TestDemoDisplay>Excellent Interface Display</TestDemoDisplay>
+	</Home>
+	<TimeLine>
+		<AddAbpVNextSeverProject>Prepare preliminary knowledge and add the Abp vNext basic service project</AddAbpVNextSeverProject>
+		<AddEmptyClientApp>Add an empty mobile client project</AddEmptyClientApp>
+		<AddNotifyIcon>Add a tray icon</AddNotifyIcon>
+		<AddWPFManagerProject>Confirm that the server side is built using Abp vNext and add the WPF project</AddWPFManagerProject>
+		<ClientAppBaseInfo>Obtain basic information of the mobile client</ClientAppBaseInfo>
+		<ClientAppCompleteContactRead>The mobile client has completed reading the contact data</ClientAppCompleteContactRead>
+		<ClientAppVersion1>The first version of the mobile client has come to an end, and other process modules will be developed</ClientAppVersion1>
+		<InitializeProject>Initialize the project</InitializeProject>
+		<WPFManagerStructureOver>Build the initial version of the WPF management terminal to achieve dynamic theme color change, internationalization, localization, and Prism modularization</WPFManagerStructureOver>
+	</TimeLine>
+</Localization>

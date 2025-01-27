@@ -9,7 +9,7 @@
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <FileVersion>0.1.1.0</FileVersion>
     <Version>0.0.1</Version>
-    <PackageProjectUrl>https://terminalmacs.com/</PackageProjectUrl>
+    <PackageProjectUrl>https://dotnet9.com/</PackageProjectUrl>
     <PackageIcon>logo.png</PackageIcon>
     <PackageReleaseNotes>TerminalMACS桌面管理端WPF版本</PackageReleaseNotes>
     <Platforms>AnyCPU;x64</Platforms>
@@ -37,7 +37,7 @@
     <None Remove="Images\setting.png" />
     <None Remove="Images\Start.jpg" />
     <None Remove="Images\WeChat-public-address.jpg" />
-    <None Include="I18nResources\Language.cs">
+    <None Include="i18n\Language.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Language.tt</DependentUpon>
@@ -53,12 +53,12 @@
     <PackageReference Include="HandyControl" Version="3.5.1" />
     <PackageReference Include="IdentityModel.OidcClient" Version="6.0.0" />
     <PackageReference Include="Prism.Unity" Version="9.0.401-pre" />
+    <PackageReference Include="WPFXmlTranslator" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TerminalMACS.Controls\TerminalMACS.Controls.csproj" />
     <ProjectReference Include="..\TerminalMACS.Infrastructure.UI\TerminalMACS.Infrastructure.UI.csproj" />
-    <ProjectReference Include="..\WpfExtensions.Xaml\WpfExtensions.Xaml.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -87,29 +87,29 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="I18nResources\Language.cs">
+    <Compile Update="i18n\Language.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Language.tt</DependentUpon>
     </Compile>
-    <Compile Update="I18nResources\UiResource.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>UiResource.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="I18nResources\UiResource.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>UiResource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="I18nResources\Language.tt">
+    <None Update="i18n\Language.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Language.cs</LastGenOutput>
+    </None>
+    <None Update="i18n\TerminalMACS.zh-Hant.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="i18n\TerminalMACS.en-US.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="i18n\TerminalMACS.ja-JP.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="i18n\TerminalMACS.zh-CN.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

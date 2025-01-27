@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Localization language="Japanese" description="日語" cultureName="ja-JP">
+	<Client>
+		<Title>クライアント端</Title>
+	</Client>
+</Localization>

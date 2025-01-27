@@ -1,11 +1,8 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
-using MaterialDesignThemes.Wpf;
-using WpfExtensions.Xaml;
+using WPFXmlTranslator;
 
 namespace TerminalMACS.TestDemo.Views.FoodAppLoginUI;
 
@@ -111,8 +108,8 @@ public partial class FoodAppLoginView : Window, INotifyPropertyChanged
         IsLoggedIn = (bool)eventArgs.Parameter;
         IsJustStarted = false;
         if (IsLoggedIn)
-            LoginStatusmsg = I18nManager.Instance.Get(I18nResources.Language.FoodAppLoginView_Success).ToString();
+            LoginStatusmsg = I18nManager.Instance.GetResource(Localization.FoodAppLoginView.Success);
         else
-            LoginStatusmsg = I18nManager.Instance.Get(I18nResources.Language.FoodAppLoginView_Fail).ToString();
+            LoginStatusmsg = I18nManager.Instance.GetResource(Localization.FoodAppLoginView.Fail);
     }
 }

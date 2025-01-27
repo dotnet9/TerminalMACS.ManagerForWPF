@@ -1,19 +1,17 @@
-﻿using Prism.Mvvm;
-using TerminalMACS.I18nResources;
-using WpfExtensions.Xaml;
+﻿using WPFXmlTranslator;
 
 namespace TerminalMACS.ViewModels;
 
 internal class LoginViewModel : BindableBase
 {
-    private string _title = "Login";
+    private string? _title = "Login";
 
     public LoginViewModel()
     {
-        Title = I18nManager.Instance.Get(Language.AppTitle).ToString();
+        Title = I18nManager.Instance.GetResource(Localization.MainWindow.Title);
     }
 
-    public string Title
+    public string? Title
     {
         get => _title;
         set

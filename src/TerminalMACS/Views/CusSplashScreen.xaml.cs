@@ -74,7 +74,6 @@ public partial class CusSplashScreen : Window
         Canvas.SetLeft(background2, background2Left);
         Canvas.SetLeft(tb1, Canvas.GetLeft(tb1) - 3);
         Canvas.SetLeft(tb2, Canvas.GetLeft(tb2) - 3);
-        Canvas.SetLeft(tb3, Canvas.GetLeft(tb3) - 3);
         if (backgroundLeft <= -1262)
         {
             timer.Stop();

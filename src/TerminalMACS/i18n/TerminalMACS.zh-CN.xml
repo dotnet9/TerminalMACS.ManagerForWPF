@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Localization language="Chinese (Simplified)" description="中文简体" cultureName="zh-CN">
+	<CusSplashScreen>
+		<Title>启动页</Title>
+	</CusSplashScreen>
+	<Login>
+		<Title>登录</Title>
+		<DoYouHaveAccount>你没有帐户吗？</DoYouHaveAccount>
+		<CreateAccount>创建一个帐户，</CreateAccount>
+		<Account>账号</Account>
+		<Password>密码</Password>
+		<NotLie>那不需要撒谎。</NotLie>
+		<RememberMe>记住我</RememberMe>
+		<ForgotPassword>我忘了密码</ForgotPassword>
+		<ThirdLogin>第三方登录</ThirdLogin>
+		<Welcome>欢迎回来</Welcome>
+		<Slogon>使不可能成为可能，使可能变得简单而优雅</Slogon>
+	</Login>
+	<MainWindow>
+		<Title>多终端资源管理与检测系统</Title>
+		<Exit>退出</Exit>
+		<About>关于</About>
+		<CNBlogs>博客园</CNBlogs>
+		<Contact>联系</Contact>
+		<Email>邮箱</Email>
+		<Language>语言</Language>
+		<QQGroup>QQ群</QQGroup>
+		<Setting>设置</Setting>
+		<SourceCode>源码</SourceCode>
+		<SponsorshipAndSupport>赞助支持</SponsorshipAndSupport>
+		<TechSupport>技术支持</TechSupport>
+		<ThemeColor>主题色</ThemeColor>
+		<TouTiao>今日头条</TouTiao>
+		<PushMainWindow2Top>打开主窗口</PushMainWindow2Top>
+	</MainWindow>
+	<About>
+		<Title>关于</Title>
+		<AddAuthorWeChat>扫码添加作者微信号、微信群</AddAuthorWeChat>
+		<AddWeChatOfficialAccount>扫码关注微信公众号：Dotnet9</AddWeChatOfficialAccount>
+		<BrowseOpenSourceFramework>浏览开源框架</BrowseOpenSourceFramework>
+		<ContactAuthor>联系作者</ContactAuthor>
+		<JoinQQGroup>点击加入群聊</JoinQQGroup>
+		<TechExchange>技术交流</TechExchange>
+		<Thanks>感谢开源框架</Thanks>
+	</About>
+</Localization>

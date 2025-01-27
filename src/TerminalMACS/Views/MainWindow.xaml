@@ -8,8 +8,8 @@
                    xmlns:hc="https://handyorg.github.io/handycontrol"
                    xmlns:AduOpenLink="clr-namespace:AduSkin.Interactivity;assembly=AduSkin"
                    xmlns:ui="clr-namespace:TerminalMACS.Infrastructure.UI;assembly=TerminalMACS.Infrastructure.UI"
-                   xmlns:markup="clr-namespace:WpfExtensions.Xaml.Markup;assembly=WpfExtensions.Xaml"
-                   xmlns:i18NResources="clr-namespace:TerminalMACS.I18nResources"
+                   xmlns:markup="https://codewf.com"
+                   xmlns:language="clr-namespace:Localization"
                    prism:ViewModelLocator.AutoWireViewModel="True"
                    WindowStartupLocation="CenterScreen"
                    MinWidth="600" MinHeight="350"
@@ -17,20 +17,20 @@
                    BorderThickness="0" WindowStyle="None"
                    Background="#FFF" mc:Ignorable="d"
                    BorderBrush="{StaticResource DefaultBrush}"
-                   Title="{markup:I18n {x:Static i18NResources:Language.AppTitle}}"
+                   Title="{markup:I18n {x:Static language:MainWindow.Title}}"
                    Icon="/Images/logo.png">
     <Metro:MetroWindow.Menu>
         <Metro:MetroTitleMenu Height="40">
-            <Metro:MetroTitleMenuItem Header="{markup:I18n {x:Static i18NResources:Language.MainMenu_Contact}}"
+            <Metro:MetroTitleMenuItem Header="{markup:I18n {x:Static language:MainWindow.Contact}}"
                                       Icon="/Images/Contact.png">
                 <Metro:MetroMenuItem Header="QQ" Command="AduOpenLink:ControlCommands.OpenLink"
                                      CommandParameter="http://wpa.qq.com/msgrd?v=3&amp;uin=632871194&amp;site=qq&amp;menu=yes" />
-                <Metro:MetroMenuItem Header="{markup:I18n {x:Static i18NResources:Language.MainMenu_Email}}"
+                <Metro:MetroMenuItem Header="{markup:I18n {x:Static language:MainWindow.Email}}"
                                      Command="AduOpenLink:ControlCommands.OpenLink"
                                      CommandParameter="mailto:632871194@qq.com" />
             </Metro:MetroTitleMenuItem>
 
-            <Metro:MetroTitleMenuItem Header="{markup:I18n {x:Static i18NResources:Language.MainMenu_SourceCode}}"
+            <Metro:MetroTitleMenuItem Header="{markup:I18n {x:Static language:MainWindow.SourceCode}}"
                                       Icon="/Images/code.png">
                 <Metro:MetroMenuItem Header="GitHub" Command="AduOpenLink:ControlCommands.OpenLink"
                                      CommandParameter="https://github.com/dotnet9/TerminalMACS.ManagerForWPF" />
@@ -38,11 +38,12 @@
                                      CommandParameter="https://gitee.com/dotnet9/TerminalMACS.ManagerForWPF" />
             </Metro:MetroTitleMenuItem>
 
-            <Metro:MetroTitleMenuItem Header="{markup:I18n {x:Static i18NResources:Language.MainMenu_Setting}}"
+            <Metro:MetroTitleMenuItem Header="{markup:I18n {x:Static language:MainWindow.Setting}}"
                                       Icon="/Images/setting.png">
-                <Metro:MetroMenuItem Header="中文" Tag="zh-CN" Click="ChangeLanguage_Click" />
+                <Metro:MetroMenuItem Header="中文简体" Tag="zh-CN" Click="ChangeLanguage_Click" />
+                <Metro:MetroMenuItem Header="中文繁体" Tag="zh-Hant" Click="ChangeLanguage_Click" />
                 <Metro:MetroMenuItem Header="English" Tag="en-US" Click="ChangeLanguage_Click" />
-                <Metro:MetroMenuItem Header="日本語" Tag="ja" Click="ChangeLanguage_Click" />
+                <Metro:MetroMenuItem Header="日本語" Tag="ja-JP" Click="ChangeLanguage_Click" />
                 <Metro:MetroMenuSeparator />
                 <MenuItem Style="{StaticResource MenuItem_NonStyle}" Height="30">
                     <MenuItem.Header>
@@ -51,7 +52,7 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="{markup:I18n {x:Static i18NResources:Language.MainMenu_ThemeColor}}"
+                            <TextBlock Text="{markup:I18n {x:Static language:MainWindow.ThemeColor}}"
                                        VerticalAlignment="Center" Margin="33 0 -10 0" />
                             <Metro:MetroColorPicker x:Name="Theme" Width="50" Height="20" Grid.Column="1"
                                                     Background="{StaticResource DefaultBrush}"
@@ -61,30 +62,30 @@
                 </MenuItem>
             </Metro:MetroTitleMenuItem>
 
-            <Metro:MetroTitleMenuItem Header="{markup:I18n {x:Static i18NResources:Language.MainMenu_About}}"
+            <Metro:MetroTitleMenuItem Header="{markup:I18n {x:Static language:MainWindow.About}}"
                                       Icon="/Images/about.png">
                 <Metro:MetroMenuItem Header="Dotnet9" Command="AduOpenLink:ControlCommands.OpenLink"
                                      CommandParameter="https://dotnet9.com/" />
-                <Metro:MetroMenuItem Header="{markup:I18n {x:Static i18NResources:Language.MainMenu_CNBlogs}}"
+                <Metro:MetroMenuItem Header="{markup:I18n {x:Static language:MainWindow.CNBlogs}}"
                                      Command="AduOpenLink:ControlCommands.OpenLink"
                                      CommandParameter="https://www.cnblogs.com/Dotnet9-com/" />
                 <Metro:MetroMenuItem Header="CSDN" Command="AduOpenLink:ControlCommands.OpenLink"
                                      CommandParameter="https://me.csdn.net/HenryMoore" />
-                <Metro:MetroMenuItem Header="{markup:I18n {x:Static i18NResources:Language.MainMenu_TouTiao}}"
+                <Metro:MetroMenuItem Header="{markup:I18n {x:Static language:MainWindow.TouTiao}}"
                                      Command="AduOpenLink:ControlCommands.OpenLink"
                                      CommandParameter="https://www.toutiao.com/c/user/98075192460/#mid=1651788205627396" />
                 <Metro:MetroMenuItem
-                    Header="{markup:I18n {x:Static i18NResources:Language.MainMenu_SponsorshipAndSupport}}"
+                    Header="{markup:I18n {x:Static language:MainWindow.SponsorshipAndSupport}}"
                     Command="AduOpenLink:ControlCommands.OpenLink"
-                    CommandParameter="https://terminalmacs.com/sponsorship-and-support" />
-                <Metro:MetroMenuItem Header="{markup:I18n {x:Static i18NResources:Language.MainMenu_About}}"
+                    CommandParameter="https://dotnet9.com/sponsorship-and-support" />
+                <Metro:MetroMenuItem Header="{markup:I18n {x:Static language:MainWindow.About}}"
                                      Click="ShowAbout_Click" />
             </Metro:MetroTitleMenuItem>
 
-            <Metro:MetroTitleMenuItem Header="{markup:I18n {x:Static i18NResources:Language.MainMenu_TechSupport}}"
+            <Metro:MetroTitleMenuItem Header="{markup:I18n {x:Static language:MainWindow.TechSupport}}"
                                       Icon="/Images/logo.png"
                                       Command="AduOpenLink:ControlCommands.OpenLink"
-                                      CommandParameter="https://terminalmacs.com/" />
+                                      CommandParameter="https://dotnet9.com/" />
 
         </Metro:MetroTitleMenu>
     </Metro:MetroWindow.Menu>
@@ -100,15 +101,15 @@
         </Grid.RowDefinitions>
 
         <hc:NotifyIcon x:Name="NotifyIconContextContent"
-                       Text="{markup:I18n {x:Static i18NResources:Language.AppTitle}}"
+                       Text="{markup:I18n {x:Static language:MainWindow.Title}}"
                        Visibility="Visible"
                        Icon="/Images/logo.ico">
             <hc:NotifyIcon.ContextMenu>
                 <ContextMenu>
                     <MenuItem Command="hc:ControlCommands.PushMainWindow2Top"
-                              Header="{markup:I18n {x:Static i18NResources:Language.PushMainWindow2Top}}" />
+                              Header="{markup:I18n {x:Static language:MainWindow.PushMainWindow2Top}}" />
                     <MenuItem Command="hc:ControlCommands.ShutdownApp"
-                              Header="{markup:I18n {x:Static i18NResources:Language.Exit}}" />
+                              Header="{markup:I18n {x:Static language:MainWindow.Exit}}" />
                 </ContextMenu>
             </hc:NotifyIcon.ContextMenu>
             <hc:Interaction.Triggers>
